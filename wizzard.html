@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Set up 1</title>
+<script type="text/javascript" src="js/vidon.me.wizardlauncher.js"></script>
+<script type="text/javascript" src="js/vidon.me.wizard.js"></script>
+<link rel="stylesheet" type="text/css" href="css/setUp.css">
+</head>
+<body>
+<form method="post">
+  <div class="containter">
+    <div class="header">
+      <h1>VidOn.me</h1>
+    </div>
+    <div class="content">
+      <div class="slides">     	
+        <div id="wizardStartPage" class="slide show setUp1" >
+          <h3>欢迎使用vidOn Server</h3>
+          <P>威动服务器出现是为了帮助您管理数字媒体，将他们自动归类，同时还提供便捷的数字媒体浏览方式，告别过去繁琐的查找，就是现在：</P>
+          <p>先给您的服务器取个名字吧</p>
+          <input type="text" id="txtWzdServername" name="servername" value="我的威动服务器"/>
+          <a href="#2" class="setUp2btn">下一步</a>
+          <p>备注：名字是移动设备用来连接您服务器的名片</p>
+        </div>
+        
+        <div id="wizardTypePage" class="slide setUp2">
+          <h3>选择您需要管理的数字媒体类型</h3>
+          <p>请告诉威动服务器您需要管理的数字媒体类型，这样威动会准确高效的帮您去找到他们，添加媒体信息并管理起来</p>
+          <div class="selectedMedia" id="selectedMedia">
+            <a href="javascript:;" id="movie" class="selected">电影</a> 
+            <a href="javascript:;" id="tvshow">电视剧</a> 
+            <a href="javascript:;" id="video">家庭视频</a> 
+            <a href="javascript:;" id="photo">图片</a> 
+            <input type="hidden"  name="mediaType"  id="mediaType" value="movie"/>
+		        <input type="hidden" name="libraryID" id="wzdLibID" value="" />
+          </div>
+          <a href="#1" class="setUp1btn">上一步</a> <a href="#3" class="setUp3btn">下一步</a> 
+        </div>      	
+        
+        <div id="wizardPathPage" class="slide setUp3">
+          <h3>为您的电影库添加管理路径</h3>
+          <p>已选路径</p>
+          <input type="text" id="txtWzdPath" value="" name="selectedPath" />
+          <a href="javascript:;" id="addPathbtn" class="addPathbtn">添加路径</a><br>
+          <a href="#2"  class="setUp2btn">上一步</a>
+          <a href="#4"  class="setUpFinbtn">进入</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tckuang addPath"> <a class="popAddPathClose"  href="javascript:;">X</a>
+    <h3>添加路径----电影</h3>
+    <p>已选路径</p>
+    <input id="addSrcPath" type="text" value=""  name="popSelectedPath"/>
+    <input type="hidden" id="netSharePath" value="" />
+    <p>选择包含"电影"资源的文件夹</p>
+    <div class="popDisk left" >
+      <ul id="listdrive">
+      </ul>
+    </div>
+    <div class="popFolder right" >
+       <ul id="listpath">
+      	</ul>   	
+    </div>
+    <div class="clr"></div>
+    <a class="AddPathCancle" "href="javascript:;">取消</a><a class="AddPathOk" href="javascript:;">确定</a> </div>
+  <div class="tckuang addNetwork"> <a class="popAddNetworkClose"  href="javascript:;">X</a>
+    <h3>Add network location.....</h3>
+    <div class="tab_title"></div>
+    <div class="clr"></div>
+    <div class="tab_content">
+        <p>
+          <label>协议</label>
+          <input type="hidden" id="txtWzdNetSharePtl" name="serverName" value="SMB" />
+        </p>    		
+        <p>
+          <label>服务器地址</label>
+          <input type="text" id="txtWzdNetShareAddress" name="serverName" />
+        </p>
+        <p>
+          <label>域</label>
+          <input type="text" id="txtWzdNetShareDomin" name="domain" />
+        </p>
+        <p>
+          <label>用户名</label>
+          <input type="text" id="txtWzdNetShareUser" name="userName" />
+        </p>
+        <p>
+          <label>密码</label>
+          <input type="text" id="txtWzdNetSharePwd" name="password" />
+        </p>
+    </div>
+    <a class="addnetshareCancle" href="javascript:;">取消</a><a class="addnetshareOK" href="javascript:;">确定</a> </div>
+</form>
+</body>
+</html>

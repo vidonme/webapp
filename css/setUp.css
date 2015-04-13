@@ -1,0 +1,61 @@
+/*reset*/
+html, body, div, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, button, textarea, th, td { margin: 0; padding: 0; }
+fieldset, img { border: 0; }
+:focus { outline: 0; }
+address, caption, cite, code, dfn, em, strong, th, var, optgroup { font-style: normal; font-weight: normal; }
+
+abbr, acronym { border: 0; font-variant: normal; }
+input, button, textarea, select, optgroup, option { font-family: inherit; font-size: inherit; font-style: inherit; font-weight: inherit; }
+code, kbd, samp, tt { font-size: 100%; }
+input, button, textarea, select { *font-size: 100%;}
+body { line-height: 1.5; }
+ol, ul { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+caption, th { text-align: left; }
+sup, sub { font-size: 100%;}
+:link, :visited, ins { text-decoration: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+body, button, input, select, textarea { color: #333; font-size:14px; line-height:1.5; font-family:'Segoe UI',Helvetica,Arial,Verdana,sans-serif;}
+a{ color:#195bbe;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{ color:#333;}
+p{ line-height:1.5;}
+
+/*弹出层*/
+.tckuanglayer{background:#000;position:fixed;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;top:0px;left:0px;width:100%;height:100%;z-index:2;
+}
+.tckuang{ position:absolute; z-index:3; display:none}
+.tckuanglayer2{background:#000;position:fixed;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;top:0px;left:0px;width:100%;height:100%;z-index:4;
+}
+.tckuang2{ position:absolute; z-index:5; display:none}
+/*tab*/
+.tab_content .tab_con,.tab_content_w .tab_con_w{ display:none;}
+.tab_content .tab_con.selected, .tab_content_w .tab_con_w.selected{ display:block;}
+.tab_title li, .tab_title_w li{ float:left; cursor:pointer;}
+.tab_title li.selected, .tab_title_w li.selected{ color:#0088be}
+.clr{ clear:both}
+input{ width:300px; height:24px; line-height:24px; border:#666 solid 1px; border-radius:3px;}
+
+.header{ height: 40px; border-bottom: #000 solid 1px;  }
+.header h1{line-height:40px; font-size: 24px;}
+.content{ position:relative;  width:980px; margin:20px auto; overflow:hidden}
+.content a ,.addPath a , input[type="submit"],.addNetwork a{ display:inline-block; width:100px; height:24px; line-height:24px;  border:#666 solid 1px; border-radius:3px; text-align:center; text-decoration:none; margin:20px;}
+.slides{ width:2940px;}
+.slide{ float:left; width:980px; height:}
+.slide.show{ display:block;}
+.selectedMedia a.selected{ border:#0088be solid 1px;}
+
+.addPath{ width:600px;min-height:400px; border:#000 solid 1px; background:#fff; padding:20px;}
+.addPath h3{ border-bottom:#000 solid 1px; margin-bottom:10px;}
+.addPath .left{ float:left; width:250px; height:300px; border:#000 solid 1px; overflow:scroll}
+.addPath .right{ float:right; width:345px;  height:300px;border:#000 solid 1px; overflow:scroll}
+.addPath .popAddPathClose{ position:absolute; right:0px; top:0px;}
+.addPath .popDisk li{ cursor:pointer}
+
+.addNetwork{ width:400px;min-height:400px;border:#000 solid 1px; background:#fff; padding:20px; z-index:4;}
+.addNetwork h3{ border-bottom:#000 solid 1px; margin-bottom:10px;}
+.addNetwork label{ width:100px; display:inline-block}
+.addNetwork input{ width:240px;}
+.addNetwork .popAddNetworkClose{ position:absolute; right:0px; top:0px;}
+.addNetwork .tab_title li{ margin-bottom:20px; margin-right:10px;}
+.addNetwork .tab_con p{ margin-bottom:10px;}
