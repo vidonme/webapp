@@ -1,78 +1,178 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-<title>VidOn.me Server Manage</title>
-<meta http-equiv="Content-Language" content="EN" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- <link rel="search" href="provider.xml" type="application/opensearchdescription+xml" title="XBMC Library" /> -->
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<!-- <link href="/images/logo.png" rel="image_src" /> -->
-<meta name="robots" content="NOINDEX, NOFOLLOW">
-<meta http-equiv="pragma" content="no-cache"/>
-<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"/>
-<meta http-equiv="expires" content="Fri,12 Jan 2001 18:18:18 GMT"/>
-<link href="css/core.css?1.3.57" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="css/jquery.ui.dialog.css" type="text/css">
-<link href="css/ipad.css?1.0.5" rel="stylesheet" media="only screen and (max-device-width: 1024px)" type="text/css">
+<meta charset="UTF-8">
+<title>Images</title>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/vidon.me.launcher.js"></script>
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" type="text/css" href="css/global.css">
 </head>
 <body>
-<div id="vidome_body">	
-<div id="title_bg" class="header">
-  <div class="header_nav">
-    <div class="logo"><a href="http://www.vidon.me"><img src="img/logo.png" alt="VidOn.me" /></a></div>
-    <div class="menu">
-      <ul>
-        <a href="#"><li id="mediaManager"></li></a>
-        <a href="#"><li id="serverSetting"></li></a>
-        <a href="#"><li id="backupMedia"></li></a>
-        <a href="#"><li id="appsDownload"></li></a>
-        <a href="#"><li id="userCenter"></li></a>
-      </ul>
+<form method="post">
+  <div class="containter">
+    <div class="header addhtml" id="header" url="template/header.html"> 
     </div>
-    
-    
-   <!--
-    <div class="user">
-      <a href="#" ><span></span></a>
-      <ul>
-      <li>切换账户</li>
-      <li>注销</li>
-      </ul>
+    <div class="siderbar addhtml" id="siderbar" url="template/siderbar.html">
+      
     </div>
-   -->
-   
-   
+    <div class="content2">
+    <div class="mainpage">
+      <div class="posterMenu"><a href="javascript:;" class="backbtn" id="backtotv" style="display:none;" title="&larr;&larr;"></a>
+        <div  class="posterMenubtn">
+          <div id="dropdown2" class="dropdown all"> 
+            <a href="javascript:;" class="input_dropdown" title="全部"><b class="font">全部</b><span></span></a>
+            <ul class="fillet10">
+              <li>全部</li>
+              <li>最近添加</li>
+            </ul>
+          </div>
+          <a title="刷新" href="javascript:;" class="fresh" id="fresh">
+      		<!--<span class="loadbtn"></span>
+      		<span class="loading"></span>
+      		<span class="noload"></span>-->
+    	  </a>
+        </div>
+	  <p id="mediatype">(<span class="movieNum"></span>)</p>
+	</div>
+    <div id="pl" class="posterList">
+    </div>
+    </div>
+	      <div class="photoblock" style="display:none;">
+        <p>对不起，当前版本不支持播放功能，研发人员正在努力实现，敬请期待！</p>
+    <p class="listing">您可以使用VidOn Cloud进行播放</p>
+    <div class="cloud">
+      <div class="no1 fl"><img src="images/movie/cloud_img.png" width="177" height="181"></div>
+      <div class="no2 fl"> <a href="javascript:;" class="btn-small btn-blue mac"><b>Available Soon</b><br>
+        on iTunes</a> <a href="javascript:;"  class="btn-small btn-blue android"><b>Available Soon</b><br>
+        on Google Play</a></div>
+      <div class="no3 fl"><img src="images/movie/cloud_m.jpg" width="101" height="100"/>
+        <p>Scan to Download</p>
+      </div>
+      <div class="clr"></div>
+    </div>
+      </div>
     <div class="clr"></div>
+    <div class="movieTips">
+      <p>服务器正在扫描您的电影路径，已发现电影<span class="movieNum">3</span>个</p>
+    </div>
   </div>
+</form>
+<div class="tckuang addNoPlay fillet10 addhtml" url="template/popaddnoplay.html"> </div>
+<div class="tckuang addVideo fillet10 addhtml" url="template/popaddvideo.html"> </div>
+<div class="tckuang  addPath fillet10 addhtml" url="template/popaddpath.html"></div>
+<div class="tckuang addNetwork fillet10 addhtml"  url="template/popaddnetwork.html"> </div>
+<div class="tckuang confirmDelete fillet10 addhtml" url="template/popconfirmdelete.html"></div>
+<div class="tckuang poplogin fillet10 addhtml" url="template/poplogin.html"> </div>
+<div class="tckuang popabout fillet10 addhtml" url="template/popabout.html"></div>
+<div class="tckuang popsetup fillet10 addhtml" url="template/popsetup.html"></div>
 </div>
-<div class="innblock ">
-  <table id="title_tab" class="title"></table>
-  <div class="folder_img_icon_box clearfix" id="folder_box">
-   
-    <div class="floatableAlbum" style="height:179px;"> </div>
-  </div>
-  <div id="server_setting" class="clearfix">
-    
-  </div>
-  <div class="clr"></div>
-</div>
-<div class="footer">
-  <p>&copy; 2012-2014 VidOn.me All Rights Reserved <a href="http://www.vidon.me" style="color:#19a4fd"> http://www.vidon.me</a>  </p>
-</div>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+<script type="text/javascript">
+	$(function(){
+		//showdiv(".popabout",1);
+		$('#selectedPath li:even').addClass("even");
+		$("#selectedPath").delegate('.delete',"click",function(){
+				showdiv(".confirmDelete",2);
+				$("#deletePath").text($(this).parent().find(".showpath").text());
+				//$(this).parent().remove();
+				
+		})
+		$("#selectedPath").delegate('li',"hover",function(){
+				 $(this).toggleClass("hover");
+		})
+		
+		$(".addNwPath").click(function(){
+				showdiv(".addNetwork",3);
+				
+			})
+		$("#header .login").click(function(){
+				CheckAuthUserInfo();
+				//showdiv(".poplogin",1);
+				
+			})
+		$(".mainpage .posterList .img,.teleplaydetails .posterList .img").click(function(){
+			showdiv(".addNoPlay",1);
+			})
+		$("#fresh").click(function(){
+		/*
+			  if(!$(this).hasClass("loading")){
+				  $(this).addClass("loading");
+				  console.log("开始刷新");
+				  //刷新完成清删除loading样式
+				  }
+			  else{
+				  $(this).removeClass("loading");
+				  console.log("停止刷新");
+				  }*/
+			  })
+		/*
+		var isno=false;
+		//测试用变量
+		var data='<div class="box">'+
+        '<div class="pic">'+
+          '<div class="img fillet10"><div class="imgbg"></div> <img class="fillet10"  src="images/17.jpg"/> </div>'+
+          '<p class="imgname">Name</p>'+
+        '</div>'+
+      '</div>';
+	  //IE7
+		$(".posterList").scroll(function(){
+    		console.log("scroll....")
+    		if(!isno) {
+    		 	 var scrollTop=$(".posterList").scrollTop();
+				 var docHeight=$(".posterList").get(0).scrollHeight;
+	    		 var winHeight=$(window).height()-80;
+	    		 if(scrollTop+winHeight>=docHeight){
+	    		 	 isno=true;
+					 alert('请求新数据...');//IE7兼容用
+			 		// for(var i=0;i<20;i++){
+					//$(".posterList").append(src);
+					
+					//}
+			         isno=false; 	         
+	    		 }  
+	        } 		 	
+    		   		 
+    	})
+		//IE7++
+		$(".posterList").mCustomScrollbar({
+          scrollButtons:{enable:true},
+          theme:"light-3",
+		  mouseWheelPixels:500,
+          callbacks:{  
+             onTotalScroll:function(){
+                //console.log('滚动到底部啦！')
+				//alert("aa");
+				//for(var i=0;i<20;i++){
+					$(".posterList .mCSB_container").append(data);
+					
+					//}
 
-<div id="dialog-form" title="Add Media Source"  > </div>
+             },
+             onTotalScrollOffset:50,
+             whileScrollingInterval:10
+          }
+          
+        });*/
+		//添加模拟滚动条
+		$("#selectedPath").mCustomScrollbar({
+		  autoHideScrollbar:true,
+        });
+		$(".addPath .popDisk").mCustomScrollbar({
+          //scrollButtons:{enable:true},
+		  autoHideScrollbar:true,
+        });
+		$(".addPath .popFolder").mCustomScrollbar({
+          //scrollButtons:{enable:true},
+		  autoHideScrollbar:true,
+        });
+		
+		
+	})	
 
-<script type="text/javascript" src="js/vidon.me.launcher.js?v=2.1.0" ></script>
-</div>
-<div class="innblock" id="promotion_innblock" style="display:none">
-  <div class="clearfix" id="promotion_clearfix">
-  </div>
-  <div id="promotioncontainer">
-  </div>
-</div>
+</script>
 <div class="vidoncover"></div>
-<div class="loadimg"></div>
+<div class="loadimg"><img id="realimg"></div>
+<div class="closeimg"></div>
 </body>
 </html>

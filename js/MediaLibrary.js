@@ -1190,24 +1190,11 @@ function addMedia(addName, addType, addPath, edit) {
 		//添加
 		vidonme.rpc.request({
 			'context': this,
-			'method': 'VidOnMe.AddPathToLibrary',
+			'method': 'VidOnMe.AddShare',
 			'params': {
+				"name": addName,
 				"path": addPath,
-				"LibraryId": 1
-			},
-			'success': function(data) {
-				$("#dialog-form").dialog("close");
-				//alert("添加成功");
-				MediaLibrary.prototype.mediaManagerOpen();
-				gaddEdit = 1;
-			
-			}
-		});
-		vidonme.rpc.request({
-			'context': this,
-			'method': 'VidOnMe.StartScan',
-			'params': {
-				"LibraryId": 1
+				"type": addType
 			},
 			'success': function(data) {
 				$("#dialog-form").dialog("close");
