@@ -1,7 +1,7 @@
 	
 	var g_CurLibId										= 0;
-	var g_CommercialVideoId						= 0;
-	var g_PersonalVideoId							= 0;
+	var g_CommercialVideoId						= 1;
+	var g_PersonalVideoId							= 2;
 	
 	var g_CurDeletePathWaitforConfirm = {};		//存已经选中删除的路径li对象				
 	

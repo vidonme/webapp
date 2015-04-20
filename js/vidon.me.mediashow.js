@@ -148,7 +148,7 @@ function PreDisplay(obj) {
 	}
 
 	try {
-		$('#pl').html('');
+		$(".posterList .mCSB_container").html('');
 		$('#mediatype').html('');
 		$('#backtotv').attr({style:"display:none"});
 		
@@ -165,7 +165,6 @@ function PreDisplay(obj) {
 
 		var count = 0;
 		var id = obj.attr("id");
-		
 		if (id == "movie") {
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
@@ -183,7 +182,7 @@ function PreDisplay(obj) {
 		} else if (id == "home_video") {
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
-				$('#mediatype').html('Home Videos' + ' ' + '(<span>' + count + '</span>)');
+				$('#mediatype').html('Videos' + ' ' + '(<span>' + count + '</span>)');
 			}, 200);
 			
 			$('#fresh').attr('onclick', 'RefreshMediaLibrary("personal")');
@@ -219,11 +218,7 @@ function SafePreHandleHtml(obj, class_name, id) {
 }
 
 function GetEpisodeDetails(idtvshow, name, season) {
-	if (global_media_timer > 0) {
-		clearInterval(global_media_timer);
-	}
-
-	$('#pl').html('');
+	$(".posterList .mCSB_container").html('');
 	$('#mediatype').html('');
 	$('.posterMenubtn').hide();
 	$('#backtotv').attr('onclick', 'GetTvshowDetails(' + idtvshow + ')');
@@ -260,15 +255,17 @@ function GetEpisodeDetails(idtvshow, name, season) {
 							var box = $('<div class="box"></div>');
 							var pic = $('<div class="pic"></div>');
 							
-							var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgteleplaydetailsbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + episode + '</p>';//" width="209" height="319" 
-							
+							//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgteleplaydetailsbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + episode + '</p>';//" width="209" height="319" 
+							var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster +  '); "><div class="imgbg"></div></div><p class="imgname">' + episode + '</p>';
 							pic.append(content);
 							box.append(pic);
 							
-							teleplaylist.append(box);
+							$(".posterList .mCSB_container").append(box);
+							//teleplaylist.append(box);
 						}
 						
-						$('#pl').append(teleplaylist);
+						//$('#pl').append(teleplaylist);
+						
 					}
 				}
 			}
@@ -296,15 +293,16 @@ function GetEpisodes(idtvshow, title) {
 					
 					var season  = data.result.seasons[i].iseason; 
 					var poster  = global_image_url + encodeURI(data.result.seasons[i].episodes[0].thumbnail);
-					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')"><div class="imgteleplaylistbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">Season' + ' ' + season + '</p>';//" width="209" height="319" 
-					
+					//var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')"><div class="imgteleplaylistbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">Season' + ' ' + season + '</p>';//" width="209" height="319" 
+					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')" style="background-image:url(' + poster +  '); "></div><p class="imgname">Season' + ' ' + season + '</p>';
 					pic.append(content);
 					box.append(pic);
 					
-					teleplaylist.append(box);
+					$(".posterList .mCSB_container").append(box);
+					//teleplaylist.append(box);
 				}
 				
-				$('#pl').append(teleplaylist);
+				//$('#pl').append(teleplaylist);
 			}
 		}
 	});
@@ -377,7 +375,8 @@ function GetTvshowSeasons(idtvshow, title, thumbnail, genre, cast, plot) {
 		topdiv.append(rightdiv);
 		topdiv.append(clrdiv);
 		
-		$('#pl').append(topdiv);
+		$(".posterList .mCSB_container").append(topdiv);
+		//$('#pl').append(topdiv);
 		
 		GetEpisodes(idtvshow, title);
 	} catch (err) {
@@ -386,10 +385,6 @@ function GetTvshowSeasons(idtvshow, title, thumbnail, genre, cast, plot) {
 }
 
 function GetTvshowDetails(idtvshow) {
-	if (global_media_timer > 0) {
-		clearInterval(global_media_timer);
-	}
-	
 	PreDisplay($('#teleplay'));
 	$('.posterMenubtn').hide();
 	
@@ -453,13 +448,12 @@ function __GetMovies(start, end, state) {
 		'params': obj,
 		'success': function(data) {
 			if (data && data.result) {
-				if (data.result.limits.end == -1) {
-					if ('finish' == state) {
-						clearInterval(global_media_timer);
-					} else {
-						return;	
+				if (data.result.limits.end != -1) {
+					// check is in Movie show page
+					if ( g_selected_type != 'movie' ) {
+						return;
 					}
-				} else {
+
 					for (var i = 0; i < data.result.limits.end - data.result.limits.start; ++i) {
 						var poster  = global_image_url + encodeURI(data.result.movies[i].thumbnail);
 						var name    = data.result.movies[i].title;
@@ -467,11 +461,17 @@ function __GetMovies(start, end, state) {
 						var box = $('<div class="box"></div>');
 						var pic = $('<div class="pic"></div>');						
 						
-						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';// width="209" height="319" 
-						
+						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';// width="209" height="319" 
+						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster +  '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
+						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
 						pic.append(content);
 						box.append(pic);
-						$('#pl').append(box);
+						//$('#pl').append(box);
+						$(".posterList .mCSB_container").append(box);
+					}
+
+					if ( data.result.limits.total > data.result.limits.end ) {
+						__GetMovies( data.result.limits.end+1, data.result.limits.total, 'finish' );
 					}
 				}
 			}
@@ -503,12 +503,18 @@ function __GetTvshows(start, end, state) {
 		'success': function(data) {
 			if (data && data.result) {
 				if (data.result.limits.end == -1) {
+					/*
 					if ('finish' == state) {
 						clearInterval(global_media_timer);
 					} else {
 						return;	
 					}
+					*/
 				} else {
+					if ( g_selected_type != 'tvshow' ) {
+						return;
+					}
+
 					for (var i = 0; i < data.result.limits.end - data.result.limits.start; ++i) {
 						var idtvshow = data.result.tvshows[i].idtvshow; 
 						var poster  = global_image_url + encodeURI(data.result.tvshows[i].thumbnail);
@@ -518,11 +524,16 @@ function __GetTvshows(start, end, state) {
 						var pic = $('<div class="pic"></div>');
 						$('.posterMenubtn').show();
 						
-						var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')"><div class="imgteleplaybg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
+						//var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')"><div class="imgteleplaybg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
+						var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')" style="background-image:url(' + poster +  '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
 						
 						pic.append(content);
 						box.append(pic);
-						$('#pl').append(box);
+						$(".posterList .mCSB_container").append(box);
+					}
+
+					if ( data.result.limits.total > data.result.limits.end ) {
+						__GetTvshows( data.result.limits.end+1, data.result.limits.total, 'finish' );
 					}
 				}
 			}
@@ -550,23 +561,33 @@ function __GetPrivVideos(start, end, state) {
 		'success': function(data) {
 			if (data && data.result) {
 				if (data.result.limits.end == -1) {
+					/*
 					if ('finish' == state) {
 						clearInterval(global_media_timer);
 					} else {
 						return;	
 					}
+					*/
 				} else {
+					if ( g_selected_type != 'video' ) {
+						return;
+					}
+
 					for (var i = 0; i < data.result.limits.end - data.result.limits.start; ++i) {
 						var box = $('<div class="box"></div>');
 						var pic = $('<div class="pic"></div>');
 						
 						var poster  = global_image_url + encodeURI(data.result.privvideos[i].thumbnail);
 						var name    = data.result.privvideos[i].title;
-						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
-						
+						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
+						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster +  '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
 						pic.append(content);
 						box.append(pic);
 						$('#pl').append(box);
+					}
+
+					if ( data.result.limits.total > data.result.limits.end ) {
+						__GetPrivVideos( data.result.limits.end+1, data.result.limits.total, 'finish' );
 					}
 				}
 			}
@@ -653,27 +674,15 @@ function ShowPicture(url) {
 }
 
 function GetMediaInformation(mediatype) {
-	var start = $(".posterList .box").length;
-	var end   = start + 10;
+	var start = 0;//$(".posterList .box").length;
+	var end   = start + 100;
 	var state = "finish";
 
 	$('.photoblock').hide();
 	
 	if ('movie' == mediatype) {
-//		TODO: wait it to be implemented.	
-//		vidonme.rpc.request({
-//			'context': this,
-//			'method': 'VidOnMe.GetCurrentScraperState',
-//			'params': mediatype,
-//			'success': function (data) {
-//				if (data && data.VidOnMe.GetScraperState) {
-//					var state = data.VidOnMe.GetScraperState.state;
-					state = "scraping"; // just for testing
-				
-					__GetMovies(start, end, state);
-//				}	
-//			}
-//		});
+		$(".posterMenu").show();
+		__GetMovies(start, end, state);
 	} else if ('tvshow' == mediatype) {
 		$(".posterMenu").show();
 		__GetTvshows(start, end, state);
@@ -685,80 +694,83 @@ function GetMediaInformation(mediatype) {
 		$('.photoblock').show();
 	} else {
 		alert("Bad parameter");
-		clearInterval(global_media_timer);
+		//clearInterval(global_media_timer);
 	}
 }
 
 function GetMovies() {
-	if (global_media_timer > 0) {
-		clearInterval(global_media_timer);
-	};
-	
+	g_selected_type = 'movie';
 	PreDisplay($('#movie'));
-	
-	global_media_timer = setInterval(function(){
-		GetMediaInformation('movie');
-	},
-	200);
+	GetMediaInformation('movie');
 }
 
 function GetTvshows() {
+	/*
 	if (global_media_timer > 0) {
 		clearInterval(global_media_timer);
-	};
+	};*/
 	
+	g_selected_type = 'tvshow';
 	PreDisplay($('#teleplay'));
+	GetMediaInformation('tvshow');
 	
+	/*
 	global_media_timer = setInterval(function(){
-		GetMediaInformation('tvshow');
+		
 	},
-	200);
+	200);*/
 }
 
 function GetPrivVideos() {
-	if (global_media_timer > 0) {
-		clearInterval(global_media_timer);
-	};
-	
+	g_selected_type = 'video';
 	PreDisplay($('#home_video'));
-
-	global_media_timer = setInterval(function(){
-		GetMediaInformation('video');
-	},
-	200);
+	GetMediaInformation('video')
 }
 
 function GetPictures() {
-	if (global_media_timer > 0) {
-		clearInterval(global_media_timer);
-	};
-	
+	g_selected_type = 'image';
 	PreDisplay($('#images'));
 	GetMediaInformation('image');;
+}
+
+function FreshMedias(){
+	if (g_selected_type == 'movie') {
+		GetMovies();
+	}
+	else if (g_selected_type == 'tvshow') {
+		GetTvshows();
+	}
+	else if (g_selected_type == 'video') {
+		GetPrivVideos();
+	}
+	else if (g_selected_type == 'image') {
+		GetPictures();
+	}
+	else{
+
+	}
 }
 
 window.onload = function() {
 	GetMovies();
 	RefreshMediaLibrary("commercial");
 	
-	if( g_IsWizzardFinish == false ){
-		vidonme.rpc.request({
+	vidonme.rpc.request({
 		        'context': this,
 		        'method': 'VidOnMe.IsWizzardEnabled',
 		        'params': {},
 		        'success': function(data) {
 					if( data ){
 						if( data.result.ret == true ){
-							location.assign("wizzard.html");
-							window.location="wizzard.html";
-							location.href="wizzard.html";
+							location.assign("guide.html");
+							window.location="guide.html";
+							location.href="guide.html";
 						}
 					}
 			    }
 	    });
-	}
 }
 
 var global_image_url = 'http://localhost:32080/image/';
-var global_media_timer = -1;
 var global_count_timer = -1;
+var g_selected_type = "movie";

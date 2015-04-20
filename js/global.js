@@ -1,7 +1,5 @@
 $(function(){
 	loadHtml() ;
-	
-
 	$(".dropdown").each(function(){  
         var $this = $(this);  
         var input_dropdown = $this.find(".input_dropdown"); 
@@ -9,18 +7,30 @@ $(function(){
         var ul = $this.find("ul"); 
 		var li=$this.find("li"); 
         input_dropdown.click(function(){
-			if(ul.css("display")=="none"){ 
+			if($this.hasClass("disable")){
+				ul.hide();
+				
+				}
+			else{
+				if(ul.css("display")=="none"){ 
 				ul.slideDown("fast"); 
-			}else{ 
+				}else{ 
 				ul.slideUp("fast"); 
-			} 
+				} 
+			}
+			
 		})
 		jt.click(function(){
-			if(ul.css("display")=="none"){ 
+			if($this.hasClass("disable")){
+				ul.hide();
+				}
+			else{
+				if(ul.css("display")=="none"){ 
 				ul.slideDown("fast"); 
-			}else{ 
+				}else{ 
 				ul.slideUp("fast"); 
-			} 
+				} 
+			}
 		})
 		li.click(function(){
 			var txt = $(this).text(); 
@@ -31,7 +41,8 @@ $(function(){
 			}
 			ul.hide(); 
 		})			                                
-    });  
+    });
+ 
 	
 //登陆框
 	$("#selectNationality").click(function(){
@@ -60,6 +71,13 @@ $(function(){
 		var index=$(this).index();
 		$("#setupcontent .setupcon").eq(index).addClass("show").siblings().removeClass("show");		
 	})
+	//自动升级
+	$("#autostart .checkbox").click(function(){
+	
+		$(".autoupgrade").toggleClass("disable");
+		$(".autoupgrade .dropdown").toggleClass("disable");
+	})
+		
 })
 
 	function showdiv(elem,index) {

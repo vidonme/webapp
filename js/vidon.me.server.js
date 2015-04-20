@@ -55,6 +55,7 @@ function getScraperStatus() {
 					tips = tips.format( data.result.total.amounts, data.result.total.finished );
 				}
 				else if ( status == "finish" ) {
+					FreshMedias();
 					getLastScraperResult();
 				}
 				else{

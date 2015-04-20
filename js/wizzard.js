@@ -1,6 +1,5 @@
 
 		var g_CurLibId = 0;
-		var g_IsWizzardFinish = false;
 
 //=================PageInterface============================
 		function cbSetLibraryID(data,mediatype){
@@ -130,14 +129,15 @@
             }
         });				
 
-			g_IsWizzardFinish = true;
 		    var s = vidonme.rpc.request({
 		        'context': this,
 		        'method': 'VidOnMe.SetWizzardDisabled',
 		        'params': {},
 		        'success': function(data) {
-		
-			    	}
+						location.assign("index.html");
+						window.location="index.html";
+						location.href="index.html";
+			    }
 	    	});
 		}
 		
@@ -147,9 +147,6 @@
 
     function FinishWizard() {
 				wizardsetting();
-				location.assign("index.html");
-				window.location="index.html";
-				location.href="index.html";
     }
     
 		function ClearDiskAndPathLi(){
@@ -218,22 +215,23 @@
         });
         
 		//ÏÂÀ­²Ëµ¥
+		/*
 		$(".input_dropdown,.jt").click(function(){ 
 			var ul = $(".dropdown ul"); 
 			if(ul.css("display")=="none"){ 
 				ul.slideDown("fast"); 
 			}else{ 
-			ul.slideUp("fast"); 
+				ul.slideUp("fast"); 
 			} 
 		}); 
 		
 		$("#dropdown li").click(function(){ 
-		var txt = $(this).text(); 
-		$(".input_dropdown").val(txt); 
+			var txt = $(this).text(); 
+			$(".input_dropdown").val(txt); 
 		
-		$("#dropdown ul").hide(); 
-		
+			$("#dropdown ul").hide(); 
 		}); 
+		*/
 					
 		$(".addnetshareOK").click(function(){
 				AddNetShare();

@@ -61,7 +61,7 @@ function getBrowserInfo()
 			"js/localizations.js",
 			"js/jquery.md5.js",
 			"js/commfunc.js",
-			"js/jquery.mCustomScrollbar.concat.min.js",
+			//"js/jquery.mCustomScrollbar.concat.min.js",
 			"js/jquery.i18n.properties-1.0.9.js",			 
 			"js/global.js", 			
 			"js/pageif.js",
@@ -69,7 +69,8 @@ function getBrowserInfo()
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
 			"js/jquery.md5.js",
-			"js/vidon.me.server.js"
+			"js/vidon.me.server.js",
+			"js/wizzard.js"
         ];
     else
         scripts = [
@@ -92,7 +93,6 @@ function getBrowserInfo()
 			"js/localizations.js",
 			"js/jquery.md5.js",
 			"js/commfunc.js",
-			"js/jquery.mCustomScrollbar.concat.min.js",
 			"js/jquery.i18n.properties-1.0.9.js",			 
 			"js/global.js", 			
 			"js/pageif.js",
@@ -100,7 +100,7 @@ function getBrowserInfo()
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
 			"js/jquery.md5.js",
-			"js/vidon.me.server.js"
+			"js/vidon.me.server.js",
         ];
 
     for (i = 0; i < scripts.length; i += 1) {

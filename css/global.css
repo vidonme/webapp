@@ -53,6 +53,7 @@ p { line-height:1.5; padding:6px 0px; }
 .dropdown .jt{ position:absolute; top:8px; right:20px; width:25px; height:14px; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -58px;}
 .dropdown ul{width:100%; background:#404140;margin-top:2px;position:absolute; display:none;} 
 .dropdown ul li{height:28px; line-height:28px; cursor:pointer;} 
+
 /*复选框*/
 .checkboxblock{ line-height:28px;}
 .checkbox{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; width:30px; cursor:pointer; display:inline-block; float:left}
@@ -66,6 +67,11 @@ p { line-height:1.5; padding:6px 0px; }
 .ratingblock{ width:225px; height:34px; background:url(../images/spriteimg/iconimg.png) no-repeat 0 -846px; float:left; margin-right:20px;}
 .rating .ratingvalue{background:url(../images/spriteimg/iconimg.png) no-repeat 0px -806px; height:34px; width:auto; }
 .rating .ratingnum{ font-size:24px; font-weight:bold; line-height:33px;}
+/*进度条*/
+.progress {height: 12px;margin-bottom: 20px;overflow: hidden;border:#484848 solid 1px;
+	-moz-border-radius: 6px;-webkit-border-radius: 6px;border-radius: 6px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);}
+.progress-bar {float: left;width: 0;height: 100%;line-height: 20px;background-color: #3278cc;-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);-webkit-transition: width .6s ease;transition: width .6s ease;}
 /*圆角*/
 .fillet10 { -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; }
 .fillettop10 { -webkit-border-top-left-radius:10px; -webkit-border-top-right-radius:10px; -moz-border-radius-topleft:10px; -moz-border-radius-topright:10px; border-top-left-radius:10px; border-top-right-radius:10px; }
@@ -73,8 +79,8 @@ p { line-height:1.5; padding:6px 0px; }
 
 body { background:#222320 url(../images/bg.jpg) repeat top left fixed;-moz-background-size: cover;-webkit-background-size: cover;-o-background-size: cover;
 	background-size: cover;}
-input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 solid 1px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; padding-left:20px; }
-.input-small { height:28px; line-height:28px; padding-left:10px; }
+input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 solid 1px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; padding:17px 0px 17px 20px; }
+.input-small { height:14px; line-height:14px; padding:7px 0px 7px 10px; }
 .text-muted { color:#a9a9a9 }
 
 /*按钮*/
@@ -130,7 +136,9 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .siderbar dl{ margin-bottom:50px;}
 .siderbar dt{ height:60px; line-height:30px; position:relative; width:210px}
 .siderbar dd{ height:60px; line-height:60px; cursor:pointer;padding-left:70px; width:160px;background:url(../images/spriteimg/iconimg.png) no-repeat;}
-.siderbar dd.selected,.siderbar dd:hover{ background-color:#3278cc;}
+
+.siderbar dd:hover{ background-color:#666}
+.siderbar dd.selected{ background-color:#3278cc;}
 .siderbar .commvideos,.siderbar .permedia{ padding-left:20px;}
 .siderbar .movies{ background-position:40px -236px; }
 .siderbar .tvshows{ background-position:40px -303px;}
@@ -159,23 +167,25 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .posterList { overflow: auto; position:absolute; top:90px; bottom:0; right:0px; left:20px; }
 .posterList .box { width: 180px; float: left; height:300px; }
 .posterList .box  .imgname{ padding-top:0; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis }
-.posterList .img { margin: 10px;  cursor:pointer; position:relative;width:160px; height:240px; }
-.posterList .pic img { display:block; width:160px; position:absolute; bottom:0px;-moz-box-shadow:0px 0px 5px #000; -webkit-box-shadow:0px 0px 5px #000; box-shadow:0px 0px 5px #000;}
+.posterList .img { margin: 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
+  -moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;}
+
 .posterList h2{ font-size:24px; font-weight:normal; margin-bottom:20px;}
-
-.movie .posterList .imgbg,.teleplaydetails .posterList .imgbg{width:160px; height:100px;position:absolute;bottom:0px; left:0px;z-index:2; }
-.movie .posterList .img:hover .imgbg,.teleplaydetails .posterList .img:hover .imgbg{ background:url(../images/movie/player1.png) no-repeat center center;}
-.posterList .img:hover img{-moz-box-shadow:0px 0px 5px #fff; -webkit-box-shadow:0px 0px 5px #fff; box-shadow:0px 0px 5px #fff; }
-
-
+.movie .posterList .imgbg,.teleplaydetails .posterList .imgbg{ background:url(../images/movie/kuang.png) no-repeat 0 0; width:160px; height:240px; position:absolute; top:0px; left:0px;}
+.movie .posterList .imgbg:hover,.teleplaydetails .posterList .imgbg:hover { background-position:0px -260px;}
+.teleplay .posterList .imgbg,.teleplaylist .posterList .imgbg{ background:url(../images/tv/kuang.png) no-repeat 0 0; width:160px; height:240px; position:absolute; top:0px; left:0px;}
+.teleplay .posterList .imgbg:hover,.teleplaylist .posterList .imgbg:hover{ background-position:0px -260px;}
 /*电视剧详情*/
 .teleplaydetails,.teleplaylist{ background: url(../images/tv/bg.jpg) no-repeat top left fixed;-moz-background-size: cover;-webkit-background-size: cover;-o-background-size: cover;background-size: cover;}
 .teleplaydetails .posterMenu,.teleplaylist .posterMenu { position:relative}
 .zhezhao{background:#171916; position:fixed; filter:alpha(opacity=80); -moz-opacity:0.8; opacity:0.8; top:0px; left:0px; width:100%; height:100%; position:absolute; }
 
 
-.movieTips { position:fixed; bottom:0px; height:32px; background:#f5fffb; left:230px; right:0px; text-align:center; }
-.movieTips p { line-height:32px; color:#171916}
+.movieTips { position:fixed; bottom:10px; height:30px; background:#171916; left:330px; right:100px; text-align:center; z-index:2;  -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; }
+.movieTips p { line-height:30px; color:#f5fffb; padding:0px;}
 /*电视剧*/
 .teleplayTop { padding:20px; }
 .teleplayTop .left { float:left; width:290px; }
@@ -233,7 +243,7 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .poplogin{ width:800px; min-height:500px;}
 .poplogin .int{ margin-top:40px;}
 .poplogin .loginblock{ margin-left:20px; width:650px;}
-.poplogin input{ width:440px; height:40px; line-height:40px; padding-left:10px;}
+.poplogin input{ width:440px; height:14px; line-height:14px; padding:13px 0px 13px 10px;}
 .poplogin label{ font-size:18px; width:150px; text-align:right; margin-right:20px; display:inline-block; line-height:40px;}
 .poplogin .submitbtn{ border:none; width:auto; padding-left:40px; float:right; margin-top:40px; margin-right:28px; font-size:18px;}
 .poplogin .tips{ margin-top:60px;}
@@ -278,7 +288,7 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .popsetup .dropdown li{ padding-left:10px;}
 
 .setupright h4{ font-size:18px; border-bottom:#484848 solid 1px; text-align:left; margin:0px; height:40px; line-height:40px;}
-.serverinfo p{ margin-top:15px;}
+/*.serverinfo p{ margin-top:15px;}*/
 .serverinfo .btn-small{ margin-top:20px;}
 .popsetup .h4{ margin-top:30px; border-bottom:none}
 .popsetup table{ width:495px;  display: table;   border-collapse:separate; border:#f5fffb solid 1px; }
@@ -286,7 +296,7 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .popsetup table td.row1{ border-top:none;}
 .popsetup table td.col1,.popsetup table td.col2{ border-right:#f5fffb solid 1px;}
 .popsetup table .btn-small{ height:28px; line-height:28px; font-size:14px;}
-.setupcon p.disablep{ display:none}
+.popsetup p.disablep{ display:none}
 
 .setupcon .disable p{ color:#535353}
 .setupcon .disable .btn-small{ background:#535353; cursor:default; color:#171916}
@@ -295,6 +305,16 @@ input { background:transparent;  height:48px; line-height:48px; border:#d3d3d3 s
 .setupcon .disable p.checkboxblock{ display:none;}
 .setupcon .disable p.disablep{ display:block; height:28px; line-height:28px;}
 .setupcon .disable p.disablep span{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -1030px; display:inline-block; width:30px; height:28px; float:left}
+
+.setupcon .autoupgrade{ margin-bottom: 50px;}
+.setupcon .autoupgrade.disable .input_dropdown{ color:#535353; border:#535353 solid 1px;}
+.setupcon .autoupgrade.disable .input_dropdown:hover{ color:#535353}
+.setupcon .autoupgrade.disable  .jt{ background-position:-41px 0px ;}
+.setupcon .autoupgrade p,.setupcon .autoupgrade .dropdown{ display: inline-block; margin-right:3px;}
+.setupcon li{ list-style:decimal; list-style-position: inside;}
+.setupcon .progress{ width: 300px;}
+.progreessbarblock p,.progreessbarblock .progress{ display: inline-block; margin-right:3px;}
+.progreessbarblock .progress{ margin-bottom:0px;}
 /**/
 .listing{ background:url(../images/movie/dian.png) no-repeat left center; padding-left:20px;}
 .cloud { margin:40px 0px;}

@@ -1,0 +1,165 @@
+ <a class="popsetupClose close"  href="javascript:;" onClick="close_box('.popsetup',1);"></a>
+<h3 class="fillettop10">服务器设置</h3>
+<div class="tckuangcon filletbot10">
+  <div class="setupleft">
+    <ul  id="setupmenu">
+      <li class="selected">服务器状态</li>
+      <li>通用</li>
+      <li>媒体库</li>
+      <li>转码</li>
+      <li>升级</li>
+    </ul>
+  </div>
+  <div class="setupright" id="setupcontent">
+    <div class="setupcon show">
+      <h4>服务器基本信息</h4>
+      <div class="serverinfo">
+        <p><span>服务器名称: </span>
+          <input class="input-small" type="text" value="威动服务器" >
+        </p>
+        <p><span>服务器版本: </span><span>2.0.2.0</span></p>
+        <p><span>服务器ip: </span><span>19.168.1.1</span></p>
+        <a href="javascript:;"  class="btn-small btn-blue">保存</a> </div>
+      <h4 class="h4">服务器实时信息</h4>
+      <p>当前连接用户端</p>
+      <table  class="fillet10">
+        <tr>
+          <td class="row1 col1">客户端名称</td>
+          <td  class="row1 col2">ip地址</td>
+          <td  class="row1">状态</td>
+        </tr>
+        <tr>
+          <td class="col1">iPhone5s</td>
+          <td class="col2">192.168.1.1</td>
+          <td>已连接</td>
+        </tr>
+      </table>
+    </div>
+    <div class="setupcon">
+      <h4>Web页面语言</h4>
+      <div class="weblangs">
+        <div class="dropdown selectLanguage" id="selectLanguage">
+          <div class="jt"></div>
+          <a title="" class="input_dropdown fillet10" href="javascript:;"><b class="font">中文（简体）</b><span></span></a>
+          <ul class="fillet10">
+            <li>中文（简体）</li>
+            <li>中文（繁体）</li>
+            <li>English</li>
+          </ul>
+        </div>
+        <p class="checkboxblock" id="onlyloaclhost"><span class="checkbox"></span>只允许本机访问web管理界面</p>
+        <p>设置此选项，则只允许威动服务器所安装的及其访问连接 http://localhost:32080/ 来管理此服务器</p>
+        <p class="checkboxblock" id="autostart"><span class="checkbox selected"></span>开机自动启动服务</p>
+        <a href="javascript:;"  class="fl btn-small btn-blue" id="btnSelectLanguage">保存</a> <a href="javascript:;"  class="fl btn-small btn-white">取消</a>
+        <div class="clr"></div>
+      </div>
+    </div>
+    <div class="setupcon">
+      <h4>自动更新媒体库时间间隔</h4>
+      <div class="dropdown selectLanguage" id="selectLanguage">
+        <div class="jt"></div>
+        <a title="" class="input_dropdown fillet10" href="javascript:;"><b class="font">每天</b><span></span></a>
+        <ul class="fillet10">
+          <li>每小时</li>
+          <li>每星期</li>
+        </ul>
+      </div>
+      <h4 style="margin-top:50px;">获取电影信息语言</h4>
+      <div class="dropdown selectLanguage" id="selectLanguage">
+        <div class="jt"></div>
+        <a title="" class="input_dropdown fillet10" href="javascript:;"><b class="font">中文（简体）</b><span></span></a>
+        <ul class="fillet10">
+          <li>中文（简体）</li>
+          <li>中文（繁体）</li>
+          <li>English</li>
+        </ul>
+      </div>
+      <a href="javascript:;"  class="fl btn-small btn-blue" id="btnSelectLanguage">保存</a> <a href="javascript:;"  class="fl btn-small btn-white">取消</a>
+      <div class="clr"></div>
+    </div>
+    <div class="setupcon">
+      <h4>转码设置</h4>
+      <div class="disable">
+        <p class="checkboxblock" id="opendecoding"><span class="checkbox"></span>开启硬件解码编码 </p>
+        <p class="disablep"><span></span>开启硬件解码编码 <b class="red">您的显卡不支持该功能，点击<a 
+       href="javascript:;" class="a">了解详情</a></b></p>
+        <p>启用硬件解码硬件编码功能，可以减轻CPU负担，并使视频播放更流畅</p>
+        <a href="javascript:;"  class="fl btn-small btn-blue" id="btnSelectLanguage">保存</a> <a href="javascript:;"  class="fl btn-small btn-white">取消</a> </div>
+      <div class="clr"></div>
+    </div>
+    <div class="setupcon">
+      <h4>自动升级</h4>
+      <p class="checkboxblock" id="autostart"><span class="checkbox selected"></span>开启自动升级</p>
+      <div class="autoupgrade">
+        <p>升级时间</p>
+        <div class="dropdown upgradeDate" id="upgradeDate">
+          <div class="jt"></div>
+          <a title="" class="input_dropdown fillet10" href="javascript:;"><b class="font">每天</b><span></span></a>
+          <ul class="fillet10">
+            <li>每星期</li>
+            <li>每月</li>
+          </ul>
+        </div>
+        <p>在</p>
+        <div class="dropdown upgradeTime" id="upgradeTime">
+          <div class="jt"></div>
+          <a title="" class="input_dropdown fillet10" href="javascript:;"><b class="font">3:00</b><span></span></a>
+          <ul class="fillet10">
+            <li>4:00</li>
+            <li>5:00</li>
+          </ul>
+        </div>
+        <div class="clr"></div>
+      </div>
+      <h4>当前版本</h4>
+      <div  class="versionnew" id="versionNew"  style="display:none">
+        <p>威动服务器: v2.0.0.1稳定版</p>
+        <p>当前已是最新版</p>
+      </div>
+      <div  class="versionfindnew" id="versionFindNew" style="display:none">
+        <p>威动服务器: v2.0.0.1稳定版</p>
+        <p>发现新版本:v3.0.0.1</p>
+        <ul>
+          <li>修改中文环境下升级失败问题</li>
+          <li>修复下载资源到移动端失败问题</li>
+        </ul>
+        <a href="javascript:;" class="btn-small btn-blue">立即下载</a> </div>
+      <div  class="versiondown" id="versionDown"  style="display:none">
+        <p>威动服务器: v2.0.0.1稳定版</p>
+        <p>发现新版本:v3.0.0.1</p>
+        <div class="progreessbarblock">
+          <p>正在下载</p>
+          <div class="progress">
+            <div class="progress-bar" style="width:40%"></div>
+          </div>
+          <P>40%</p>
+        </div>
+        <div class="clr"></div>
+        <p>升级中请不要退出程序</p>
+      </div>
+      <div  class="versiondownfail" id="versionDownFail" >
+        <P>威动服务：v2.0.0.2稳定版</p>
+        <p>发现新版本v2.0.0.3</p>
+        <P>对不起，下载失败…</p>
+        <P>您还可以到我们的官网去下载最新版本：<a href="http://www.vidon.me/vidon_server.htm">http://www.vidon.me/vidon_server.htm</a></p>
+      </div>
+      <div  class="versioninstall" id="versionInstall" style="display:none">
+        <p>威动服务器: v2.0.0.1稳定版</p>
+        <p>发现新版本:v3.0.0.1</p>
+        <div class="progreessbarblock">
+          <p>正在下载</p>
+          <div class="progress">
+            <div class="progress-bar" style="width:100%"></div>
+          </div>
+          <P>100%</p>
+        </div>
+        <div class="clr"></div>
+        <p>下载完成，安装中…</p>
+        <p>安装完成后，软件会为您弹出新的web管理界面</p>
+      </div>
+      <div  class="versioninstallfail" id="versionInstallFail"> </div>
+    </div>
+  </div>
+</div>
+<div class="clr"></div>
+</div>
