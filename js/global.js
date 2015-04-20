@@ -33,25 +33,13 @@ $(function(){
 		})			                                
     });  
 	
-//登陆框
-	$("#selectNationality").click(function(){
-		$(this).toggleClass("selected");
-	})
-	$(".checkbox").click(function(){
-		$(this).toggleClass("selected");
-	})
 //评分
 	var ratingNum=$(".rating .ratingnum").text();
 	var ratingPercent=ratingNum/5*100;
 	$(".rating .ratingvalue").css({'width':ratingPercent+'%'});
-   //弹出登陆框 
-	$("#header .login").click(function(){
-				showdiv(".poplogin",1);
-				
-	})
+
 	$("#header .setting").click(function(){
-				showdiv(".popsetup",1);
-				
+				showdiv(".popsetup",1);			
 	})
 	
 	//设置
@@ -123,70 +111,6 @@ $(function(){
 		$("html").css("overflow", "auto");
 		$("body").css("overflow", "auto");
 	}
-	
-$("#loginbtn").click(function () {
-	var cn = $("#selectNationality").hasClass("selected");
-	var username = $("#user").val();
-	var userpass = $.md5($("#password").val());
-	
-	    vidonme.rpc.request({
-        	'context': this,
-        	'method': 'VidOnMe.LoginAuth',
-        	'params': {
-				"username": username,
-				"password": userpass,
-				"country":  cn == true ? "cn" : "oversea"
-        	},
-        	'success': function(data) {
-			}
-		});
-	})
-
-function CheckAuthUserInfo() {
-	vidonme.rpc.request({
-		'context': this,
-		'method': 'VidOnMe.GetAuthUserInfo',
-		'params': {
-		},
-		'success': function(data) {
-			showdiv(".poplogin",1);
-			
-			if (data && data.result.ret) {
-				$("#login_title").text("User Information");
-				$("#login_ok").show();
-				
-				$("#accout_img").attr("src", data.result.avatar);
-				$("#email").text(data.result.email);
-	
-				if (data.result.subscribed) {
-					$("#expiration").html = data.result.expiredate;
-					$("#accout").html(data.result.username + '<div class="btn-small btn-blue">ÒÑ¶©ÔÄ</div>');	
-				} else {
-					$("#accout").text(data.result.username);
-				}
-			} else {
-				$("#login_title").text("User Login");
-				$("#login").show();
-			}
-		}
-	});
-}
-
-function LogoutAuthUser() {
-	vidonme.rpc.request({
-        'context': this,
-        'method': 'VidOnMe.LogoutAuth',
-        'params': {
-		},
-		'success': function(data) {
-			if (data && data.result.ret) {
-				$("#login_ok").hide();
-				$("#login_title").text("User Login");
-				$("#login").show();
-			}
-		}
-	});
-}
 
 //ÆÀ·Ö
 var ratingNum=$(".rating .ratingnum").text();

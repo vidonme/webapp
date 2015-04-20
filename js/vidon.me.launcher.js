@@ -68,8 +68,9 @@ function getBrowserInfo()
 			"js/librarypath.js",
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
-			"js/jquery.md5.js",
-			"js/vidon.me.server.js"
+			"js/vidon.me.login.js",
+			"js/vidon.me.server.js",
+			"js/wizzard.js"
         ];
     else
         scripts = [
@@ -99,8 +100,9 @@ function getBrowserInfo()
 			"js/librarypath.js",
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
-			"js/jquery.md5.js",
-			"js/vidon.me.server.js"
+			"js/vidon.me.login.js",
+			"js/vidon.me.server.js",
+			"js/wizzard.js"
         ];
 
     for (i = 0; i < scripts.length; i += 1) {
