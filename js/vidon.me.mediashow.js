@@ -583,7 +583,7 @@ function __GetPrivVideos(start, end, state) {
 						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster +  '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
 						pic.append(content);
 						box.append(pic);
-						$('#pl').append(box);
+						$(".posterList .mCSB_container").append(box);
 					}
 
 					if ( data.result.limits.total > data.result.limits.end ) {

@@ -51,8 +51,8 @@ function getScraperStatus() {
 					tips = '<p>' + "Server is scanning" + '<p>';
 				}
 				else if ( status == "scraping" ) {
-					tips = '<p>' + "Server is scraping {0}/{0}" + '<p>';
-					tips = tips.format( data.result.total.amounts, data.result.total.finished );
+					tips = '<p>' + "Server is scraping {0}/{1}" + '<p>';
+					tips = tips.format( data.result.total.finished, data.result.total.amounts );
 				}
 				else if ( status == "finish" ) {
 					FreshMedias();

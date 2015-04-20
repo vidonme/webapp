@@ -3,7 +3,8 @@
 	var g_CommercialVideoId						= 1;
 	var g_PersonalVideoId							= 2;
 	
-	var g_CurDeletePathWaitforConfirm = {};		//存已经选中删除的路径li对象				
+	var g_CurDeletePathWaitforConfirm = {};		//存已经选中删除的路径li对象	
+	var g_CurLibraryType = "commercial";
 	
 	
 	$(function(){
@@ -11,12 +12,14 @@
 
 		  $("#addCommercialPath").click(function(){
 				g_CurLibId = g_CommercialVideoId;
-				ShowPageManageLibPath(g_CurLibId)
+				g_CurLibraryType = "commercial";
+				ShowPageManageLibPath(g_CurLibId);
 			})
 			
 			$("#addPermediaPath").click(function(){
 				g_CurLibId = g_PersonalVideoId;
-				ShowPageManageLibPath(g_CurLibId)
+				g_CurLibraryType = "personal";
+				ShowPageManageLibPath(g_CurLibId);
 			})
 			
 			$("#addPathbtn").click(function(){
@@ -26,6 +29,7 @@
 			
 			$("#btnMngPathOK").click(function(){
 				close_box('.addVideo',1);
+				RefreshMediaLibrary(g_CurLibraryType);
 			})
 			
 			$("#btnAddLibPathOK").click(function(){
