@@ -2,7 +2,7 @@ $(function(){
 	loadHtml() ;
 	loadProperties();
 
-	var settings = new SettingService();
+	//var settings = new SettingService();
 	
 	$(".dropdown").each(function(){  
         var $this = $(this);  
