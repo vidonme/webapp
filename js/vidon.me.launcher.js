@@ -70,6 +70,7 @@ function getBrowserInfo()
 			"js/vidon.me.mediashow.js",
 			"js/vidon.me.login.js",
 			"js/vidon.me.server.js",
+			"js/vidon.me.settings.js"
         ];
     else
         scripts = [
@@ -101,6 +102,7 @@ function getBrowserInfo()
 			"js/vidon.me.mediashow.js",
 			"js/vidon.me.login.js",
 			"js/vidon.me.server.js",
+			"js/vidon.me.settings.js"
         ];
 
     for (i = 0; i < scripts.length; i += 1) {

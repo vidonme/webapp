@@ -15,14 +15,14 @@
       <h4>服务器基本信息</h4>
       <div class="serverinfo">
         <p><span>服务器名称: </span>
-          <input class="input-small" type="text" value="威动服务器" >
+          <input class="input-small" id="txtServerName" type="text" value="威动服务器" >
         </p>
-        <p><span>服务器版本: </span><span>2.0.2.0</span></p>
-        <p><span>服务器ip: </span><span>19.168.1.1</span></p>
-        <a href="javascript:;"  class="btn-small btn-blue">保存</a> </div>
+        <p><span>服务器版本: </span><span id="lblServerVersion">2.0.2.0</span></p>
+        <p><span>服务器ip: </span><span id="lblServerIP">19.168.1.1</span></p>
+        <a href="javascript:;" id="btnSaveState"  class="btn-small btn-blue">保存</a> </div>
       <h4 class="h4">服务器实时信息</h4>
       <p>当前连接用户端</p>
-      <table  class="fillet10">
+      <table id="tblClienlist"  class="fillet10">
         <tr>
           <td class="row1 col1">客户端名称</td>
           <td  class="row1 col2">ip地址</td>

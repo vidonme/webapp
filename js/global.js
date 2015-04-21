@@ -3,7 +3,7 @@ $(function(){
 	loadProperties("en");
 	translateHtml();
 	getServerLanguage();
-
+	var settings = new SettingService();
 	//var settings = new SettingService();
 	
 	$(".dropdown").each(function(){  
