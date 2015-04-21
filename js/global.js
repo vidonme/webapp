@@ -1,6 +1,7 @@
 $(function(){
 	loadHtml() ;
 	loadProperties();
+	translateHtml();
 
 	//var settings = new SettingService();
 	
@@ -115,6 +116,22 @@ $(function(){
 		$.ajaxSetup({
 			async: true //取消异步  
 		});
+	}
+
+	function translateHtml() {
+		$("[trans_value]").each(function(){
+			var _this=$(this);
+			var originStr=$(this).attr("trans_value");
+			originStr = $.i18n.prop( originStr );
+			_this.html( originStr );
+		})
+
+		$("[trans_title]").each(function(){
+			var _this=$(this);
+			var originStr=$(this).attr("trans_title");
+			originStr = $.i18n.prop( originStr );
+			_this.attr( "title", originStr );
+		})
 	}
 	
 	
