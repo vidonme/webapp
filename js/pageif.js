@@ -77,10 +77,11 @@
 			if(!checkResponse(data)) return;	
 			$("#selectedPath").html("");
 			$.each($(data.result.paths), jQuery.proxy(function(i, item) {
-		      var pid 			= item.PathId;
-		      var path 			= item.path;
-					var itemhtml 	=	'<li index="' + pid + '"><span class="delete"></span><span class="showpath">' + path + '</span></li>'
-					$("#selectedPath").append(itemhtml);					
+		      	var pid 			= item.PathId;
+		      	var path 			= item.path;
+				var itemhtml 	=	'<li index="' + pid + '"><span class="delete"></span><span class="showpath">' + path + '</span></li>'
+				$("#selectedPath").append(itemhtml);
+				$('#selectedPath li:even').addClass("even");					
   		}, this));	
 	}
 	

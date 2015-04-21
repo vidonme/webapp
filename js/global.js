@@ -1,7 +1,8 @@
 $(function(){
 	loadHtml() ;
-	loadProperties();
+	loadProperties("en");
 	translateHtml();
+	getServerLanguage();
 
 	//var settings = new SettingService();
 	
@@ -126,6 +127,13 @@ $(function(){
 			_this.html( originStr );
 		})
 
+		$("[trans_in_value]").each(function(){
+			var _this=$(this);
+			var originStr=$(this).attr("trans_in_value");
+			originStr = $.i18n.prop( originStr );
+			_this.attr( "value", originStr );
+		})
+
 		$("[trans_title]").each(function(){
 			var _this=$(this);
 			var originStr=$(this).attr("trans_title");
@@ -151,20 +159,55 @@ $(function(){
 		$("body").css("overflow", "auto");
 	}
 
-function loadProperties(){
+function loadProperties(languageType){
 			jQuery.i18n.properties({//¼ÓÔØ×Êä¯ÀÀÆ÷ÓïÑÔ¶ÔÓ¦µÄ×ÊÔ´ÎÄ¼þ
 					name:'strings', //×ÊÔ´ÎÄ¼þÃû³Æ
 					path:'i18n/', //×ÊÔ´ÎÄ¼þÂ·¾¶
 					mode:'map', //ÓÃMapµÄ·½Ê½Ê¹ÓÃ×ÊÔ´ÎÄ¼þÖÐµÄÖµ
+					language: languageType,
 					callback: function() {//¼ÓÔØ³É¹¦ºóÉèÖÃÏÔÊ¾ÄÚÈÝ
-						//ÓÃ»§Ãû
-						$('#label_username').html($.i18n.prop('string_movie'));
-					    //ÃÜÂë
-						$('#label_password').html($.i18n.prop('string_teleplay'));
-					    //µÇÂ¼
-						$('#button_login').val($.i18n.prop('string_home_video'));
 					}
 			});
+}
+
+function getServerLanguage(){
+	vidonme.rpc.request({
+        'context': this,
+        'method': 'VidOnMe.GetSystemSetting',
+        'params': {
+            "key": "language.default"
+        },
+        'success': function(data) {
+			 var locale = "en";
+            if (data && data.result) {
+				
+                if (data.result.val == "Chinese (Simple)") {
+                    locale = "zh-cn";
+                } else if (data.result.val == "Chinese (Traditional)") {
+                    locale = "zh-tw";
+                } else if (data.result.val == "German") {
+                    locale = "de";
+                } else if (data.result.val == "French") {
+                    locale = "fr";
+                } else if (data.result.val == "Japanese") {
+                    locale = "ja";
+                } else if (data.result.val == "Portuguese (Brazil)") {
+                    locale = "pt";
+                } else if (data.result.val == "Spanish" || data.result.val == "Spanish (Mexico)") {
+                    locale = "es";
+                } else if (data.result.val == "Korean") {
+                    locale = "ko";
+                } else if (data.result.val == "Swedish") {
+                    locale = "se";
+                } else if (data.result.val == "English" || data.result.val == "") {
+                    locale = "en";
+                } 
+
+                loadProperties( locale );
+                translateHtml();
+            }
+        }
+    });
 }
 
 String.prototype.format=function()  

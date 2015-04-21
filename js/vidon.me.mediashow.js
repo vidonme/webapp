@@ -231,6 +231,7 @@ function SafePreHandleHtml(obj, class_name, id) {
 
 function GetEpisodeDetails(idtvshow, name, season) {
 	$(".posterList .mCSB_container").html('');
+	$(".movie").removeClass("teleplay");
 	$('#mediatype').html('');
 	$('.posterMenubtn').hide();
 	$('#backtotv').attr('onclick', 'GetTvshowDetails(' + idtvshow + ')');
@@ -447,6 +448,7 @@ function GetTvshowDetails(idtvshow) {
 
 function __GetMovies(start, end, state) {
 	$("#siderbar dd").eq(0).addClass("selected");
+	$(".movie").removeClass("teleplay");
 	var __start = arguments[0] ? start : 0;
 	var __end   = arguments[1] ? end : 20;
 	
@@ -504,6 +506,7 @@ function __GetMovies(start, end, state) {
 }
 
 function __GetTvshows(start, end, state) {
+	$(".movie").addClass("teleplay");
 	var __start = arguments[0] ? start : 0;
 	var __end   = arguments[1] ? end : 20;
 	
@@ -568,6 +571,7 @@ function __GetTvshows(start, end, state) {
 }
 
 function __GetPrivVideos(start, end, state) {
+	$(".movie").removeClass("teleplay");
 	var __start = arguments[0] ? start : 0;
 	var __end   = arguments[1] ? end : 20;
 	

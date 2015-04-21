@@ -130,12 +130,12 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 
 
 /*图片展示*/
-.siderbar { width: 230px; border-right:#000 solid 1px; position:absolute; top:80px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
+.siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:80px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
 
 .siderbar .vertical { height: 60px;}
 .siderbar dl{ margin-bottom:50px; font-size:16px;}
-.siderbar dt{ height:60px; line-height:30px; position:relative; width:210px}
-.siderbar dd{ height:60px; line-height:60px; cursor:pointer;padding-left:70px; width:160px;background:url(../images/spriteimg/iconimg.png) no-repeat;}
+.siderbar dt{ height:60px; line-height:30px; position:relative; width:180px}
+.siderbar dd{ height:60px; line-height:60px; cursor:pointer;padding-left:70px; width:130px;background:url(../images/spriteimg/iconimg.png) no-repeat;}
 
 .siderbar dd:hover{ background-color:#666}
 .siderbar dd.selected{ background-color:#3278cc;}
@@ -250,7 +250,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .poplogin .tips a{ text-decoration:underline;}
 .poplogin .tips p{ text-align:center}
 .poplogin .tip1 a{ margin:0px 20px;}
-.poplogin .selectNationality{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; line-height:28px; padding-left:30px; width:300px; float:left; margin-top:50px; margin-left:170px; cursor:pointer;}
+.poplogin .selectNationality{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; line-height:28px; padding-left:30px; width:260px; float:left; margin-top:50px; margin-left:170px; cursor:pointer;}
 .poplogin .selectNationality.selected{ background-position: 0px -918px;}
 
 .loginblock2{ width:670px; margin:0px auto}
