@@ -1,4 +1,7 @@
 
+var g_ScrapingNum = 0;
+var g_FreshSeconds = 0;
+
 function getLastScraperResult(){
 	vidonme.rpc.request({
 		'context': this,
@@ -42,6 +45,7 @@ function getScraperStatus() {
 					$("#fresh").addClass("loading");
 				}
 				
+				g_FreshSeconds++;
 
 				var tips;
 				if ( status == "ready" ) {
@@ -49,12 +53,22 @@ function getScraperStatus() {
 				}
 				else if ( status == "scanning" ) {
 					tips = '<p>' + "Server is scanning" + '<p>';
+					g_ScrapingNum = 0;
+					g_FreshSeconds = 0;
 				}
 				else if ( status == "scraping" ) {
 					tips = '<p>' + "Server is scraping {0}/{1}" + '<p>';
 					tips = tips.format( data.result.total.finished, data.result.total.amounts );
+
+					if ( g_FreshSeconds > 10 && g_ScrapingNum != data.result.total.finished ) {
+						g_ScrapingNum = data.result.total.finished;
+						g_FreshSeconds = 0;
+						FreshMedias();
+					};
 				}
 				else if ( status == "finish" ) {
+					g_ScrapingNum = 0;
+					g_FreshSeconds = 0;
 					FreshMedias();
 					getLastScraperResult();
 				}
@@ -74,12 +88,4 @@ function getScraperStatus() {
 			}
 		}
 	});
-}
-
-String.prototype.format=function()  
-{  
-  if(arguments.length==0) return this;  
-  for(var s=this, i=0; i<arguments.length; i++)  
-    s=s.replace(new RegExp("\\{"+i+"\\}","g"), arguments[i]);  
-  return s;  
-}; 
+} 

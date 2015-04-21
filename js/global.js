@@ -2,6 +2,8 @@ $(function(){
 	loadHtml() ;
 	loadProperties();
 
+	var settings = new SettingService();
+	
 	$(".dropdown").each(function(){  
         var $this = $(this);  
         var input_dropdown = $this.find(".input_dropdown"); 
