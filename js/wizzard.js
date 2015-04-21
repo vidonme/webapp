@@ -21,78 +21,12 @@
 		  close_box('.addPath',2);
 			$("#selectedPath").val(mediapath);
 	}
-	
-	//==================添加网络Drive Div======================	
-		function ShowPageAddNetShare(host, edit) {
-				//yanggui dialogClose();
-//				var dialogTitle = "%267";
-//
-//				if (true == edit) {
-//					$("#user_name").focus();
-//				} else {
-//					$("#server_address").focus();
-//				}
-				
-				showdiv(".addNetwork",3);	
-		}
-		
-		function commitAddNetShare() {
-				var protocol 				= $("#txtNetSharePtl").val();
-				var srvaddr 				= $("#txtNetShareSrcName").val();	
-				var srvdomain 			= $("#txtNetShareDomain").val();
-				var username				= $("#txtNetShareUserName").val();	
-				var userpass 				= $("#txtNetSharePwd").val();
-				var netshare_search = '';
-				var display 				= '';	
-				
-				if (protocol == "Windows Network (SMB)") {
-						if (checkip(srvaddr) == false && srvaddr == "" || srvdomain == "") {
-								alert("Null is forbidden");	
-								return;
-						}
-						
-						if (username == "" && userpass == "")
-						{
-							netshare_search = 'smb://' + srvaddr;
-						}
-						else
-						{
-							if (username == "" || userpass == "") {
-								alert("Null is forbidden");	
-								return;	
-							}
-							else
-							{
-								netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
-							}
-						}
-						
-						display = 'smb://' + srvaddr;
-				} else {
-						display = 'nfs://' + srvaddr;
-						netshare_search = display;
-				}
-				
-				//alert("netsearch="+netshare_search+",display="+display);
-				RequestAddNetDrive(netshare_search);
-				$("#addSrcPath").val(display);
-				close_box('.addNetwork',3);
-		}
-		
-		function cbAddNetDrive(data,netpath){
-				//alert(netpath);
-				if (data && data.result.ret == true) {
-						btn_browse("movie", escape(netpath), false, escape(netpath));
-				} else {
-						alert(data.result.err);
-				}
-		}
 
 //===============ServerInterface============================
     function isNeedWizard() {
 		    var s = vidonme.rpc.request({
 		        'context': this,
-		        'method': 'VidOnMe.IsWizzardEnabled',
+		        'method': 'VidOnMe.IsWizzardEnsabled',
 		        'params': {},
 		        'success': function(data) {
 		        		//alert("isNeedWizard=" + data.result.ret);
@@ -104,13 +38,11 @@
 			    	}
 	    	});  	
 		}
-		
-
 
 		function wizardsetting() {	
 				var libID 			= g_CurLibId;
 				var mediapath 	= $('#selectedPath').val();		
-				alert("libID=" + libID + ",path=" + mediapath);
+				//alert("libID=" + libID + ",path=" + mediapath);
 				
 				if (!libID || !mediapath) {
 						alert("libID or Path is neccessary!");
@@ -129,15 +61,13 @@
             }
         });				
 
-		    var s = vidonme.rpc.request({
+		    vidonme.rpc.request({
 		        'context': this,
 		        'method': 'VidOnMe.SetWizzardDisabled',
 		        'params': {},
 		        'success': function(data) {
-						location.assign("index.html");
-						window.location="index.html";
-						location.href="index.html";
-			    }
+		        		//alert("SetWizzardDisabled:" + data.result.ret);
+			    	}
 	    	});
 		}
 		
@@ -147,12 +77,10 @@
 
     function FinishWizard() {
 				wizardsetting();
+				location.assign("movie.html");
+				window.location="movie.html";
+				location.href="movie.html";
     }
-    
-		function ClearDiskAndPathLi(){
-				$("#popDiskblock").html("");
-				$("#listpath").html("");
-		}
 
 	$(function(){
 
@@ -160,87 +88,41 @@
 		loadProperties();
 		
 		$("#commVideo").click(function(){
-			RequestGetLibraries("commercial");
-			})
+				RequestGetLibraries("commercial");
+		})
 		
 		$("#perMedia").click(function(){
-			RequestGetLibraries("personal");
-			})	
+				RequestGetLibraries("personal");
+		})	
 					
 		$(".setUp2btn").click(function(){
-			$(".slides").animate({left:-slideWidth},500);
-			$(".guideMenu li").eq(2).addClass("selected").siblings().removeClass("selected");
-			})
+				$(".slides").animate({left:-slideWidth},500);
+				$(".guideMenu li").eq(2).addClass("selected").siblings().removeClass("selected");
+		})
 			
 		$(".setUp3btn").click(function(){
-			if (!g_CurLibId) {
-					RequestGetLibraries("commercial");
-			}
-			$(".slides").animate({left:-2*slideWidth},500);
-			$(".guideMenu li").eq(4).addClass("selected").siblings().removeClass("selected");
-			})
-			
-			$("#btnAddLibPathOK").click(function(){
-				commitAddOneLibPath();
-			})	
+				if (!g_CurLibId) {
+						RequestGetLibraries("commercial");
+				}
+				$("#selectedPath").val("");
+				$(".slides").animate({left:-2*slideWidth},500);
+				$(".guideMenu li").eq(4).addClass("selected").siblings().removeClass("selected");
+		})
 		
 		$("#btnWzdOK").click(function(){
 				FinishWizard();
-		})
-					
+		})		
+				
 		$("#selectedMedia a").click(function(){
-			$(this).addClass("selected").siblings().removeClass("selected");
-			var id=$(this).attr('id'); 
-			$("#mediaName").val(id);
-			})
+				$(this).addClass("selected").siblings().removeClass("selected");
+		})
 				
 		$(".addPathbtn").click(function(){
 				showdiv(".addPath",2);
-				var mtype = $("#mediaType").val();
-				btn_browse(mtype,'',false,'');
-			})
-		
-		$(".addNwPath").click(function(){
-				showdiv(".addNetwork",3);	
-		})
-			
-		$(".addPath .popDisk").mCustomScrollbar({
-          //scrollButtons:{enable:true},
-		  autoHideScrollbar:true
-        });
-        
-		$(".addPath .popFolder").mCustomScrollbar({
-          //scrollButtons:{enable:true},
-		  autoHideScrollbar:true,
-        });
-        
-		//下拉菜单
-		/*
-		$(".input_dropdown,.jt").click(function(){ 
-			var ul = $(".dropdown ul"); 
-			if(ul.css("display")=="none"){ 
-				ul.slideDown("fast"); 
-			}else{ 
-				ul.slideUp("fast"); 
-			} 
-		}); 
-		
-		$("#dropdown li").click(function(){ 
-			var txt = $(this).text(); 
-			$(".input_dropdown").val(txt); 
-		
-			$("#dropdown ul").hide(); 
-		}); 
-		*/
+				ShowPageAddOnePath('','');				
+		})	
 					
-		$(".addnetshareOK").click(function(){
-				AddNetShare();
-				close_box(".addNetwork",3);
-		})					
-					
-		loadPage();				
-		
-		
+		loadPage();
 	})
 	   
 	function loadProperties(){

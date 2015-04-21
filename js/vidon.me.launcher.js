@@ -43,7 +43,7 @@ function getBrowserInfo()
         scripts;
     if (browserinfo.match("msie"))
         scripts = [
-			"js/jquery-1.8.2.min.js",
+			"js/jquery-1.8.2.min.js",	
 			"js/json2.js",
 			"js/jquery-ui.js",
 			//"js/iscroll.js",
@@ -60,16 +60,17 @@ function getBrowserInfo()
 			 //"js/NowPlayingManager.js",
 			"js/localizations.js",
 			"js/jquery.md5.js",
+			"js/global.js", 				
 			"js/commfunc.js",
-			//"js/jquery.mCustomScrollbar.concat.min.js",
-			"js/jquery.i18n.properties-1.0.9.js",			 
-			"js/global.js", 			
+			"js/jquery.mCustomScrollbar.concat.min.js",
+			"js/jquery.i18n.properties-1.0.9.js",		
 			"js/pageif.js",
-			"js/librarypath.js",
+			"js/getjson.js",			
+			"js/librarypath.js",	
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
 			"js/vidon.me.login.js",
-			"js/vidon.me.server.js",
+			"js/vidon.me.server.js"
         ];
     else
         scripts = [
@@ -91,16 +92,17 @@ function getBrowserInfo()
 			//    "js/NowPlayingManager.js",
 			"js/localizations.js",
 			"js/jquery.md5.js",
+			"js/global.js", 				
 			"js/commfunc.js",
-			//"js/jquery.mCustomScrollbar.concat.min.js",
-			"js/jquery.i18n.properties-1.0.9.js",			 
-			"js/global.js", 			
-			"js/pageif.js",
+			"js/jquery.mCustomScrollbar.concat.min.js",
+			"js/jquery.i18n.properties-1.0.9.js",		
+			"js/getjson.js",					
 			"js/librarypath.js",
+			"js/pageif.js",			
 			"js/vidon.me.mediashowinit.js",
 			"js/vidon.me.mediashow.js",
 			"js/vidon.me.login.js",
-			"js/vidon.me.server.js",
+			"js/vidon.me.server.js"
         ];
 
     for (i = 0; i < scripts.length; i += 1) {

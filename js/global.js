@@ -1,5 +1,7 @@
 $(function(){
 	loadHtml() ;
+	loadProperties();
+
 	$(".dropdown").each(function(){  
         var $this = $(this);  
         var input_dropdown = $this.find(".input_dropdown"); 
@@ -130,6 +132,29 @@ $(function(){
 		$("body").css("overflow", "auto");
 	}
 
+function loadProperties(){
+			jQuery.i18n.properties({//¼ÓÔØ×Êä¯ÀÀÆ÷ÓïÑÔ¶ÔÓ¦µÄ×ÊÔ´ÎÄ¼þ
+					name:'strings', //×ÊÔ´ÎÄ¼þÃû³Æ
+					path:'i18n/', //×ÊÔ´ÎÄ¼þÂ·¾¶
+					mode:'map', //ÓÃMapµÄ·½Ê½Ê¹ÓÃ×ÊÔ´ÎÄ¼þÖÐµÄÖµ
+					callback: function() {//¼ÓÔØ³É¹¦ºóÉèÖÃÏÔÊ¾ÄÚÈÝ
+						//ÓÃ»§Ãû
+						$('#label_username').html($.i18n.prop('string_movie'));
+					    //ÃÜÂë
+						$('#label_password').html($.i18n.prop('string_teleplay'));
+					    //µÇÂ¼
+						$('#button_login').val($.i18n.prop('string_home_video'));
+					}
+			});
+}
+
+String.prototype.format=function()  
+{  
+  if(arguments.length==0) return this;  
+  for(var s=this, i=0; i<arguments.length; i++)  
+    s=s.replace(new RegExp("\\{"+i+"\\}","g"), arguments[i]);  
+  return s;  
+};
 //ÆÀ·Ö
 var ratingNum=$(".rating .ratingnum").text();
 var ratingPercent=ratingNum/5*100;

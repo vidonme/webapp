@@ -52,6 +52,7 @@ function getBrowserInfo()
 			"js/jquery.i18n.properties-1.0.9.js",
 			"js/commfunc.js",	
 			"js/librarypath.js",
+			"js/getjson.js",
 			"js/wizzard.js",
         ];
 
