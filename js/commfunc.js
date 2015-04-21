@@ -41,7 +41,41 @@
 				return false;
 		}	
 		
-		function getdrivetypename(drivetype,name){
+	
+	function checkResponse(data){
+
+			var err 	 = "";
+			var langua = "";
+			
+			if(typeof(data) == "undefined"){
+					langua = $.i18n.prop('Server_Response_Err');
+					alert(langua);
+					return false;
+			}
+			
+			if (data && (data.result.ret == false)) {
+					err = data.result.err;
+
+					if (err == "Access is denied") {
+							langua = $.i18n.prop('Server_Response_Err_Access');
+							alert(langua);
+					} else if (err == "Unknown user name or bad password") {
+							langua = $.i18n.prop('Server_Response_Err_UserPwd');
+							alert(langua);
+					} else if (err == "Network path not found") {
+							langua = $.i18n.prop('Server_Response_Err_PathErr');
+							alert(langua);
+					} else {
+							alert(err);
+					}
+			
+			    return false;
+			}
+			
+			return true
+	}		
+		
+		function getdrivetypename(drivetype){
     		var drivetypename = "";
         switch (drivetype) {
             case 1:

@@ -41,6 +41,36 @@
 				showdiv(".addNetwork",3);	
 		}
 		
+		function checkNetShare(protocol,srvaddr,srvdomain,username,userpass){
+				var langua = "";
+				if(!srvaddr){
+						langua = $.i18n.prop('NetShare_IP_Null');
+						alert(langua);
+						return false;
+				}
+				
+				if(checkip(srvaddr) == false){
+						langua = $.i18n.prop('NetShare_IP_Illegal');
+						alert(langua);
+						return false;
+				}
+				
+				if(!srvdomain){
+						langua = $.i18n.prop('NetShare_Domin_Null');
+						alert(langua);
+						return false;					
+				}
+				
+				if(protocol == "Windows Network (SMB)"){
+						if((!username && userpass) || (username && !userpass)){
+								langua = $.i18n.prop('NetShare_UserPwd_Null');
+								alert(langua);
+								return false;									
+						}
+				}
+				
+				return true;
+		}
 	
 		function commitAddNetShare() {
 				var protocol 				= $("#txtNetSharePtl").val();
@@ -49,28 +79,18 @@
 				var username				= $("#txtNetShareUserName").val();	
 				var userpass 				= $("#txtNetSharePwd").val();
 				var netshare_search = '';
-				var display 				= '';	
+				var display 				= '';
+				
+				if (!checkNetShare(protocol,srvaddr,srvdomain,username,userpass)) return;
 				
 				if (protocol == "Windows Network (SMB)") {
-						if (checkip(srvaddr) == false && srvaddr == "" || srvdomain == "") {
-								alert("Null is forbidden");	
-								return;
-						}
-						
-						if (username == "" && userpass == "")
+						if (!username || !userpass)
 						{
-							netshare_search = 'smb://' + srvaddr;
+								netshare_search = 'smb://' + srvaddr;
 						}
 						else
 						{
-							if (username == "" || userpass == "") {
-								alert("Null is forbidden");	
-								return;	
-							}
-							else
-							{
 								netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
-							}
 						}
 						
 						display = 'smb://' + srvaddr;
@@ -87,11 +107,8 @@
 		
 		function cbAddNetDrive(data,netpath){
 				//alert(netpath);
-				if (data && data.result.ret == true) {
-						ShowPageAddOnePath(escape(netpath), false, escape(netpath));
-				} else {
-						alert(data.result.err);
-				}
+				if(!checkResponse(data)) return;				
+				ShowPageAddOnePath(escape(netpath), false, escape(netpath));
 		}
 
 
@@ -114,37 +131,13 @@
 			g_lastjqXhr = RequestDriveDirectory(path,drive);
 			reqCnt++;
 	}
-	
-	function checkResponseGetDirectory(data){
-
-			var err 	 = "";
-			
-			if(typeof(data) == "undefined"){
-					alert("Please Check You Network");
-			}
-			
-			if (data && (data.result.ret == false)) {
-					err = data.result.err;
-
-					if (err == "Access is denied") {
-		        	alert("%276".toLocaleString());
-					} else if (err == "Unknown user name or bad password") {
-	           	alert("%277".toLocaleString());
-					} else if (err == "Network path not found") {
-		         	alert("%278".toLocaleString());
-					} else {
-							alert("Other:" + err);
-					}
-			
-			    return false;
-			}
-			
-			return true
-	}
 
 	function cbHandleDiskList(data) {
 			var itemhtml 			= "";		
       var langua 				= "";	
+
+      if(!checkResponse(data))
+					return;
 
 			$("#popDiskblock").html("");
       $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
@@ -182,7 +175,7 @@
       reqCnt--;
       //alert(reqCnt);
       
-			if(!checkResponseGetDirectory(data))
+			if(!checkResponse(data))
 					return;
 
 			if(path == "")

@@ -74,17 +74,14 @@
 	}
 	
 	function cbHandleLibraryPaths(data){
-		if (data && data.result.ret == true) {
+			if(!checkResponse(data)) return;	
 			$("#selectedPath").html("");
 			$.each($(data.result.paths), jQuery.proxy(function(i, item) {
 		      var pid 			= item.PathId;
 		      var path 			= item.path;
 					var itemhtml 	=	'<li index="' + pid + '"><span class="delete"></span><span class="showpath">' + path + '</span></li>'
 					$("#selectedPath").append(itemhtml);					
-  		}, this));
-  	}else {
-  		  alert(data.result.err);
-		}	
+  		}, this));	
 	}
 	
 		//主页增加路径
