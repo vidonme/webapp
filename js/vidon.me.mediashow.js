@@ -166,32 +166,44 @@ function PreDisplay(obj) {
 		var count = 0;
 		var id = obj.attr("id");
 		if (id == "movie") {
+			/*
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
 				$('#mediatype').html('Movies' + ' ' + '(<span>' + count + '</span>)'); //TODO: localization
 			}, 200);
+			*/
+			FreshMediasCount();
 			
 			$('#fresh').attr('onclick', 'RefreshMediaLibrary("commercial")');
 		} else if (id == "teleplay") {
+			/*
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
 				$('#mediatype').html('Tvshows' + ' ' + '(<span>' + count + '</span>)');
 			}, 200);
-			
+			*/
+			FreshMediasCount();
+
 			$('#fresh').attr('onclick', 'RefreshMediaLibrary("commercial")');
 		} else if (id == "home_video") {
+			/*
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
 				$('#mediatype').html('Videos' + ' ' + '(<span>' + count + '</span>)');
 			}, 200);
-			
+			*/
+			FreshMediasCount();
+
 			$('#fresh').attr('onclick', 'RefreshMediaLibrary("personal")');
 		} else if (id == "images") {
+			/*
 			global_count_timer = setInterval(function() {
 				count = $(".posterList .box").length;
 				$('#mediatype').html('Images' + ' ' + '(<span>' + count + '</span>)');
 			}, 200);
-			
+			*/
+			FreshMediasCount();
+
 			$('#fresh').attr('onclick', 'RefreshMediaLibrary("personal")');
 		} else {
 			;	
@@ -264,6 +276,7 @@ function GetEpisodeDetails(idtvshow, name, season) {
 							//teleplaylist.append(box);
 						}
 						
+						FreshMediasCount();
 						//$('#pl').append(teleplaylist);
 						
 					}
@@ -302,13 +315,14 @@ function GetEpisodes(idtvshow, title) {
 					//teleplaylist.append(box);
 				}
 				
+				FreshMediasCount();
 				//$('#pl').append(teleplaylist);
 			}
 		}
 	});
 }
 
-function GetTvshowSeasons(idtvshow, title, thumbnail, genre, cast, plot) {
+function GetTvshowSeasons(idtvshow, title, rating, thumbnail, genre, cast, plot) {
 	if (global_count_timer > 0) {
 		clearInterval(global_count_timer);
 	}
@@ -322,39 +336,46 @@ function GetTvshowSeasons(idtvshow, title, thumbnail, genre, cast, plot) {
 		var leftdiv  = $('<div class="left fillet10"></div>');
 		var rightdiv = $('<div class="right"></div>');
 		
-		var ratingvalue = $('<div class="ratingvalue" style="width:90%;"></div>');
+		if (rating.length == 0) {
+			rating = 0;
+		}
+		
+		var ratingvalue = $('<div class="ratingvalue" style="width:' + rating * 10 + '%;"></div>');
 		var ratingblock = $('<div class="ratingblock"></div>');
 		
 		ratingblock.append(ratingvalue);
 		
-		var ratingnum= $('<div class="ratingnum">4.5</div>');
+		var ratingnum= $('<div class="ratingnum">' + rating + '</div>');
 		
 		var rating   = $('<div class="rating"></div>');
 		var detail   = $('<div class="detail"></div>');
 		
-		var director_p   = '<p>Director: </p>';
-		var country_p    = '<p>Country: </p>';
-		
 		var genre_p      = '<p>Genre: ';
-		for (var i = 0; i < genre.length - 1; ++i) {
-			genre_p += genre[i] + ', ';
+		for (var i = 0; i < genre.length; ++i) {
+			if (i != genre.length - 1) {
+				genre_p += genre[i] + ', ';
+			} else {
+				genre_p += genre[i];
+			}
 		}
 		
-		genre_p += genre[i] + '</p>';
+		genre_p += '</p>';
 		
 		var cast_p       = '<p>Cast: ';
 		
-		for (var i = 0; i < cast.name.length - 1; ++i) {
-			cast_p += cast.name[i] + ', ';
+		for (var i = 0; i < cast.name.length; ++i) {
+			if (i != cast.name.length - 1) {
+				cast_p += cast.name[i] + ', ';
+			} else {
+				cast_p += cast.name[i];
+			}
 		}
 		
-		cast_p += cast.name[i] + '</p>';
+		cast_p += '</p>';
 		
 		var plot_p       = '<p>Plot: ' + plot + '</p>';
 		
-		detail.append(director_p);
 		detail.append(genre_p);
-		detail.append(country_p);
 		detail.append(cast_p);
 		detail.append(plot_p);
 		
@@ -400,6 +421,7 @@ function GetTvshowDetails(idtvshow) {
 				var plot    = data.result.tvshowdetails.plot;
 				var year    = data.result.tvshowdetails.year;
 				var title   = data.result.tvshowdetails.title;
+				var rating  = data.result.tvshowdetails.rating;
 
 				var cast = new Array();
 				cast.name = new Array();
@@ -417,7 +439,7 @@ function GetTvshowDetails(idtvshow) {
 					genre.push(data.result.tvshowdetails.genre[i]);
 				}
 				
-				GetTvshowSeasons(idtvshow, title, poster, genre, cast, plot);
+				GetTvshowSeasons(idtvshow, title, rating, poster, genre, cast, plot);
 			}
 		}
 	});
@@ -469,6 +491,8 @@ function __GetMovies(start, end, state) {
 						//$('#pl').append(box);
 						$(".posterList .mCSB_container").append(box);
 					}
+
+					FreshMediasCount();
 
 					if ( data.result.limits.total > data.result.limits.end ) {
 						__GetMovies( data.result.limits.end+1, data.result.limits.total, 'finish' );
@@ -532,6 +556,8 @@ function __GetTvshows(start, end, state) {
 						$(".posterList .mCSB_container").append(box);
 					}
 
+					FreshMediasCount();
+
 					if ( data.result.limits.total > data.result.limits.end ) {
 						__GetTvshows( data.result.limits.end+1, data.result.limits.total, 'finish' );
 					}
@@ -586,6 +612,8 @@ function __GetPrivVideos(start, end, state) {
 						$(".posterList .mCSB_container").append(box);
 					}
 
+					FreshMediasCount();
+					
 					if ( data.result.limits.total > data.result.limits.end ) {
 						__GetPrivVideos( data.result.limits.end+1, data.result.limits.total, 'finish' );
 					}
@@ -673,8 +701,15 @@ function ShowPicture(url) {
 	ShowPictureDiv(url);
 }
 
-function GetMediaInformation(mediatype) {
-	var start = 0;//$(".posterList .box").length;
+function GetMediaInformation(mediatype, reset) {
+	var start = 0;
+	if ( reset == true ) {
+		start = 0;
+	}
+	else{
+		start = $(".posterList .box").length;
+	}
+
 	var end   = start + 100;
 	var state = "finish";
 
@@ -701,7 +736,7 @@ function GetMediaInformation(mediatype) {
 function GetMovies() {
 	g_selected_type = 'movie';
 	PreDisplay($('#movie'));
-	GetMediaInformation('movie');
+	GetMediaInformation('movie', true);
 }
 
 function GetTvshows() {
@@ -712,7 +747,7 @@ function GetTvshows() {
 	
 	g_selected_type = 'tvshow';
 	PreDisplay($('#teleplay'));
-	GetMediaInformation('tvshow');
+	GetMediaInformation('tvshow', true);
 	
 	/*
 	global_media_timer = setInterval(function(){
@@ -724,16 +759,19 @@ function GetTvshows() {
 function GetPrivVideos() {
 	g_selected_type = 'video';
 	PreDisplay($('#home_video'));
-	GetMediaInformation('video')
+	GetMediaInformation('video', true)
 }
 
 function GetPictures() {
 	g_selected_type = 'image';
 	PreDisplay($('#images'));
-	GetMediaInformation('image');;
+	GetMediaInformation('image', true);
 }
 
 function FreshMedias(){
+	//GetMediaInformation(g_selected_type, false);
+
+	
 	if (g_selected_type == 'movie') {
 		GetMovies();
 	}
@@ -749,6 +787,32 @@ function FreshMedias(){
 	else{
 
 	}
+}
+
+function FreshMediasCount(){
+	count = $(".posterList .box").length;
+	var str;
+	if (g_selected_type == 'movie') {
+		str = $.i18n.prop('Movies_Count')
+		str = str.format( count );
+	}
+	else if (g_selected_type == 'tvshow') {
+		str = $.i18n.prop('TVShows_Count')
+		str = str.format( count );
+	}
+	else if (g_selected_type == 'video') {
+		str = $.i18n.prop('Videos_Count')
+		str = str.format( count );
+	}
+	else if (g_selected_type == 'image') {
+		str = $.i18n.prop('Images_Count')
+		str = str.format( count );
+	}
+	else{
+
+	}
+
+	$('#mediatype').html(str);
 }
 
 window.onload = function() {
