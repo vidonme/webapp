@@ -84,13 +84,13 @@
     		var drivetypename = "";
         switch (drivetype) {
             case 1:
-                drivetypename = $.i18n.prop('Local_Disk');
+                drivetypename = $.i18n.prop('index_21');
             break;
             case 4:
-                drivetypename = $.i18n.prop('Network_Drive');
+                drivetypename = $.i18n.prop('index_21_1');
             break;
             case 6:
-                drivetypename = $.i18n.prop('Removable_Disk');
+                drivetypename = $.i18n.prop('index_21_2');
             break;
             default:
                 drivetypename = "other";
