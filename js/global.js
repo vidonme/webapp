@@ -40,10 +40,13 @@ $(function(){
 		})
 		li.click(function(){
 			var txt = $(this).text(); 
+			var cusvalue = $(this).attr("cus_value");
 			if(input_dropdown.hasClass("input")){
 				input_dropdown.val(txt); 
+				input_dropdown.attr("cus_value", cusvalue );
 			}else{
 				input_dropdown.find(".font").text(txt); 
+				input_dropdown.attr("cus_value", cusvalue );
 			}
 			ul.hide(); 
 		})
