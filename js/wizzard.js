@@ -90,7 +90,7 @@
 		}
 		
     function loadPage() {
-    		RequestIsNeedWizard("guide.html");
+    		//RequestIsNeedWizard("guide.html");
     }
 
     function FinishWizard() {
