@@ -39,11 +39,14 @@ SettingService.prototype = {
 
     },
     bindControls: function() {
-    //    $('#serverSetting').click(jQuery.proxy(this.serverSettingOpen, this));
         $("#btnSetting").click(jQuery.proxy(this.serverSettingOpen,this));
         $("#btnSaveState").click(function(){
             saveServerName();
         });
+        $("#btnSaveEssentialInfo").click(function() {
+                settingSave(eSettingType.essentialInfo);
+            }
+        );
     },
     resetPage: function() {
         $('#serverSetting').removeClass('selected');
@@ -60,17 +63,8 @@ SettingService.prototype = {
 
     serverSettingOpen: function() {
         this.resetPage();
-        $('#mediaManager').removeClass('selected');
-        $('#appsDownload').removeClass('selected');
-        $('#backupMedia').removeClass('selected');
-        $('#serverSetting').addClass('selected');
-        $('#userCenter').removeClass('selected');
         $('.contentContainer').hide();
         var libraryContainer = '';
-
-       // libraryContainer = $('<div></div>');
-      //  $('#title_tab').html('');
-      //  $('#title_tab').append('<tr><td class="heading">' + "%102".toLocaleString() + '</td><td></td></tr>');
 
         vidonme.rpc.request({
             'context': this,
@@ -79,19 +73,9 @@ SettingService.prototype = {
             'success': function(data) {
 
                 if (data && data.result && data.result.settings) {
-              //      $('#folder_box').html('');
-              //      document.getElementById('folder_box').style.display = "";
-              //      $('#server_setting').html('');
-              //      $('#server_setting').append(libraryContainer);
 
                     settingInfo = data.result.settings;
-                    /*       libraryContainer.append('<div class="siderbar" ><ul><li  onClick="info(\'' + "serverState" + '\')">' + "%116".toLocaleString() + '</li>' +
-                     '<li class="selected" onClick="info(\'' + "essentialInfo" + '\')">' + "%117".toLocaleString() + '</li>' +
-                     '<li onClick="info(\'' + "mediaLibrary" + '\')">' + "%118".toLocaleString() + '</li>' +
-                     '<li onClick="info(\'' + "transcoding" + '\')">' + "%119".toLocaleString() + '</li><li onClick="info(\'' + "update" + '\')">' + "%177".toLocaleString() + '</li></ul></div>').find("li").click(function() {
-                     $(this).addClass("selected").siblings().removeClass("selected");
-                     });
-                     */
+
                     vidonme.rpc.request({
                         'context': this,
                         'method': 'VidOnMe.GetServerName',
@@ -99,6 +83,7 @@ SettingService.prototype = {
                         'success': function(data) {
                             if (data && data.result.ret) {
                                 genericName = data.result.name;
+                               // info(eSettingType.serverState)
                             }
                         }
                     });
@@ -110,8 +95,11 @@ SettingService.prototype = {
                         'success': function(data1) {
                             if (data1 && data1.result) {
                                 serverInfo = data1.result;
-                               // info("essentialInfo");
-                                info("serverState");
+                                info(eSettingType.serverState);
+                            //    info(eSettingType.essentialInfo);
+                           //     info(eSettingType.mediaLibrary);
+                           //     info(eSettingType.transcoding);
+                           //     info(eSettingType.update);
                             }
                         }
                     });
@@ -128,22 +116,22 @@ function info(infoType) {
 
 //	serverName = '',
     language1 = '',  //WEB语言
-        genericAutoStart = '',  //是否开机自动启动
-        discoveryBonjour = '',  //本助协议
-        discoveryDns = '',  //DNS
-        // webServicePort = '',  //web端口号
-        accountAccount = '',  //Web管理登陆用户名
-        accountPassword = '',  //Web管理登陆密码
-        webServer = '',
-        dlna = '',
-        libAutoUpdate = '',
-        libAutoUpdateTimeSpan = '',
-        servicesWebonlyLocal = '',
-        cupMaxUsage = '',
-        tempFilePath = '',
-        defaultScraperLanguage = '',
-        defaultSubtitleShowMode='',
-        serverIp = '';
+    genericAutoStart = '',  //是否开机自动启动
+    discoveryBonjour = '',  //本助协议
+    discoveryDns = '',  //DNS
+    // webServicePort = '',  //web端口号
+    accountAccount = '',  //Web管理登陆用户名
+    accountPassword = '',  //Web管理登陆密码
+    webServer = '',
+    dlna = '',
+    libAutoUpdate = '',
+    libAutoUpdateTimeSpan = '',
+    servicesWebonlyLocal = '',
+    cupMaxUsage = '',
+    tempFilePath = '',
+    defaultScraperLanguage = '',
+    defaultSubtitleShowMode='',
+    serverIp = '';
 
     for (var i = 0; i < settingInfo.length; i++) {
         switch (settingInfo[i].key) {
@@ -203,15 +191,7 @@ function info(infoType) {
 
     $('#server_setting').append(rightInfo);
     if (infoType == eSettingType.serverState) {
-       // rightInfo.html('');
-        /*    rightInfo.append('<h3>' + "%121".toLocaleString() + '</h3>' +
-         '<p class="info">' + "%122".toLocaleString() + ': <input id="servname" class="servname" type="text" value=\'' + genericName + '\'></p>' +
-         '<p class="info">' + "%123".toLocaleString() + ': ' + genericVersion + '</p> <p class="info">' + "%124".toLocaleString() + ': ' + serverIp + '</p' +
-         '<p><a style="padding-top:5px; padding-left:20px;" class="btn" OnClick="saveServerName(\'' + language1 + '\',' + true + ')"><span class="btnl">' + "%135".toLocaleString() + '</span><span class="btnr"></span></a></p>');
-         $('#servname').focus();
-         */
-     //   rightInfo.append('<div id="tableId"></div>');
-      //  var tableDiv = document.getElementById("txtServerName");
+
         $("#txtServerName").val(genericName.toLocaleString());
         $("#lblServerIP").html(serverIp);
         $("#lblServerVersion").html(genericVersion);
@@ -221,23 +201,14 @@ function info(infoType) {
 
     } else if (infoType == eSettingType.essentialInfo) {
         clearInterval(timer); //停止定时器
-        /*  rightInfo.html('');
-         rightInfo.append('<h3>' + "%133".toLocaleString() + '</h3>');
-         rightInfo.append('<p><select class="form_select" id="selectLaunguage">' +
-         '<option value="Chinese (Simple)">中文（简体）<option value="Chinese (Traditional)">繁軆中文<option value="English">English' +
-         '<option value="French">Français<option value="German">Deutsch<option value="Japanese">日本語<option value="Korean">한국어' +
-         '<option value="Portuguese (Brazil)">Português(Brasil)<option value="Spanish">Español<option value="Swedish">Svenska</select></p>' +
-         '<p class="form_checkbox"> <input id="WebonlyLocal" type="checkbox"/>' + "&nbsp;" + "%140".toLocaleString() + '</p>' + '<p>' + "%141".toLocaleString() + '</p>' +
-         '<p class="form_checkbox"><input id="checkboxStart" type="checkbox" />  ' + "%134".toLocaleString() + '</p>' + ' <a class="btn" OnClick="settingSave(\'' + "essentialInfo" + '\')">' +
-         '<span class="btnl">' + "%135".toLocaleString() + '</span><span class="btnr"></span></a><a class="btn"  OnClick="settingCancle(\'' + "essentialInfo" + '\')"><span class="btnl">' + "%114".toLocaleString() + '</span>' +
-         '<span class="btnr"></span></a>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
-        var selectLaunage = document.getElementById("selectLaunguage");
+
+     /*   var selectLaunage = $("#selectWebLanguage");
         for (var i = 0; i < selectLaunage.options.length; i++) {
             if ((selectLaunage.options[i].value == "English" && language1 == "") || selectLaunage.options[i].value == language1) {
                 selectLaunage.options[i].selected = true;
             }
         }
+     */
         if (genericAutoStart == "true") {
             document.getElementById("checkboxStart").checked = true;
         } else {
@@ -249,11 +220,7 @@ function info(infoType) {
     } else if(infoType=="trackSubtitle"){
         //音轨字幕语言设置
         clearInterval(timer); //停止定时器
-        /*
-         rightInfo.html('');
-         rightInfo.append('<h3>' + "首选音轨语言" + '</h3><select class="form_select"  id="trackLaunguage"><option value="zh">中文</option><option value="en">English</option><option value="us">English (US)</option><option value="fr">Français<option value="de">Deutsch<option value="ja">日本語<option value="ko">한국어<option value="pt">Português(Brasil)<option value="es">Español</select><h3>'+"首选字幕语言"+'</h3><select class="form_select"  id="subtitleLaunguage"><option value="zh">中文<option value="en">English<option value="us">English (US)<option value="fr">Français<option value="de">Deutsch<option value="ja">日本語<option value="ko">한국어<option value="pt">Português(Brasil)<option value="es">Español</select>');
-         rightInfo.append('<a class="btn" onClick="settingSave(\'' + "trackSubtitle" + '\')"> <span class="btnl">' + "%135".toLocaleString() + '</span><span class="btnr"></span></a>  ' + '<a class="btn" OnClick="settingCancle(\'' + "trackSubtitle" + '\')"><span class="btnl">' + "%114".toLocaleString() + '</span><span class="btnr"></span></a>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
+
         var trackLaunguage = document.getElementById("trackLaunguage");
         for (var i = 0; i < trackLaunguage.options.length; i++) {
             if (trackLaunguage.options[i].value == defaultScraperLanguage) {
@@ -270,14 +237,6 @@ function info(infoType) {
     } else if (infoType == "network") {
         clearInterval(timer); //停止定时器
 
-        /*    rightInfo.html('');
-         rightInfo.append('<p class="form_checkbox"> </p><p class="form_checkbox"> <input id="WebonlyLocal" type="checkbox"/>' + "%140".toLocaleString() + '</p>' +
-         '<p>' + "%141".toLocaleString() + '</p>' + '<h3>' + "%142".toLocaleString() + '</h3>' + '<p>' + "%143".toLocaleString() + '</p>' + '<h3>' + "%144".toLocaleString() + '</h3>' + '' +
-         '<p><input class="form_input" id="webName" type="text" value="' + accountAccount + '" /></p>' + '<h3>' + "%145".toLocaleString() + '</h3>' +
-         '<p><input class="form_input" id="webPassword" type="password" value="' + accountPassword + '"  /></p>' + '<p>' + "%146".toLocaleString() + '</p>' + '<a class="btn" onClick="settingSave(\'' + "network" + '\')">' +
-         '<span class="btnl">' + "%135".toLocaleString() + '</span><span class="btnr"></span></a>   ' + '<a class="btn" OnClick="settingCancle(\'' + "network" + '\')"><span class="btnl">' + "%114".toLocaleString() + '</span>' +
-         '<span class="btnr"></span></a>');
-         */
         if (servicesWebonlyLocal == true) {
             document.getElementById("WebonlyLocal").checked = true;
         }
@@ -295,19 +254,10 @@ function info(infoType) {
             'success': function(data) {
                 if (data && data.result) {
                     var support = data.result.hardCodecSupport;
-                    /*
-                     rightInfo.html('');
-                     rightInfo.append('<h3>' + "%212".toLocaleString() + '</h3><p class="form_checkbox_transcode"><input id="checkboxOpenTranscode" type="checkbox" /> ' + "%213".toLocaleString() + '</p><p>' + "%214".toLocaleString() + '</p>');
-                     */
+
                     if (support == true) {
                         var setup = data.result.hardCodecSetup;
-                        /*
-                         document.getElementById("checkboxOpenTranscode").checked = setup;
 
-                         rightInfo.append('<p style="padding-top:5px"><a class="btn" OnClick="settingSave(\'' + "transcoding" + '\')"><span class="btnl">' + "%135".toLocaleString() + '</span>' +
-                         '<span class="btnr"></span></a><a class="btn"  OnClick="settingCancle(\'' + "transcoding" + '\')"><span class="btnl">' + "%114".toLocaleString() + '</span>' +
-                         '<span class="btnr"></span></a>').find(".form_selectoption:even").css("backgroundColor", "#151516");
-                         */
                     } else {
                         //	document.getElementById("checkboxOpenTranscode").disabled = true;
                     }
@@ -317,17 +267,6 @@ function info(infoType) {
     } else if (infoType == eSettingType.mediaLibrary) {
         clearInterval(timer); //停止定时器
 
-        /*
-         rightInfo.html('');
-         rightInfo.append('<h3>' + "%147".toLocaleString() + '</h3><p><select class="form_select" id="updateTime"><option value="0">' + "%148".toLocaleString() + '<option value="1">' + "%149".toLocaleString() +
-         '<option value="12">' + "%150".toLocaleString() + '<option value="24">' + "%151".toLocaleString() + '<option value="72">' + "%152".toLocaleString() + '</option><option value="168">' + "%153".toLocaleString() + '</option>' +
-         '<option value="720">' + "%154".toLocaleString() + '</option></select></p>' + '<p><h3>' + "%155".toLocaleString() + '</h3></p>');
-
-         rightInfo.append('<p><select class="form_select"  id="selectMovieLaunguage"><option value="zh">中文</option><option value="en">English</option>' +
-         '<option value="us">English (US)</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="pt">Português(Brasil)</option>' +
-         '<option value="es">Español</option></select></p><p style="margin-top:15px"></p><div id="mediaLibPrompt"></div> <a class="btn" onClick="settingSave(\'' + "mediaLibrary" + '\')"> <span class="btnl">' + "%135".toLocaleString() + '</span>' +
-         '<span class="btnr"></span></a>  ' + '<a class="btn" OnClick="settingCancle(\'' + "mediaLibrary" + '\')"><span class="btnl">' + "%114".toLocaleString() + '</span><span class="btnr"></span></a>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
         var selectMovieLaunage = document.getElementById("selectMovieLaunguage");
         for (var i = 0; i < selectMovieLaunage.options.length; i++) {
             if (selectMovieLaunage.options[i].value == defaultScraperLanguage) {
@@ -348,7 +287,7 @@ function info(infoType) {
 function settingSave(actionType) {
     var reloadPage = '';
     if (actionType == "essentialInfo") {
-        var languageId = document.getElementById("selectLaunguage");
+        var languageId = document.getElementById("selectWebLanguage");
         var autoStart = document.getElementById("checkboxStart").checked;
         var index = languageId.selectedIndex;
         var language = languageId.options[index].value;
@@ -362,7 +301,7 @@ function settingSave(actionType) {
 //			}
 //		}
 
-        var webonlyLocal = document.getElementById("WebonlyLocal").checked;
+        var webonlyLocal = document.getElementById("onlyloaclhost").checked;
         // var webServicePort = '';
         for (var i = 0; i < settingInfo.length; i++) {
             if (settingInfo[i].key == "language.default") {
@@ -423,7 +362,6 @@ function settingSave(actionType) {
         var libUpdateTime = document.getElementById("updateTime").value;
         var scraperLanguage = document.getElementById("selectMovieLaunguage").value;
         var mediaLibDiv = document.getElementById("mediaLibPrompt");
-        //mediaLibDiv.innerHTML = '<img src="/img/loading.gif" style="padding-left:5px;padding-top:15px;padding-right:5px;" />'+"%209".toLocaleString();+'</p>';
 
         if (libUpdateTime == "0") {
             vidonme.rpc.request({
@@ -596,11 +534,6 @@ function getFilePath(p) {
 function scanFilePath(path1) {
 
     var add = $("#dialog-form");
-    //  add.html('');
-    //   add.append('<div class="path">');
-    //   $(".path").append('<div class="srcpath"><input type="text" id="srcPath" class="" /></div>');
-    //   $(".path").append('<ul  class="pathul">');
-    //$(".path").append('<ul  id="wrapper" class="pathul">');
     vidonme.rpc.request({
         'context': this,
         'method': 'VidOnMe.GetDirectory',
@@ -617,8 +550,6 @@ function scanFilePath(path1) {
                     path = path + strs[i] + "\\\\";
                 }
 
-                //               $(".path ul").append('<li class="back" onClick="scanFilePath(\'' + path + '\')">back</li>');
-
             }
             $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
                     var strs = item.path.split("\\");
@@ -634,15 +565,12 @@ function scanFilePath(path1) {
                         name = str;
                     }
 
-                    //               $(".path ul").append('<li onClick="scanFilePath(\'' + path + '\')" title=' + str + '>' + name + '</li>');
                 },
                 this));
 
             path1 = path1.replace(/\\\\/g, '\\');
             //path2=path2.replace(/\\\\/g,'\\');
             document.getElementById("srcPath").value = path1;
-            //           $(".path").append('<p class="btnp"> <a class="btn" onClick=setFilePath(\'' + "" + '\') ><span class="btnl">' + "%114".toLocaleString() + '</span>' +
-            //              '<span class="btnr"></span></a><a class="btn" onClick=setFilePath(\'' + escape(path1) + '\')><span class="btnl">' + "%115".toLocaleString() + '</span><span class="btnr"></span></a></p>');
 
         }
     });
@@ -659,7 +587,7 @@ function setFilePath(filePath) {
 }
 
 function upgrade(download) {
-    var selectLanguage = document.getElementById("selectLaunguage");
+    var selectLanguage = document.getElementById("selectWebLanguage");
     if (selectLanguage != null) {
         for (var i = 0; i < selectLanguage.options.length; i++) {
             if (selectLanguage.options[i].selected == true){
@@ -676,21 +604,6 @@ function upgrade(download) {
         return;
     }
 
-    /*    rightInfo.html('');
-     rightInfo.append('<h3>' + "%178".toLocaleString() + '</h3><div style="float:left"><select class="form_select_short" id="autoUpdateSelect" onchange="updateChange()" >' +
-     '<option value="true">' + "%179".toLocaleString() + '</option><option value="false">' + "%180".toLocaleString() + '</option></select></div>' +
-     '<div id="updateSet" style="float:left;margin-left:40px;">' + "%181".toLocaleString() + '<select class="form_select_short" id="autoUpdateWeekdaySelect" style="margin-left:20px;margin-right:20px;">' +
-     '<option value="0">' + "%182".toLocaleString() + '</option><option value="1">' + "%183".toLocaleString() + '</option><option value="2">' + "%184".toLocaleString() + '</option>' +
-     '<option value="3">' + "%185".toLocaleString() + '</option><option value="4">' + "%186".toLocaleString() + '</option><option value="5">' + "%187".toLocaleString() + '</option>' +
-     '<option value="6">' + "%188".toLocaleString() + '</option><option value="7">' + "%189".toLocaleString() + '</option></select>' + "%201".toLocaleString() +
-     '<select class="form_select_short" id="autoUpdateDaytimeSelect" style="margin-left:20px;"><option value="0">0:00</option><option value="1">1:00</option><option value="2">2:00</option>' +
-     '<option value="3">3:00</option><option value="4">4:00</option><option value="5">5:00</option><option value="6">6:00</option><option value="7">7:00</option><option value="8">8:00</option>' +
-     '<option value="9">9:00</option><option value="10">10:00</option><option value="11">11:00</option><option value="12">12:00</option><option value="13">13:00</option><option value="14">14:00</option>' +
-     '<option value="15">15:00</option><option value="16">16:00</option><option value="17">17:00</option><option value="18">18:00</option><option value="19">19:00</option><option value="20">20:00</option>' +
-     '<option value="21">21:00</option><option value="22">22:00</option><option value="23">23:00</option></select></div><div  style="clear:both";></div><h3>' + "%190".toLocaleString() + '</h3>');
-
-     rightInfo.append('<h4 id="version">' + genericName + ': V' + genericVersion + '</h4>');
-     */
     var updateAutoId = document.getElementById("autoUpdateSelect");
     var updateWeekdayId = document.getElementById("autoUpdateWeekdaySelect");
     var updateDaytimeId = document.getElementById("autoUpdateDaytimeSelect");
@@ -716,8 +629,6 @@ function upgrade(download) {
 
 
     if (upgradeState == 0) {
-//        rightInfo.append('<div id="waitTips">' + "%191".toLocaleString() + '</div>').find(".form_select option:even").css("backgroundColor", "#151516");
-
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.Upgrade_GetState',
@@ -761,10 +672,6 @@ function upgrade(download) {
                         data1.result.changes = data1.result.changes.replace(/\r\n/g, "<br//>");
                         genericNewVersion = data1.result.newversion;
 
-                        /*                   waitTips.innerHTML = '<h4>' + "%193".toLocaleString() + genericNewVersion + '</h4><h4>' + data1.result.changes + '</h4>' +
-                         '<p><a class="renew" href="#" onclick=upgrade(\'' + "true" + '\') id="update"> ' + '</a></p>' +
-                         '<a class="btn" onClick="upgrade(\'' + "true" + '\')"> <span class="btnl">' + "%194".toLocaleString() + '</span><span class="btnr"></span></a>';
-                         */
                         upgradeState = 1;
                     }
 
@@ -775,13 +682,6 @@ function upgrade(download) {
             }
         });
     } else if (upgradeState == 1) {
-        /*
-         rightInfo.append('<h4>' + "%193".toLocaleString() + '<span id="newVersion">' + genericNewVersion + '</span></h4>' +
-         '<div id="updateMessage"><h4>' + "%195".toLocaleString() + '</h4>' +
-         '<p><div id="updateProgressBar" style="float:left;margin-right:10px"><div id="updateProgressP">' +
-         '<div id="updateProgressC"></div></div></div><div id="msg" style="margin-top:2px"></div></p>' +
-         '<h4>' + "%196".toLocaleString() + '</h4></div>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
         var updateDiv = document.getElementById("updateMessage");
         var progressDiv = document.getElementById("updateProgressBar");
         var pDiv = document.getElementById("updateProgressP");
@@ -810,9 +710,6 @@ function upgrade(download) {
                         'success': function(data1) {
                             data1.result.newversion = HandleVersion(data1.result.newversion);
 
-                            //                        cDiv.style.width = parseInt(data1.result.progress) * 4 + "px";
-                            //                        msgDiv.innerHTML = parseInt(data1.result.progress) + "%";
-                            //                        newVersion.innerHTML = data1.result.newversion;
                         }
                     });
 
@@ -848,51 +745,33 @@ function upgrade(download) {
                                 if (data1 && data1.result.state == "downloadfailed") {
                                     clearInterval(downloadTimer); //停止定时器
                                     upgradeState = 5;
-                                    //                                updateDiv.innerHTML = "%199".toLocaleString() + "<h4>" + "%200".toLocaleString() + "</h4><h4><a href='http://www.vidon.me/download/VidOnServer.exe'>http://www.vidon.me/download/VidOnServer.exe</h4></a>";
                                 }
                             }
                         });
                     }, 2000);
                 } else {
                     upgradeState = 5;
-                    //                updateDiv.innerHTML = "%199".toLocaleString() + "<h4>" + "%200".toLocaleString() + "</h4><h4><a href='http://www.vidon.me/download/VidOnServer.exe'>http://www.vidon.me/download/VidOnServer.exe</h4></a>";
 
                 }
             }
         });
     } else if (upgradeState == 2) {
-        //     rightInfo.append('<div><p>' + "%192".toLocaleString() + '</p></div>').find(".form_select option:even").css("backgroundColor", "#151516");
     } else if (upgradeState == 3) {
         clearInterval(downloadTimer); //停止定时器
-        /*
-         rightInfo.append('<h4>' + "%193".toLocaleString() + '<span id="newVersion"></span></h4><div id="updateMessage"><h4>' + "%195".toLocaleString() + '</h4>' +
-         '<p><div id="updateProgressBar" style="float:left;margin-right:10px"><div id="updateProgressP"><div id="updateProgressC"></div></div></div>' +
-         '<div id="msg" style="margin-top:2px"></div></p><h4>' + "%196".toLocaleString() + '</h4></div>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
         var updateDiv = document.getElementById("updateMessage");
         var progressDiv = document.getElementById("updateProgressBar");
         var pDiv = document.getElementById("updateProgressP");
         var cDiv = document.getElementById("updateProgressC");
         var msgDiv = document.getElementById("msg");
         var newVersion = document.getElementById("newVersion");
-        /*
-         pDiv.style.border = "1px solid #ffffff";
-         cDiv.style.backgroundColor = '#00a0ff';
-         pDiv.style.height = cDiv.style.height = 15 + "px";
-         pDiv.style.width = pDiv.style.width = 400 + "px";
-         cDiv.style.width = "0px";
-         msgDiv.style.height = 20 + "px";
-         */
+
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.Upgrade_GetState',
             'params': [],
             'success': function(data1) {
-                //          cDiv.style.width = parseInt(data1.result.progress) * 4 + "px";
-                //          msgDiv.innerHTML = parseInt(data1.result.progress) + "%";
 
                 data1.result.newversion = HandleVersion(data1.result.newversion);
-                //          newVersion.innerHTML = data1.result.newversion;
             }
         });
 
@@ -931,23 +810,14 @@ function upgrade(download) {
                     if (data1 && data1.result.state == "downloadfailed") {
                         clearInterval(downloadTimer); //停止定时器
                         upgradeState = 5;
-                        //                  updateDiv.innerHTML = "%199".toLocaleString() + "<h4>" + "%200".toLocaleString() + "</h4><h4><a href='http://www.vidon.me/download/VidOnServer.exe'>http://www.vidon.me/download/VidOnServer.exe</h4></a>";
                     }
                 }
             });
 
         }, 2000);
     } else if (upgradeState == 4 || upgradeState == 6) {
-        /*
-         rightInfo.append('<div id="updateMessage"><h4>' + "%195".toLocaleString() + '</h4>' +
-         '<p><div id="updateProgressBar" style="float:left;margin-right:10px"><div id="updateProgressP">' +
-         '<div id="updateProgressC"></div></div></div><div id="msg" style="margin-top:2px"></div></p>' +
-         '<h4>' + "%196".toLocaleString() + '</h4></div>').find(".form_select option:even").css("backgroundColor", "#151516");
-         */
         var updateDiv = document.getElementById("updateMessage");
         var versionDiv = document.getElementById("version");
-        //     updateDiv.innerHTML = "%197".toLocaleString();
-        //		 clearInterval(downloadTimer); //停止定时器
         downloadTimer = window.setInterval(function() {
             vidonme.rpc.request({
                 'context': this,
@@ -964,7 +834,6 @@ function upgrade(download) {
 
                     if (data1 && data1.result.state == "installfailed") {
                         clearInterval(downloadTimer); //停止定时器
-                        //                    updateDiv.innerHTML = "%199".toLocaleString() + "<h4>" + "%200".toLocaleString() + "</h4><h4><a href='http://www.vidon.me/download/VidOnServer.exe'>http://www.vidon.me/download/VidOnServer.exe</h4></a>";
                         upgradeState = 5;
 
                     }
@@ -972,11 +841,8 @@ function upgrade(download) {
             });
         }, 30000);
     } else if (upgradeState == 5) {
-        //     rightInfo.append("%199".toLocaleString() + "<h4>" + "%200".toLocaleString() + "</h4><h4><a href='http://www.vidon.me/download/VidOnServer.exe'>http://www.vidon.me/download/VidOnServer.exe</h4>" +
-        //         "</a>").find(".form_select option:even").css("backgroundColor", "#151516");
 
     } else if (upgradeState == 7) {
-        //    rightInfo.append('<div>' + "%198".toLocaleString() + '</div>').find(".form_select option:even").css("backgroundColor", "#151516");
     }
 }
 
@@ -1060,17 +926,6 @@ function showTable(){
                         var name = item.clientname;
                         var ip = item.clientip;
                         var state = item.state;
-                     /*   var file = '';
-                        if (state == "connected") {
-                            file = "%208".toLocaleString();
-                        } else {
-                            file = item.playvideo;
-                            if (file.length > 50) {
-                                file = file.substring(0, 50) + "...";
-                            }
-                            file = "%205".toLocaleString() + file;
-                        }
-                      */
                         name = unescape(name);
                         if (name.length > 30) {
                             name = name.substring(0, 30) + "...";

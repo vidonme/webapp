@@ -126,9 +126,7 @@
         }
         
         delete load_queues[locale];
-    }
-    
-    ;
+    };
     
     if (typeof XMLHttpRequest === undef_type && typeof ActiveXObject !== undef_type) {
         var AXO = ActiveXObject;
