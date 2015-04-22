@@ -53,6 +53,11 @@
 					return false;
 			}
 			
+			if(typeof(data.error) != "undefined"){
+					alert(data.error);
+					return false;
+			}			
+			
 			if (data && (data.result.ret == false)) {
 					err = data.result.err;
 
@@ -66,7 +71,7 @@
 							langua = $.i18n.prop('Server_Response_Err_PathErr');
 							alert(langua);
 					} else {
-							alert(err);
+							//alert(err);
 					}
 			
 			    return false;
@@ -79,13 +84,13 @@
     		var drivetypename = "";
         switch (drivetype) {
             case 1:
-                drivetypename = $.i18n.prop('Local_Disk');
+                drivetypename = $.i18n.prop('index_21');
             break;
             case 4:
-                drivetypename = $.i18n.prop('Network_Drive');
+                drivetypename = $.i18n.prop('index_21_1');
             break;
             case 6:
-                drivetypename = $.i18n.prop('Removable_Disk');
+                drivetypename = $.i18n.prop('index_21_2');
             break;
             default:
                 drivetypename = "other";

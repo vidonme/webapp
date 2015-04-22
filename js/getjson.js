@@ -1,4 +1,16 @@
 		//API is not REST
+	function RequestIsNeedWizard(page) {
+		    var s = vidonme.rpc.request({
+		        'context': this,
+		        'method': 'VidOnMe.IsWizzardEnabled',
+		        'params': {},
+		        'success': function(data) {
+								cbIsNeedWizard(data,page);
+			    	}
+	    	});  	
+		}
+		
+		
 		function RequestGetLibraries(mediatype) {
 		    var s = vidonme.rpc.request({
 		        'context': this,

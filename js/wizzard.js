@@ -1,5 +1,6 @@
 
 		var g_CurLibId = 0;
+		var g_CurLibraryType = "commercial";		
 
 //=================PageInterface============================
 		function cbSetLibraryID(data,mediatype){
@@ -13,6 +14,22 @@
     				},
     				this));
     		}
+		}
+		
+		function cbIsNeedWizard(data,page){
+				if(page != "guide.html"){
+						return;
+				}
+				
+				if(!checkResponse(data)) return;
+				
+		    //alert("isNeedWizard=" + data.result.ret);
+			/*
+				if(data.result.ret != "true"){
+						location.assign("index.html");
+						window.location	="index.html";
+						location.href		="index.html";
+				}*/
 		}
 		
 			//Wizard页面增加路径
@@ -67,19 +84,19 @@
 		        'params': {},
 		        'success': function(data) {
 		        		//alert("SetWizzardDisabled:" + data.result.ret);
+								location.assign("index.html");
+								window.location="index.html";
+								location.href="index.html";     		
 			    	}
 	    	});
 		}
 		
     function loadPage() {
-    		isNeedWizard();
+    		//RequestIsNeedWizard("guide.html");
     }
 
     function FinishWizard() {
 				wizardsetting();
-				location.assign("movie.html");
-				window.location="movie.html";
-				location.href="movie.html";
     }
 
 	$(function(){
@@ -87,10 +104,12 @@
 		var  slideWidth=$(".slide").width();
 		
 		$("#commVideo").click(function(){
+				g_CurLibraryType = "commercial";
 				RequestGetLibraries("commercial");
 		})
 		
 		$("#perMedia").click(function(){
+				g_CurLibraryType = "personal";
 				RequestGetLibraries("personal");
 		})	
 					
@@ -103,6 +122,7 @@
 				if (!g_CurLibId) {
 						RequestGetLibraries("commercial");
 				}
+				
 				$("#selectedPath").val("");
 				$(".slides").animate({left:-2*slideWidth},500);
 				$(".guideMenu li").eq(4).addClass("selected").siblings().removeClass("selected");
@@ -117,8 +137,18 @@
 		})
 				
 		$(".addPathbtn").click(function(){
+				var title = "";
+				if(g_CurLibraryType == "commercial"){
+						title = $.i18n.prop('index_17');;
+						$("#popAddPathH3").text(title);
+				}else {
+						title = $.i18n.prop('index_18');;
+						$("#popAddPathH3").text(title);							
+				}					
+				
 				showdiv(".addPath",2);
-				ShowPageAddOnePath('','');				
+
+				ShowPageAddOnePath('','');			
 		})	
 					
 		loadPage();

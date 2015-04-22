@@ -54,6 +54,7 @@ function getBrowserInfo()
 			"js/librarypath.js",
 			"js/getjson.js",
 			"js/wizzard.js",
+			"js/vidon.me.settings.js",
         ];
 
     for (i = 0; i < scripts.length; i += 1) {
