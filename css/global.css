@@ -51,9 +51,9 @@ p { line-height:1.5; padding:6px 0px; }
 /*下拉框*/
 .dropdown{position:relative} 
 .dropdown .jt{ position:absolute; top:8px; right:20px; width:25px; height:14px; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -58px;}
-.dropdown ul{width:100%; background:#404140;margin-top:2px;position:absolute; display:none; z-index:2} 
+.dropdown ul{width:100%; background:#404140;margin-top:2px;position:absolute; display:none; z-index:2; padding:10px 0px;} 
 .dropdown ul li{height:28px; line-height:28px; cursor:pointer;} 
-
+.dropdown ul li:hover{ background:#333}
 /*复选框*/
 .checkboxblock{ line-height:28px;}
 .checkbox{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; width:30px; cursor:pointer; display:inline-block; float:left}
@@ -110,7 +110,9 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .guideMenu li.selected { color:#f5fffb; }
 .guideMenu li span { display:inline-block; width:40px; height:40px; -moz-border-radius:21px; -webkit-border-radius:21px; border-radius:21px; border:#d3d3d3 solid 1px; font-size:28px; line-height:40px; text-align:center; margin-right:10px; }
 .guideMenu li.selected span { background:#3278cc; border:#3278cc solid 1px; }
+.guideMenu li b{ font-weight:normal}
 .slideblock { width:800px; overflow:hidden; position:relative; }
+
 .slides { width:2400px; position:relative; }
 .slide { float:left; width:800px; }
 .slide.show { display:block; }
@@ -302,6 +304,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .setupcon .disable .btn-small{ background:#535353; cursor:default; color:#171916}
 .setupcon .disable .btn-small:hover{background:#535353; color:#171916}
 .setupcon .disable p b.red{ color:#ff2334}
+.setupcon .disable p b.red a{ text-decoration:underline}
 .setupcon .disable p.checkboxblock{ display:none;}
 .setupcon .disable p.disablep{ display:block; height:28px; line-height:28px;}
 .setupcon .disable p.disablep span{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -1030px; display:inline-block; width:30px; height:28px; float:left}
@@ -317,6 +320,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .progreessbarblock .progress{ margin-bottom:0px;}
 
 .popsetup .dropdown  ul{ top:28px;}
+.popsetup .dropdown  ul li{ list-style:none;}
+.upgradeTime ul{ height:300px; overflow:auto}
 /**/
 .listing{ background:url(../images/movie/dian.png) no-repeat left center; padding-left:20px;}
 .cloud { margin:40px 0px;}

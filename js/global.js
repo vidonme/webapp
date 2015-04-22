@@ -46,7 +46,13 @@ $(function(){
 				input_dropdown.find(".font").text(txt); 
 			}
 			ul.hide(); 
-		})			                                
+		})
+		$this.hover(function() {
+        	ul.fadeOut(10).hide();
+   		 },
+   		 function() {
+       	 ul.fadeOut(10).hide();
+   	   });				                                
     });
  
 	
