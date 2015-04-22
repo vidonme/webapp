@@ -51,7 +51,7 @@ p { line-height:1.5; padding:6px 0px; }
 /*下拉框*/
 .dropdown{position:relative} 
 .dropdown .jt{ position:absolute; top:8px; right:20px; width:25px; height:14px; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -58px;}
-.dropdown ul{width:100%; background:#404140;margin-top:2px;position:absolute; display:none;} 
+.dropdown ul{width:100%; background:#404140;margin-top:2px;position:absolute; display:none; z-index:2} 
 .dropdown ul li{height:28px; line-height:28px; cursor:pointer;} 
 
 /*复选框*/
