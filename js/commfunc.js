@@ -53,6 +53,8 @@
 					return false;
 			}
 			
+			
+			/*
 			if (data && (data.result.ret == false)) {
 					err = data.result.err;
 
@@ -71,7 +73,7 @@
 			
 			    return false;
 			}
-			
+			*/
 			return true
 	}		
 		

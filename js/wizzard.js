@@ -23,11 +23,12 @@
 				if(!checkResponse(data)) return;
 				
 		    //alert("isNeedWizard=" + data.result.ret);
+			/*
 				if(data.result.ret != "true"){
 						location.assign("index.html");
 						window.location	="index.html";
 						location.href		="index.html";
-				}
+				}*/
 		}
 		
 			//Wizard页面增加路径
