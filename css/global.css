@@ -148,13 +148,13 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .siderbar .addbtn:hover{ background-position:0px -608px;}
 .content2 { position:absolute; top:80px; left:230px; bottom:0px; right:0px; overflow:hidden;}
 .posterMenu { height:90px;font-size:18px;}
-.posterMenu .posterMenubtn{ position:absolute; top:0px; right:10px; width:400px;}
+.posterMenu .posterMenubtn{ position:absolute; top:0px; right:15px; width:400px;}
 .posterMenu a { display:inline-block;float:right; height:28px; line-height:28px;}
 .posterMenu .fresh{ background:url(../images/spriteimg/iconimg.png) no-repeat -92px 2px; margin:31px 25px 0px;  width:32px; height:32px;}
 .posterMenu .fresh:hover{ background-position:-217px 2px;}
 .posterMenu .fresh.loading{ background:url(../images/movie/refresh.gif) no-repeat; }
 .posterMenu .fresh.loading:hover{ background:url(../images/spriteimg/iconimg.png) no-repeat -219px -42px;}
-.posterMenu .all a{ margin-top:25px; text-align:right}
+.posterMenu .all a{ margin-top:25px; text-align:right; padding-bottom:10px;}
 .posterMenu .all a b{ font-weight:normal}
 .posterMenu .all a span{  display:inline-block; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -43px; width:28px; height:28px; margin-left:10px; line-height:28px;}
 .posterMenu .all a:hover span{ background-position:-93px -74px;}
@@ -215,7 +215,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .addNetwork label { width:100px; display:inline-block; text-align:right;margin-right:8px }
 .addNetwork input { width:460px;}
 .addNetwork .dropdown{ width:480px; display:inline-block;}
-.addNetwork .dropdown ul{ width:470px;}
+.addNetwork .dropdown ul{ width:470px; top:28px;}
 .addNetwork .dropdown li{padding-left:10px;}
 .addNetwork  p { margin:20px 0; }
 /*弹出层添加源*/
@@ -245,12 +245,12 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .poplogin .loginblock{ margin-left:20px; width:650px;}
 .poplogin input{ width:440px; height:14px; line-height:14px; padding:13px 0px 13px 10px;}
 .poplogin label{ font-size:18px; width:150px; text-align:right; margin-right:20px; display:inline-block; line-height:40px;}
-.poplogin .submitbtn{ border:none; width:auto; padding-left:40px; float:right; margin-top:40px; margin-right:28px; font-size:18px; height:40px; line-height:40px; padding: 0px 40px;}
+.poplogin .submitbtn{ border:none; width:auto; float:right; margin-top:40px; margin-right:28px; font-size:18px; height:40px; line-height:40px; width:150px; text-align:center; padding:0;}
 .poplogin .tips{ margin-top:60px;}
 .poplogin .tips a{ text-decoration:underline;}
 .poplogin .tips p{ text-align:center}
 .poplogin .tip1 a{ margin:0px 20px;}
-.poplogin .selectNationality{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; line-height:28px; padding-left:30px; width:260px; float:left; margin-top:50px; margin-left:170px; cursor:pointer;}
+.poplogin .selectNationality{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -961px; height:28px; line-height:28px; padding-left:30px; width:270px; float:left; margin-top:50px; margin-left:170px; cursor:pointer;}
 .poplogin .selectNationality.selected{ background-position: 0px -918px;}
 
 .loginblock2{ width:670px; margin:0px auto}
@@ -315,6 +315,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .setupcon .progress{ width: 300px;}
 .progreessbarblock p,.progreessbarblock .progress{ display: inline-block; margin-right:3px;}
 .progreessbarblock .progress{ margin-bottom:0px;}
+
+.popsetup .dropdown  ul{ top:28px;}
 /**/
 .listing{ background:url(../images/movie/dian.png) no-repeat left center; padding-left:20px;}
 .cloud { margin:40px 0px;}
