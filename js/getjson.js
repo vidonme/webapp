@@ -2,7 +2,7 @@
 	function RequestIsNeedWizard(page) {
 		    var s = vidonme.rpc.request({
 		        'context': this,
-		        'method': 'VidOnMe.IsWizzardEnsabled',
+		        'method': 'VidOnMe.IsWizzardEnabled',
 		        'params': {},
 		        'success': function(data) {
 								cbIsNeedWizard(data,page);

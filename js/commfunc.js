@@ -53,8 +53,11 @@
 					return false;
 			}
 			
+			if(typeof(data.error) != "undefined"){
+					alert(data.error);
+					return false;
+			}			
 			
-			/*
 			if (data && (data.result.ret == false)) {
 					err = data.result.err;
 
@@ -68,12 +71,12 @@
 							langua = $.i18n.prop('Server_Response_Err_PathErr');
 							alert(langua);
 					} else {
-							alert(err);
+							//alert(err);
 					}
 			
 			    return false;
 			}
-			*/
+			
 			return true
 	}		
 		
