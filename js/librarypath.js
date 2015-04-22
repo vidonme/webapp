@@ -29,16 +29,11 @@
 	
 	//==================ÃÌº”Õ¯¬ÁDrive Div======================	
 		function ShowPageAddNetShare(host) {
-				//yanggui dialogClose();
-//				var dialogTitle = "%267";
-//
-//				if (true == edit) {
-//					$("#user_name").focus();
-//				} else {
-//					$("#server_address").focus();
-//				}
-				
+				var title = "";
+				$("#txtNetShareSrcName").focus();
 				showdiv(".addNetwork",3);	
+				title = $.i18n.prop('index_28');;
+				$("#popAddNetworkH3").text(title);							
 		}
 		
 		function checkNetShare(protocol,srvaddr,srvdomain,username,userpass){
@@ -152,15 +147,15 @@
 			
 			
 			//alert(html);
-			langua = $.i18n.prop('Disk_Type_SMB');
+			langua = $.i18n.prop('index_22');
 			html = '<li onClick="ShowPageAddOnePath(\'' + "smb://" + '\',\'' + "" + '\')">' + langua + '</li>';
 			$("#popDiskblock").append(html);
 			
-			langua = $.i18n.prop('Disk_Type_NFS');
+			langua = $.i18n.prop('index_23');
 			html = '<li onClick="ShowPageAddOnePath(\'' + "nfs://" + '\',\'' + "" + '\')">' + langua + '</li>';
 			$("#popDiskblock").append(html);
 						
-			var note = $.i18n.prop('Add_Shared');					
+			var note = $.i18n.prop('index_24');					
 			html = '<li class="addNwPath" title="' + note + '" onClick="ShowPageAddNetShare(\'' + "" + '\')">' + note + '</li>';
 			$("#popDiskblock").append(html);	
 		
@@ -193,7 +188,7 @@
       
       if (parentpath != "") {
       	  //alert("parentpath 1=" + parentpath);
-      	  langua = $.i18n.prop('Path_Back_Arrow');
+      	  langua = $.i18n.prop('index_21_3');
 					html = '<div class="back"> <a onClick="ShowPageAddOnePath(\'' + escape(parentpath) + '\',\''  + escape(drive) + '\')">' + langua + '</a> </div>';
 					$("#listpath").append(html);
       }
