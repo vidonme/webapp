@@ -15,6 +15,21 @@
     		}
 		}
 		
+		function cbIsNeedWizard(data,page){
+				if(page != "guide.html"){
+						return;
+				}
+				
+				if(!checkResponse(data)) return;
+				
+		    //alert("isNeedWizard=" + data.result.ret);
+				if(data.result.ret != "true"){
+						location.assign("index.html");
+						window.location	="index.html";
+						location.href		="index.html";
+				}
+		}
+		
 			//Wizard页面增加路径
 	function commitAddOneLibPath(){
 		  var mediapath = $("#addSrcPath").val();
@@ -67,19 +82,19 @@
 		        'params': {},
 		        'success': function(data) {
 		        		//alert("SetWizzardDisabled:" + data.result.ret);
+								location.assign("index.html");
+								window.location="index.html";
+								location.href="index.html";     		
 			    	}
 	    	});
 		}
 		
     function loadPage() {
-    		isNeedWizard();
+    		RequestIsNeedWizard("guide.html");
     }
 
     function FinishWizard() {
 				wizardsetting();
-				location.assign("movie.html");
-				window.location="movie.html";
-				location.href="movie.html";
     }
 
 	$(function(){
