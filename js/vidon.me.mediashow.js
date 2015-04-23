@@ -453,22 +453,32 @@ function __GetMovies(start, end, state) {
 	var __end   = arguments[1] ? end : 20;
 	
 	var obj = new JsonObject();
-	obj.limits = new Limits(__start, __end);
-	obj.sort = (new Sort()).byDateAdded();
-	// obj.filter = (new Filter()).byCountry("United States of America");
+	var getMethod = 'VideoLibrary.GetMovies';
+	if ( g_ShowRecentMedia ) {
+		getMethod = "VideoLibrary.GetRecentlyAddedMovies";
+		obj.limits = new Limits(__start, __end);
+		//obj.sort = (new Sort()).byDateAdded();
+		// obj.filter = (new Filter()).byCountry("United States of America");
+	}
+	else{
+		obj.limits = new Limits(__start, __end);
+		obj.sort = (new Sort()).byDateAdded();
+		// obj.filter = (new Filter()).byCountry("United States of America");
+	}
+
 	obj.properties = new Array();
-	
 	obj.properties.push("file");
 	obj.properties.push("year");
 	obj.properties.push("thumbnail");
 	obj.properties.push("runtime");
 	obj.properties.push("title");
 	
+	
 	$('.posterMenubtn').show();
 		
 	vidonme.rpc.request({
 		'context': this,
-		'method': 'VideoLibrary.GetMovies',
+		'method': getMethod,
 		'params': obj,
 		'success': function(data) {
 			if (data && data.result) {
@@ -822,6 +832,15 @@ function FreshMediasCount(){
 window.onload = function() {
 	GetMovies();
 	RefreshMediaLibrary("commercial");
+
+	$("#dropdown2 li").click( function(){
+		var txt = $(this).text(); 
+		var cus_value = $(this).attr("cus_value"); 
+
+		g_ShowRecentMedia = cus_value == "0" ? false : true;
+
+		FreshMedias();
+	} );
 	
 	vidonme.rpc.request({
 		        'context': this,
@@ -842,3 +861,4 @@ window.onload = function() {
 var global_image_url = 'http://localhost:32080/image/';
 var global_count_timer = -1;
 var g_selected_type = "movie";
+var g_ShowRecentMedia = false;
