@@ -63,7 +63,7 @@
 				//alert("libID=" + libID + ",path=" + mediapath);
 				
 				if (!libID || !mediapath) {
-						alert("libID or Path is neccessary!");
+						//alert("libID or Path is neccessary!");
 						return;
 				}          
         
