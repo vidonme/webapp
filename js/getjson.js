@@ -103,20 +103,22 @@
 				drivepath 		= unescape(drivepath);
 		    realpath 			= unescape(realpath);
 		    realpath 			= removeslashAtEnd(realpath);
-		    
+		    var init = "init";
 		   //alert("realpath="+realpath+", drivepath="+drivepath);
-		
-		    vidonme.rpc.request({
-		        'context': this,
-		        'method': 'VidOnMe.GetDirectory',
-		        'params': {
-		            "mask": "/",
-		            "directory": ""
-		        },
-		        'success': function(data) {
-								cbHandleDiskList(data);
-		        }
-		    });
+				
+				if(init){				
+				    vidonme.rpc.request({
+				        'context': this,
+				        'method': 'VidOnMe.GetDirectory',
+				        'params': {
+				            "mask": "/",
+				            "directory": ""
+				        },
+				        'success': function(data) {
+										cbHandleDiskList(data);
+				        }
+				    });
+		  	}
 		    
 
 		   	

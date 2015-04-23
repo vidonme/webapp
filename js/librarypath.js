@@ -131,11 +131,12 @@
 	function cbHandleDiskList(data) {
 			var itemhtml 			= "";		
       var langua 				= "";	
-
+      
+			$("#popDiskblock").html("");
+			
       if(!checkResponse(data))
 					return;
 
-			$("#popDiskblock").html("");
       $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
           var strpath 		= removeslashAtEnd(item.path);
           var drivetype 	= getdrivetypename(item.drivetype);
@@ -170,14 +171,13 @@
       
       reqCnt--;
       //alert(reqCnt);
-      
-			if(!checkResponse(data))
-					return;
-
 			if(path == "")
-				return;			
-			
-			$("#listpath").html("");
+				return;	      
+				  
+			$("#listpath").html("");		      
+      
+			if(!checkResponse(data)){
+					return;
 
 			if ((drive != path) && (drive != handleUrl(path, true, true))) {
 						parentpath = getParentPath(path);
