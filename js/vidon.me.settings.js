@@ -44,9 +44,17 @@ SettingService.prototype = {
             saveServerName();
         });
         $("#btnSaveEssentialInfo").click(function() {
-                settingSave(eSettingType.essentialInfo);
-            }
-        );
+            settingSave(eSettingType.essentialInfo);
+        });
+        $("#btnSaveMediaLibrary").click( function() {
+            settingSave(eSettingType.mediaLibrary);
+        });
+        $("#btnSaveTranscode").click( function() {
+            settingSave(eSettingType.transcoding);
+        });
+        $("#btnSaveMediaLibrary").click( function() {
+            settingSave(eSettingType.mediaLibrary);
+        });
     },
     resetPage: function() {
         $('#serverSetting').removeClass('selected');
@@ -96,9 +104,9 @@ SettingService.prototype = {
                             if (data1 && data1.result) {
                                 serverInfo = data1.result;
                                 info(eSettingType.serverState);
-                            //    info(eSettingType.essentialInfo);
-                           //     info(eSettingType.mediaLibrary);
-                           //     info(eSettingType.transcoding);
+                                info(eSettingType.essentialInfo);
+                                info(eSettingType.mediaLibrary);
+                                info(eSettingType.transcoding);
                            //     info(eSettingType.update);
                             }
                         }
@@ -202,20 +210,27 @@ function info(infoType) {
     } else if (infoType == eSettingType.essentialInfo) {
         clearInterval(timer); //停止定时器
 
-     /*   var selectLaunage = $("#selectWebLanguage");
-        for (var i = 0; i < selectLaunage.options.length; i++) {
-            if ((selectLaunage.options[i].value == "English" && language1 == "") || selectLaunage.options[i].value == language1) {
-                selectLaunage.options[i].selected = true;
+        var liArray = $("#ulWebLanguage li");
+        var defaultLanguage = liArray["0"].getAttribute("cus_value"); //liArray["0"].attributes["0"].value;
+        //设置一个默认值
+        $("#selectWebLanguage").attr("cus_value",defaultLanguage);
+        $("#selectWebLanguage").html(liArray[0].val);
+        for (var i = 0; i < liArray.length; i++) {
+            if ((liArray[i] == "English" && language1 == "") || liArray[i] == language1) {
+                $("#selectWebLanguage").attr("cus_value",language1);
+                $("#selectWebLanguage").html(liArray[i].val);
             }
         }
-     */
+
         if (genericAutoStart == "true") {
-            document.getElementById("checkboxStart").checked = true;
+            $("#autostart span:first").addClass("checkbox selected");
         } else {
-            document.getElementById("checkboxStart").checked = false;
+            $("#autostart span:first").addClass("checkbox");
         }
         if (servicesWebonlyLocal == true) {
-            document.getElementById("WebonlyLocal").checked = true;
+            $("#onlyloaclhost span:first").addClass("checkbox selected");
+        } else {
+            $("#onlyloaclhost span:first").addClass("checkbox");
         }
     } else if(infoType=="trackSubtitle"){
         //音轨字幕语言设置
@@ -256,10 +271,9 @@ function info(infoType) {
                     var support = data.result.hardCodecSupport;
 
                     if (support == true) {
-                        var setup = data.result.hardCodecSetup;
-
+                        $("#hardCodecSupport").addClass("able");
                     } else {
-                        //	document.getElementById("checkboxOpenTranscode").disabled = true;
+                        $("#hardCodecSupport").addClass("disable");
                     }
                 }
             }
@@ -267,17 +281,21 @@ function info(infoType) {
     } else if (infoType == eSettingType.mediaLibrary) {
         clearInterval(timer); //停止定时器
 
-        var selectMovieLaunage = document.getElementById("selectMovieLaunguage");
-        for (var i = 0; i < selectMovieLaunage.options.length; i++) {
-            if (selectMovieLaunage.options[i].value == defaultScraperLanguage) {
-                selectMovieLaunage.options[i].selected = true;
+        var liArray = $("#ulUpdateFrequency li");
+        $("#updateFrequency").innerText = "";
+        for (var i = 0; i < liArray.length; i++) {
+            if (liArray[i].getAttribute("cus_value") == libAutoUpdateTimeSpan) {
+                $("#updateFrequency").attr("cus_value",liArray[i].getAttribute("cus_value"));
+                $("#updateFrequency b").html(liArray[i].innerText);
             }
         }
 
-        var update = document.getElementById("updateTime");
-        for (var i = 0; i < update.options.length; i++) {
-            if (update.options[i].value == libAutoUpdateTimeSpan) {
-                update.options[i].selected = true;
+        liArray = $("#ulSubLanguage li");
+        $("#subLanguage").innerText = "";
+        for (var i = 0; i < liArray.length; i++) {
+            if (liArray[i].getAttribute("cus_value") == defaultScraperLanguage) {
+                $("#subLanguage").attr("cus_value",liArray[i].getAttribute("cus_value"));
+                $("#subLanguage b").html(liArray[i].innerText);
             }
         }
     }
@@ -287,10 +305,11 @@ function info(infoType) {
 function settingSave(actionType) {
     var reloadPage = '';
     if (actionType == "essentialInfo") {
-        var languageId = document.getElementById("selectWebLanguage");
-        var autoStart = document.getElementById("checkboxStart").checked;
-        var index = languageId.selectedIndex;
-        var language = languageId.options[index].value;
+
+        var autoStart = $("#autostart span:first").hasClass("checkbox selected");
+        //var index = languageId.selectedIndex;
+
+        var language = $("#selectWebLanguage").attr("cus_value");
 //		if (genericName == '') {
 //			if (language == "Chinese (Simple)") {
 //				genericName = "威动服务器";
@@ -301,7 +320,7 @@ function settingSave(actionType) {
 //			}
 //		}
 
-        var webonlyLocal = document.getElementById("onlyloaclhost").checked;
+        var webonlyLocal =  $("#onlyloaclhost span:first").hasClass("checkbox selected");
         // var webServicePort = '';
         for (var i = 0; i < settingInfo.length; i++) {
             if (settingInfo[i].key == "language.default") {
@@ -311,7 +330,7 @@ function settingSave(actionType) {
             }
         }
 
-        var str = '{\"webonlylocal\":' + webonlyLocal + ',\"webserver\":true,\"webserverpassword\":\"\",\"webserverusername\":\"\"}';
+        var str = '{\"webonlylocal\":' + webonlyLocal  +  ',\"webserver\":true,\"webserverpassword\":\"\",\"webserverusername\":\"\"}';
 
         vidonme.rpc.request({
             'context': this,
@@ -332,7 +351,7 @@ function settingSave(actionType) {
                 "val": autoStart + ""
             },
             'success': function(data) {
-
+                var str = '';
             }
         });
         vidonme.rpc.request({
@@ -357,11 +376,10 @@ function settingSave(actionType) {
 
             }
         });
-    } else if (actionType == "mediaLibrary") {
+    } else if (actionType == eSettingType.mediaLibrary) {
         reloadPage = true;
-        var libUpdateTime = document.getElementById("updateTime").value;
-        var scraperLanguage = document.getElementById("selectMovieLaunguage").value;
-        var mediaLibDiv = document.getElementById("mediaLibPrompt");
+        var libUpdateTime = $("#updateFrequency").attr("cus_value");
+        var scraperLanguage = $("#subLanguage").attr("cus_value");
 
         if (libUpdateTime == "0") {
             vidonme.rpc.request({
@@ -425,15 +443,16 @@ function settingSave(actionType) {
                         }, 1000);
                     } else {
                         window.setTimeout(function() {
-                            mediaLibDiv.innerHTML = "%210".toLocaleString();
+                         //   mediaLibDiv.innerHTML = "%210".toLocaleString();
+                            alert("time out")
                         }, 1000);
                     }
                 }
             }
         });
-    } else if (actionType == "transcoding") {
+    } else if (actionType == eSettingType.transcoding) {
         reloadPage = true;
-        var openTransCode = document.getElementById("checkboxOpenTranscode").checked;
+        var openTransCode = $("#opendecoding").hasClass("checkbox selected");
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetTranscodeOption',
