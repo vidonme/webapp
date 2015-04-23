@@ -18,7 +18,7 @@
 			fadeScrollbar: c || d || !a,
 			shrinkScrollbar: c || d || !a,
 			desktopCompatibility: false,
-			overflow: "hidden"		//	fixedScrollbar:false
+			overflow: "hidden",		//	fixedScrollbar:false
 			snap: true
 		};
 		if (typeof n == "object") {

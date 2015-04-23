@@ -138,7 +138,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .siderbar .vertical { height: 60px;}
 .siderbar dl{ margin-bottom:50px; font-size:16px;}
 .siderbar dt{ height:60px; line-height:30px; position:relative; width:180px}
-.siderbar dd{ height:60px; line-height:60px; cursor:pointer;padding-left:70px; width:130px;background:url(../images/spriteimg/iconimg.png) no-repeat;}
+.siderbar dd{ height:60px; line-height:60px; cursor:pointer;padding-left:70px; display:block;background:url(../images/spriteimg/iconimg.png) no-repeat;}
 
 .siderbar dd:hover{ background-color:#666}
 .siderbar dd.selected{ background-color:#3278cc;}
