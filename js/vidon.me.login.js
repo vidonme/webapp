@@ -13,12 +13,23 @@ $(function() {
 	})
 	
 	$("#loginbtn").click(function () {
+		$("#loginerr").text("");
 		var cn = $("#selectNationality").hasClass("selected");
 		var username = $("#user").val();
 		var userpass = $.md5($("#password").val());
+		var userpass2=$("#password").val();
 		
+		if(username=="" && userpass2==""){
+			$("#loginerr").text($.i18n.prop('index_175'));
+			}
+		else if(username!=""&& userpass2==""){
+			$("#loginerr").text($.i18n.prop('index_174'));
+			}
+		else if(username==""&& userpass!=""){
+			$("#loginerr").text($.i18n.prop('index_173'));
+			}
+		else{
 		showdiv('.loading', 3);
-		
 		vidonme.rpc.request({
 			'context': this,
 			'method': 'VidOnMe.LoginAuth',
@@ -27,16 +38,27 @@ $(function() {
 				"password": userpass,
 				"country":  cn == true ? "cn" : "oversea"
 			},
+			
 			'success': function(data) {
-				close_box(".loading", 3);
+			close_box(".loading", 3);
 				
 				if (data.result.ret) {
+					//$("#login_title").text($.i18n.prop('index_50'));
 					$("#login").hide();
 					$("#login_ok").show();
 				}
+				else{
+					$("#loginerr").text($.i18n.prop('index_176'));
+					}
 			}
 		});
+		}
+		
+		
 	})
+	$("#logoutbtn").click(function(){
+		LogoutAuthUser();
+		})
 })
 
 function CheckAuthUserInfo() {
@@ -49,7 +71,7 @@ function CheckAuthUserInfo() {
 			showdiv(".poplogin",1);
 			
 			if (data && data.result.ret) {
-				$("#login_title").text("User Information");
+				//$("#login_title").text("User Information");
 				$("#login").hide();
 				$("#login_ok").show();
 				
@@ -63,7 +85,7 @@ function CheckAuthUserInfo() {
 					$("#accout").text(data.result.username);
 				}
 			} else {
-				$("#login_title").text("User Login");
+				//$("#login_title").text($.i18n.prop('index_50'));
 				$("#login").show();
 				$("#login_ok").hide();
 			}
@@ -80,7 +102,7 @@ function LogoutAuthUser() {
 		'success': function(data) {
 			if (data && data.result.ret) {
 				$("#login_ok").hide();
-				$("#login_title").text("User Login");
+				//$("#login_title").text("User Login");
 				$("#login").show();
 			}
 		}
