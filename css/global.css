@@ -129,7 +129,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .setUp .addPathbtn{ width:36px; height:27px; display:block; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -118px; position:absolute; top:12px; right:30px;}
 .setUp .addPathbtn:hover{ background-position:-63px -118px;}
 .setUp .tips{ float:left; width:360px; padding:20px; margin-top:20px;}
-
+.setUp .tips a{ color:#3278cc; text-decoration:underline}
+.setUp .tips a:hover{ background:transparent; color:#f5fffb;} 
 
 /*图片展示*/
 .siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:80px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
@@ -160,7 +161,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .posterMenu .all a b{ font-weight:normal}
 .posterMenu .all a span{  display:inline-block; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -43px; width:28px; height:28px; margin-left:10px; line-height:28px;}
 .posterMenu .all a:hover span{ background-position:-93px -74px;}
-.posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX;}
+.posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX; font-size:14px;}
 .posterMenu .all ul li{ padding-left:10px;}
 .posterMenu p { text-align:center; line-height:90px; }
 .posterMenu a.backbtn { float:left; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -648px; display:block; height:90px; line-height:80px; padding-left:40px; margin-left:20px;}
@@ -168,7 +169,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .mCSB_scrollTools { z-index: 5; }
 .posterList { overflow: auto; position:absolute; top:90px; bottom:0; right:0px; left:20px; }
 .posterList .box { width: 180px; float: left; height:300px; }
-.posterList .box  .imgname{ padding-top:0; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis }
+.posterList .box  .imgname{ padding:0px 10px 0px 10px; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
 .posterList .img { margin: 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
   -moz-background-size: cover;
 	-webkit-background-size: cover;
