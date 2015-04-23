@@ -161,7 +161,7 @@ function PreDisplay(obj) {
 		//$('#images').removeClass('selected');
 		//$('#movie').removeClass('selected');
 		
-		obj.parent().addClass('selected');
+		obj.parents(".verticaldd").addClass('selected');
 
 		var count = 0;
 		var id = obj.attr("id");
@@ -457,13 +457,9 @@ function __GetMovies(start, end, state) {
 	if ( g_ShowRecentMedia ) {
 		getMethod = "VideoLibrary.GetRecentlyAddedMovies";
 		obj.limits = new Limits(__start, __end);
-		//obj.sort = (new Sort()).byDateAdded();
-		// obj.filter = (new Filter()).byCountry("United States of America");
-	}
-	else{
+	} else {
 		obj.limits = new Limits(__start, __end);
 		obj.sort = (new Sort()).byDateAdded();
-		// obj.filter = (new Filter()).byCountry("United States of America");
 	}
 
 	obj.properties = new Array();
@@ -521,8 +517,16 @@ function __GetTvshows(start, end, state) {
 	var __end   = arguments[1] ? end : 20;
 	
 	var obj = new JsonObject();
+	var getMethod = '';
+
+	if (g_ShowRecentMedia) {
+		getMethod = 'VideoLibrary.GetRecentlyAddedTVShows';
+	} else {
+		getMethod = 'VideoLibrary.GetTVShows';
+		obj.sort = (new Sort()).byDateAdded();
+	}
+
 	obj.limits = new Limits(__start, __end);
-	obj.sort = (new Sort()).byDateAdded();
 	
 	obj.properties = new Array();
 	obj.properties.push("file");
@@ -535,7 +539,7 @@ function __GetTvshows(start, end, state) {
 	
 	vidonme.rpc.request({
 		'context': this,
-		'method': 'VideoLibrary.GetTVShows',
+		'method': getMethod,
 		'params': obj,
 		'success': function(data) {
 			if (data && data.result) {
@@ -586,17 +590,26 @@ function __GetPrivVideos(start, end, state) {
 	var __end   = arguments[1] ? end : 20;
 	
 	var obj = new JsonObject();
+	var getMethod = '';
+
 	obj.limits = new Limits(__start, __end);
-	obj.sort = (new Sort()).byDateAdded();
-	
-	obj.properties = new Array();
-	obj.properties.push("file");
-	obj.properties.push("thumbnail");
-	obj.properties.push("title");
+
+	if (g_ShowRecentMedia) {
+		getMethod = 'VideoLibrary.GetRecentlyAddedPrivVideos';
+		
+	} else {
+		getMethod = 'VideoLibrary.GetPrivVideos';
+
+		obj.sort = (new Sort()).byDateAdded();
+		obj.properties = new Array();
+		obj.properties.push("file");
+		obj.properties.push("thumbnail");
+		obj.properties.push("title");
+	}
 	
 	vidonme.rpc.request({
 		'context': this,
-		'method': 'VideoLibrary.GetPrivVideos',
+		'method': getMethod,
 		'params': obj,
 		'success': function(data) {
 			if (data && data.result) {

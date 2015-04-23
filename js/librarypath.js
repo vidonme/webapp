@@ -31,6 +31,7 @@
 		function ShowPageAddNetShare(host) {
 				var title = "";
 				$("#txtNetShareSrcName").focus();
+				$("#txtNetShareDomain").val("WORKGROUP");
 				showdiv(".addNetwork",3);	
 				title = $.i18n.prop('index_28');;
 				$("#popAddNetworkH3").text(title);							
@@ -141,18 +142,18 @@
           var displaypath = handleUrl(strpath, true, true);
           
           strpath = item.path.replace(/\\/g, '\\\\');
-          itemhtml = '<li onClick="ShowPageAddOnePath(\'' + escape(strpath) + '\',\'' + escape(displaypath) + '\')" title=' + displaypath + '>' + drivetype + ' ' + displaypath + '</li>';
+          itemhtml = '<li onClick="ShowPageAddOnePath(\'' + escape(strpath) + '\',\'' + escape(displaypath) + '\')" title="' + displaypath + '">' + drivetype + ' ' + displaypath + '</li>';
 					$("#popDiskblock").append(itemhtml);
       }, this));
 			
 			
 			//alert(html);
 			langua = $.i18n.prop('index_22');
-			html = '<li onClick="ShowPageAddOnePath(\'' + "smb://" + '\',\'' + "" + '\')">' + langua + '</li>';
+			html = '<li title="'+ langua + '" onClick="ShowPageAddOnePath(\'' + "smb://" + '\',\'' + "" + '\')">' + langua + '</li>';
 			$("#popDiskblock").append(html);
 			
 			langua = $.i18n.prop('index_23');
-			html = '<li onClick="ShowPageAddOnePath(\'' + "nfs://" + '\',\'' + "" + '\')">' + langua + '</li>';
+			html = '<li title="'+ langua + '" onClick="ShowPageAddOnePath(\'' + "nfs://" + '\',\'' + "" + '\')">' + langua + '</li>';
 			$("#popDiskblock").append(html);
 						
 			var note = $.i18n.prop('index_24');					
@@ -205,7 +206,7 @@
           }
           
           //alert("folderpath 2=" + itempath);              
-					html = '<div class="folder"> <a onClick="ShowPageAddOnePath(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title=' + item.title + '>' + item.title + '</a> </div>';
+					html = '<div class="folder"> <a onClick="ShowPageAddOnePath(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title="' + item.title + '">' + item.title + '</a> </div>';
 					$("#listpath").append(html);
       }, this));
 

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Images</title>
+<title>Index</title>
+<link rel="shortcut icon" href="/favicon.ico" >
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/vidon.me.launcher.js"></script>
 <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -17,7 +18,7 @@
     <div class="movie">
       <div class="posterMenu"><a href="javascript:;" class="backbtn" id="backtotv" style="display:none;" title="&larr;&larr;"></a>
         <div  class="posterMenubtn">
-          <div id="dropdown2" class="dropdown all"> <a href="javascript:;" class="input_dropdown" trans_title="index_45"><b class="font" cus_value="0" trans_value="index_45">全部</b><span></span></a>
+          <div id="dropdown2" class="dropdown all" style="float:right;"> <a href="javascript:;" class="input_dropdown" trans_title="index_45"><b class="font" cus_value="0" trans_value="index_45">全部</b><span></span></a>
             <ul class="fillet10">
               <li cus_value="0" trans_value="index_45">全部</li>
               <li cus_value="1" trans_value="index_46">最近添加</li>
@@ -152,7 +153,7 @@
           whileScrollingInterval:10 
         });
 		//添加模拟滚动条
-		$("#selectedPath").mCustomScrollbar({
+		$("#selectedPathblock").mCustomScrollbar({
 		  autoHideScrollbar:true,
         });
 		$(".addPath .popDisk").mCustomScrollbar({
