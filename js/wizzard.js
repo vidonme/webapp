@@ -1,5 +1,5 @@
 
-		var g_CurLibId = 0;
+		var g_CurLibId = 2;
 		var g_CurLibraryType = "";		
 
 //=================PageInterface============================
