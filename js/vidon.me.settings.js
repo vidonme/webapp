@@ -977,16 +977,351 @@ function saveServerName() {
     });
 }
 
+
+function showUpgradeStatus(status){
+    $("#versionNew").attr("style", "display:none");
+    $("#versionFindNew").attr("style", "display:none");
+    $("#versionDown").attr("style", "display:none");
+    $("#versionDownFail").attr("style", "display:none");
+    $("#versionInstall").attr("style", "display:none");
+
+    if ( upgradeState == 0 ) {
+        
+    }
+    else if ( upgradeState == 1 ) {
+        // have new version
+        /*
+        data1.result.newversion = HandleVersion(data1.result.newversion);
+        data1.result.changes = data1.result.changes.replace(/\r\n/g, "<br//>");
+        genericNewVersion = data1.result.newversion;
+
+        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
+        <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
+        <ul id="">
+          <li>修改中文环境下升级失败问题</li>
+          <li>修复下载资源到移动端失败问题</li>
+        </ul>
+        */
+        $("#versionFindNew #curVersion").text( genericVersion);
+        $("#versionFindNew #newVersion").text( genericNewVersion );
+        showdiv("#versionFindNew");
+    }
+    else if ( upgradeState == 2 ) {
+        //already latest version
+        /*
+        <div  class="versionnew" id="versionNew" style="display:none">
+        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
+        <p  trans_value="index_142">当前已是最新版</p>
+        </div>
+        */
+
+        $("#versionNew #curVersion").text( genericVersion);
+        showdiv("#versionNew");
+    }
+    else if ( upgradeState == 3 ) {
+        //downloading
+        /*
+        cDiv.style.width = parseInt(data1.result.progress) * 4 + "px";
+        msgDiv.innerHTML = parseInt(data1.result.progress) + "%";
+
+        data1.result.newversion = HandleVersion(data1.result.newversion);
+        newVersion.innerHTML = data1.result.newversion;
+
+
+        <div  class="versiondown" id="versionDown"  style="display:none">
+          <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
+          <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
+          <div class="progreessbarblock">
+            <p  trans_value="index_145">正在下载</p>
+            <div class="progress">
+              <div class="progress-bar" style="width:40%"></div>
+            </div>
+            <P>40%</p>
+          </div>
+          <div class="clr"></div>
+          <p trans_value="index_146">升级中请不要退出程序</p>
+        </div>
+        */
+
+        $("#versionDown #curVersion").text( genericVersion);
+        $("#versionDown #newVersion").text( genericNewVersion );
+        $("#versionDown .progress-bar").attr( "style", "width:" + downloadProcess + "%" );
+        $("#versionDown #percent").text( downloadProcess + "%" );
+        
+        showdiv("#versionDown");
+    }
+    else if( upgradeState == 4 ){
+        // download finish
+
+    }
+    else if( upgradeState == 5 ){
+        // download failed
+        $("#versionDownFail #curVersion").text( genericVersion);
+        $("#versionDownFail #newVersion").text( genericNewVersion );
+        showdiv("#versionDownFail");
+    }
+    else if( upgradeState == 6 ){
+        // installing
+        
+        $("#versionInstall #curVersion").text( genericVersion);
+        $("#versionInstall #newVersion").text( genericNewVersion );
+        showdiv("#versionInstall");
+    }
+    else if( upgradeState == 7 ){
+        // install finish
+    }
+    else if( upgradeState == 8 ){
+        // cancel
+        $("#versionDownFail #curVersion").text( genericVersion);
+        $("#versionDownFail #newVersion").text( genericNewVersion );
+        showdiv("#versionDownFail");
+    }
+    else if( upgradeState == 9 ){
+        // install failed
+        $("#versionDownFail #curVersion").text( genericVersion);
+        $("#versionDownFail #newVersion").text( genericNewVersion );
+        showdiv("#versionDownFail");
+    }
+    else{
+
+    }
+
+}
+
+function startUpgrade(download) {
+    if (upgradeState == 1 && download != "true") {
+        upgradeState = 0;
+        rightInfo.html('');
+        upgrade(false);
+        return;
+    }
+
+    if (upgradeState == 0) {
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.Upgrade_GetState',
+            'params': [],
+            'success': function(data1) {
+                if (data1 && data1.result.state == "download") {
+                    clearInterval(downloadTimer); //停止定时器
+
+                    upgradeState = 3;
+                    upgrade(false);
+
+                }
+                else if (data1 && data1.result.state == "downloadfin") {
+                    upgradeState = 6;
+                    upgrade(false);
+                } else if (data1 && data1.result.state == "downloadfailed") {
+                    upgradeState = 5;
+                    upgrade();
+                }
+                else if (data1 && data1.result.state == "checkversionfailed") {
+                    upgradeState = 5;
+                    upgrade(false);
+                }
+                else if (data1 && data1.result.state == "install") {
+                    upgradeState = 6;
+                    upgrade(false);
+                } else if (data1 && data1.result.state == "installfin") {
+                    upgradeState = 7;
+                    upgrade(false);
+                } else if (data1 && data1.result.state == "installfailed") {
+                    upgradeState = 5;
+                    upgrade(false);
+                } else if (data1 && data1.result.state == "checkversionfin") {
+                    var waitTips = document.getElementById("waitTips");
+                    clearInterval(downloadTimer); //停止定时器
+                    if (data1.result.checkresult == "alreadynewversion") {
+                        upgradeState = 2;
+                        showUpgradeStatus();
+                    } else {
+                        upgradeState = 1;
+                        showUpgradeStatus();
+                    }
+
+                } else if (data1 && data1.result.state == "downloadcancel") {
+                    upgradeState = 8;
+                    showUpgradeStatus();
+                }
+            }
+        });
+    } else if (upgradeState == 1) {
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.Upgrade_Download',
+            'params': [],
+            'success': function(data) {
+                if (data && data.result.ret == true) {
+                    upgradeState = 3;
+                    vidonme.rpc.request({
+                        'context': this,
+                        'method': 'VidOnMe.Upgrade_GetState',
+                        'params': [],
+                        'success': function(data1) {
+                            data1.result.newversion = HandleVersion(data1.result.newversion);
+
+                        }
+                    });
+
+                    downloadTimer = window.setInterval(function() {
+                        vidonme.rpc.request({
+                            'context': this,
+                            'method': 'VidOnMe.Upgrade_GetState',
+                            'params': [],
+                            'success': function(data1) {
+                                showUpgradeStatus(1);
+
+                                if (data1 && data1.result.state == "downloadfin") {
+                                    clearInterval(downloadTimer); //停止定时器
+                                    upgradeState = 4;
+                                    showUpgradeStatus();
+
+                                    vidonme.rpc.request({
+                                        'context': this,
+                                        'method': 'VidOnMe.Upgrade_Install',
+                                        'params': [],
+                                        'success': function(data) {
+                                            if (data && data.result.ret == true) {
+                                                upgradeState == 6;
+                                                upgrade(false);
+                                            }
+                                        }
+                                    });
+                                }
+                                if (data1 && data1.result.state == "downloadfailed") {
+                                    clearInterval(downloadTimer); //停止定时器
+                                    upgradeState = 5;
+                                    showUpgradeStatus();
+                                }
+                            }
+                        });
+                    }, 2000);
+                } else {
+                    upgradeState = 5;
+                    showUpgradeStatus();
+                }
+            }
+        });
+    } else if (upgradeState == 2) {
+        showUpgradeStatus();
+    } else if (upgradeState == 3) {
+        clearInterval(downloadTimer); //停止定时器
+        showUpgradeStatus();
+
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.Upgrade_GetState',
+            'params': [],
+            'success': function(data1) {
+
+                genericNewVersion = HandleVersion(data1.result.newversion);
+            }
+        });
+
+        downloadTimer = window.setInterval(function() {
+
+            vidonme.rpc.request({
+                'context': this,
+                'method': 'VidOnMe.Upgrade_GetState',
+                'params': [],
+                'success': function(data1) {
+
+                    if (data1 && data1.result.state == "downloadcancel") {
+                        clearInterval(downloadTimer); //停止定时器
+                        upgradeState = 8;
+                        showUpgradeStatus();
+                        return;
+                    }
+
+                    downloadProcess = parseInt(data1.result.progress);
+
+                    if (data1 && data1.result.state == "downloadfin") {
+                        clearInterval(downloadTimer); //停止定时器
+                        upgradeState = 4;
+                        showUpgradeStatus();
+                        vidonme.rpc.request({
+                            'context': this,
+                            'method': 'VidOnMe.Upgrade_Install',
+                            'params': [],
+                            'success': function(data) {
+                                if (data && data.result.ret == true) {
+                                    upgradeState == 6;
+                                    upgrade(false);
+                                }
+                            }
+                        });
+                    }
+                    if (data1 && data1.result.state == "downloadfailed") {
+                        clearInterval(downloadTimer); //停止定时器
+                        upgradeState = 5;
+                        showUpgradeStatus();
+                    }
+                }
+            });
+
+        }, 2000);
+    } else if (upgradeState == 4 || upgradeState == 6) {
+        showUpgradeStatus();
+        downloadTimer = window.setInterval(function() {
+            vidonme.rpc.request({
+                'context': this,
+                'method': 'VidOnMe.Upgrade_GetState',
+                'params': [],
+                'success': function(data1) {
+                    if (data1 && data1.result.state == "installfin" || data1.result.state == "checkversionfin") {
+                        clearInterval(downloadTimer); //停止定时器
+                        upgradeState = 7;
+                        showUpgradeStatus();
+                    }
+
+                    if (data1 && data1.result.state == "installfailed") {
+                        clearInterval(downloadTimer); //停止定时器
+                        upgradeState = 9;
+                        showUpgradeStatus();
+                    }
+                }
+            });
+        }, 30000);
+    } else if (upgradeState == 5) {
+        showUpgradeStatus();
+
+    } else if (upgradeState == 7) {
+        showUpgradeStatus();
+    }
+}
+
+function showSettingPage(pageIndex){
+    if ( pageIndex == 0 ) {
+
+    }
+    else if( pageIndex == 1 ){
+
+    }
+    else if( pageIndex == 2 ){
+        
+    }
+    else if( pageIndex == 3 ){
+        
+    }
+    else if( pageIndex == 4 ){
+        //startUpgrade();
+        upgradeState = 3;
+        showUpgradeStatus();
+    }
+}
+
 var settingInfo = ''; //设置信息
 var serverInfo = ''; //服务器参数
 var rightInfo = $('<div></div>');
 rightInfo.addClass('main');
 var timer = ''; //定时器
 var downloadTimer = '';
-var genericVersion = ''; //服务器名称、服务器版本
-var genericNewVersion = '';
+var genericVersion = '1234'; //服务器名称、服务器版本
+var genericNewVersion = '4567';
 var updateAuto = '', updateWeekday = '', updateDaytime = '';
 var hasCommitUpdate = true;
-var upgradeState = 0; //0未检查更新 1 有新版本  2没有新版本  3正在下载新版本 4 下载成功 5 下载失败、安装失败  6 正在安装 7安装成功 8取消升级
+var upgradeState = 0; //0未检查更新 1 有新版本  2没有新版本  3正在下载新版本 4 下载成功 5 下载失败  6 正在安装 7安装成功 8取消升级 9 安装失败
 var Language = '';
 var genericName = '';
+var downloadProcess = 60;

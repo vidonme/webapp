@@ -829,8 +829,14 @@ function FreshMediasCount(){
 	$('#mediatype').html(str);
 }
 
-window.onload = function() {
-	GetMovies();
+var global_image_url = 'http://localhost:32080/image/';
+var global_count_timer = -1;
+var g_selected_type = "movie";
+var g_ShowRecentMedia = false;
+
+$(function(){
+	//GetMovies();
+	GetTvshows();
 	RefreshMediaLibrary("commercial");
 
 	$("#dropdown2 li").click( function(){
@@ -841,24 +847,5 @@ window.onload = function() {
 
 		FreshMedias();
 	} );
-	
-	vidonme.rpc.request({
-		        'context': this,
-		        'method': 'VidOnMe.IsWizzardEnabled',
-		        'params': {},
-		        'success': function(data) {
-					if( data ){
-						if( data.result.ret == true ){
-							location.assign("guide.html");
-							window.location="guide.html";
-							location.href="guide.html";
-						}
-					}
-			    }
-	    });
-}
+})
 
-var global_image_url = 'http://localhost:32080/image/';
-var global_count_timer = -1;
-var g_selected_type = "movie";
-var g_ShowRecentMedia = false;

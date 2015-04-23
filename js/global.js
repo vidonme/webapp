@@ -72,7 +72,8 @@ $(function(){
 	$("#setupmenu li").click(function(){
 		$(this).addClass("selected").siblings().removeClass("selected");
 		var index=$(this).index();
-		$("#setupcontent .setupcon").eq(index).addClass("show").siblings().removeClass("show");		
+		$("#setupcontent .setupcon").eq(index).addClass("show").siblings().removeClass("show");
+		showSettingPage( index );
 	})
 	//自动升级
 	$("#autostart .checkbox").click(function(){

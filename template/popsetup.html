@@ -157,51 +157,44 @@
             <li cus_value="23" trans_value="index_140">23:00</li>   
           </ul>
         </div>
+        <a href="javascript:;"  class="fl btn-small btn-blue" id="btnSaveAutoUpgrade" trans_value="index_81">保存</a> <a href="javascript:;"  class="fl btn-small btn-white" id="btnCancelAutoUpgrade" trans_value="index_25">取消</a>
         <div class="clr"></div>
       </div>
       <h4  trans_value="index_141">当前版本</h4>
-      <div  class="versionnew" id="versionNew" style="display:none">
-        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
+      <div  class="versionnew" id="versionNew" status="2" style="display:none">
+        <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
         <p  trans_value="index_142">当前已是最新版</p>
       </div>
-      <div  class="versionfindnew" id="versionFindNew"   style="display:none">
-        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
-        <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
-        <ul id="">
+      <div  class="versionfindnew" id="versionFindNew" status="1" style="display:none">
+        <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
+        <p><span trans_value="index_143">发现新版本:</span><span id="newVersion">v3.0.0.1</span></p>
+        <ul id="changelog">
           <li>修改中文环境下升级失败问题</li>
           <li>修复下载资源到移动端失败问题</li>
         </ul>
         <a href="javascript:;" class="btn-small btn-blue" trans_value="index_144">立即下载</a> </div>
-      <div  class="versiondown" id="versionDown"  style="display:none">
-        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
-         <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
-        <div class="progreessbarblock">
-        
-          <p  trans_value="index_145">正在下载</p>
-          <div class="progress">
-            <div class="progress-bar" style="width:40%"></div>
+      <div  class="versiondown" id="versionDown" status="3" style="display:none">
+          <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
+          <p><span trans_value="index_143">发现新版本:</span><span id="newVersion">v3.0.0.1</span></p>
+          <div class="progreessbarblock">
+            <p  trans_value="index_145">正在下载</p>
+            <div class="progress">
+              <div class="progress-bar" style="width:40%"></div>
+            </div>
+            <P id="percent">40%</p>
           </div>
-          <P>40%</p>
-        </div>
-        <div class="clr"></div>
-        <p trans_value="index_146">升级中请不要退出程序</p>
+          <div class="clr"></div>
+          <p trans_value="index_146">升级中请不要退出程序</p>
       </div>
-      <div  class="versiondownfail" id="versionDownFail" style="display:none">
-        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
+      <div  class="versiondownfail" id="versionDownFail" status="5" style="display:none">
+        <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
          <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
         <P trans_value="index_156">对不起，下载失败…</p>
         <P trans_value="index_157">您还可以到我们的官网去下载最新版本：<a href="http://www.vidon.me/vidon_server.htm">http://www.vidon.me/vidon_server.htm</a></p>
       </div>
-      <div  class="versioninstall" id="versionInstall">
-        <p><span trans_value="index_149">威动服务器: </span><span>v2.0.0.1稳定版</span></p>
-         <p><span trans_value="index_143">发现新版本:</span><span>v3.0.0.1</span></p>
-        <div class="progreessbarblock">
-           <p  trans_value="index_145">正在下载</p>
-          <div class="progress">
-            <div class="progress-bar" style="width:100%"></div>
-          </div>
-          <P>100%</p>
-        </div>
+      <div  class="versioninstall" id="versionInstall" status="6">
+        <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
+        <p><span trans_value="index_143">发现新版本:</span><span id="newVersion">v3.0.0.1</span></p>
         <div class="clr"></div>
         <p trans_value="index_147">下载完成，安装中…</p>
         <p trans_value="index_148">安装完成后，软件会为您弹出新的web管理界面</p>
