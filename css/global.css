@@ -89,7 +89,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .btn-blue { background:#3278cc; color:#f5fffb }
 .btn-blue:hover { color:#f5fffb; background:#0066cc}
 .btn-white { background:#d3d3d3; color:#171916 }
-
+.btn-disable,.btn-disable:hover { background:#535353; color:#171916 }
 .btn-white:hover { color:#171916 ; background:#f5fffb}
 .btn-text{font-size:18px; color:#f5fffb; margin-top:10px;}
 .btn-text:hover{ color:#f5fffb; }
@@ -124,8 +124,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .setUp input.btn { width:auto; border:none; }
 .setUp .selectedMedia{ margin-top:50px;}
 .setUp .selectedMedia a.commVideo,.setUp .selectedMedia a.perMedia { display:block; width:200px; height:180px; text-align:center; float:left; padding-top:20px; margin:0px 100px;}
-.selectedMedia a.selected { background:#3278cc; color:#f5fffb}
-.selectedMedia a:hover{color:#f5fffb}
+.selectedMedia a:hover{color:#f5fffb; background:#666;}
+.selectedMedia a.selected { background:#3278cc url(/images/guide/gou.png) no-repeat right bottom; color:#f5fffb}
 .setUp .addPathbtn{ width:36px; height:27px; display:block; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -118px; position:absolute; top:12px; right:30px;}
 .setUp .addPathbtn:hover{ background-position:-63px -118px;}
 .setUp .tips{ float:left; width:360px; padding:20px; margin-top:20px;}
@@ -222,7 +222,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .addNetwork  p { margin:20px 0; }
 /*弹出层添加源*/
 .addVideo { width:800px; min-height:400px; }
-.addVideo .selectedPath{ height:360px; overflow:auto}
+.addVideo .selectedPathblock{ height:360px; overflow:auto}
 .addVideo .selectedPath li{ height:40px; line-height:40px; cursor:pointer; background:#696969; padding-left:10px; width:710px;}
 .addVideo .selectedPath li.even{ background:#4f4d4d}
 .addVideo .selectedPath li.hover{ background:#a9a9a9}
