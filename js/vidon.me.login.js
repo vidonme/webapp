@@ -38,7 +38,6 @@ $(function() {
 				"password": userpass,
 				"country":  cn == true ? "cn" : "oversea"
 			},
-			
 			'success': function(data) {
 			close_box(".loading", 3);
 				
@@ -48,7 +47,7 @@ $(function() {
 					$("#login_ok").show();
 				}
 				else{
-					$("#loginerr").text($.i18n.prop('index_176'));
+					$("#loginerr").text($.i18n.prop('index_35'));
 					}
 			}
 		});

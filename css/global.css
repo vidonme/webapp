@@ -103,7 +103,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .headerMenu a.login{ background-position:-67px -164px;}
 .headerMenu a.login:hover{ background-position:-137px -164px;}
 /*向导主体部分*/
-.content { position:relative; width:800px; margin:0px auto; padding:35px 90px; }
+.content { position:relative; width:800px; margin:0px auto; padding:35px 90px; color:#ccc; }
 .guideMenu { margin-bottom:60px; }
 .guideMenu li { float:left; font-size:22px; line-height:42px; }
 .guideMenu li.linethrough { text-decoration:line-through; width:80px; height:22px; border-bottom:#d3d3d3 solid 1px; margin:0px 20px; }
@@ -118,7 +118,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .slide.show { display:block; }
 .int { margin-top:60px; }
 .setUp p{ font-size:18px;}
-.setUp h3 { font-size:28px; border-left:10px solid #3278cc; padding-left:20px; font-weight:normal; color:#f5fffb; margin-bottom:45px; }
+.setUp h3 { font-size:28px; border-left:10px solid #3278cc; padding-left:20px; font-weight:normal; margin-bottom:45px; }
 .setUp .btn { float:right; margin-top:80px; }
 .setUp .btn.fl { float:left; }
 .setUp input.btn { width:auto; border:none; }
@@ -245,7 +245,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 /*登陆框*/
 .poplogin{ width:800px; min-height:500px;}
 .poplogin .int{ margin-top:40px;}
-.poplogin .loginblock{ margin-left:20px; width:650px;}
+.poplogin .loginblock{ margin-left:20px; width:650px; position:relative}
+.poplogin .loginblock p.err{ position:absolute;top:-40px; left:170px; color:#f00;}
 .poplogin input{ width:440px; height:14px; line-height:14px; padding:13px 0px 13px 10px;}
 .poplogin label{ font-size:18px; width:150px; text-align:right; margin-right:20px; display:inline-block; line-height:40px;}
 .poplogin .submitbtn{ border:none; width:auto; float:right; margin-top:40px; margin-right:28px; font-size:18px; height:40px; line-height:40px; width:150px; text-align:center; padding:0;}
