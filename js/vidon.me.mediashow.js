@@ -848,8 +848,7 @@ var g_selected_type = "movie";
 var g_ShowRecentMedia = false;
 
 $(function(){
-	//GetMovies();
-	GetTvshows();
+	GetMovies();
 	RefreshMediaLibrary("commercial");
 
 	$("#dropdown2 li").click( function(){

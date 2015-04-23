@@ -1324,8 +1324,7 @@ function showSettingPage(pageIndex){
         
     }
     else if( pageIndex == 4 ){
-        //startUpgrade();
-        upgradeState = 3;
+        startUpgrade();
         showUpgradeStatus();
     }
 }

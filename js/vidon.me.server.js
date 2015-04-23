@@ -10,7 +10,7 @@ function getLastScraperResult(){
 		},
 		'success': function(data) {
 			if ( data ) {
-				var tips = '<p>' + "The last scraper result is {0}/{0}" + '</p>';
+				var tips = '<p>' + $.i18n.prop('index_44') + '</p>';
 				tips = tips.format( data.result.total.failed_amounts, data.result.total.success_amounts );
 				$(".movieTips").html( tips );
 				$("#fresh").removeClass("loading");
@@ -49,15 +49,15 @@ function getScraperStatus() {
 
 				var tips;
 				if ( status == "ready" ) {
-					tips = '<p>' + "Server is ready for scanning" + '<p>';
+					tips = '<p>' + $.i18n.prop('index_42') + '<p>';
 				}
 				else if ( status == "scanning" ) {
-					tips = '<p>' + "Server is scanning" + '<p>';
+					tips = '<p>' + $.i18n.prop('index_42') + '<p>';
 					g_ScrapingNum = 0;
 					g_FreshSeconds = 0;
 				}
 				else if ( status == "scraping" ) {
-					tips = '<p>' + "Server is scraping {0}/{1}" + '<p>';
+					tips = '<p>' + $.i18n.prop('index_43') + '<p>';
 					tips = tips.format( data.result.total.finished, data.result.total.amounts );
 
 					if ( g_FreshSeconds > 10 && g_ScrapingNum != data.result.total.finished ) {
