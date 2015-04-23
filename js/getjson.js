@@ -45,6 +45,7 @@
 		
    	function RequestAddLibraryPath(libid,mediapath){
   			//²ÎÊýÅÐ¶Ï
+  			if(!libid || !mediapath) return;
   			
   			//server½»»¥
         vidonme.rpc.request({

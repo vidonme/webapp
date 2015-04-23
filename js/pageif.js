@@ -101,6 +101,7 @@
 		//主页增加路径
 	function commitAddOneLibPath(){
 		  var mediapath = $("#addSrcPath").val();
+		  if (!mediapath) return;		  
 		  RequestAddLibraryPath(g_CurLibId,mediapath);
 			var html = '<li index="0"><span class="delete"></span><span class="showpath">'+ mediapath +'</span></li>'
 			$("#selectedPath").append(html);		  
