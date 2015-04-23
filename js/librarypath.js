@@ -131,11 +131,12 @@
 	function cbHandleDiskList(data) {
 			var itemhtml 			= "";		
       var langua 				= "";	
-
+      
+			$("#popDiskblock").html("");
+			
       if(!checkResponse(data))
 					return;
 
-			$("#popDiskblock").html("");
       $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
           var strpath 		= removeslashAtEnd(item.path);
           var drivetype 	= getdrivetypename(item.drivetype);
