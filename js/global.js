@@ -80,6 +80,13 @@ $(function(){
 		$(".autoupgrade").toggleClass("disable");
 		$(".autoupgrade .dropdown").toggleClass("disable");
 	})
+	//按钮有灰色变亮
+	$("#selectedMedia a").click(function(){
+		$("#setUp3btn").removeClass("btn-disable").addClass("btn-blue");
+		})
+	$("#btnAddLibPathOK").click(function () {
+			$("#btnWzdOK").removeClass("btn-disable").addClass("btn-blue");
+		})
 		
 })
 

@@ -88,8 +88,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .btn-small{ height:40px; line-height:40px; padding:0px 30px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; display:inline-block; font-size:18px;}
 .btn-blue { background:#3278cc; color:#f5fffb }
 .btn-blue:hover { color:#f5fffb; background:#0066cc}
-.btn-white { background:#d3d3d3; color:#171916 }
-
+.btn-white { background:#d3d3d3; color:#171916 ; }
+.btn-disable,.btn-disable:hover { background:#535353; color:#171916;cursor:default }
 .btn-white:hover { color:#171916 ; background:#f5fffb}
 .btn-text{font-size:18px; color:#f5fffb; margin-top:10px;}
 .btn-text:hover{ color:#f5fffb; }
@@ -124,12 +124,13 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .setUp input.btn { width:auto; border:none; }
 .setUp .selectedMedia{ margin-top:50px;}
 .setUp .selectedMedia a.commVideo,.setUp .selectedMedia a.perMedia { display:block; width:200px; height:180px; text-align:center; float:left; padding-top:20px; margin:0px 100px;}
-.selectedMedia a.selected { background:#3278cc; color:#f5fffb}
-.selectedMedia a:hover{color:#f5fffb}
+.selectedMedia a:hover{color:#f5fffb; background:#666;}
+.selectedMedia a.selected { background:#3278cc url(/images/guide/gou.png) no-repeat right bottom; color:#f5fffb}
 .setUp .addPathbtn{ width:36px; height:27px; display:block; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -118px; position:absolute; top:12px; right:30px;}
 .setUp .addPathbtn:hover{ background-position:-63px -118px;}
 .setUp .tips{ float:left; width:360px; padding:20px; margin-top:20px;}
-
+.setUp .tips a{ color:#3278cc; text-decoration:underline}
+.setUp .tips a:hover{ background:transparent; color:#f5fffb;} 
 
 /*图片展示*/
 .siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:80px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
@@ -160,7 +161,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .posterMenu .all a b{ font-weight:normal}
 .posterMenu .all a span{  display:inline-block; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -43px; width:28px; height:28px; margin-left:10px; line-height:28px;}
 .posterMenu .all a:hover span{ background-position:-93px -74px;}
-.posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX;}
+.posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX; font-size:14px;}
 .posterMenu .all ul li{ padding-left:10px;}
 .posterMenu p { text-align:center; line-height:90px; }
 .posterMenu a.backbtn { float:left; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -648px; display:block; height:90px; line-height:80px; padding-left:40px; margin-left:20px;}
@@ -168,7 +169,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .mCSB_scrollTools { z-index: 5; }
 .posterList { overflow: auto; position:absolute; top:90px; bottom:0; right:0px; left:20px; }
 .posterList .box { width: 180px; float: left; height:300px; }
-.posterList .box  .imgname{ padding-top:0; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis }
+.posterList .box  .imgname{ padding:0px 10px 0px 10px; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
 .posterList .img { margin: 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
   -moz-background-size: cover;
 	-webkit-background-size: cover;
@@ -208,7 +209,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 
 .addPath .right .folder,.addPath .right .back{ height:30px;}
 .addPath .right .back a{ display:block; height:30px; background:url(../images/back.png) no-repeat 10px 7px; padding-left:46px; line-height:30px; }
-.addPath .right .folder a{ display:block; height:30px; background:url(../images/folder.png) no-repeat 10px 6px; padding-left:46px; line-height:30px; }
+.addPath .right .folder a{ display:block; height:30px; background:url(../images/folder.png) no-repeat 10px 6px; padding-left:46px; line-height:30px;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis }
 .addPath .right .folder a:hover,.addPath .right .back a:hover{ background-color:#696969; color:#d3d3d3}
 .addPath  .btn-small { margin-top:30px;}
 
@@ -222,7 +223,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .addNetwork  p { margin:20px 0; }
 /*弹出层添加源*/
 .addVideo { width:800px; min-height:400px; }
-.addVideo .selectedPath{ height:360px; overflow:auto}
+.addVideo .selectedPathblock{ height:360px; overflow:auto}
 .addVideo .selectedPath li{ height:40px; line-height:40px; cursor:pointer; background:#696969; padding-left:10px; width:710px;}
 .addVideo .selectedPath li.even{ background:#4f4d4d}
 .addVideo .selectedPath li.hover{ background:#a9a9a9}

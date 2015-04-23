@@ -1,6 +1,6 @@
 
 		var g_CurLibId = 0;
-		var g_CurLibraryType = "commercial";		
+		var g_CurLibraryType = "";		
 
 //=================PageInterface============================
 		function cbSetLibraryID(data,mediatype){
@@ -35,6 +35,7 @@
 			//Wizard页面增加路径
 	function commitAddOneLibPath(){
 		  var mediapath = $("#addSrcPath").val();
+		  if (!mediapath) return;
 		  close_box('.addPath',2);
 			$("#selectedPath").val(mediapath);
 	}
@@ -62,7 +63,7 @@
 				//alert("libID=" + libID + ",path=" + mediapath);
 				
 				if (!libID || !mediapath) {
-						alert("libID or Path is neccessary!");
+						//alert("libID or Path is neccessary!");
 						return;
 				}          
         
@@ -120,7 +121,7 @@
 			
 		$(".setUp3btn").click(function(){
 				if (!g_CurLibId) {
-						RequestGetLibraries("commercial");
+						return;
 				}
 				
 				$("#selectedPath").val("");
