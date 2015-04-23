@@ -301,6 +301,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .popsetup table td.col1,.popsetup table td.col2{ border-right:#f5fffb solid 1px;}
 .popsetup table .btn-small{ height:28px; line-height:28px; font-size:14px;}
 .popsetup p.disablep{ display:none}
+
 .setupcon .disable p{ color:#535353}
 .setupcon .disable .btn-small{ background:#535353; cursor:default; color:#171916}
 .setupcon .disable .btn-small:hover{background:#535353; color:#171916}
