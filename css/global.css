@@ -337,3 +337,5 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 
 /*phpto*/
 .photoblock{ width:720px; margin:100px auto 0px auto;}
+
+.loading { width:128px; height:128px; background:#fff; position:absolute;z-index:6; background:url(../images/server_loading.gif) no-repeat; display:none; }
