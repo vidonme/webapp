@@ -88,8 +88,8 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .btn-small{ height:40px; line-height:40px; padding:0px 30px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; display:inline-block; font-size:18px;}
 .btn-blue { background:#3278cc; color:#f5fffb }
 .btn-blue:hover { color:#f5fffb; background:#0066cc}
-.btn-white { background:#d3d3d3; color:#171916 }
-.btn-disable,.btn-disable:hover { background:#535353; color:#171916 }
+.btn-white { background:#d3d3d3; color:#171916 ; }
+.btn-disable,.btn-disable:hover { background:#535353; color:#171916;cursor:default }
 .btn-white:hover { color:#171916 ; background:#f5fffb}
 .btn-text{font-size:18px; color:#f5fffb; margin-top:10px;}
 .btn-text:hover{ color:#f5fffb; }
@@ -208,7 +208,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 
 .addPath .right .folder,.addPath .right .back{ height:30px;}
 .addPath .right .back a{ display:block; height:30px; background:url(../images/back.png) no-repeat 10px 7px; padding-left:46px; line-height:30px; }
-.addPath .right .folder a{ display:block; height:30px; background:url(../images/folder.png) no-repeat 10px 6px; padding-left:46px; line-height:30px; }
+.addPath .right .folder a{ display:block; height:30px; background:url(../images/folder.png) no-repeat 10px 6px; padding-left:46px; line-height:30px;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis }
 .addPath .right .folder a:hover,.addPath .right .back a:hover{ background-color:#696969; color:#d3d3d3}
 .addPath  .btn-small { margin-top:30px;}
 
