@@ -105,7 +105,8 @@
 		    realpath 			= removeslashAtEnd(realpath);
 		    
 		   //alert("realpath="+realpath+", drivepath="+drivepath);
-		
+				
+				if()				
 		    vidonme.rpc.request({
 		        'context': this,
 		        'method': 'VidOnMe.GetDirectory',

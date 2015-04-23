@@ -170,14 +170,13 @@
       
       reqCnt--;
       //alert(reqCnt);
-      
-			if(!checkResponse(data))
-					return;
-
 			if(path == "")
-				return;			
-			
-			$("#listpath").html("");
+				return;	      
+				  
+			$("#listpath").html("");		      
+      
+			if(!checkResponse(data)){
+					return;
 
 			if ((drive != path) && (drive != handleUrl(path, true, true))) {
 						parentpath = getParentPath(path);
