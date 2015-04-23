@@ -89,3 +89,12 @@ function getScraperStatus() {
 		}
 	});
 } 
+
+
+function stopGetScrapingStatus(){
+	clearInterval( freshScraperStatus );
+	freshScraperStatus = -1;
+	$(".movieTips").hide();
+
+	FreshMedias();
+}

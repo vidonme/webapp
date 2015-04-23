@@ -174,7 +174,7 @@ function PreDisplay(obj) {
 			*/
 			FreshMediasCount();
 			
-			$('#fresh').attr('onclick', 'RefreshMediaLibrary("commercial")');
+			$('#fresh').attr('onclick', 'clickFreshBtn("commercial")');
 		} else if (id == "teleplay") {
 			/*
 			global_count_timer = setInterval(function() {
@@ -184,7 +184,7 @@ function PreDisplay(obj) {
 			*/
 			FreshMediasCount();
 
-			$('#fresh').attr('onclick', 'RefreshMediaLibrary("commercial")');
+			$('#fresh').attr('onclick', 'clickFreshBtn("commercial")');
 		} else if (id == "home_video") {
 			/*
 			global_count_timer = setInterval(function() {
@@ -194,7 +194,7 @@ function PreDisplay(obj) {
 			*/
 			FreshMediasCount();
 
-			$('#fresh').attr('onclick', 'RefreshMediaLibrary("personal")');
+			$('#fresh').attr('onclick', 'clickFreshBtn("personal")');
 		} else if (id == "images") {
 			/*
 			global_count_timer = setInterval(function() {
@@ -204,7 +204,7 @@ function PreDisplay(obj) {
 			*/
 			FreshMediasCount();
 
-			$('#fresh').attr('onclick', 'RefreshMediaLibrary("personal")');
+			$('#fresh').attr('onclick', 'clickFreshBtn("personal")');
 		} else {
 			;	
 		}
@@ -793,6 +793,17 @@ function GetPictures() {
 	g_selected_type = 'image';
 	PreDisplay($('#images'));
 	GetMediaInformation('image', true);
+}
+
+function clickFreshBtn( videoType ){
+	if(!$("#fresh").hasClass("loading")){
+		$("#fresh").addClass("loading");
+		RefreshMediaLibrary( videoType );
+	}
+	else{
+		$("#fresh").removeClass("loading");
+		stopGetScrapingStatus();
+	}
 }
 
 function FreshMedias(){
