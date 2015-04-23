@@ -2,12 +2,7 @@
 	var g_lastjqXhr = {};
 	
 	
-	$(function(){		
-//			$("#addPathbtn").click(function(){
-//					showdiv(".addPath",2);
-//					ShowPageAddOnePath('','');
-//			})
-			
+	$(function(){			
 			$("#btnAddLibPathOK").click(function(){
 				commitAddOneLibPath();
 			})
@@ -18,7 +13,7 @@
 			
 			$(".addPath .popDisk").mCustomScrollbar({
 	    		//scrollButtons:{enable:true},
-			  	autoHideScrollbar:true
+			  	autoHideScrollbar:true,
 	    });
 	        
 			$("#listpathblock").mCustomScrollbar({
@@ -104,7 +99,7 @@
 		function cbAddNetDrive(data,netpath){
 				//alert(netpath);
 				if(!checkResponse(data)) return;				
-				ShowPageAddOnePath(escape(netpath), false, escape(netpath));
+				ShowPageAddOnePath(escape(netpath), escape(netpath));
 		}
 
 
@@ -131,12 +126,11 @@
 	function cbHandleDiskList(data) {
 			var itemhtml 			= "";		
       var langua 				= "";	
-      
-			$("#popDiskblock").html("");
-			
+
       if(!checkResponse(data))
 					return;
 
+			$("#popDiskblock").html("");
       $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
           var strpath 		= removeslashAtEnd(item.path);
           var drivetype 	= getdrivetypename(item.drivetype);
@@ -171,13 +165,13 @@
       
       reqCnt--;
       //alert(reqCnt);
-			if(path == "")
-				return;	      
-				  
 			$("#listpath").html("");		      
       
-			if(!checkResponse(data)){
+			if(!checkResponse(data))
 					return;
+
+			if(path == "")
+				return;
 
 			if ((drive != path) && (drive != handleUrl(path, true, true))) {
 						parentpath = getParentPath(path);
