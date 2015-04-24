@@ -12,7 +12,7 @@
 		$("#addCommercialPath").click(function() {
 			g_CurLibId = g_CommercialVideoId;
 			g_CurLibraryType = "commercial";
-			var title = $.i18n.prop('index_17');;
+			var title = $.i18n.prop('index_17');
 			$("#popaddVideoH3").text(title);
 			ShowPageManageLibPath(g_CurLibId);
 		})
@@ -20,7 +20,7 @@
 		$("#addPermediaPath").click(function() {
 			g_CurLibId = g_PersonalVideoId;
 			g_CurLibraryType = "personal";
-			var title = $.i18n.prop('index_18');;
+			var title = $.i18n.prop('index_18');
 			$("#popaddVideoH3").text(title);
 			ShowPageManageLibPath(g_CurLibId);
 		})
@@ -29,10 +29,10 @@
 			var title = "";
 			showdiv(".addPath", 2);
 			if (g_CurLibraryType == "commercial") {
-				title = $.i18n.prop('index_17');;
+				title = $.i18n.prop('index_17');
 				$("#popAddPathH3").text(title);
 			} else {
-				title = $.i18n.prop('index_18');;
+				title = $.i18n.prop('index_18');
 				$("#popAddPathH3").text(title);
 			}
 

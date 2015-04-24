@@ -3,11 +3,6 @@
 
 
 	$(function() {
-		//			$("#addPathbtn").click(function(){
-		//					showdiv(".addPath",2);
-		//					ShowPageAddOnePath('','');
-		//			})
-
 		$("#btnAddLibPathOK").click(function() {
 			commitAddOneLibPath();
 		})
@@ -18,7 +13,7 @@
 
 		$(".addPath .popDisk").mCustomScrollbar({
 			//scrollButtons:{enable:true},
-			autoHideScrollbar: true
+			autoHideScrollbar: true,
 		});
 
 		$("#listpathblock").mCustomScrollbar({
@@ -101,7 +96,7 @@
 	function cbAddNetDrive(data, netpath) {
 		//alert(netpath);
 		if (!checkResponse(data)) return;
-		ShowPageAddOnePath(escape(netpath), false, escape(netpath));
+		ShowPageAddOnePath(escape(netpath), escape(netpath));
 	}
 
 
@@ -129,10 +124,10 @@
 		var itemhtml = "";
 		var langua = "";
 
-		$("#popDiskblock").html("");
-
 		if (!checkResponse(data))
 			return;
+
+		$("#popDiskblock").html("");
 
 		$.each($(data.result.filelist), jQuery.proxy(function(i, item) {
 			var strpath = removeslashAtEnd(item.path);
@@ -168,47 +163,47 @@
 
 		reqCnt--;
 		//alert(reqCnt);
-		if (path == "")
-			return;
 
 		$("#listpath").html("");
 
-		if (!checkResponse(data)) {
+		if (!checkResponse(data))
 			return;
 
-			if ((drive != path) && (drive != handleUrl(path, true, true))) {
-				parentpath = getParentPath(path);
-			}
+		if (path == "")
+			return;
 
-			if (parentpath.match('\'')) {
-				parentpath = parentpath.replace(/\'/g, '\\\''); // handle "'" in path, TODO: merge into another func
-			}
-
-			if (parentpath != "") {
-				//alert("parentpath 1=" + parentpath);
-				langua = $.i18n.prop('index_21_3');
-				html = '<div class="back"> <a onClick="ShowPageAddOnePath(\'' + escape(parentpath) + '\',\'' + escape(drive) + '\')">' + langua + '</a> </div>';
-				$("#listpath").append(html);
-			}
-
-			$.each($(data.result.filelist), jQuery.proxy(function(i, item) {
-				var itempath = item.path;
-
-				if (!itempath.match("/")) {
-					itempath = itempath.replace(/\\/g, '\\\\');
-				}
-
-				if (itempath.match('\'')) {
-					itempath = itempath.replace(/\'/g, '\\\'');
-				}
-
-				//alert("folderpath 2=" + itempath);              
-				html = '<div class="folder"> <a onClick="ShowPageAddOnePath(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title="' + item.title + '">' + item.title + '</a> </div>';
-				$("#listpath").append(html);
-			}, this));
-
-			display = path.replace(/\\\\/g, '\\');
-			display = handleUrl(display, true, true);
-			$("#addSrcPath").val(display);
+		if ((drive != path) && (drive != handleUrl(path, true, true))) {
+			parentpath = getParentPath(path);
 		}
+
+		if (parentpath.match('\'')) {
+			parentpath = parentpath.replace(/\'/g, '\\\''); // handle "'" in path, TODO: merge into another func
+		}
+
+		if (parentpath != "") {
+			//alert("parentpath 1=" + parentpath);
+			langua = $.i18n.prop('index_21_3');
+			html = '<div class="back"> <a onClick="ShowPageAddOnePath(\'' + escape(parentpath) + '\',\'' + escape(drive) + '\')">' + langua + '</a> </div>';
+			$("#listpath").append(html);
+		}
+
+		$.each($(data.result.filelist), jQuery.proxy(function(i, item) {
+			var itempath = item.path;
+
+			if (!itempath.match("/")) {
+				itempath = itempath.replace(/\\/g, '\\\\');
+			}
+
+			if (itempath.match('\'')) {
+				itempath = itempath.replace(/\'/g, '\\\'');
+			}
+
+			//alert("folderpath 2=" + itempath);              
+			html = '<div class="folder"> <a onClick="ShowPageAddOnePath(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title="' + item.title + '">' + item.title + '</a> </div>';
+			$("#listpath").append(html);
+		}, this));
+
+		display = path.replace(/\\\\/g, '\\');
+		display = handleUrl(display, true, true);
+		$("#addSrcPath").val(display);
 	}
