@@ -18,7 +18,7 @@
  *
  */
 
-(function (window) {
+(function(window) {
 
     var vidonme = window.vidonme || {};
 
@@ -27,11 +27,11 @@
             'contentType': 'application/json',
             'dataType': 'json',
             'type': 'POST',
-            'success': function () {
+            'success': function() {
                 $('#spinner').hide();
             }
         },
-        'request': function (options) {
+        'request': function(options) {
             var request_options = jQuery.extend({}, this.default_options, options);
             request_options.url = vidonme.core.JSON_RPC + '?' + options.method;
             request_options.data = JSON.stringify({
@@ -43,30 +43,28 @@
             return jQuery.ajax(request_options);
         }
     };
-	
-	
-	
-	
-	vidonme.http = {
+
+
+
+    vidonme.http = {
         'default_options': {
             'contentType': 'application/xml',
             'dataType': 'xml',
             'type': 'POST',
-            'success': function () {
+            'success': function() {
                 $('#spinner').hide();
             }
         },
-        'request': function (options) {
+        'request': function(options) {
             var request_options = jQuery.extend({}, this.default_options, options);
             //request_options.url = "file/http://localhost:31040/cmd/param?command=GetChannels";//vidonme.core.JSON_RPC ;
-			 request_options.url ="file/"+encodeURIComponent("http://localhost:31040/cmd/param?command=GetChannels");
-           
+            request_options.url = "file/" + encodeURIComponent("http://localhost:31040/cmd/param?command=GetChannels");
+
             return jQuery.ajax(request_options);
         }
     };
-	
+
 
     window.vidonme = vidonme;
 
 }(window));
-

@@ -1,5 +1,4 @@
-﻿function isurl(path)
-{
+﻿function isurl(path) {
     return path.indexOf("://") > 0;
 }
 
@@ -73,11 +72,11 @@ MediaLibrary.prototype = {
     replaceAll: function(haystack, needle, thread) {
         return (haystack || '').split(needle || '').join(thread || '');
     },
-    
+
     getThumbnailPath: function(thumbnail) {
         return thumbnail ? ('/image/' + encodeURI(thumbnail)) : vidonme.core.DEFAULT_ALBUM_COVER;
     },
-    
+
     hideOverlay: function(event) {
         if (this.activeCover) {
             $(this.activeCover).remove();
@@ -85,7 +84,7 @@ MediaLibrary.prototype = {
         }
         $('#overlay').hide();
     },
-    
+
     updateScrollEffects: function(event) {
         if (event.data.activeLibrary && $(event.data.activeLibrary).scrollTop() > 0) {
             $('#topScrollFade').fadeIn();
@@ -103,8 +102,7 @@ MediaLibrary.prototype = {
                     'path': this.replaceAll(event.data.directory.file, "\\", "\\\\")
                 }
             },
-            'success': function() {
-            }
+            'success': function() {}
         });
     },
 
@@ -115,7 +113,7 @@ MediaLibrary.prototype = {
         var floatableAlbum = $('<div></div>');
         var path = this.getThumbnailPath(thumbnail);
         title = title || '';
-        
+
         artist = artist || '';
         if (title.length > 18 && !(title.length <= 21)) {
             title = title.substring(0, 18) + '...';
@@ -181,8 +179,7 @@ MediaLibrary.prototype = {
     MediaLibraryMaintitleSet: function() {
         var str = "%101".toLocaleString();
         var len = str.length;
-        if (len > 30)
-        {
+        if (len > 30) {
             document.getElementById('mediaManager').style.lineHeight = "35px";
         }
         $('#mediaManager').html(str);
@@ -190,47 +187,43 @@ MediaLibrary.prototype = {
     ServerSettingMaintitleSet: function() {
         var str = "%102".toLocaleString();
         var len = str.length;
-        if (len > 30)
-        {
+        if (len > 30) {
             document.getElementById('serverSetting').style.lineHeight = "35px";
-		}
+        }
         $('#serverSetting').html("%102".toLocaleString());
     },
     AppsDownloadMaintitleSet: function() {
         var str = "%247".toLocaleString();
         var len = str.length;
-        if (len > 30)
-        {
+        if (len > 30) {
             document.getElementById('appsDownload').style.lineHeight = "35px";
-		}
+        }
         $('#appsDownload').html("%247".toLocaleString());
     },
     BackupMediaMaintitleSet: function() {
         var str = "%252".toLocaleString();
         var len = str.length;
-        if (len > 30)
-        {
+        if (len > 30) {
             document.getElementById('backupMedia').style.lineHeight = "35px";
         }
         $('#backupMedia').html(str);
     },
     UserCenterImageSet: function() {
-		vidonme.rpc.request({
-			'context': this,
-			'method': 'VidOnMe.GetAuthUserInfo',
-			'params': {
-			},
-			'success': function(data) {
-				if (data && data.result.ret) {
-					var imageHTML = '<img id="user_img" src="' + data.result.avatar + '">';
-					$('#userCenter').html(imageHTML);
-				} else {
-					$('#userCenter').html('<img id="user_img" src="img/user_head_normal.png">');
-				}
-			}
-		});
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.GetAuthUserInfo',
+            'params': {},
+            'success': function(data) {
+                if (data && data.result.ret) {
+                    var imageHTML = '<img id="user_img" src="' + data.result.avatar + '">';
+                    $('#userCenter').html(imageHTML);
+                } else {
+                    $('#userCenter').html('<img id="user_img" src="img/user_head_normal.png">');
+                }
+            }
+        });
     },
-	MediaLibraryAddtagSet: function() {
+    MediaLibraryAddtagSet: function() {
         $('#addtag').html("%132".toLocaleString());
     },
     mediaManagerOpen: function() {
@@ -240,7 +233,7 @@ MediaLibrary.prototype = {
         $('#appsDownload').removeClass('selected');
         $('#backupMedia').removeClass('selected');
         $('#mediaManager').addClass('selected');
-		$('#userCenter').removeClass('selected');
+        $('#userCenter').removeClass('selected');
         $('.contentContainer').hide();
         var libraryContainer = '';
         var video_data = '';
@@ -249,7 +242,7 @@ MediaLibrary.prototype = {
         setTimeout(this.ServerSettingMaintitleSet, 100);
         setTimeout(this.AppsDownloadMaintitleSet, 100);
         setTimeout(this.BackupMediaMaintitleSet, 100);
-		setTimeout(this.UserCenterImageSet, 100);
+        setTimeout(this.UserCenterImageSet, 100);
         document.getElementById('folder_box').style.display = "";
         vidonme.rpc.request({
             'context': this,
@@ -263,7 +256,7 @@ MediaLibrary.prototype = {
                     'params': [],
                     'success': function(pic_data) {
                         //设置标题
-                       
+
                         $('#mediaManager').html("%101".toLocaleString());
                         $('#serverSetting').html("%102".toLocaleString());
 
@@ -273,29 +266,29 @@ MediaLibrary.prototype = {
                         $('#folder_box').append(libraryContainer);
                         if (pic_data && pic_data.result && pic_data.result.shares) {
                             $.each($(pic_data.result.shares), jQuery.proxy(function(i, item) {
-                                var floatableMovieCover = this.generateThumb(item.type, item.path, item.name);
-                                //floatableMovieCover.bind('click', { movie: item }, jQuery.proxy(this.displayMovieDetails, this));
-                                libraryContainer.append(floatableMovieCover);
-                            }, 
-                            this));
+                                    var floatableMovieCover = this.generateThumb(item.type, item.path, item.name);
+                                    //floatableMovieCover.bind('click', { movie: item }, jQuery.proxy(this.displayMovieDetails, this));
+                                    libraryContainer.append(floatableMovieCover);
+                                },
+                                this));
                         } else {
                             libraryContainer.html('');
                         }
-                        
+
                         libraryContainer.append('<div class="floatableAlbum"> <a href="#" onClick=btn_add("","","",false,"")><img class="img" src="img/add_btn.png" /><p  class="Album_name" id="addtag">' + "%132".toLocaleString() + '</p></a></div>');
-                    
+
                     }
-                
+
                 });
             }
         });
 
         setTimeout(this.MediaLibraryAddtagSet, 100);
     },
-	MediaManagerResize: function () {
-		$(".ui-dialog").css("top", ($(window).height() - $(".ui-dialog").height()) / 2 + "px");
-		$(".ui-dialog").css("left", ($(window).width() - $(".ui-dialog").width()) / 2 + "px");
-	}
+    MediaManagerResize: function() {
+        $(".ui-dialog").css("top", ($(window).height() - $(".ui-dialog").height()) / 2 + "px");
+        $(".ui-dialog").css("left", ($(window).width() - $(".ui-dialog").width()) / 2 + "px");
+    }
 }
 
 function btn_delete(title, type, isOpen, path) {
@@ -339,29 +332,29 @@ function btn_refresh(thumbnail) {
 function btn_save(shareType, sharePath, edit, origpath) {
     dialogClose();
     var dialogTitle = '';
-	
+
     gsharePath = sharePath;
     switch (shareType) {
         case 'movie':
             dialogTitle = "%161".toLocaleString();
-        break;
+            break;
         case 'tvshow':
             dialogTitle = "%162".toLocaleString();
-        break;
+            break;
         case 'video':
             dialogTitle = "%230".toLocaleString();
-        break;
+            break;
         case 'photo':
             dialogTitle = "%164".toLocaleString();
-        break;
+            break;
         default:
             dialogTitle = "%229".toLocaleString();
     }
-	
+
     var add = $("#dialog-form");
     add.html('');
     add.dialog({
-        //	autoOpen: true,
+        //  autoOpen: true,
         title: dialogTitle,
         height: 440,
         width: 690,
@@ -374,8 +367,7 @@ function btn_save(shareType, sharePath, edit, origpath) {
     sharePath = unescape(sharePath);
     sharePath = removeslashAtEnd(sharePath);
 
-    if (sharePath == "")
-    {
+    if (sharePath == "") {
         alert("Path empty!");
         dialogClose();
         return false;
@@ -397,7 +389,7 @@ function btn_save(shareType, sharePath, edit, origpath) {
         paths = name.split("/");
         name = paths[paths.length - 1].toString();
     }
-			
+
     var img_src = '';
     if (shareType == "video") {
         img_src = "img/video_01.png";
@@ -410,10 +402,10 @@ function btn_save(shareType, sharePath, edit, origpath) {
     } else {
         img_src = "img/auto_01.png";
     }
-	
+
     add.append('<div class="save"></div>');
-	
-    $(".save").append('<img style="padding-top:23px" class="img" src="' + img_src + '"/><p align="left" style="padding-left:26px">' + "%244".toLocaleString() +'</p><input class="form_menu" id="srcName" type="text" value="' + name + '"/><p align="left" style="padding-left:26px">' + "%245".toLocaleString() + '</p><table class="btnpre"><tr><td OnClick="btn_browse(\'' + shareType + '\',\'' + escape(sharePath) +'\',' + edit + ',\'' + escape(origpath) + '\')" background="img/button_previous_normal.png">' + "%237".toLocaleString() + '</td></tr></table><table class="btnnex"><tr><td OnClick="addMedia(\'' + escape(name) + '\',\'' + shareType + '\',\'' + escape(sharePath) +'\',' + edit + ')" background="img/button_next_save_normal.png">' + "%135".toLocaleString() + '</td></tr></table>');
+
+    $(".save").append('<img style="padding-top:23px" class="img" src="' + img_src + '"/><p align="left" style="padding-left:26px">' + "%244".toLocaleString() + '</p><input class="form_menu" id="srcName" type="text" value="' + name + '"/><p align="left" style="padding-left:26px">' + "%245".toLocaleString() + '</p><table class="btnpre"><tr><td OnClick="btn_browse(\'' + shareType + '\',\'' + escape(sharePath) + '\',' + edit + ',\'' + escape(origpath) + '\')" background="img/button_previous_normal.png">' + "%237".toLocaleString() + '</td></tr></table><table class="btnnex"><tr><td OnClick="addMedia(\'' + escape(name) + '\',\'' + shareType + '\',\'' + escape(sharePath) + '\',' + edit + ')" background="img/button_next_save_normal.png">' + "%135".toLocaleString() + '</td></tr></table>');
 
     return true;
 }
@@ -431,150 +423,158 @@ function _mouseout(obj) {
 }
 
 function checkip(ip) {
-	var regexp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
-	if (ip.match(regexp)) {
-		return true;
-	}
+    var regexp = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+    if (ip.match(regexp)) {
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 function setnetshare() {
-	var protocol = '';
-	var domain_select = document.getElementById("protocolvalue");
-	for (var i = 0; i < domain_select.length; ++i) {
-		if (domain_select.options[i].selected == true) {
-			protocol = domain_select.options[i].value;
-			break;
-		}
-	}
-	
-	var netshare_search = '', display = '';
-	var srvaddr = document.getElementById("server_address").value;
-	var username = document.getElementById("user_name").value;
-	var userpass = document.getElementById("user_pass").value;
-	
-	if (protocol == "SMB") {
-		var srvdomain = document.getElementById("domain").value;
-		
-		if (checkip(srvaddr) == false && srvaddr == "" || srvdomain == "") {
-			$("#server_error").attr({style:"color:red"});
-			$("#server_error").html("%274".toLocaleString());
-			$("#identification_error").attr({style:"color:red"});
-			$("#identification_error").html('');
-			return;
-		}
-		
-		if (username == "" && userpass == "")
-		{
-			netshare_search = 'smb://' + srvaddr;
-		}
-		else
-		{
-			if (username == "" || userpass == "") {
-				$("#identification_error").attr({style:"color:red"});
-				$("#identification_error").html("%275".toLocaleString());
-				$("#server_error").attr({style:"color:red"});
-				$("#server_error").html('');
-				return;	
-			}
-			else
-			{
-				netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
-			}
-		}
-		
-		display = 'smb://' + srvaddr;
-	} else {
-		display = 'nfs://' + srvaddr;
-		netshare_search = display;
-	}
-	
-	showdiv();
-	
-	vidonme.rpc.request({
-		'context': this,
-		'method': 'VidOnMe.AddNetDirectory',
-		'params': {
-			"directory": netshare_search
-		},
-		'success': function(data) {
-			hidediv();
-			if (data && data.result.ret == true) {
-				btn_browse(gtype, escape(netshare_search), gedit, escape(netshare_search));
-			} else {
-				alert(data.result.err);
-			}
-		}
-	});
+    var protocol = '';
+    var domain_select = document.getElementById("protocolvalue");
+    for (var i = 0; i < domain_select.length; ++i) {
+        if (domain_select.options[i].selected == true) {
+            protocol = domain_select.options[i].value;
+            break;
+        }
+    }
+
+    var netshare_search = '',
+        display = '';
+    var srvaddr = document.getElementById("server_address").value;
+    var username = document.getElementById("user_name").value;
+    var userpass = document.getElementById("user_pass").value;
+
+    if (protocol == "SMB") {
+        var srvdomain = document.getElementById("domain").value;
+
+        if (checkip(srvaddr) == false && srvaddr == "" || srvdomain == "") {
+            $("#server_error").attr({
+                style: "color:red"
+            });
+            $("#server_error").html("%274".toLocaleString());
+            $("#identification_error").attr({
+                style: "color:red"
+            });
+            $("#identification_error").html('');
+            return;
+        }
+
+        if (username == "" && userpass == "") {
+            netshare_search = 'smb://' + srvaddr;
+        } else {
+            if (username == "" || userpass == "") {
+                $("#identification_error").attr({
+                    style: "color:red"
+                });
+                $("#identification_error").html("%275".toLocaleString());
+                $("#server_error").attr({
+                    style: "color:red"
+                });
+                $("#server_error").html('');
+                return;
+            } else {
+                netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
+            }
+        }
+
+        display = 'smb://' + srvaddr;
+    } else {
+        display = 'nfs://' + srvaddr;
+        netshare_search = display;
+    }
+
+    showdiv();
+
+    vidonme.rpc.request({
+        'context': this,
+        'method': 'VidOnMe.AddNetDirectory',
+        'params': {
+            "directory": netshare_search
+        },
+        'success': function(data) {
+            hidediv();
+            if (data && data.result.ret == true) {
+                btn_browse(gtype, escape(netshare_search), gedit, escape(netshare_search));
+            } else {
+                alert(data.result.err);
+            }
+        }
+    });
 }
 
 function handle_inputs() {
-	var protocol = '';
-	var domain_select = document.getElementById("protocolvalue");
-	for (var i = 0; i < domain_select.length; ++i) {
-		if (domain_select.options[i].selected == true) {
-			protocol = domain_select.options[i].value;
-			break;
-		}
-	}
-	
-	var domain = document.getElementById("domain");
-	var user_name = document.getElementById("user_name");
-	var user_pass = document.getElementById("user_pass");
-	
-	if (protocol == "NFS") {
-		domain.disabled = true;
-		user_name.disabled = true;
-		user_pass.disabled = true;
-	} else if (protocol == "SMB") {
-		domain.disabled = false;
-		user_name.disabled = false;
-		user_pass.disabled = false;	
-	}
-	
-	$("#server_address").focus();
+    var protocol = '';
+    var domain_select = document.getElementById("protocolvalue");
+    for (var i = 0; i < domain_select.length; ++i) {
+        if (domain_select.options[i].selected == true) {
+            protocol = domain_select.options[i].value;
+            break;
+        }
+    }
+
+    var domain = document.getElementById("domain");
+    var user_name = document.getElementById("user_name");
+    var user_pass = document.getElementById("user_pass");
+
+    if (protocol == "NFS") {
+        domain.disabled = true;
+        user_name.disabled = true;
+        user_pass.disabled = true;
+    } else if (protocol == "SMB") {
+        domain.disabled = false;
+        user_name.disabled = false;
+        user_pass.disabled = false;
+    }
+
+    $("#server_address").focus();
 }
 
 function btn_addnetshare(host, edit) {
-	dialogClose();
+    dialogClose();
 
-	var dialogTitle = "%267".toLocaleString();
-	var netshare = $("#dialog-form");
-	netshare.html('');
-	
-	netshare.dialog({
-		//autoOpen: true,
-		title: dialogTitle,
-		height: 430,
-		width: 480,
-		//draggable: false,
-		resizable: false,
-		position: 'center',
-		modal: true
-	});
-	
-	netshare.append('<div class="netshare" id="addsamba"><table class="netsharetable"><tr><td class="td1">Protocol</td><td class="td2" id="protocol"><select class="protoselect" id="protocolvalue" onchange="handle_inputs()"><option value="SMB">Windows Network (SMB)<option value="NFS">Network Filesystem (NFS)</td></tr></select></table></div>');
-	$(".smaba").resize(function() {
-		$(".netshare").css("top", ($(window).height() - $(".netshare").height()) / 2 + "px");
-		$(".netshare").css("left", ($(window).width() - $(".netshare").width()) / 2 + "px");
-	});
-	
-	$(".netshare").append('<table class="netsharetable"><tr><td class="td1">' + "%272".toLocaleString() + '</td><td class="td2" id="server_error"></td></tr><tr><td class="td1">' + "%268".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="server_address" type="text" value=' + host + '></td></tr><tr><td class="td1">' + "%269".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="domain" type="text" value="WORKGROUP"></td></tr></table>');
-	
-	$(".netshare").append('<table class="netsharetable"><tr><td class="td1">' + "%273".toLocaleString() + '</td><td class="td2" id="identification_error"></td></tr><tr><td class="td1">' + "%270".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="user_name" type="text"></td></tr><tr><td class="td1">' + "%271".toLocaleString() + '</td><td td="td2"><input class="netshareinput" id="user_pass" type="password"></td></tr></table>');
-	
-	$(".netshare").append('<table class="netsharecancel"><tr><td OnClick="dialogClose()" background="img/button_previous_normal.png">' + "%114".toLocaleString() + '</td></tr></table><table class="netshareconfirm"><tr><td OnClick="setnetshare()" background="img/button_next_save_normal.png">' + "%115".toLocaleString() + '</td></tr></table>');
-	
-	if (true == edit) {
-		$("#user_name").focus();
-	} else {
-		$("#server_address").focus();
-	}
+    var dialogTitle = "%267".toLocaleString();
+    var netshare = $("#dialog-form");
+    netshare.html('');
+
+    netshare.dialog({
+        //autoOpen: true,
+        title: dialogTitle,
+        height: 430,
+        width: 480,
+        //draggable: false,
+        resizable: false,
+        position: 'center',
+        modal: true
+    });
+
+    netshare.append('<div class="netshare" id="addsamba"><table class="netsharetable"><tr><td class="td1">Protocol</td><td class="td2" id="protocol"><select class="protoselect" id="protocolvalue" onchange="handle_inputs()"><option value="SMB">Windows Network (SMB)<option value="NFS">Network Filesystem (NFS)</td></tr></select></table></div>');
+    $(".smaba").resize(function() {
+        $(".netshare").css("top", ($(window).height() - $(".netshare").height()) / 2 + "px");
+        $(".netshare").css("left", ($(window).width() - $(".netshare").width()) / 2 + "px");
+    });
+
+    $(".netshare").append('<table class="netsharetable"><tr><td class="td1">' + "%272".toLocaleString() + '</td><td class="td2" id="server_error"></td></tr><tr><td class="td1">' + "%268".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="server_address" type="text" value=' + host + '></td></tr><tr><td class="td1">' + "%269".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="domain" type="text" value="WORKGROUP"></td></tr></table>');
+
+    $(".netshare").append('<table class="netsharetable"><tr><td class="td1">' + "%273".toLocaleString() + '</td><td class="td2" id="identification_error"></td></tr><tr><td class="td1">' + "%270".toLocaleString() + '</td><td class="td2"><input class="netshareinput" id="user_name" type="text"></td></tr><tr><td class="td1">' + "%271".toLocaleString() + '</td><td td="td2"><input class="netshareinput" id="user_pass" type="password"></td></tr></table>');
+
+    $(".netshare").append('<table class="netsharecancel"><tr><td OnClick="dialogClose()" background="img/button_previous_normal.png">' + "%114".toLocaleString() + '</td></tr></table><table class="netshareconfirm"><tr><td OnClick="setnetshare()" background="img/button_next_save_normal.png">' + "%115".toLocaleString() + '</td></tr></table>');
+
+    if (true == edit) {
+        $("#user_name").focus();
+    } else {
+        $("#server_address").focus();
+    }
 }
 
 function handleUrl(url, withproto, withshare) {
-    var proto = '', name = '', localpathnoproto = '', pos = 0, posslash = 0;
+    var proto = '',
+        name = '',
+        localpathnoproto = '',
+        pos = 0,
+        posslash = 0;
 
     var index = url.indexOf("://");
     if (index > 0) {
@@ -587,23 +587,23 @@ function handleUrl(url, withproto, withshare) {
                 varpos = localpathnoproto.indexOf(";");
             }
 
-			pos = (varpos <= -1 ? 0 : varpos + 1);
+            pos = (varpos <= -1 ? 0 : varpos + 1);
         } else if (url.substr(0, index + 3) == "nfs://") {
-			proto = "nfs://";
+            proto = "nfs://";
 
-			pos = 0; // nfs is simpler than smb
-			localpathnoproto = url.substr(proto.length);
+            pos = 0; // nfs is simpler than smb
+            localpathnoproto = url.substr(proto.length);
         } else {
-			return url;
-		}
+            return url;
+        }
 
         posslash = localpathnoproto.indexOf("/", pos);
 
-		if (posslash <= -1 || withshare) {
-			name = localpathnoproto.substr(pos);
-		} else {
-			name = localpathnoproto.substr(pos, posslash - pos);
-		}
+        if (posslash <= -1 || withshare) {
+            name = localpathnoproto.substr(pos);
+        } else {
+            name = localpathnoproto.substr(pos, posslash - pos);
+        }
     } else {
         name = url;
     }
@@ -612,35 +612,35 @@ function handleUrl(url, withproto, withshare) {
 }
 
 function btn_browse(type, path, edit, origpath) {
-	dialogClose();
-	var bsrname = gbrowser + "";
-	var dialogTitle = '';
-	type = gtype;
-	origpath = unescape(origpath);
-	gsharePath = path;
-	var protocol = '';
+    dialogClose();
+    var bsrname = gbrowser + "";
+    var dialogTitle = '';
+    type = gtype;
+    origpath = unescape(origpath);
+    gsharePath = path;
+    var protocol = '';
 
     switch (type) {
         case 'movie':
             dialogTitle = "%161".toLocaleString();
-        break;
+            break;
         case 'tvshow':
             dialogTitle = "%162".toLocaleString();
-        break;
+            break;
         case 'video':
             dialogTitle = "%230".toLocaleString();
-        break;
+            break;
         case 'photo':
             dialogTitle = "%164".toLocaleString();
-        break;
+            break;
         default:
             dialogTitle = "%229".toLocaleString();
     }
-	
+
     var add = $("#dialog-form");
     add.html('');
     add.dialog({
-        //	autoOpen: true,
+        //  autoOpen: true,
         title: dialogTitle,
         height: 580,
         width: 690,
@@ -693,13 +693,13 @@ function btn_browse(type, path, edit, origpath) {
                 switch (drivetype) {
                     case 1:
                         drivetypename = "%249".toLocaleString();
-                    break;
+                        break;
                     case 4:
                         drivetypename = "%251".toLocaleString();
-                    break;
+                        break;
                     case 6:
                         drivetypename = "%250".toLocaleString();
-                    break;
+                        break;
                     default:
                         drivetypename = "other";
                 }
@@ -711,9 +711,9 @@ function btn_browse(type, path, edit, origpath) {
                 var localpath = str;
                 name = handleUrl(localpath, true, true);
 
-				if (!bsrname.match("msie")) {
+                if (!bsrname.match("msie")) {
                     localpath = item.path.replace(/\\/g, '\\\\');
-                    document.getElementById("tab1").innerHTML += '<tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' +  type + '\',\'' + escape(localpath) + '\',' + edit + ',\'' + escape(name) + '\')" title=' + name + '>' + drivetypename + ' ' + name + '</td></tr>';
+                    document.getElementById("tab1").innerHTML += '<tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' + type + '\',\'' + escape(localpath) + '\',' + edit + ',\'' + escape(name) + '\')" title=' + name + '>' + drivetypename + ' ' + name + '</td></tr>';
                 } else {
                     var row = document.getElementById('tab1').insertRow();
 
@@ -725,35 +725,35 @@ function btn_browse(type, path, edit, origpath) {
                     };
                 }
             }, this));
-			
-			if (!bsrname.match("msie")) {
-				var note = "%267".toLocaleString();
-				document.getElementById('tab1').innerHTML += '<tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' + type + '\',\'' + "smb://" + '\',' + edit + ',\'' + "" + '\')">Windows Network (SMB)</td></tr><tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' + type + '\',\'' + "nfs://" + '\',' + edit + ',\'' + "" + '\')">Network Filesystem (NFS)</td></tr><tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_addnetshare(\'' + "" + '\',' + false + ')">' + note + '</td></tr>';	
-			} else {	
-				var row = document.getElementById('tab1').insertRow();
-				
-				var col = row.insertCell();
-				col.innerText = "Windows Network (SMB)";
-				col.onclick = function() {
-				    btn_browse(type, "smb://", edit, "");
-				};
-				
-				row = document.getElementById("tab1").insertRow();
-				
-				var col = row.insertCell();
-				col.innerText = "Network Filesystem (NFS)";
-				col.onclick = function() {
-				    btn_browse(type, "nfs://", edit, "");
-				};
-				
-				row = document.getElementById("tab1").insertRow();
-				
-				var col = row.insertCell();
-				col.innerText = "%267".toLocaleString();
-				col.onclick = function() {
-					btn_addnetshare("", false);
-				};
-			}
+
+            if (!bsrname.match("msie")) {
+                var note = "%267".toLocaleString();
+                document.getElementById('tab1').innerHTML += '<tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' + type + '\',\'' + "smb://" + '\',' + edit + ',\'' + "" + '\')">Windows Network (SMB)</td></tr><tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_browse(\'' + type + '\',\'' + "nfs://" + '\',' + edit + ',\'' + "" + '\')">Network Filesystem (NFS)</td></tr><tr><td onmouseover="_mouseover2(this)" onmouseout="_mouseout(this)" onClick="btn_addnetshare(\'' + "" + '\',' + false + ')">' + note + '</td></tr>';
+            } else {
+                var row = document.getElementById('tab1').insertRow();
+
+                var col = row.insertCell();
+                col.innerText = "Windows Network (SMB)";
+                col.onclick = function() {
+                    btn_browse(type, "smb://", edit, "");
+                };
+
+                row = document.getElementById("tab1").insertRow();
+
+                var col = row.insertCell();
+                col.innerText = "Network Filesystem (NFS)";
+                col.onclick = function() {
+                    btn_browse(type, "nfs://", edit, "");
+                };
+
+                row = document.getElementById("tab1").insertRow();
+
+                var col = row.insertCell();
+                col.innerText = "%267".toLocaleString();
+                col.onclick = function() {
+                    btn_addnetshare("", false);
+                };
+            }
         }
     });
 
@@ -765,29 +765,29 @@ function btn_browse(type, path, edit, origpath) {
             "mask": "/",
             "directory": path
         },
-        'success': function (data) {
+        'success': function(data) {
             hidediv();
             var is_smb = path.indexOf("smb://") >= 0;
             var is_nfs = path.indexOf("nfs://") >= 0;
 
             if (data && data.result.ret == false) {
-				var err = data.result.err;
-				
-				if (err == "Access is denied") {
-                	alert("%276".toLocaleString());
-				} else if (err == "Unknown user name or bad password") {
-                	alert("%277".toLocaleString());
-				} else if (err == "Network path not found") {
-                	alert("%278".toLocaleString());
-				} else {
-					alert(err);
-				}
+                var err = data.result.err;
+
+                if (err == "Access is denied") {
+                    alert("%276".toLocaleString());
+                } else if (err == "Unknown user name or bad password") {
+                    alert("%277".toLocaleString());
+                } else if (err == "Network path not found") {
+                    alert("%278".toLocaleString());
+                } else {
+                    alert(err);
+                }
 
                 if (is_smb || is_nfs) {
-					if (err == "Access is denied" ||
-						err == "Unknown user name or bad password") {
-                    		btn_addnetshare(handleUrl(path, false, false), true);
-					}
+                    if (err == "Access is denied" ||
+                        err == "Unknown user name or bad password") {
+                        btn_addnetshare(handleUrl(path, false, false), true);
+                    }
                 }
 
                 return;
@@ -795,13 +795,13 @@ function btn_browse(type, path, edit, origpath) {
 
             if (path != "") {
                 var arg = '';
-				
-				if (origpath != path) {
-					var temp = handleUrl(path, true, true);
-					if (origpath != temp) {
-						arg = getParentPath(path);
-					}
-				}
+
+                if (origpath != path) {
+                    var temp = handleUrl(path, true, true);
+                    if (origpath != temp) {
+                        arg = getParentPath(path);
+                    }
+                }
 
                 if (arg.match('\'')) {
                     arg = arg.replace(/\'/g, '\\\''); // handle "'" in path, TODO: merge into another func
@@ -815,7 +815,7 @@ function btn_browse(type, path, edit, origpath) {
                         var col = row.insertCell();
                         col.innerText = "back";
 
-                        col.onclick = function () {
+                        col.onclick = function() {
                             btn_browse(type, escape(arg), edit, escape(origpath));
                         };
 
@@ -823,16 +823,16 @@ function btn_browse(type, path, edit, origpath) {
                         col.style.width = "312px";
                         col.style.paddingLeft = "40px";
                         col.style.background = "url(img/back.png) no-repeat 5px 8px";
-                        col.onmouseover = function () {
+                        col.onmouseover = function() {
                             col.style.backgroundColor = "#025567";
                         }
-                        col.onmouseout = function () {
+                        col.onmouseout = function() {
                             col.style.backgroundColor = '';
                         }
                     }
                 }
 
-                $.each($(data.result.filelist), jQuery.proxy(function (i, item) {
+                $.each($(data.result.filelist), jQuery.proxy(function(i, item) {
                     var str = item.title;
 
                     var name = '';
@@ -863,17 +863,17 @@ function btn_browse(type, path, edit, origpath) {
                         var col = row.insertCell();
                         col.title = str;
                         col.innerText = name;
-                        col.onclick = function () {
+                        col.onclick = function() {
                             btn_browse(type, escape(arg), edit, escape(origpath));
                         };
                         col.style.margin = "5px 0";
                         col.style.width = "312px";
                         col.style.paddingLeft = "40px";
                         col.style.background = "url(img/file.png) no-repeat 5px 8px";
-                        col.onmouseover = function () {
+                        col.onmouseover = function() {
                             col.style.backgroundColor = "#025567";
                         }
-                        col.onmouseout = function () {
+                        col.onmouseout = function() {
                             col.style.backgroundColor = '';
                         }
                     }
@@ -896,74 +896,74 @@ function btn_browse(type, path, edit, origpath) {
 function settype(id) {
     if (gselected) {
         var localid = gselected.id;
-		switch(localid) {
-        case 'img0':
-            gselected.src = "img/auto_01.png";
-            break;
-        case 'img1':
-            gselected.src = "img/movie_01.png";
-            break;
-        case 'img2':
-            gselected.src = "img/tvshow_01.png";
-            break;
-        case 'img3':
-            gselected.src = "img/video_01.png";
-            break;
-        case 'img4':
-            gselected.src = "img/photo_01.png";
+        switch (localid) {
+            case 'img0':
+                gselected.src = "img/auto_01.png";
+                break;
+            case 'img1':
+                gselected.src = "img/movie_01.png";
+                break;
+            case 'img2':
+                gselected.src = "img/tvshow_01.png";
+                break;
+            case 'img3':
+                gselected.src = "img/video_01.png";
+                break;
+            case 'img4':
+                gselected.src = "img/photo_01.png";
         }
     }
 
     switch (id) {
-    case 'a1':
-        gtype = "movie";
-        document.getElementById("img1").src = "img/movie_03.png";
-        gselected = document.getElementById("img1");
-	    break;
-    case 'a2':
-        gtype = "tvshow";
-        document.getElementById("img2").src = "img/tvshow_03.png";
-        gselected = document.getElementById("img2");
-	    break;
-    case 'a3':
-        gtype = "video";
-        document.getElementById("img3").src = "img/video_03.png";
-        gselected = document.getElementById("img3");
-	    break;
-    case 'a4':
-        gtype = "photo";
-        document.getElementById("img4").src = "img/photo_03.png";
-        gselected = document.getElementById("img4");
-	    break;
-    case 'a0':
-    default:
-        gtype = "auto";
-        document.getElementById("img0").src = "img/auto_03.png";
-        gselected = document.getElementById("img0");
+        case 'a1':
+            gtype = "movie";
+            document.getElementById("img1").src = "img/movie_03.png";
+            gselected = document.getElementById("img1");
+            break;
+        case 'a2':
+            gtype = "tvshow";
+            document.getElementById("img2").src = "img/tvshow_03.png";
+            gselected = document.getElementById("img2");
+            break;
+        case 'a3':
+            gtype = "video";
+            document.getElementById("img3").src = "img/video_03.png";
+            gselected = document.getElementById("img3");
+            break;
+        case 'a4':
+            gtype = "photo";
+            document.getElementById("img4").src = "img/photo_03.png";
+            gselected = document.getElementById("img4");
+            break;
+        case 'a0':
+        default:
+            gtype = "auto";
+            document.getElementById("img0").src = "img/auto_03.png";
+            gselected = document.getElementById("img0");
     }
 }
 
 function btn_add(shareName, shareType, sharePath, edit, origpath) { // origpath is set in btn_browse when clicking the items in left table
-    if (edit == true){
-		 goldPath = sharePath;
-         goldName = shareName;
-		 if (goldType == '') {
-             goldType = shareType;
-         }
+    if (edit == true) {
+        goldPath = sharePath;
+        goldName = shareName;
+        if (goldType == '') {
+            goldType = shareType;
+        }
     }
-	
+
     gshareName = shareName;
     gshareType = shareType;
     gsharePath = sharePath;
     gedit = edit;
     var dialogTitle = "%228".toLocaleString();
-	
+
     shareName = unescape(shareName);
     sharePath = unescape(sharePath);
     var add = $("#dialog-form");
     add.html('');
     add.dialog({
-        //	autoOpen: true,
+        //  autoOpen: true,
         title: dialogTitle,
         height: 580,
         width: 690,
@@ -972,17 +972,17 @@ function btn_add(shareName, shareType, sharePath, edit, origpath) { // origpath 
         position: 'center',
         modal: true
     });
-	
+
     add.append('<div class="add"></div>');
-	$(".add").append('<p style="height:23px"></p>');
-	
+    $(".add").append('<p style="height:23px"></p>');
+
     var content = '';
     var bsrname = gbrowser + "";
     var mouse = '';
     var typediv = '';
-	var typename = new Array("%229".toLocaleString(),"%161".toLocaleString(),"%162".toLocaleString(),"%230".toLocaleString(),"%164".toLocaleString());
-	
-	for (var i = 0; i < 5; i++) {
+    var typename = new Array("%229".toLocaleString(), "%161".toLocaleString(), "%162".toLocaleString(), "%230".toLocaleString(), "%164".toLocaleString());
+
+    for (var i = 0; i < 5; i++) {
         typediv = $('<div id=' + "div" + i + '></div>');
         if (edit == false) {
             mouse = '<a id=' + "a" + i + ' ' + 'OnClick="settype(this.id)">';
@@ -990,23 +990,23 @@ function btn_add(shareName, shareType, sharePath, edit, origpath) { // origpath 
             mouse = '<a id=' + "a" + i + '>';
         }
         if (i == 0) {
-            mouse += '<img id=' + "img" + i + ' ' +'class="img" src="img/auto_01.png"/>';
+            mouse += '<img id=' + "img" + i + ' ' + 'class="img" src="img/auto_01.png"/>';
         }
         if (i == 1) {
-            mouse += '<img id=' + "img" + i + ' ' +'class="img" src="img/movie_01.png"/>';
+            mouse += '<img id=' + "img" + i + ' ' + 'class="img" src="img/movie_01.png"/>';
         }
         if (i == 2) {
-            mouse += '<img id=' + "img" + i + ' ' +'class="img" src="img/tvshow_01.png"/>';
+            mouse += '<img id=' + "img" + i + ' ' + 'class="img" src="img/tvshow_01.png"/>';
         }
         if (i == 3) {
-            mouse += '<img id=' + "img" + i + ' ' +'class="img" src="img/video_01.png"/>';
+            mouse += '<img id=' + "img" + i + ' ' + 'class="img" src="img/video_01.png"/>';
         }
         if (i == 4) {
-            mouse += '<img id=' + "img" + i + ' ' +'class="img" src="img/photo_01.png"/>';
+            mouse += '<img id=' + "img" + i + ' ' + 'class="img" src="img/photo_01.png"/>';
         }
         mouse += '<p id=' + "p" + i + ' ' + 'class="Album_name2">' + typename[i] + '</p></a>';
         var t = typediv.addClass("type").html(mouse);
-		
+
         if (edit == false) {
             t.hover(function(e) {
                 var localid = '';
@@ -1071,31 +1071,31 @@ function btn_add(shareName, shareType, sharePath, edit, origpath) { // origpath 
                 if (gselected) {
                     localid = gselected.id;
                 }
-                switch(this.id) {
-                case 'div0':
-                    if (localid != "img0") {
-                        document.getElementById("img0").src = "img/auto_01.png";
-                    }
-                break;
-                case 'div1':
-                    if (localid != "img1") {
-                        document.getElementById("img1").src = "img/movie_01.png";
-                    }
-                break;
-                case 'div2':
-                    if (localid != "img2") {
-                        document.getElementById("img2").src = "img/tvshow_01.png";
-                    }
-                break;
-                case 'div3':
-                    if (localid != "img3") {
-                        document.getElementById("img3").src = "img/video_01.png";
-                    }
-                break;
-                case 'div4':
-                    if (localid != "img4") {
-                        document.getElementById("img4").src = "img/photo_01.png";
-                    }
+                switch (this.id) {
+                    case 'div0':
+                        if (localid != "img0") {
+                            document.getElementById("img0").src = "img/auto_01.png";
+                        }
+                        break;
+                    case 'div1':
+                        if (localid != "img1") {
+                            document.getElementById("img1").src = "img/movie_01.png";
+                        }
+                        break;
+                    case 'div2':
+                        if (localid != "img2") {
+                            document.getElementById("img2").src = "img/tvshow_01.png";
+                        }
+                        break;
+                    case 'div3':
+                        if (localid != "img3") {
+                            document.getElementById("img3").src = "img/video_01.png";
+                        }
+                        break;
+                    case 'div4':
+                        if (localid != "img4") {
+                            document.getElementById("img4").src = "img/photo_01.png";
+                        }
                 }
             });
         }
@@ -1129,9 +1129,9 @@ function btn_add(shareName, shareType, sharePath, edit, origpath) { // origpath 
             id = "a0";
             content = "%231".toLocaleString();
     }
-	
+
     settype(id);
-	
+
     if (!bsrname.match("msie")) {
         document.getElementById("Note").innerHTML = '<tr><td>' + content + '</td></tr>';
     } else {
@@ -1153,7 +1153,7 @@ function addMedia(addName, addType, addPath, edit) {
     }
 
     addPath = unescape(addPath);
-	
+
     var oldName = unescape(goldName);
     var oldPath = unescape(goldPath);
 
@@ -1166,62 +1166,62 @@ function addMedia(addName, addType, addPath, edit) {
         }
         addName = paths[paths.length - 1].toString();
     }
-  
-	if(edit == true) {
-		//更新
-		vidonme.rpc.request({
-			'context': this,
-			'method': 'VidOnMe.UpdateShare',
-			'params': {
-				"oldname": oldName,
-				"oldpath": oldPath,
-				"oldtype": goldType,
-				"name": addName,
-				"path": addPath,
-				"type": addType
-			},
-			'success': function(data) {
-				$("#dialog-form").dialog("close");
-				MediaLibrary.prototype.mediaManagerOpen();
-				//gaddEdit = 1;
-			}
-		});
-	} else if(edit == false){
-		//添加
-		vidonme.rpc.request({
-			'context': this,
-			'method': 'VidOnMe.AddShare',
-			'params': {
-				"name": addName,
-				"path": addPath,
-				"type": addType
-			},
-			'success': function(data) {
-				$("#dialog-form").dialog("close");
-				//alert("添加成功");
-				MediaLibrary.prototype.mediaManagerOpen();
-				gaddEdit = 1;
-			
-			}
-		});
-	} else {
-		alert("Invalid parameters!");	
-	}
-	
-	var language = '';
-	var scraperSetting = '';
-	vidonme.rpc.request({
-		'context': this,
-		'method': 'VidOnMe.GetSystemSetting',
-		'params': {
-			"key": "library.defaultlanguageforscraper"
-		
-		},
-		'success': function(data) {
-			language = data.result.val + "";
-			scraperSetting = "<settings><setting id=\"language\" value=" + language + " /></settings>";
-		}
-	});
+
+    if (edit == true) {
+        //更新
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.UpdateShare',
+            'params': {
+                "oldname": oldName,
+                "oldpath": oldPath,
+                "oldtype": goldType,
+                "name": addName,
+                "path": addPath,
+                "type": addType
+            },
+            'success': function(data) {
+                $("#dialog-form").dialog("close");
+                MediaLibrary.prototype.mediaManagerOpen();
+                //gaddEdit = 1;
+            }
+        });
+    } else if (edit == false) {
+        //添加
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.AddShare',
+            'params': {
+                "name": addName,
+                "path": addPath,
+                "type": addType
+            },
+            'success': function(data) {
+                $("#dialog-form").dialog("close");
+                //alert("添加成功");
+                MediaLibrary.prototype.mediaManagerOpen();
+                gaddEdit = 1;
+
+            }
+        });
+    } else {
+        alert("Invalid parameters!");
+    }
+
+    var language = '';
+    var scraperSetting = '';
+    vidonme.rpc.request({
+        'context': this,
+        'method': 'VidOnMe.GetSystemSetting',
+        'params': {
+            "key": "library.defaultlanguageforscraper"
+
+        },
+        'success': function(data) {
+            language = data.result.val + "";
+            scraperSetting = "<settings><setting id=\"language\" value=" + language + " /></settings>";
+        }
+    });
 }
 
 var gtype = ''; //媒体类型
@@ -1239,8 +1239,7 @@ var gedit = false;
 function onShow(li) {
     $(li).find("span").show();
 }
+
 function onHide(li) {
     $(li).find("span").hide();
 }
-
-

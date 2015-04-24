@@ -1,48 +1,44 @@
-function getBrowserInfo()
-{
-	var agent = navigator.userAgent.toLowerCase() ;
-	
-	var regStr_ie = /msie [\d.]+;/gi ;
+function getBrowserInfo() {
+	var agent = navigator.userAgent.toLowerCase();
+
+	var regStr_ie = /msie [\d.]+;/gi;
 	var regStr_ff = /firefox\/[\d.]+/gi
-	var regStr_chrome = /chrome\/[\d.]+/gi ;
-	var regStr_saf = /safari\/[\d.]+/gi ;
+	var regStr_chrome = /chrome\/[\d.]+/gi;
+	var regStr_saf = /safari\/[\d.]+/gi;
 	//IE
-	if(agent.indexOf("msie") > 0)
-	{
-		return agent.match(regStr_ie) ;
+	if (agent.indexOf("msie") > 0) {
+		return agent.match(regStr_ie);
 	}
-	
+
 	//firefox
-	if(agent.indexOf("firefox") > 0)
-	{
-		return agent.match(regStr_ff) ;
+	if (agent.indexOf("firefox") > 0) {
+		return agent.match(regStr_ff);
 	}
-	
+
 	//Chrome
-	if(agent.indexOf("chrome") > 0)
-	{
-		return agent.match(regStr_chrome) ;
+	if (agent.indexOf("chrome") > 0) {
+		return agent.match(regStr_chrome);
 	}
-	
+
 	//Safari
-	if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
-	{
-		return agent.match(regStr_saf) ;
+	if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+		return agent.match(regStr_saf);
 	}
-	
-    return ["unknown"];
+
+	return ["unknown"];
 }
 
-(function (document) {
-    "use strict";
-    var browserinfo = getBrowserInfo() + "";
-    var i,
-        script,
-        debug = false, /* Set to true to disable cached javascript */
-        version = (debug ? Math.random() : '2.1.0'),
-        scripts;
-    if (browserinfo.match("msie"))
-        scripts = [
+(function(document) {
+	"use strict";
+	var browserinfo = getBrowserInfo() + "";
+	var i,
+		script,
+		debug = false,
+		/* Set to true to disable cached javascript */
+		version = (debug ? Math.random() : '2.1.0'),
+		scripts;
+	if (browserinfo.match("msie"))
+		scripts = [
 			"js/jquery-1.8.2.min.js",
 			"js/json2.js",
 			"js/jquery-ui.js",
@@ -57,13 +53,13 @@ function getBrowserInfo()
 			//"js/promotion.js",
 			//"js/UserCenter.js",
 			//"js/vidon.me.init.js",
-			 //"js/NowPlayingManager.js",
+			//"js/NowPlayingManager.js",
 			"js/localizations.js",
 			"js/jquery.md5.js",
 			"js/vidon.me.login.js",
-			"js/global.js", 
+			"js/global.js",
 			"js/commfunc.js",
-			"js/jquery.i18n.properties-1.0.9.js",			 			
+			"js/jquery.i18n.properties-1.0.9.js",
 			"js/pageif.js",
 			"js/getjson.js",
 			"js/librarypath.js",
@@ -72,9 +68,9 @@ function getBrowserInfo()
 			"js/vidon.me.login.js",
 			"js/vidon.me.server.js",
 			"js/vidon.me.settings.js"
-        ];
-    else
-        scripts = [
+		];
+	else
+		scripts = [
 			"js/jquery-1.8.2.min.js",
 			"js/json2.js",
 			"js/jquery-ui.js",
@@ -96,8 +92,8 @@ function getBrowserInfo()
 			"js/jquery.md5.js",
 			"js/global.js",
 			"js/commfunc.js",
-			"js/jquery.i18n.properties-1.0.9.js",			 
-			"js/getjson.js",			
+			"js/jquery.i18n.properties-1.0.9.js",
+			"js/getjson.js",
 			"js/pageif.js",
 			"js/librarypath.js",
 			"js/vidon.me.mediashowinit.js",
@@ -105,14 +101,13 @@ function getBrowserInfo()
 			"js/vidon.me.login.js",
 			"js/vidon.me.server.js",
 			"js/vidon.me.settings.js"
-        ];
+		];
 
-    for (i = 0; i < scripts.length; i += 1) {
-        script = '<script type="text/javascript" src="';
-        script += scripts[i] + '?' + version;
-        script += '"><\/script>';
-        document.write(script);
-    }
-   
+	for (i = 0; i < scripts.length; i += 1) {
+		script = '<script type="text/javascript" src="';
+		script += scripts[i] + '?' + version;
+		script += '"><\/script>';
+		document.write(script);
+	}
+
 }(window.document));
-

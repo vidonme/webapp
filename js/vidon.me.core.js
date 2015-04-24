@@ -3,42 +3,37 @@
  *      http://www.vidon.me
  *
  */
-function getBrowserInfo()
-{
-	var agent = navigator.userAgent.toLowerCase() ;
-	
-	var regStr_ie = /msie [\d.]+;/gi ;
-	var regStr_ff = /firefox\/[\d.]+/gi
-	var regStr_chrome = /chrome\/[\d.]+/gi ;
-	var regStr_saf = /safari\/[\d.]+/gi ;
-	//IE
-	if(agent.indexOf("msie") > 0)
-	{
-		return agent.match(regStr_ie) ;
-	}
-	
-	//firefox
-	if(agent.indexOf("firefox") > 0)
-	{
-		return agent.match(regStr_ff) ;
-	}
-	
-	//Chrome
-	if(agent.indexOf("chrome") > 0)
-	{
-		return agent.match(regStr_chrome) ;
-	}
-	
-	//Safari
-	if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
-	{
-		return agent.match(regStr_saf) ;
-	}
-	
+function getBrowserInfo() {
+    var agent = navigator.userAgent.toLowerCase();
+
+    var regStr_ie = /msie [\d.]+;/gi;
+    var regStr_ff = /firefox\/[\d.]+/gi
+    var regStr_chrome = /chrome\/[\d.]+/gi;
+    var regStr_saf = /safari\/[\d.]+/gi;
+    //IE
+    if (agent.indexOf("msie") > 0) {
+        return agent.match(regStr_ie);
+    }
+
+    //firefox
+    if (agent.indexOf("firefox") > 0) {
+        return agent.match(regStr_ff);
+    }
+
+    //Chrome
+    if (agent.indexOf("chrome") > 0) {
+        return agent.match(regStr_chrome);
+    }
+
+    //Safari
+    if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+        return agent.match(regStr_saf);
+    }
+
     return ["unknown"];
 }
 
-(function (window) {
+(function(window) {
     "use strict";
 
     var browser = getBrowserInfo();
@@ -50,26 +45,26 @@ function getBrowserInfo()
         'DEFAULT_ALBUM_COVER': 'images/DefaultAlbumCover.png',
         'DEFAULT_VIDEO_COVER': 'images/DefaultVideo.png',
         'JSON_RPC': '/jsonrpc',
-        'applyDeviceFixes': function () {
+        'applyDeviceFixes': function() {
             if (bsrname.match("msie")) {
                 if (verinfo == "6.0" || verinfo == "7.0" || verinfo == "8.0") {
-                    window.document.attachEvent('touchmove', function (e) {
+                    window.document.attachEvent('touchmove', function(e) {
                         e.preventDefault();
                     });
-		        }
+                }
             } else {
-                window.document.addEventListener('touchmove', function (e) {
+                window.document.addEventListener('touchmove', function(e) {
                     e.preventDefault();
-                });	
+                });
             }
         },
-        'displayCommunicationError': function (m) {
+        'displayCommunicationError': function(m) {
             window.clearTimeout(vidonme.core.commsErrorTiemout);
             var message = m || 'Connection to server lost';
             $('#commsErrorPanel').html(message).show();
             vidonme.core.commsErrorTiemout = window.setTimeout('vidonme.core.hideCommunicationError()', 5000);
         },
-        'durationToString': function (duration) {
+        'durationToString': function(duration) {
             var total_seconds = duration || 0,
                 seconds = total_seconds % 60,
                 minutes = Math.floor(total_seconds / 60) % 60,
@@ -79,7 +74,7 @@ function getBrowserInfo()
             result += (seconds < 10 ? '0' : '') + seconds;
             return result;
         },
-        'getCookie': function (name) {
+        'getCookie': function(name) {
             var i,
                 match,
                 haystack = window.document.cookie.split(';');
@@ -91,10 +86,10 @@ function getBrowserInfo()
             }
             return null;
         },
-        'hideCommunicationError': function () {
+        'hideCommunicationError': function() {
             $('#commsErrorPanel').hide();
         },
-        'setCookie': function (name, value, days) {
+        'setCookie': function(name, value, days) {
             var date,
                 expires;
             if (name) {
@@ -108,7 +103,7 @@ function getBrowserInfo()
                 window.document.cookie = name + "=" + value + expires + "; path=/";
             }
         },
-        'timeToDuration': function (time) {
+        'timeToDuration': function(time) {
             var duration;
             time = time || {};
             duration = ((time.hours || 0) * 3600);

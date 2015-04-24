@@ -6,10 +6,15 @@ var SettingService = function() {
     return true;
 };
 
-var eSettingType = { serverState:"serverState",essentialInfo:"essentialInfo",mediaLibrary:"mediaLibrary",transcoding:"transcoding",update:"update" };
+var eSettingType = {
+    serverState: "serverState",
+    essentialInfo: "essentialInfo",
+    mediaLibrary: "mediaLibrary",
+    transcoding: "transcoding",
+    update: "update"
+};
 
-function HandleVersion(versionIn)
-{
+function HandleVersion(versionIn) {
     if (versionIn.length == 5) {
         var version_tag, version_raw = '';
         var version_split = versionIn.split("");
@@ -39,21 +44,25 @@ SettingService.prototype = {
 
     },
     bindControls: function() {
-        $("#btnSetting").click(jQuery.proxy(this.serverSettingOpen,this));
-        $("#btnSaveState").click(function(){
+        $("#btnSetting").click(jQuery.proxy(this.serverSettingOpen, this));
+        $("#btnSaveState").click(function() {
             saveServerName();
         });
         $("#btnSaveEssentialInfo").click(function() {
             settingSave(eSettingType.essentialInfo);
         });
-        $("#btnSaveMediaLibrary").click( function() {
+        $("#btnSaveMediaLibrary").click(function() {
             settingSave(eSettingType.mediaLibrary);
         });
-        $("#btnSaveTranscode").click( function() {
+        $("#btnSaveTranscode").click(function() {
             settingSave(eSettingType.transcoding);
         });
-        $("#btnSaveMediaLibrary").click( function() {
+        $("#btnSaveMediaLibrary").click(function() {
             settingSave(eSettingType.mediaLibrary);
+        });
+
+        $("#btnSaveAutoUpgrade").click(function() {
+            saveUpdateInfo();
         });
     },
     resetPage: function() {
@@ -91,7 +100,7 @@ SettingService.prototype = {
                         'success': function(data) {
                             if (data && data.result.ret) {
                                 genericName = data.result.name;
-                               // info(eSettingType.serverState)
+                                // info(eSettingType.serverState)
                             }
                         }
                     });
@@ -107,7 +116,7 @@ SettingService.prototype = {
                                 info(eSettingType.essentialInfo);
                                 info(eSettingType.mediaLibrary);
                                 info(eSettingType.transcoding);
-                           //     info(eSettingType.update);
+                                info(eSettingType.update);
                             }
                         }
                     });
@@ -122,30 +131,30 @@ SettingService.prototype = {
 function info(infoType) {
     commitUpdateInfo();
 
-//	serverName = '',
-    language1 = '',  //WEB语言
-    genericAutoStart = '',  //是否开机自动启动
-    discoveryBonjour = '',  //本助协议
-    discoveryDns = '',  //DNS
-    // webServicePort = '',  //web端口号
-    accountAccount = '',  //Web管理登陆用户名
-    accountPassword = '',  //Web管理登陆密码
-    webServer = '',
-    dlna = '',
-    libAutoUpdate = '',
-    libAutoUpdateTimeSpan = '',
-    servicesWebonlyLocal = '',
-    cupMaxUsage = '',
-    tempFilePath = '',
-    defaultScraperLanguage = '',
-    defaultSubtitleShowMode='',
-    serverIp = '';
+    //  serverName = '',
+    language1 = '', //WEB语言
+        genericAutoStart = '', //是否开机自动启动
+        discoveryBonjour = '', //本助协议
+        discoveryDns = '', //DNS
+        // webServicePort = '',  //web端口号
+        accountAccount = '', //Web管理登陆用户名
+        accountPassword = '', //Web管理登陆密码
+        webServer = '',
+        dlna = '',
+        libAutoUpdate = '',
+        libAutoUpdateTimeSpan = '',
+        servicesWebonlyLocal = '',
+        cupMaxUsage = '',
+        tempFilePath = '',
+        defaultScraperLanguage = '',
+        defaultSubtitleShowMode = '',
+        serverIp = '';
 
     for (var i = 0; i < settingInfo.length; i++) {
         switch (settingInfo[i].key) {
-//            case "name.value":
-//                serverName = settingInfo[i].val;
-//                break;
+            //            case "name.value":
+            //                serverName = settingInfo[i].val;
+            //                break;
             case "language.default":
                 language1 = settingInfo[i].val;
                 break;
@@ -193,7 +202,7 @@ function info(infoType) {
         }
     }
 
-	//genericName = serverInfo.serverName;
+    //genericName = serverInfo.serverName;
     serverIp = serverInfo.serverip;
     genericVersion = HandleVersion(serverInfo.srvversion);
 
@@ -205,7 +214,9 @@ function info(infoType) {
         $("#lblServerVersion").html(genericVersion);
         showTable();
 
-        timer = window.setInterval(function() { showTable(tableDiv); }, 6000);
+        timer = window.setInterval(function() {
+            showTable(tableDiv);
+        }, 6000);
 
     } else if (infoType == eSettingType.essentialInfo) {
         clearInterval(timer); //停止定时器
@@ -213,11 +224,11 @@ function info(infoType) {
         var liArray = $("#ulWebLanguage li");
         var defaultLanguage = liArray["0"].getAttribute("cus_value"); //liArray["0"].attributes["0"].value;
         //设置一个默认值
-        $("#selectWebLanguage").attr("cus_value",defaultLanguage);
+        $("#selectWebLanguage").attr("cus_value", defaultLanguage);
         $("#selectWebLanguage").html(liArray[0].val);
         for (var i = 0; i < liArray.length; i++) {
             if ((liArray[i] == "English" && language1 == "") || liArray[i] == language1) {
-                $("#selectWebLanguage").attr("cus_value",language1);
+                $("#selectWebLanguage").attr("cus_value", language1);
                 $("#selectWebLanguage").html(liArray[i].val);
             }
         }
@@ -232,7 +243,7 @@ function info(infoType) {
         } else {
             $("#onlyloaclhost span:first").addClass("checkbox");
         }
-    } else if(infoType=="trackSubtitle"){
+    } else if (infoType == "trackSubtitle") {
         //音轨字幕语言设置
         clearInterval(timer); //停止定时器
 
@@ -257,8 +268,7 @@ function info(infoType) {
         }
 
     } else if (infoType == eSettingType.update) {
-        hasCommitUpdate = false;
-        upgrade();
+        initUpdateParam();
     } else if (infoType == eSettingType.transcoding) {
         clearInterval(timer);
 
@@ -285,7 +295,7 @@ function info(infoType) {
         $("#updateFrequency").innerText = "";
         for (var i = 0; i < liArray.length; i++) {
             if (liArray[i].getAttribute("cus_value") == libAutoUpdateTimeSpan) {
-                $("#updateFrequency").attr("cus_value",liArray[i].getAttribute("cus_value"));
+                $("#updateFrequency").attr("cus_value", liArray[i].getAttribute("cus_value"));
                 $("#updateFrequency b").html(liArray[i].innerText);
             }
         }
@@ -294,7 +304,7 @@ function info(infoType) {
         $("#subLanguage").innerText = "";
         for (var i = 0; i < liArray.length; i++) {
             if (liArray[i].getAttribute("cus_value") == defaultScraperLanguage) {
-                $("#subLanguage").attr("cus_value",liArray[i].getAttribute("cus_value"));
+                $("#subLanguage").attr("cus_value", liArray[i].getAttribute("cus_value"));
                 $("#subLanguage b").html(liArray[i].innerText);
             }
         }
@@ -310,17 +320,17 @@ function settingSave(actionType) {
         //var index = languageId.selectedIndex;
 
         var language = $("#selectWebLanguage").attr("cus_value");
-//		if (genericName == '') {
-//			if (language == "Chinese (Simple)") {
-//				genericName = "威动服务器";
-//			} else if ( language == "Chinese (Traditional)") {
-//				genericName = "威動伺服器";
-//			} else {
-//				genericName = "VidOn Server";
-//			}
-//		}
+        //      if (genericName == '') {
+        //          if (language == "Chinese (Simple)") {
+        //              genericName = "威动服务器";
+        //          } else if ( language == "Chinese (Traditional)") {
+        //              genericName = "威動伺服器";
+        //          } else {
+        //              genericName = "VidOn Server";
+        //          }
+        //      }
 
-        var webonlyLocal =  $("#onlyloaclhost span:first").hasClass("checkbox selected");
+        var webonlyLocal = $("#onlyloaclhost span:first").hasClass("checkbox selected");
         // var webServicePort = '';
         for (var i = 0; i < settingInfo.length; i++) {
             if (settingInfo[i].key == "language.default") {
@@ -330,7 +340,7 @@ function settingSave(actionType) {
             }
         }
 
-        var str = '{\"webonlylocal\":' + webonlyLocal  +  ',\"webserver\":true,\"webserverpassword\":\"\",\"webserverusername\":\"\"}';
+        var str = '{\"webonlylocal\":' + webonlyLocal + ',\"webserver\":true,\"webserverpassword\":\"\",\"webserverusername\":\"\"}';
 
         vidonme.rpc.request({
             'context': this,
@@ -443,7 +453,7 @@ function settingSave(actionType) {
                         }, 1000);
                     } else {
                         window.setTimeout(function() {
-                         //   mediaLibDiv.innerHTML = "%210".toLocaleString();
+                            //   mediaLibDiv.innerHTML = "%210".toLocaleString();
                             alert("time out")
                         }, 1000);
                     }
@@ -466,11 +476,11 @@ function settingSave(actionType) {
                 }
             }
         });
-    }else if(actionType =="trackSubtitle"){
+    } else if (actionType == "trackSubtitle") {
         reloadPage = true;
         var track_launguage = document.getElementById("trackLaunguage").value;
         var subtitle_language = document.getElementById("subtitleLaunguage").value;
-    }else if (actionType == "network") {
+    } else if (actionType == "network") {
         reloadPage = true;
         var accountAccount = document.getElementById("webName").value;
         var accountPassword = document.getElementById("webPassword").value;
@@ -536,7 +546,7 @@ function settingCancle(actionType) {
 function getFilePath(p) {
     var add = $("#dialog-form");
     add.dialog({
-        //	autoOpen: true,
+        //  autoOpen: true,
         title: "%168".toLocaleString(),
         height: 315,
         width: 607,
@@ -609,7 +619,7 @@ function upgrade(download) {
     var selectLanguage = document.getElementById("selectWebLanguage");
     if (selectLanguage != null) {
         for (var i = 0; i < selectLanguage.options.length; i++) {
-            if (selectLanguage.options[i].selected == true){
+            if (selectLanguage.options[i].selected == true) {
                 Language = selectLanguage.options[i].value;
                 break;
             }
@@ -659,19 +669,16 @@ function upgrade(download) {
                     upgradeState = 3;
                     upgrade(false);
 
-                }
-                else if (data1 && data1.result.state == "downloadfin") {
+                } else if (data1 && data1.result.state == "downloadfin") {
                     upgradeState = 6;
                     upgrade(false);
                 } else if (data1 && data1.result.state == "downloadfailed") {
                     upgradeState = 5;
                     upgrade();
-                }
-                else if (data1 && data1.result.state == "checkversionfailed") {
+                } else if (data1 && data1.result.state == "checkversionfailed") {
                     upgradeState = 5;
                     upgrade(false);
-                }
-                else if (data1 && data1.result.state == "install") {
+                } else if (data1 && data1.result.state == "install") {
                     upgradeState = 6;
                     upgrade(false);
                 } else if (data1 && data1.result.state == "installfin") {
@@ -774,8 +781,7 @@ function upgrade(download) {
                 }
             }
         });
-    } else if (upgradeState == 2) {
-    } else if (upgradeState == 3) {
+    } else if (upgradeState == 2) {} else if (upgradeState == 3) {
         clearInterval(downloadTimer); //停止定时器
         var updateDiv = document.getElementById("updateMessage");
         var progressDiv = document.getElementById("updateProgressBar");
@@ -861,8 +867,7 @@ function upgrade(download) {
         }, 30000);
     } else if (upgradeState == 5) {
 
-    } else if (upgradeState == 7) {
-    }
+    } else if (upgradeState == 7) {}
 }
 
 function commitUpdateInfo() {
@@ -880,8 +885,7 @@ function commitUpdateInfo() {
                     "key": "generic.autoupgrade",
                     "val": updateAuto
                 },
-                'success': function(data) {
-                }
+                'success': function(data) {}
             });
             vidonme.rpc.request({
                 'context': this,
@@ -890,8 +894,7 @@ function commitUpdateInfo() {
                     "key": "generic.daytime",
                     "val": updateDaytime
                 },
-                'success': function(data) {
-                }
+                'success': function(data) {}
             });
             vidonme.rpc.request({
                 'context': this,
@@ -900,8 +903,7 @@ function commitUpdateInfo() {
                     "key": "generic.weekday",
                     "val": updateWeekday1
                 },
-                'success': function(data) {
-                }
+                'success': function(data) {}
             });
 
             hasCommitUpdate = true;
@@ -918,8 +920,7 @@ function commitUpdateInfo() {
             });
 
         }
-    } catch (err) {
-    }
+    } catch (err) {}
 }
 
 function updateChange() {
@@ -932,7 +933,7 @@ function updateChange() {
     }
 }
 
-function showTable(){
+function showTable() {
     $("#tblClienlist tr:gt(0)").remove(); //清除表格内容
     vidonme.rpc.request({
         'context': this,
@@ -953,7 +954,7 @@ function showTable(){
                         $("#tblClienlist tr:last").after(newRow);
                     },
                     this));
-            }else{
+            } else {
                 //没有客户端连接
             }
         }
@@ -965,12 +966,12 @@ function saveServerName() {
     $('#txtServerName').focus();
 
     if (name == '') {
-		if (this.language == "Chinese (Simple)") {
-			name = "威动服务器";
-		} else if ( language == "Chinese (Traditional)") {
-			name = "威動伺服器";
-		} else {
-			name = "VidOn Server";
+        if (this.language == "Chinese (Simple)") {
+            name = "威动服务器";
+        } else if (language == "Chinese (Traditional)") {
+            name = "威動伺服器";
+        } else {
+            name = "VidOn Server";
         }
 
         name = genericName;
@@ -986,7 +987,7 @@ function saveServerName() {
             "name": name
         },
         'success': function(data) {
-            if(data.result.ret) {
+            if (data.result.ret) {
                 alert("%156".toLocaleString());
             } else {
                 alert("Save faild".toLocaleString());
@@ -997,17 +998,16 @@ function saveServerName() {
 }
 
 
-function showUpgradeStatus(status){
+function showUpgradeStatus(status) {
     $("#versionNew").attr("style", "display:none");
     $("#versionFindNew").attr("style", "display:none");
     $("#versionDown").attr("style", "display:none");
     $("#versionDownFail").attr("style", "display:none");
     $("#versionInstall").attr("style", "display:none");
 
-    if ( upgradeState == 0 ) {
-        
-    }
-    else if ( upgradeState == 1 ) {
+    if (upgradeState == 0) {
+
+    } else if (upgradeState == 1) {
         // have new version
         /*
         data1.result.newversion = HandleVersion(data1.result.newversion);
@@ -1021,11 +1021,10 @@ function showUpgradeStatus(status){
           <li>修复下载资源到移动端失败问题</li>
         </ul>
         */
-        $("#versionFindNew #curVersion").text( genericVersion);
-        $("#versionFindNew #newVersion").text( genericNewVersion );
+        $("#versionFindNew #curVersion").text(genericVersion);
+        $("#versionFindNew #newVersion").text(genericNewVersion);
         showdiv("#versionFindNew");
-    }
-    else if ( upgradeState == 2 ) {
+    } else if (upgradeState == 2) {
         //already latest version
         /*
         <div  class="versionnew" id="versionNew" style="display:none">
@@ -1034,10 +1033,9 @@ function showUpgradeStatus(status){
         </div>
         */
 
-        $("#versionNew #curVersion").text( genericVersion);
+        $("#versionNew #curVersion").text(genericVersion);
         showdiv("#versionNew");
-    }
-    else if ( upgradeState == 3 ) {
+    } else if (upgradeState == 3) {
         //downloading
         /*
         cDiv.style.width = parseInt(data1.result.progress) * 4 + "px";
@@ -1062,49 +1060,114 @@ function showUpgradeStatus(status){
         </div>
         */
 
-        $("#versionDown #curVersion").text( genericVersion);
-        $("#versionDown #newVersion").text( genericNewVersion );
-        $("#versionDown .progress-bar").attr( "style", "width:" + downloadProcess + "%" );
-        $("#versionDown #percent").text( downloadProcess + "%" );
-        
+        $("#versionDown #curVersion").text(genericVersion);
+        $("#versionDown #newVersion").text(genericNewVersion);
+        $("#versionDown .progress-bar").attr("style", "width:" + downloadProcess + "%");
+        $("#versionDown #percent").text(downloadProcess + "%");
+
         showdiv("#versionDown");
-    }
-    else if( upgradeState == 4 ){
+    } else if (upgradeState == 4) {
         // download finish
 
-    }
-    else if( upgradeState == 5 ){
+    } else if (upgradeState == 5) {
         // download failed
-        $("#versionDownFail #curVersion").text( genericVersion);
-        $("#versionDownFail #newVersion").text( genericNewVersion );
+        $("#versionDownFail #curVersion").text(genericVersion);
+        $("#versionDownFail #newVersion").text(genericNewVersion);
         showdiv("#versionDownFail");
-    }
-    else if( upgradeState == 6 ){
+    } else if (upgradeState == 6) {
         // installing
-        
-        $("#versionInstall #curVersion").text( genericVersion);
-        $("#versionInstall #newVersion").text( genericNewVersion );
+
+        $("#versionInstall #curVersion").text(genericVersion);
+        $("#versionInstall #newVersion").text(genericNewVersion);
         showdiv("#versionInstall");
-    }
-    else if( upgradeState == 7 ){
+    } else if (upgradeState == 7) {
         // install finish
-    }
-    else if( upgradeState == 8 ){
+    } else if (upgradeState == 8) {
         // cancel
-        $("#versionDownFail #curVersion").text( genericVersion);
-        $("#versionDownFail #newVersion").text( genericNewVersion );
+        $("#versionDownFail #curVersion").text(genericVersion);
+        $("#versionDownFail #newVersion").text(genericNewVersion);
         showdiv("#versionDownFail");
-    }
-    else if( upgradeState == 9 ){
+    } else if (upgradeState == 9) {
         // install failed
-        $("#versionDownFail #curVersion").text( genericVersion);
-        $("#versionDownFail #newVersion").text( genericNewVersion );
+        $("#versionDownFail #curVersion").text(genericVersion);
+        $("#versionDownFail #newVersion").text(genericNewVersion);
         showdiv("#versionDownFail");
-    }
-    else{
+    } else {
 
     }
 
+}
+
+function initUpdateParam() {
+    if (updateAuto == "true") {
+        $(".autoupgrade").removeClass("disable");
+        $(".autoupgrade .dropdown").removeClass("disable");
+
+        $("#upgradeDate .font").attr("cus_value", 0);
+        $("#upgradeDate .font").html($.i18n.prop('index_96'));
+
+        $("#upgradeDate ul li").each(function() {
+            var _this = $(this);
+            var cusValue = $(this).attr("cus_value");
+            var str = $(this).html();
+            if (cusValue == updateWeekday) {
+                $("#upgradeDate .font").attr("cus_value", cusValue);
+                $("#upgradeDate .font").html(str);
+            }
+        });
+
+        $("#upgradeTime .font").attr("cus_value", 0);
+        $("#upgradeTime .font").html($.i18n.prop('index_96'));
+
+        $("#upgradeTime ul li").each(function() {
+            var _this = $(this);
+            var cusValue = $(this).attr("cus_value");
+            var str = $(this).html();
+            if (cusValue == updateDaytime) {
+                $("#upgradeTime .font").attr("cus_value", cusValue);
+                $("#upgradeTime .font").html(str);
+            }
+        });
+    } else {
+        $(".autoupgrade").addClass("disable");
+        $(".autoupgrade .dropdown").addClass("disable");
+    }
+}
+
+function saveUpdateInfo() {
+    try {
+        var updateAuto = $("#autoUpdate span:first").hasClass("checkbox selected");
+        var updateWeekday1 = $("#upgradeDate .font").attr("cus_value");
+        var updateDaytime = $("#upgradeTime .font").attr("cus_value");
+
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.SetSystemSetting',
+            'params': {
+                "key": "generic.autoupgrade",
+                "val": updateAuto
+            },
+            'success': function(data) {}
+        });
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.SetSystemSetting',
+            'params': {
+                "key": "generic.daytime",
+                "val": updateDaytime
+            },
+            'success': function(data) {}
+        });
+        vidonme.rpc.request({
+            'context': this,
+            'method': 'VidOnMe.SetSystemSetting',
+            'params': {
+                "key": "generic.weekday",
+                "val": updateWeekday1
+            },
+            'success': function(data) {}
+        });
+    } catch (err) {}
 }
 
 function startUpgrade(download) {
@@ -1127,19 +1190,16 @@ function startUpgrade(download) {
                     upgradeState = 3;
                     upgrade(false);
 
-                }
-                else if (data1 && data1.result.state == "downloadfin") {
+                } else if (data1 && data1.result.state == "downloadfin") {
                     upgradeState = 6;
                     upgrade(false);
                 } else if (data1 && data1.result.state == "downloadfailed") {
                     upgradeState = 5;
                     upgrade();
-                }
-                else if (data1 && data1.result.state == "checkversionfailed") {
+                } else if (data1 && data1.result.state == "checkversionfailed") {
                     upgradeState = 5;
                     upgrade(false);
-                }
-                else if (data1 && data1.result.state == "install") {
+                } else if (data1 && data1.result.state == "install") {
                     upgradeState = 6;
                     upgrade(false);
                 } else if (data1 && data1.result.state == "installfin") {
@@ -1310,20 +1370,16 @@ function startUpgrade(download) {
     }
 }
 
-function showSettingPage(pageIndex){
-    if ( pageIndex == 0 ) {
+function showSettingPage(pageIndex) {
+    if (pageIndex == 0) {
 
-    }
-    else if( pageIndex == 1 ){
+    } else if (pageIndex == 1) {
 
-    }
-    else if( pageIndex == 2 ){
-        
-    }
-    else if( pageIndex == 3 ){
-        
-    }
-    else if( pageIndex == 4 ){
+    } else if (pageIndex == 2) {
+
+    } else if (pageIndex == 3) {
+
+    } else if (pageIndex == 4) {
         startUpgrade();
         showUpgradeStatus();
     }
@@ -1337,7 +1393,9 @@ var timer = ''; //定时器
 var downloadTimer = '';
 var genericVersion = '1234'; //服务器名称、服务器版本
 var genericNewVersion = '4567';
-var updateAuto = '', updateWeekday = '', updateDaytime = '';
+var updateAuto = '',
+    updateWeekday = '',
+    updateDaytime = '';
 var hasCommitUpdate = true;
 var upgradeState = 0; //0未检查更新 1 有新版本  2没有新版本  3正在下载新版本 4 下载成功 5 下载失败  6 正在安装 7安装成功 8取消升级 9 安装失败
 var Language = '';

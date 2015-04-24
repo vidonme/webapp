@@ -28,7 +28,7 @@ function ShowMgrPage() {
 					if (location.substr(location.length - 2) == "/#") {
 						location = location.substr(0, location.length - 2);
 					}
-					
+
 					window.location.replace(location);
 					clearInterval(intervalId);
 				}, 500);
@@ -51,8 +51,7 @@ function mousehover(id) {
 		if (!element.disabled) {
 			element.style.background = "url(promotion/showpage_btn_hover.png)";
 		}
-	} else {
-		;
+	} else {;
 	}
 }
 
@@ -68,8 +67,7 @@ function mouseout(id) {
 		element.src = "promotion/ios_btn_normal.png";
 	} else if (id == "mgrbtn") {
 		element.style.background = "url(promotion/showpage_btn_normal.png)";
-	} else {
-		;
+	} else {;
 	}
 }
 
@@ -81,9 +79,8 @@ function openlink(type) {
 	} else if (type == "iOS_player") {
 		window.open("https://itunes.apple.com/us/app/vidon-player/id679482348?mt=8");
 	} else if (type == "iOS_cloud") {
-		alert("%266".toLocaleString());		
-	} else {
-		;	
+		alert("%266".toLocaleString());
+	} else {;
 	}
 }
 
