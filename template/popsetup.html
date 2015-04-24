@@ -10,7 +10,8 @@
       <li trans_value="index_76">升级</li>
     </ul>
   </div>
-  <div class="setupright" id="setupcontent">
+  <div class="setupright" id="setupright">
+  <div id="setupcontent">
     <div class="setupcon show">
       <h4 trans_value="index_77">服务器基本信息</h4>
       <div class="serverinfo">
@@ -157,7 +158,7 @@
             <li cus_value="23" trans_value="index_140">23:00</li>   
           </ul>
         </div>
-        <a href="javascript:;"  class="fl btn-small btn-blue" id="btnSaveAutoUpgrade" trans_value="index_81">保存</a> <a href="javascript:;"  class="fl btn-small btn-white" id="btnCancelAutoUpgrade" trans_value="index_25">取消</a>
+       
         <div class="clr"></div>
       </div>
       <h4  trans_value="index_141">当前版本</h4>
@@ -172,7 +173,7 @@
           <li>修改中文环境下升级失败问题</li>
           <li>修复下载资源到移动端失败问题</li>
         </ul>
-        <a href="javascript:;" class="btn-small btn-blue" trans_value="index_144">立即下载</a> </div>
+        <a href="javascript:;" class="btn-small btn-blue" id="btnUpgrade" trans_value="index_144">立即下载</a> </div>
       <div  class="versiondown" id="versionDown" status="3" style="display:none">
           <p><span trans_value="index_149">威动服务器: </span><span id="curVersion">v2.0.0.1稳定版</span></p>
           <p><span trans_value="index_143">发现新版本:</span><span id="newVersion">v3.0.0.1</span></p>
@@ -201,7 +202,14 @@
       </div>
       <div  class="versioninstallfail" id="versionInstallFail"> </div>
     </div>
+   </div>
   </div>
 </div>
 <div class="clr"></div>
 </div>
+<script type="text/javascript">
+$("#setupright").mCustomScrollbar({
+		  autoHideScrollbar:false,
+		 scrollButtons:{enable:true}
+        });
+</script>

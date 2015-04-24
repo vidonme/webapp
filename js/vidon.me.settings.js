@@ -64,6 +64,10 @@ SettingService.prototype = {
         $("#btnSaveAutoUpgrade").click(function() {
             saveUpdateInfo();
         });
+
+        $("#btnUpgrade").click(function() {
+            startUpgrade(true);
+        });
     },
     resetPage: function() {
         $('#serverSetting').removeClass('selected');
@@ -1170,10 +1174,10 @@ function saveUpdateInfo() {
 }
 
 function startUpgrade(download) {
-    if (upgradeState == 1 && download != "true") {
+    if (upgradeState == 1 && download != true) {
         upgradeState = 0;
         rightInfo.html('');
-        upgrade(false);
+        startUpgrade(false);
         return;
     }
 
@@ -1187,26 +1191,26 @@ function startUpgrade(download) {
                     clearInterval(downloadTimer); //停止定时器
 
                     upgradeState = 3;
-                    upgrade(false);
+                    startUpgrade(false);
 
                 } else if (data1 && data1.result.state == "downloadfin") {
                     upgradeState = 6;
-                    upgrade(false);
+                    startUpgrade(false);
                 } else if (data1 && data1.result.state == "downloadfailed") {
                     upgradeState = 5;
-                    upgrade();
+                    startUpgrade();
                 } else if (data1 && data1.result.state == "checkversionfailed") {
                     upgradeState = 5;
-                    upgrade(false);
+                    startUpgrade(false);
                 } else if (data1 && data1.result.state == "install") {
                     upgradeState = 6;
-                    upgrade(false);
+                    startUpgrade(false);
                 } else if (data1 && data1.result.state == "installfin") {
                     upgradeState = 7;
-                    upgrade(false);
+                    startUpgrade(false);
                 } else if (data1 && data1.result.state == "installfailed") {
                     upgradeState = 5;
-                    upgrade(false);
+                    startUpgrade(false);
                 } else if (data1 && data1.result.state == "checkversionfin") {
                     var waitTips = document.getElementById("waitTips");
                     clearInterval(downloadTimer); //停止定时器
@@ -1215,6 +1219,8 @@ function startUpgrade(download) {
                         showUpgradeStatus();
                     } else {
                         upgradeState = 1;
+                        genericNewVersion = HandleVersion(data1.result.newversion);
+                        changelog = data1.result.changes.replace(/\r\n/g, "<br//>");
                         showUpgradeStatus();
                     }
 
@@ -1237,8 +1243,8 @@ function startUpgrade(download) {
                         'method': 'VidOnMe.Upgrade_GetState',
                         'params': [],
                         'success': function(data1) {
-                            data1.result.newversion = HandleVersion(data1.result.newversion);
-
+                            genericNewVersion= HandleVersion(data1.result.newversion);
+                            changelog = data1.result.changes.replace(/\r\n/g, "<br//>");
                         }
                     });
 
@@ -1248,6 +1254,7 @@ function startUpgrade(download) {
                             'method': 'VidOnMe.Upgrade_GetState',
                             'params': [],
                             'success': function(data1) {
+                                downloadProcess = parseInt(data1.result.progress);
                                 showUpgradeStatus(1);
 
                                 if (data1 && data1.result.state == "downloadfin") {
@@ -1262,7 +1269,7 @@ function startUpgrade(download) {
                                         'success': function(data) {
                                             if (data && data.result.ret == true) {
                                                 upgradeState == 6;
-                                                upgrade(false);
+                                                startUpgrade(false);
                                             }
                                         }
                                     });
@@ -1292,13 +1299,12 @@ function startUpgrade(download) {
             'method': 'VidOnMe.Upgrade_GetState',
             'params': [],
             'success': function(data1) {
-
                 genericNewVersion = HandleVersion(data1.result.newversion);
+                changelog = data1.result.changes.replace(/\r\n/g, "<br//>");
             }
         });
 
         downloadTimer = window.setInterval(function() {
-
             vidonme.rpc.request({
                 'context': this,
                 'method': 'VidOnMe.Upgrade_GetState',
@@ -1325,7 +1331,7 @@ function startUpgrade(download) {
                             'success': function(data) {
                                 if (data && data.result.ret == true) {
                                     upgradeState == 6;
-                                    upgrade(false);
+                                    startUpgrade(false);
                                 }
                             }
                         });
@@ -1347,6 +1353,10 @@ function startUpgrade(download) {
                 'method': 'VidOnMe.Upgrade_GetState',
                 'params': [],
                 'success': function(data1) {
+                    
+                    genericNewVersion= HandleVersion(data1.result.newversion);
+                    showUpgradeStatus();
+
                     if (data1 && data1.result.state == "installfin" || data1.result.state == "checkversionfin") {
                         clearInterval(downloadTimer); //停止定时器
                         upgradeState = 7;
@@ -1392,6 +1402,7 @@ var timer = ''; //定时器
 var downloadTimer = '';
 var genericVersion = '1234'; //服务器名称、服务器版本
 var genericNewVersion = '4567';
+var changelog;
 var updateAuto = '',
     updateWeekday = '',
     updateDaytime = '';

@@ -161,7 +161,7 @@
  		//$('#images').removeClass('selected');
  		//$('#movie').removeClass('selected');
 
- 		obj.parents(".verticaldd").addClass('selected');
+ 		obj.addClass('selected');
 
  		var count = 0;
  		var id = obj.attr("id");
