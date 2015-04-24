@@ -16,7 +16,7 @@ sup, sub { font-size: 100%; }
 :link, :visited, ins { text-decoration: none; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
-body, button, input, select, textarea { color:#f5fffb; font-size:14px; line-height:1.5; font-family: 'Segoe UI', Helvetica, Arial, Verdana,"\5FAE\8F6F\96C5\9ED1", "\9ED1\4F53", "\5B8B\4F53", sans-serif; }
+body, button, input, select, textarea { color:#f5fffb; font-size:14px; line-height:1.5; font-family: Verdana,"\5FAE\8F6F\96C5\9ED1", "\9ED1\4F53", "\5B8B\4F53", sans-serif; }
 a { color:#f5fffb; outline:none; blr:expression(this.onFocus=this.blur()); text-decoration:none}
 a:hover { color:#3278cc; }
 .a { color:#3278cc; outline:none; blr:expression(this.onFocus=this.blur()); text-decoration:none}
@@ -104,7 +104,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .headerMenu a.login:hover{ background-position:-137px -164px;}
 /*向导主体部分*/
 .content { position:relative; width:800px; margin:0px auto; padding:35px 90px; color:#ccc; }
-.guideMenu { margin-bottom:60px; }
+.guideMenu { margin-bottom:40px; }
 .guideMenu li { float:left; font-size:22px; line-height:42px; }
 .guideMenu li.linethrough { text-decoration:line-through; width:80px; height:22px; border-bottom:#d3d3d3 solid 1px; margin:0px 20px; }
 .guideMenu li.selected { color:#f5fffb; }
@@ -116,14 +116,14 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .slides { width:2400px; position:relative; }
 .slide { float:left; width:800px; }
 .slide.show { display:block; }
-.int { margin-top:60px; }
+.int { margin-top:40px; }
 .setUp p{ font-size:18px;}
-.setUp h3 { font-size:28px; border-left:10px solid #3278cc; padding-left:20px; font-weight:normal; margin-bottom:45px; }
-.setUp .btn { float:right; margin-top:80px; }
+.setUp h3 { font-size:28px; border-left:10px solid #3278cc; padding-left:20px; font-weight:normal; margin-bottom:25px; }
+.setUp .btn { float:right; margin-top:40px; }
 .setUp .btn.fl { float:left; }
 .setUp input.btn { width:auto; border:none; }
 .setUp .selectedMedia{ margin-top:50px;}
-.setUp .selectedMedia a.commVideo,.setUp .selectedMedia a.perMedia { display:block; width:200px; height:180px; text-align:center; float:left; padding-top:20px; margin:0px 100px;}
+.setUp .selectedMedia a.commVideo,.setUp .selectedMedia a.perMedia { display:block; width:180px; height:160px; text-align:center; float:left; padding-top:20px; margin:0px 110px;}
 .selectedMedia a:hover{color:#f5fffb; background:#666;}
 .selectedMedia a.selected { background:#3278cc url(/images/guide/gou.png) no-repeat right bottom; color:#f5fffb}
 .setUp .addPathbtn{ width:36px; height:27px; display:block; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -118px; position:absolute; top:12px; right:30px;}
@@ -340,3 +340,4 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .photoblock{ width:720px; margin:100px auto 0px auto;}
 
 .loading { width:128px; height:128px; background:#fff; position:absolute;z-index:6; background:url(../images/server_loading.gif) no-repeat; display:none; }
+.loadimg{ display:none} 
