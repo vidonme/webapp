@@ -272,14 +272,14 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .popabout .big{ font-size:18px; margin-bottom:30px; text-align:center}
 .popabout .big a{ text-decoration:underline}
 /*设置*/
-.popsetup{ width:800px; min-height:550px;}
+.popsetup{ width:800px; min-height:570px;}
 .popsetup .tckuangcon{ padding-top:40px;}
-.popsetup .setupleft { width:170px; height:490px; background:#20201e; float:left}
+.popsetup .setupleft { width:170px; height:470px; background:#20201e; float:left;}
 .popsetup .setupleft li{ height:40px; line-height:40px; padding-left:15px; cursor:pointer}
 .popsetup .setupleft li.selected{ color:#f5fffb; background:#3278cc}
 
-.setupright { width:570px; float:right; position:relative}
-.popsetup .setupcon{ position:absolute; top:0px; left:0px; display:none; width:570px;}
+.setupright { width:570px; height:470px;float:right; padding-bottom:20px; position:relative;}
+.popsetup .setupcon{display:none; width:570px;}
 .popsetup .setupcon.show{ display:block;}
 
 .popsetup p.checkboxblock{ margin-top:20px;}

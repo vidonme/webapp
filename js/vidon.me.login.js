@@ -40,8 +40,7 @@ $(function() {
 
 					if (data.result.ret) {
 						//$("#login_title").text($.i18n.prop('index_50'));
-						$("#login").hide();
-						$("#login_ok").show();
+						ShowUserInfo(data);
 					} else {
 						$("#loginerr").text($.i18n.prop('index_35'));
 					}
@@ -56,6 +55,26 @@ $(function() {
 	})
 })
 
+function ShowUserInfo(data) {
+	$("#login").hide();
+	$("#login_ok").show();
+
+	$("#accout_img").attr("src", data.result.avatar);
+	$("#email").text(data.result.email);
+
+	if (data.result.subscribed) {
+		$("#expiration").html = data.result.expiredate;
+		$("#accout").html(data.result.username + '<div class="btn-small btn-blue">Subscribed</div>');
+	} else {
+		$("#accout").text(data.result.username);
+	}
+}
+
+function ShowLogin() {
+	$("#login").show();
+	$("#login_ok").hide();
+}
+
 function CheckAuthUserInfo() {
 	vidonme.rpc.request({
 		'context': this,
@@ -66,22 +85,10 @@ function CheckAuthUserInfo() {
 
 			if (data && data.result.ret) {
 				//$("#login_title").text("User Information");
-				$("#login").hide();
-				$("#login_ok").show();
-
-				$("#accout_img").attr("src", data.result.avatar);
-				$("#email").text(data.result.email);
-
-				if (data.result.subscribed) {
-					$("#expiration").html = data.result.expiredate;
-					$("#accout").html(data.result.username + '<div class="btn-small btn-blue">Subscribed</div>');
-				} else {
-					$("#accout").text(data.result.username);
-				}
+				ShowUserInfo(data);
 			} else {
 				//$("#login_title").text($.i18n.prop('index_50'));
-				$("#login").show();
-				$("#login_ok").hide();
+				ShowLogin();
 			}
 		}
 	});
@@ -94,9 +101,8 @@ function LogoutAuthUser() {
 		'params': {},
 		'success': function(data) {
 			if (data && data.result.ret) {
-				$("#login_ok").hide();
 				//$("#login_title").text("User Login");
-				$("#login").show();
+				ShowLogin();
 			}
 		}
 	});
