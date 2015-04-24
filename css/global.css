@@ -80,9 +80,8 @@ p { line-height:1.5; padding:6px 0px; }
 body { background:#222320 url(../images/bg.jpg) repeat top left fixed;-moz-background-size: cover;-webkit-background-size: cover;-o-background-size: cover;
 	background-size: cover;}
 input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 solid 1px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; padding:15px 0px 15px 20px; }
-.input-small { height:18px; line-height:14px; padding:5px 0px 5px 10px; }
+.input-small { height:18px; line-height:14px; padding:5px 0px 5px 10px;}
 .text-muted { color:#a9a9a9 }
-
 /*按钮*/
 .btn { height:60px; line-height:60px; padding:0px 40px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; display:inline-block; font-size:24px; }
 .btn-small{ height:40px; line-height:40px; padding:0px 30px; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px; display:inline-block; font-size:18px;}
