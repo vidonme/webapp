@@ -66,7 +66,7 @@ SettingService.prototype = {
         });
 
         $("#btnUpgrade").click(function() {
-            startUpgrade();
+            startUpgrade(true);
         });
     },
     resetPage: function() {
@@ -1174,7 +1174,7 @@ function saveUpdateInfo() {
 }
 
 function startUpgrade(download) {
-    if (upgradeState == 1 && download != "true") {
+    if (upgradeState == 1 && download != true) {
         upgradeState = 0;
         rightInfo.html('');
         startUpgrade(false);
@@ -1254,6 +1254,7 @@ function startUpgrade(download) {
                             'method': 'VidOnMe.Upgrade_GetState',
                             'params': [],
                             'success': function(data1) {
+                                downloadProcess = parseInt(data1.result.progress);
                                 showUpgradeStatus(1);
 
                                 if (data1 && data1.result.state == "downloadfin") {
@@ -1352,6 +1353,10 @@ function startUpgrade(download) {
                 'method': 'VidOnMe.Upgrade_GetState',
                 'params': [],
                 'success': function(data1) {
+                    
+                    genericNewVersion= HandleVersion(data1.result.newversion);
+                    showUpgradeStatus();
+
                     if (data1 && data1.result.state == "installfin" || data1.result.state == "checkversionfin") {
                         clearInterval(downloadTimer); //停止定时器
                         upgradeState = 7;
