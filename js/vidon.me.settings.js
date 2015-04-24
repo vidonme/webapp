@@ -1103,29 +1103,29 @@ function initUpdateParam() {
         $(".autoupgrade").removeClass("disable");
         $(".autoupgrade .dropdown").removeClass("disable");
 
-        $("#upgradeDate .font").attr("cus_value", 0);
-        $("#upgradeDate .font").html($.i18n.prop('index_96'));
+        $("#upgradeDate a").attr("cus_value", 0);
+        $("#upgradeDate a b").html($.i18n.prop('index_96'));
 
         $("#upgradeDate ul li").each(function() {
             var _this = $(this);
             var cusValue = $(this).attr("cus_value");
             var str = $(this).html();
             if (cusValue == updateWeekday) {
-                $("#upgradeDate .font").attr("cus_value", cusValue);
-                $("#upgradeDate .font").html(str);
+                $("#upgradeDate a").attr("cus_value", cusValue);
+                $("#upgradeDate a b").html(str);
             }
         });
 
-        $("#upgradeTime .font").attr("cus_value", 0);
-        $("#upgradeTime .font").html($.i18n.prop('index_96'));
+        $("#upgradeTime a").attr("cus_value", 0);
+        $("#upgradeTime a b").html($.i18n.prop('index_96'));
 
         $("#upgradeTime ul li").each(function() {
             var _this = $(this);
             var cusValue = $(this).attr("cus_value");
             var str = $(this).html();
             if (cusValue == updateDaytime) {
-                $("#upgradeTime .font").attr("cus_value", cusValue);
-                $("#upgradeTime .font").html(str);
+                $("#upgradeTime a").attr("cus_value", cusValue);
+                $("#upgradeTime a b").html(str);
             }
         });
     } else {
@@ -1137,8 +1137,8 @@ function initUpdateParam() {
 function saveUpdateInfo() {
     try {
         var updateAuto = $("#autoUpdate span:first").hasClass("checkbox selected");
-        var updateWeekday1 = $("#upgradeDate .font").attr("cus_value");
-        var updateDaytime = $("#upgradeTime .font").attr("cus_value");
+        var updateWeekday1 = $("#upgradeDate a").attr("cus_value");
+        var updateDaytime = $("#upgradeTime a").attr("cus_value");
 
         vidonme.rpc.request({
             'context': this,
