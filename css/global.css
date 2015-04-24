@@ -205,7 +205,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .addPath .left { float:left; width:250px; height:300px; border:#fff solid 1px; padding:10px 0px; overflow:auto; -webkit-border-top-left-radius:10px; -webkit-border-bottom-left-radius:10px; -moz-border-radius-topleft:10px; -moz-border-radius-bottomleft:10px; border-top-left-radius:10px; border-bottom-left-radius:10px; }
 .addPath .left  li{ line-height:30px; padding-left:10px;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .addPath .left  li:hover{ background:#696969}
-.addPath .right { float:right; width:347px; height:300px; border:#fff solid 1px; border-left:none; overflow:auto; padding:10px 0px;-webkit-border-top-right-radius:10px; -webkit-border-bottom-right-radius:10px; -moz-border-radius-topright:10px; -moz-border-radius-bottomright:10px; border-top-right-radius:10px; border-bottom-right-radius:10px;  }
+.addPath .right { float:left; width:340px; height:300px; border:#fff solid 1px; border-left:none; overflow:auto; padding:10px 0px;-webkit-border-top-right-radius:10px; -webkit-border-bottom-right-radius:10px; -moz-border-radius-topright:10px; -moz-border-radius-bottomright:10px; border-top-right-radius:10px; border-bottom-right-radius:10px;  }
 
 .addPath .right .folder,.addPath .right .back{ height:30px;}
 .addPath .right .back a{ display:block; height:30px; background:url(../images/back.png) no-repeat 10px 7px; padding-left:46px; line-height:30px; }
