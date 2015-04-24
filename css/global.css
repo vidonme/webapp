@@ -111,7 +111,7 @@ input { background:transparent;  height:14px; line-height:14px; border:#d3d3d3 s
 .guideMenu li span { display:inline-block; width:40px; height:40px; -moz-border-radius:21px; -webkit-border-radius:21px; border-radius:21px; border:#d3d3d3 solid 1px; font-size:28px; line-height:40px; text-align:center; margin-right:10px; }
 .guideMenu li.selected span { background:#3278cc; border:#3278cc solid 1px; }
 .guideMenu li b{ font-weight:normal}
-.slideblock { width:800px; overflow:hidden; position:relative; }
+.slideblock { width:800px; overflow:hidden; position:relative;}
 
 .slides { width:2400px; position:relative; }
 .slide { float:left; width:800px; }
