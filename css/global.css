@@ -274,7 +274,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 /*设置*/
 .popsetup{ width:800px; min-height:570px;}
 .popsetup .tckuangcon{ padding-top:40px;}
-.popsetup .setupleft { width:170px; height:490px; background:#20201e; float:left}
+.popsetup .setupleft { width:170px; height:470px; background:#20201e; float:left;}
 .popsetup .setupleft li{ height:40px; line-height:40px; padding-left:15px; cursor:pointer}
 .popsetup .setupleft li.selected{ color:#f5fffb; background:#3278cc}
 
