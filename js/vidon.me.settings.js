@@ -225,17 +225,17 @@ function info(infoType) {
     } else if (infoType == eSettingType.essentialInfo) {
         clearInterval(timer); //停止定时器
 
-        var liArray = $("#ulWebLanguage li");
-        var defaultLanguage = liArray["0"].getAttribute("cus_value"); //liArray["0"].attributes["0"].value;
+       // var liArray = $("#ulWebLanguage li");
+       // var defaultLanguage = liArray["0"].getAttribute("cus_value"); //liArray["0"].attributes["0"].value;
         //设置一个默认值
-        $("#selectWebLanguage").attr("cus_value", defaultLanguage);
-        $("#selectWebLanguage").html(liArray[0].val);
-        for (var i = 0; i < liArray.length; i++) {
-            if ((liArray[i] == "English" && language1 == "") || liArray[i] == language1) {
+        $("#selectWebLanguage").attr("cus_value",  $("#ulWebLanguage li:first").attr("cus_value"));
+        $("#selectWebLanguage b").val($("#ulWebLanguage li:first").val());
+        $("#ulWebLanguage li").each( function() {
+            if(($(this).val() == "English" && language1 == "") || $(this).attr("cus_value") == language1) {
                 $("#selectWebLanguage").attr("cus_value", language1);
-                $("#selectWebLanguage").html(liArray[i].val);
+                $("#selectWebLanguage b").html($(this).html());
             }
-        }
+        });
 
         if (genericAutoStart == "true") {
             $("#autostart span:first").addClass("checkbox selected");
@@ -295,23 +295,23 @@ function info(infoType) {
     } else if (infoType == eSettingType.mediaLibrary) {
         clearInterval(timer); //停止定时器
 
-        var liArray = $("#ulUpdateFrequency li");
-        $("#updateFrequency").innerText = "";
-        for (var i = 0; i < liArray.length; i++) {
-            if (liArray[i].getAttribute("cus_value") == libAutoUpdateTimeSpan) {
-                $("#updateFrequency").attr("cus_value", liArray[i].getAttribute("cus_value"));
-                $("#updateFrequency b").html(liArray[i].innerText);
-            }
-        }
 
-        liArray = $("#ulSubLanguage li");
-        $("#subLanguage").innerText = "";
-        for (var i = 0; i < liArray.length; i++) {
-            if (liArray[i].getAttribute("cus_value") == defaultScraperLanguage) {
-                $("#subLanguage").attr("cus_value", liArray[i].getAttribute("cus_value"));
-                $("#subLanguage b").html(liArray[i].innerText);
+
+       // var liArray = $("#ulUpdateFrequency li");
+        $("#updateFrequency").innerText = "";
+        $("#ulUpdateFrequency li").each( function() {
+            if ($(this).attr("cus_value") == libAutoUpdateTimeSpan) {
+                $("#updateFrequency").attr("cus_value", $(this).attr("cus_value"));
+                $("#updateFrequency b").html($(this).html());
             }
-        }
+        });
+        $("#subLanguage").innerText = "";
+        $("#ulSubLanguage li").each(function() {
+            if ($(this).attr("cus_value") == defaultScraperLanguage) {
+                $("#subLanguage").attr("cus_value", $(this).attr("cus_value"));
+                $("#subLanguage b").html($(this).html());
+            }
+        });
     }
 }
 
@@ -442,7 +442,6 @@ function settingSave(actionType) {
                 if (data && data.result) {
                     if (data.result.ret == true) {
                         window.setTimeout(function() {
-                            mediaLibDiv.innerHTML = '';
 
                             vidonme.rpc.request({
                                 'context': this,

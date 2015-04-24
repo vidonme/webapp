@@ -93,10 +93,10 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .btn-text{font-size:18px; color:#f5fffb; margin-top:10px;}
 .btn-text:hover{ color:#f5fffb; }
 /*header*/
-.header { height: 80px; background:#171916; position:relative; }
-.header .logo { display:block; position:absolute; top:24px; left:30px; }
+.header { height: 60px; background:#171916; position:relative; }
+.header .logo { display:block; position:absolute; top:14px; left:20px; }
 .headerMenu { float:right; }
-.headerMenu a{ background:url(../images/spriteimg/iconimg.png) no-repeat; display:inline-block; width:26px; height:26px; margin-right:20px; margin-top:27px;}
+.headerMenu a{ background:url(../images/spriteimg/iconimg.png) no-repeat; display:inline-block; width:26px; height:26px; margin-right:20px; margin-top:17px;}
 .headerMenu a.setting{ background-position:0px -164px;}
 .headerMenu a.setting:hover{ background-position:-214px -163px;}
 .headerMenu a.login{ background-position:-67px -164px;}
@@ -132,7 +132,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .setUp .tips a:hover{ background:transparent; color:#f5fffb;} 
 
 /*图片展示*/
-.siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:80px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
+.siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:60px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
 
 .siderbar .vertical { height: 60px;}
 .siderbar dl{ margin-bottom:50px;}
@@ -148,8 +148,8 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .siderbar .photo{background-position:40px -439px;}
 .siderbar .addbtn{ position:absolute; top:18px; right:20px; width:28px; height:28px; display:block; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -524px;}
 .siderbar .addbtn:hover{ background-position:0px -608px;}
-.content2 { position:absolute; top:80px; left:230px; bottom:0px; right:0px; overflow:hidden;}
-.posterMenu { height:90px;font-size:18px;}
+.content2 { position:absolute; top:60px; left:230px; bottom:0px; right:0px; overflow:hidden;}
+.posterMenu { height:80px;font-size:18px;}
 .posterMenu .posterMenubtn{ position:absolute; top:0px; right:15px; width:400px;}
 .posterMenu a { display:inline-block;float:right; height:28px; line-height:28px;}
 .posterMenu .fresh{ background:url(../images/spriteimg/iconimg.png) no-repeat -92px 2px; margin:31px 25px 0px;  width:32px; height:32px;}
@@ -162,14 +162,14 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .posterMenu .all a:hover span{ background-position:-93px -74px;}
 .posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX; font-size:14px;}
 .posterMenu .all ul li{ padding-left:10px;}
-.posterMenu p { text-align:center; line-height:90px; }
+.posterMenu p { text-align:center; line-height:80px; padding:0px;}
 .posterMenu a.backbtn { float:left; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -648px; display:block; height:90px; line-height:80px; padding-left:40px; margin-left:20px;}
 .posterMenu a.backbtn:hover{ background-position:0px -711px;}
 .mCSB_scrollTools { z-index: 5; }
-.posterList { overflow: auto; position:absolute; top:90px; bottom:0; right:0px; left:20px; }
+.posterList { overflow: auto; position:absolute; top:80px; bottom:0; right:0px; left:20px; }
 .posterList .box { width: 180px; float: left; height:300px; }
 .posterList .box  .imgname{ padding:0px 10px 0px 10px; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
-.posterList .img { margin: 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
+.posterList .img { margin: 0px 10px 10px 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
   -moz-background-size: cover;
 	-webkit-background-size: cover;
 	-o-background-size: cover;
@@ -309,7 +309,6 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .setupcon .disable p.checkboxblock{ display:none;}
 .setupcon .disable p.disablep{ display:block; height:28px; line-height:28px;}
 .setupcon .disable p.disablep span{ background:url(../images/spriteimg/iconimg.png) no-repeat 0px -1030px; display:inline-block; width:30px; height:28px; float:left}
-
 .setupcon .autoupgrade{ margin-bottom: 50px;}
 .setupcon .autoupgrade.disable .input_dropdown{ color:#535353; border:#535353 solid 1px;}
 .setupcon .autoupgrade.disable .input_dropdown:hover{ color:#535353}
