@@ -31,9 +31,14 @@
 			if (g_CurLibraryType == "commercial") {
 				title = $.i18n.prop('index_17');
 				$("#popAddPathH3").text(title);
+				title = $.i18n.prop('index_19');
+				$("#popAddPathP").text(title);
+				
 			} else {
 				title = $.i18n.prop('index_18');
 				$("#popAddPathH3").text(title);
+				title = $.i18n.prop('index_20');
+				$("#popAddPathP").text(title);				
 			}
 
 			ShowPageAddOnePath('', '');
