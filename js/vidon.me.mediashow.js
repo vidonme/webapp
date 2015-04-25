@@ -459,7 +459,7 @@
  		obj.limits = new Limits(__start, __end);
  	} else {
  		obj.limits = new Limits(__start, __end);
- 		obj.sort = (new Sort()).byDateAdded();
+ 		obj.sort = (new Sort()).byDateAdded('descending');
  	}
 
  	obj.properties = new Array();
@@ -529,7 +529,7 @@
  		getMethod = 'VideoLibrary.GetRecentlyAddedTVShows';
  	} else {
  		getMethod = 'VideoLibrary.GetTVShows';
- 		obj.sort = (new Sort()).byDateAdded();
+ 		obj.sort = (new Sort()).byDateAdded('descending');
  	}
 
  	obj.limits = new Limits(__start, __end);
@@ -612,7 +612,7 @@
  	} else {
  		getMethod = 'VideoLibrary.GetPrivVideos';
 
- 		obj.sort = (new Sort()).byDateAdded();
+ 		obj.sort = (new Sort()).byDateAdded('descending');
  		obj.properties = new Array();
  		obj.properties.push("file");
  		obj.properties.push("thumbnail");
