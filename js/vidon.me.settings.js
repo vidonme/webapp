@@ -295,7 +295,7 @@ function info(infoType) {
                     var support = data.result.hardCodecSupport;
 
                     if (support == true) {
-                        $("#hardCodecSupport").addClass("able");
+                        $("#hardCodecSupport").removeClass("disable");
                     } else {
                         $("#hardCodecSupport").addClass("disable");
                     }
