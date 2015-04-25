@@ -828,13 +828,13 @@
  	count = $(".posterList .box").length;
  	var str;
  	if (g_selected_type == 'movie') {
- 		str = $.i18n.prop('Movies_Count')
+ 		str = $.i18n.prop('index_151')
  		str = str.format(count);
  	} else if (g_selected_type == 'tvshow') {
- 		str = $.i18n.prop('TVShows_Count')
+ 		str = $.i18n.prop('index_152')
  		str = str.format(count);
  	} else if (g_selected_type == 'video') {
- 		str = $.i18n.prop('Videos_Count')
+ 		str = $.i18n.prop('index_166')
  		str = str.format(count);
  	} else if (g_selected_type == 'image') {
  		str = $.i18n.prop('Images_Count')
@@ -845,6 +845,8 @@
 
  	$('#mediatype').html(str);
  }
+
+ 
 
  var global_image_url = 'http://' + window.location.host + '/image/';
  var global_count_timer = -1;

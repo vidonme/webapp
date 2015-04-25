@@ -397,7 +397,7 @@ function settingSave(actionType) {
                 "val": language
             },
             'success': function(data) {
-
+                getServerLanguage();
             }
         });
     } else if (actionType == eSettingType.mediaLibrary) {
