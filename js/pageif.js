@@ -37,6 +37,8 @@
 
 		$("#btnCfmDeletePathOK").click(function() {
 			confirmDeletePath();
+			$('#selectedPath li').removeClass("even");
+			$('#selectedPath li:even').addClass("even");
 		})
 
 		//Ò³ÃæÉ¾³ýÂ·¾¶

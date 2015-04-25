@@ -125,7 +125,14 @@ $(function() {
 		if (!g_CurLibId) {
 			return;
 		}
-
+		var title = "";
+		if (g_CurLibraryType == "commercial") {
+			title = $.i18n.prop('index_13');
+			$("#WzdAddPathTitle").text(title);		
+		} else {
+			title = $.i18n.prop('index_14');
+			$("#WzdAddPathTitle").text(title);			
+		}
 		$("#selectedPath").val("");
 		$(".slides").animate({
 			left: -2 * slideWidth
