@@ -104,12 +104,12 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 /*向导主体部分*/
 .content { position:relative; width:800px; margin:0px auto; padding:35px 90px; color:#ccc; }
 .guideMenu { margin-bottom:40px; }
-.guideMenu li { float:left; font-size:22px; line-height:42px; }
-.guideMenu li.linethrough { text-decoration:line-through; width:60px; height:22px; border-bottom:#d3d3d3 solid 1px; margin:0px 20px; }
+.guideMenu li { float:left; font-size:18px; line-height:30px; width:210px;}
+.guideMenu li.linethrough { text-decoration:line-through; width:62px; height:17px; border-bottom:#d3d3d3 solid 1px; margin:0px 10px; }
 .guideMenu li.selected { color:#f5fffb; }
-.guideMenu li span { display:inline-block; width:40px; height:40px; -moz-border-radius:21px; -webkit-border-radius:21px; border-radius:21px; border:#d3d3d3 solid 1px; font-size:28px; line-height:40px; text-align:center; margin-right:10px; }
+.guideMenu li span { display:inline-block; width:30px; height:30px; -moz-border-radius:16px; -webkit-border-radius:16px; border-radius:16px; border:#d3d3d3 solid 1px; font-size:24px; line-height:30px; text-align:center; margin-right:10px; float:left}
 .guideMenu li.selected span { background:#3278cc; border:#3278cc solid 1px; }
-.guideMenu li b{ font-weight:normal}
+.guideMenu li b{ font-weight:normal; display:block; float:left; width:165px; text-align:center}
 .slideblock { width:800px; overflow:hidden; position:relative;}
 
 .slides { width:2400px; position:relative; }
@@ -279,6 +279,8 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .popsetup .setupleft li.selected{ color:#f5fffb; background:#3278cc}
 
 .setupright { width:570px; height:470px;float:right; padding-bottom:20px; position:relative;}
+.setupright .setupcon{min-height:470px;}
+
 .popsetup .setupcon{display:none; width:570px;}
 .popsetup .setupcon.show{ display:block;}
 
@@ -321,7 +323,8 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 
 .popsetup .dropdown  ul{ top:28px;}
 .popsetup .dropdown  ul li{ list-style:none;}
-.upgradeTime ul{ height:300px; overflow:auto}
+.upgradeTime ul{ height:250px; overflow:auto}
+#selectLanguage ul{ height:160px; overflow:auto}
 /**/
 .listing{ background:url(../images/movie/dian.png) no-repeat left center; padding-left:20px;}
 .cloud { margin:40px 0px;}

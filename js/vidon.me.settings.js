@@ -44,9 +44,11 @@ SettingService.prototype = {
 
         $("#setupright").mCustomScrollbar({
             autoHideScrollbar: false,
-            scrollButtons: {
-                enable: true
-            }
+           
+        });
+		$("#ulSubLanguage").mCustomScrollbar({
+            autoHideScrollbar: false,
+           
         });
     },
     bindControls: function() {
