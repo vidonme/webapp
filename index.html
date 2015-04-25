@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
 <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 <title>VidOn.me</title>
-<script type="text/javascript" src="js/vidon.me.launcher.js"></script>
+<script type="text/javascript" src="js/vidon.me.launcher.js"?2.0.28></script>
 <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 </head>
 <body>
@@ -18,10 +18,8 @@
 		        'params': {},
 		        'success': function(data) {
 					if( data ){
-						var date = new Date();
 						var debug = true;
-						version = (debug ? Math.random() : '2.0.2.8'),
-                    	var dateStr = Math.random();//date.toGMTString();
+						var version = (debug ? Math.random() : '2.0.2.8');
 						if( data.result.ret == true ){
 							location.assign("guide.html?") + version;
 							window.location="guide.html?" + version;
