@@ -846,7 +846,7 @@
  	$('#mediatype').html(str);
  }
 
- var global_image_url = 'http://localhost:32080/image/';
+ var global_image_url = 'http://' + window.location.host + '/image/';
  var global_count_timer = -1;
  var g_selected_type = "movie";
  var g_ShowRecentMedia = false;
