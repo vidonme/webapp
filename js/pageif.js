@@ -26,7 +26,6 @@
 		})
 
 		$("#addPathbtn").click(function() {
-			var title = "";
 			showdiv(".addPath", 2);
 			AccessPageLibraryPath(g_CurLibraryType);
 		})
@@ -96,6 +95,7 @@
 		RequestAddLibraryPath(g_CurLibId, mediapath);
 		var html = '<li index="0"><span class="delete"></span><span class="showpath">' + mediapath + '</span></li>'
 		$("#selectedPath").append(html);
+		$('#selectedPath li:even').addClass("even");		
 		close_box('.addPath', 2);
 	}
 

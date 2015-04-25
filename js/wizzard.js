@@ -37,6 +37,7 @@ function commitAddOneLibPath() {
 	if (!mediapath) return;
 	close_box('.addPath', 2);
 	$("#selectedPath").val(mediapath);
+	$("#btnWzdOK").removeClass("btn-disable").addClass("btn-blue");
 }
 
 //===============ServerInterface============================

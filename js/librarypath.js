@@ -4,7 +4,18 @@
 
 	$(function() {
 		$("#btnAddLibPathOK").click(function() {
+			var path = $("#addSrcPath").val();
+			if (!path) return;
 			commitAddOneLibPath();
+		})
+		
+		$("#addSrcPath").bind("propertychange input",function(){
+				var path = $("#addSrcPath").val();
+				if (!path){
+						$("#btnAddLibPathOK").addClass("btn-disable").removeClass("btn-blue");
+				}else{	
+						$("#btnAddLibPathOK").removeClass("btn-disable").addClass("btn-blue");
+				}
 		})
 
 		$("#btnAddNetworkOK").click(function() {
@@ -129,8 +140,9 @@
 		$("#popDiskblock").append(html);
 		if (path) {
 			$("#listpath").append(html);
+			$("#btnAddLibPathOK").removeClass("btn-disable").addClass("btn-blue");
 		}
-
+		
 		if (reqCnt != 0) {
 			if (g_lastjqXhr && g_lastjqXhr.readyState != 4) {
 				g_lastjqXhr.abort();
