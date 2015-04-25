@@ -105,7 +105,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .content { position:relative; width:800px; margin:0px auto; padding:35px 90px; color:#ccc; }
 .guideMenu { margin-bottom:40px; }
 .guideMenu li { float:left; font-size:22px; line-height:42px; }
-.guideMenu li.linethrough { text-decoration:line-through; width:80px; height:22px; border-bottom:#d3d3d3 solid 1px; margin:0px 20px; }
+.guideMenu li.linethrough { text-decoration:line-through; width:60px; height:22px; border-bottom:#d3d3d3 solid 1px; margin:0px 20px; }
 .guideMenu li.selected { color:#f5fffb; }
 .guideMenu li span { display:inline-block; width:40px; height:40px; -moz-border-radius:21px; -webkit-border-radius:21px; border-radius:21px; border:#d3d3d3 solid 1px; font-size:28px; line-height:40px; text-align:center; margin-right:10px; }
 .guideMenu li.selected span { background:#3278cc; border:#3278cc solid 1px; }
@@ -166,7 +166,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .posterMenu a.backbtn { float:left; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -648px; display:block; height:90px; line-height:80px; padding-left:40px; margin-left:20px;}
 .posterMenu a.backbtn:hover{ background-position:0px -711px;}
 .mCSB_scrollTools { z-index: 5; }
-.posterList { overflow: auto; position:absolute; top:80px; bottom:0; right:0px; left:20px; }
+.posterList { overflow: auto; position:absolute; top:80px; bottom:20px; right:0px; left:20px; }
 .posterList .box { width: 180px; float: left; height:300px; }
 .posterList .box  .imgname{ padding:0px 10px 0px 10px; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
 .posterList .img { margin: 0px 10px 10px 10px;  cursor:pointer; position:relative;  width:160px; height:240px;  background-position: center center; overflow:hidden; background-repeat:repeat;
