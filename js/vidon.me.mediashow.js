@@ -448,7 +448,6 @@
  }
 
  function __GetMovies(start, end, state) {
- 	$("#siderbar dd").eq(0).addClass("selected");
  	$(".movie").removeClass("teleplay");
  	var __start = arguments[0] ? start : 0;
  	var __end = arguments[1] ? end : 20;
@@ -480,6 +479,11 @@
  		'success': function(data) {
  			if (data && data.result) {
  				if (data.result.limits.end != -1) {
+ 					if ( state == "getcount" ) {
+ 						FreshSiderbarCount( "movie", data.result.limits.total );
+ 						return;
+ 					}
+
  					// check is in Movie show page
  					if (g_selected_type != 'movie') {
  						return;
@@ -553,6 +557,11 @@
  					}
  					*/
  				} else {
+ 					if ( state == "getcount" ) {
+ 						FreshSiderbarCount( "tvshow", data.result.limits.total );
+ 						return;
+ 					}
+
  					if (g_selected_type != 'tvshow') {
  						return;
  					}
@@ -623,6 +632,11 @@
  					}
  					*/
  				} else {
+ 					if ( state == "getcount" ) {
+ 						FreshSiderbarCount( "video", data.result.limits.total );
+ 						return;
+ 					}
+
  					if (g_selected_type != 'video') {
  						return;
  					}
@@ -822,6 +836,10 @@
  	} else {
 
  	}
+
+ 	__GetMovies( 0, 1, "getcount");
+ 	__GetTvshows( 0, 1, "getcount");
+ 	__GetPrivVideos( 0, 1, "getcount");
  }
 
  function FreshMediasCount() {
@@ -846,7 +864,37 @@
  	$('#mediatype').html(str);
  }
 
- 
+ function FreshSiderbarCount(type, count) {
+ 	var _this = null;
+ 	var strTitle;
+
+ 	if (type == 'movie') {
+ 		_this = $("#siderbar_moive");
+ 		strTitle = $.i18n.prop('index_38')
+ 	} else if (type == 'tvshow') {
+ 		_this = $("#siderbar_teleplay");
+ 		strTitle = $.i18n.prop('index_39')
+ 	} else if (type == 'video') {
+ 		_this = $("#siderbar_home_video");
+ 		strTitle = $.i18n.prop('index_40')
+ 	} else if (type == 'image') {
+ 		_this = $("#siderbar_images");
+ 		strTitle = $.i18n.prop('index_41')
+ 	} else {
+
+ 	}
+
+ 	if ( _this != null ) {
+ 		if ( count > 0  ) {
+ 			strTitle = strTitle + " (" + count + ")";
+ 		}
+ 		
+ 		_this.text( strTitle );
+ 	}
+ 	
+ }
+
+
 
  var global_image_url = 'http://' + window.location.host + '/image/';
  var global_count_timer = -1;

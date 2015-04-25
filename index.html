@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>Images</title>
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<title>VidOn.me</title>
 <script type="text/javascript" src="js/vidon.me.launcher.js"></script>
 <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 </head>
@@ -16,16 +19,18 @@
 		        'success': function(data) {
 					if( data ){
 						var date = new Date();
+						debug = true;
+						version = (debug ? Math.random() : '2.1.1'),
                     	var dateStr = Math.random();//date.toGMTString();
 						if( data.result.ret == true ){
-							location.assign("guide.html?") + dateStr;
-							window.location="guide.html?" + dateStr;
-							location.href="guide.html?" + dateStr;
+							location.assign("guide.html?") + version;
+							window.location="guide.html?" + version;
+							location.href="guide.html?" + version;
 						}
 						else{
-							location.assign("mediashow.html?") + dateStr;
-							window.location="mediashow.html?" + dateStr;
-							location.href="mediashow.html?" + dateStr;
+							location.assign("mediashow.html?") + version;
+							window.location="mediashow.html?" + version;
+							location.href="mediashow.html?" + version;
 						}
 					}
 			    }
