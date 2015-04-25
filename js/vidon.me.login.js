@@ -88,6 +88,12 @@ function CheckAuthUserInfo() {
 				ShowUserInfo(data);
 			} else {
 				//$("#login_title").text($.i18n.prop('index_50'));
+				if ( g_languageType == "zh-cn" ) {
+					$("#selectNationality").addClass("selected");
+				}
+				else{
+					$("#selectNationality").removeClass("selected");
+				}
 				ShowLogin();
 			}
 		}

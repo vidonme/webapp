@@ -1,3 +1,5 @@
+var g_languageType = null;
+
 $(function() {
 	loadHtml();
 	loadProperties("en");
@@ -221,6 +223,7 @@ function getServerLanguage() {
 					locale = "en";
 				}
 
+				g_languageType = locale;
 				loadProperties(locale);
 				translateHtml();
 			}
