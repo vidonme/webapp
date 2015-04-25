@@ -150,7 +150,7 @@ function info(infoType) {
         genericAutoStart = '', //是否开机自动启动
         discoveryBonjour = '', //本助协议
         discoveryDns = '', //DNS
-        // webServicePort = '',  //web端口号
+         webServicePort = '',  //web端口号
         accountAccount = '', //Web管理登陆用户名
         accountPassword = '', //Web管理登陆密码
         webServer = '',
@@ -199,10 +199,13 @@ function info(infoType) {
             case "services.webserver":
                 webServer = settingInfo[i].val;
                 var jsonWebServer = eval('(' + webServer + ')');
-                // webServicePort = jsonWebServer.webserverport;
+                 webServicePort = jsonWebServer.webserverport;
                 accountAccount = jsonWebServer.webserverusername;
                 accountPassword = jsonWebServer.webserverpassword;
                 servicesWebonlyLocal = jsonWebServer.webonlylocal;
+                break;
+            case "webserver.port":
+                webServicePort = settingInfo[i].val;
                 break;
             case "generic.autoupgrade":
                 updateAuto = settingInfo[i].val;
@@ -246,6 +249,12 @@ function info(infoType) {
                 $("#selectWebLanguage b").html($(this).html());
             }
         });
+        var address = "http://" + serverIp + ":" + webServicePort;
+        address = "<a href='"  + address + "' class='a'>" + address + "</a>"
+        var info = $("#localhostInfo").html();
+        info = info.format(address);
+        $("#localhostInfo").html(info);
+      //  $("#localhostInfo").html(.format(address));
 
         if (genericAutoStart == "true") {
             $("#autostart span:first").addClass("checkbox selected");
@@ -293,9 +302,16 @@ function info(infoType) {
             'success': function(data) {
                 if (data && data.result) {
                     var support = data.result.hardCodecSupport;
-
+                    var enable  = data.result.hardCodecSetup;
                     if (support == true) {
                         $("#hardCodecSupport").removeClass("disable");
+                        if (enable) {
+                            $("#opendecoding span:first").remove("checkbox");
+                            $("#opendecoding span:first").addClass("checkbox selected");
+                        } else {
+                            $("#opendecoding span:first").removeClass("checkbox selected");
+                            $("#opendecoding span:first").addClass("checkbox");
+                        }
                     } else {
                         $("#hardCodecSupport").addClass("disable");
                     }
@@ -475,7 +491,7 @@ function settingSave(actionType) {
         });
     } else if (actionType == eSettingType.transcoding) {
         reloadPage = true;
-        var openTransCode = $("#opendecoding").hasClass("checkbox selected");
+        var openTransCode = $("#opendecoding span:first").hasClass("checkbox selected");
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetTranscodeOption',
