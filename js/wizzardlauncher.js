@@ -35,7 +35,7 @@ function getBrowserInfo() {
 		script,
 		debug = false,
 		/* Set to true to disable cached javascript */
-		version = (debug ? Math.random() : '2.1.1'),
+		version = (debug ? Math.random() : '2.0.2.8'),
 		scripts;
 	scripts = [
 		"js/jquery-1.8.2.min.js",

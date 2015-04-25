@@ -506,6 +506,7 @@
  					}
 
  					FreshMediasCount();
+ 					FreshSiderbarCount( "movie", data.result.limits.total );
 
  					if (data.result.limits.total > data.result.limits.end) {
  						__GetMovies(data.result.limits.end + 1, data.result.limits.total, 'finish');
@@ -584,6 +585,7 @@
  					}
 
  					FreshMediasCount();
+ 					FreshSiderbarCount( "tvshow", data.result.limits.total );
 
  					if (data.result.limits.total > data.result.limits.end) {
  						__GetTvshows(data.result.limits.end + 1, data.result.limits.total, 'finish');
@@ -655,6 +657,7 @@
  					}
 
  					FreshMediasCount();
+ 					FreshSiderbarCount( "video", data.result.limits.total );
 
  					if (data.result.limits.total > data.result.limits.end) {
  						__GetPrivVideos(data.result.limits.end + 1, data.result.limits.total, 'finish');
