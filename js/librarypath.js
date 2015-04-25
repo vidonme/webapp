@@ -21,8 +21,29 @@
 			autoHideScrollbar: true,
 		});
 	})
+	
+	function ShowPageTitleLibraryPath(type){
+			
+			if (type == "commercial") {
+				title = $.i18n.prop('index_17');
+				$("#popAddPathH3").text(title);
+				title = $.i18n.prop('index_19');
+				$("#popAddPathP").text(title);
+				
+			} else {
+				title = $.i18n.prop('index_18');
+				$("#popAddPathH3").text(title);
+				title = $.i18n.prop('index_20');
+				$("#popAddPathP").text(title);				
+			}
+	}
+	
+	function AccessPageLibraryPath(type){
+			ShowPageTitleLibraryPath(type);
+			ShowPageAddOnePath('', '');
+	}	
 
-	//==================添加网络Drive Div======================	
+	//打开添加网络路径DIV
 	function ShowPageAddNetShare(host) {
 		var title = "";
 		$("#txtNetShareSrcName").focus();

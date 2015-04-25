@@ -141,18 +141,8 @@ $(function() {
 	})
 
 	$(".addPathbtn").click(function() {
-		var title = "";
-		if (g_CurLibraryType == "commercial") {
-			title = $.i18n.prop('index_17');;
-			$("#popAddPathH3").text(title);
-		} else {
-			title = $.i18n.prop('index_18');;
-			$("#popAddPathH3").text(title);
-		}
-
 		showdiv(".addPath", 2);
-
-		ShowPageAddOnePath('', '');
+		AccessPageLibraryPath(g_CurLibraryType);
 	})
 
 	loadPage();
