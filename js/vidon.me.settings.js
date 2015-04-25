@@ -42,6 +42,12 @@ SettingService.prototype = {
     init: function() {
         this.bindControls();
 
+        $("#setupright").mCustomScrollbar({
+            autoHideScrollbar: false,
+            scrollButtons: {
+                enable: true
+            }
+        });
     },
     bindControls: function() {
         $("#btnSetting").click(jQuery.proxy(this.serverSettingOpen, this));
@@ -67,6 +73,10 @@ SettingService.prototype = {
 
         $("#btnUpgrade").click(function() {
             startUpgrade(true);
+        });
+
+        $("#btnPopsetupClose").click(function(){
+            saveUpdateInfo();
         });
     },
     resetPage: function() {
@@ -474,7 +484,7 @@ function settingSave(actionType) {
             },
             'success': function(data) {
                 if (data.result.ret) {
-                    alert("%156".toLocaleString());
+                    //alert("%156".toLocaleString());
                     info(actionType);
                 }
             }
@@ -505,7 +515,7 @@ function settingSave(actionType) {
     }
 
     if (actionType != "mediaLibrary" && actionType != "transcoding") {
-        alert("%156".toLocaleString());
+        //alert("%156".toLocaleString());
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.GetSystemSettingForAll',
@@ -991,9 +1001,9 @@ function saveServerName() {
         },
         'success': function(data) {
             if (data.result.ret) {
-                alert("%156".toLocaleString());
+                //alert("%156".toLocaleString());
             } else {
-                alert("Save faild".toLocaleString());
+                //alert("Save faild".toLocaleString());
             }
 
         }
@@ -1002,12 +1012,15 @@ function saveServerName() {
 
 
 function showUpgradeStatus(status) {
-    $("#versionNew").attr("style", "display:none");
-    $("#versionFindNew").attr("style", "display:none");
-    $("#versionDown").attr("style", "display:none");
-    $("#versionDownFail").attr("style", "display:none");
-    $("#versionInstall").attr("style", "display:none");
-
+    if ( g_lastUpgradStatus != upgradeState ) {
+        $("#versionNew").attr("style", "display:none");
+        $("#versionFindNew").attr("style", "display:none");
+        $("#versionDown").attr("style", "display:none");
+        $("#versionDownFail").attr("style", "display:none");
+        $("#versionInstall").attr("style", "display:none");
+    };
+    
+    var strNeedShowDiv = null;
     if (upgradeState == 0) {
 
     } else if (upgradeState == 1) {
@@ -1024,9 +1037,12 @@ function showUpgradeStatus(status) {
           <li>修复下载资源到移动端失败问题</li>
         </ul>
         */
+        $("#changelog").html("");
+        $("#changelog").append( changelog );
         $("#versionFindNew #curVersion").text(genericVersion);
         $("#versionFindNew #newVersion").text(genericNewVersion);
-        showdiv("#versionFindNew");
+
+        strNeedShowDiv = "#versionFindNew";
     } else if (upgradeState == 2) {
         //already latest version
         /*
@@ -1037,7 +1053,7 @@ function showUpgradeStatus(status) {
         */
 
         $("#versionNew #curVersion").text(genericVersion);
-        showdiv("#versionNew");
+        strNeedShowDiv = "#versionNew";
     } else if (upgradeState == 3) {
         //downloading
         /*
@@ -1068,7 +1084,7 @@ function showUpgradeStatus(status) {
         $("#versionDown .progress-bar").attr("style", "width:" + downloadProcess + "%");
         $("#versionDown #percent").text(downloadProcess + "%");
 
-        showdiv("#versionDown");
+        strNeedShowDiv = "#versionDown";
     } else if (upgradeState == 4) {
         // download finish
 
@@ -1076,29 +1092,37 @@ function showUpgradeStatus(status) {
         // download failed
         $("#versionDownFail #curVersion").text(genericVersion);
         $("#versionDownFail #newVersion").text(genericNewVersion);
-        showdiv("#versionDownFail");
+
+        strNeedShowDiv = "#versionDownFail";
     } else if (upgradeState == 6) {
         // installing
 
         $("#versionInstall #curVersion").text(genericVersion);
         $("#versionInstall #newVersion").text(genericNewVersion);
-        showdiv("#versionInstall");
+
+        strNeedShowDiv = "#versionInstall";
     } else if (upgradeState == 7) {
         // install finish
     } else if (upgradeState == 8) {
         // cancel
         $("#versionDownFail #curVersion").text(genericVersion);
         $("#versionDownFail #newVersion").text(genericNewVersion);
-        showdiv("#versionDownFail");
+
+        strNeedShowDiv = "#versionDownFail";
     } else if (upgradeState == 9) {
         // install failed
         $("#versionDownFail #curVersion").text(genericVersion);
         $("#versionDownFail #newVersion").text(genericNewVersion);
-        showdiv("#versionDownFail");
+
+        strNeedShowDiv = "#versionDownFail";
     } else {
 
     }
 
+    if ( strNeedShowDiv != null && g_lastUpgradStatus != upgradeState ) {
+        showdiv(strNeedShowDiv);
+        g_lastUpgradStatus = status;
+    }
 }
 
 function initUpdateParam() {
@@ -1410,4 +1434,5 @@ var hasCommitUpdate = true;
 var upgradeState = 0; //0未检查更新 1 有新版本  2没有新版本  3正在下载新版本 4 下载成功 5 下载失败  6 正在安装 7安装成功 8取消升级 9 安装失败
 var Language = '';
 var genericName = '';
-var downloadProcess = 60;
+var downloadProcess = 0;
+var g_lastUpgradStatus;

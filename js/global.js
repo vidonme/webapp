@@ -76,7 +76,7 @@ $(function() {
 			showSettingPage(index);
 		})
 		//自动升级
-	$("#autostart .checkbox").click(function() {
+	$("#autoUpdate .checkbox").click(function() {
 
 			$(".autoupgrade").toggleClass("disable");
 			$(".autoupgrade .dropdown").toggleClass("disable");
