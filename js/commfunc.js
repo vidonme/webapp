@@ -54,7 +54,11 @@
 			}
 
 			if (data && (data.result.ret == false)) {
-				err = data.result.err;
+				if (typeof(data.result.err_msg) == "undefined") {
+					return false;
+				}
+				
+				err = data.result.err_msg;
 
 				if (err == "Access is denied") {
 					langua = $.i18n.prop('Server_Response_Err_Access');

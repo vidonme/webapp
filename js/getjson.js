@@ -56,7 +56,7 @@
 					"path": mediapath
 				},
 				'success': function(data) {
-					return data.result.PathId;
+					cbHandleAddLibraryPath(data);
 					//alert("AddPathToLibrary:" + data.result.ret);
 				}
 			});

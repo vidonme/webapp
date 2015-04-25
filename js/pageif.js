@@ -89,16 +89,28 @@
 			$('#selectedPath li:even').addClass("even");
 		}, this));
 	}
+	
+	function cbHandleAddLibraryPath(data){
+		if (!checkResponse(data)){
+			var errmsg = $.i18n.prop('index_37_1');
+			alert(errmsg);
+			return;
+		}
+
+		var mediapath = $("#addSrcPath").val();
+		if (!mediapath) return;					
+		var html = '<li index="0"><span class="delete"></span><span class="showpath">' + mediapath + '</span></li>'
+		$("#selectedPath").append(html);
+		$('#selectedPath li:even').addClass("even");		
+		close_box('.addPath', 2);
+	}
+	
 
 	//主页增加路径
 	function commitAddOneLibPath() {
 		var mediapath = $("#addSrcPath").val();
 		if (!mediapath) return;
 		RequestAddLibraryPath(g_CurLibId, mediapath);
-		var html = '<li index="0"><span class="delete"></span><span class="showpath">' + mediapath + '</span></li>'
-		$("#selectedPath").append(html);
-		$('#selectedPath li:even').addClass("even");		
-		close_box('.addPath', 2);
 	}
 
 	//==================确认删除路径DIV==============================

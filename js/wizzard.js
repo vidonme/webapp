@@ -75,21 +75,27 @@ function wizardsetting() {
 			"path": mediapath
 		},
 		'success': function(data) {
-			//alert("AddPathToLibrary:" + data.result.ret);
+			if (data.result.ret == false) {
+				var errmsg = $.i18n.prop('index_37_1');
+				alert(errmsg);
+				return;
+			}
+			
+			vidonme.rpc.request({
+				'context': this,
+				'method': 'VidOnMe.SetWizzardDisabled',
+				'params': {},
+				'success': function(data) {		
+					//alert("SetWizzardDisabled:" + data.result.ret);
+					location.assign("index.html");
+					window.location = "index.html";
+					location.href = "index.html";
+				}
+			});
 		}
 	});
 
-	vidonme.rpc.request({
-		'context': this,
-		'method': 'VidOnMe.SetWizzardDisabled',
-		'params': {},
-		'success': function(data) {
-			//alert("SetWizzardDisabled:" + data.result.ret);
-			location.assign("index.html");
-			window.location = "index.html";
-			location.href = "index.html";
-		}
-	});
+
 }
 
 function loadPage() {
@@ -151,6 +157,15 @@ $(function() {
 	$(".addPathbtn").click(function() {
 		showdiv(".addPath", 2);
 		AccessPageLibraryPath(g_CurLibraryType);
+	})
+	
+	$("#selectedPath").bind("propertychange input",function(){
+			var path = $("#selectedPath").val();
+			if (!path){
+					$("#btnWzdOK").addClass("btn-disable").removeClass("btn-blue");
+			}else{	
+					$("#btnWzdOK").removeClass("btn-disable").addClass("btn-blue");
+			}
 	})
 
 	loadPage();
