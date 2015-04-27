@@ -1,5 +1,7 @@
-	var reqCnt = 0;
-	var g_lastjqXhr = {};
+	var reqDriveCnt = 0;
+	var g_lastDrivejqXhr = {};
+	var reqFolderCnt = 0;
+	var g_lastFolderjqXhr = {};	
 
 
 	$(function() {
@@ -51,7 +53,8 @@
 	
 	function AccessPageLibraryPath(type){
 			ShowPageTitleLibraryPath(type);
-			ShowPageAddOnePath('', '');
+			ShowDriveList();
+			//ShowPageAddOnePath('', '');
 	}	
 
 	//打开添加网络路径DIV
@@ -128,10 +131,12 @@
 	function cbAddNetDrive(data, netpath) {
 		//alert(netpath);
 		if (!checkResponse(data)) return;
-		ShowPageAddOnePath(escape(netpath), escape(netpath));
+		ShowDriveList();
+		ShowFolderList(escape(netpath), escape(netpath));
 	}
 
 
+	
 	//==================添加一个LibPath Div======================			
 	function ShowPageAddOnePath(path, drive) {
 		$("#popDiskblock").html("");
@@ -153,10 +158,29 @@
 		reqCnt++;
 	}
 
+
+
+	function ShowDriveList(){
+		$("#popDiskblock").html("");
+		
+		var html = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';
+		$("#popDiskblock").append(html);
+		
+		if (reqDriveCnt != 0) {
+			if (g_lastDrivejqXhr && g_lastDrivejqXhr.readyState != 4) {
+				g_lastDrivejqXhr.abort();
+			}
+		}
+
+		g_lastDrivejqXhr = RequestDriveList();
+		reqDriveCnt++;			
+	}
+
 	function cbHandleDiskList(data) {
 		var itemhtml = "";
 		var langua = "";
-
+		
+		reqDriveCnt--;
 		if (!checkResponse(data))
 			return;
 
@@ -168,18 +192,18 @@
 			var displaypath = handleUrl(strpath, true, true);
 
 			strpath = item.path.replace(/\\/g, '\\\\');
-			itemhtml = '<li onClick="ShowPageAddOnePath(\'' + escape(strpath) + '\',\'' + escape(displaypath) + '\')" title="' + displaypath + '">' + drivetype + ' ' + displaypath + '</li>';
+			itemhtml = '<li onClick="ShowFolderList(\'' + escape(strpath) + '\',\'' + escape(displaypath) + '\')" title="' + displaypath + '">' + drivetype + ' ' + displaypath + '</li>';
 			$("#popDiskblock").append(itemhtml);
 		}, this));
 
 
 		//alert(html);
 		langua = $.i18n.prop('index_22');
-		html = '<li title="' + langua + '" onClick="ShowPageAddOnePath(\'' + "smb://" + '\',\'' + "" + '\')">' + langua + '</li>';
+		html = '<li title="' + langua + '" onClick="ShowFolderList(\'' + "smb://" + '\',\'' + "" + '\')">' + langua + '</li>';
 		$("#popDiskblock").append(html);
 
 		langua = $.i18n.prop('index_23');
-		html = '<li title="' + langua + '" onClick="ShowPageAddOnePath(\'' + "nfs://" + '\',\'' + "" + '\')">' + langua + '</li>';
+		html = '<li title="' + langua + '" onClick="ShowFolderList(\'' + "nfs://" + '\',\'' + "" + '\')">' + langua + '</li>';
 		$("#popDiskblock").append(html);
 
 		var note = $.i18n.prop('index_24');
@@ -187,6 +211,25 @@
 		$("#popDiskblock").append(html);
 
 	}
+	
+	function ShowFolderList(path,drive){
+		$("#listpath").html("");
+		
+		var html = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';		
+		if (path) {
+			$("#listpath").append(html);
+			$("#btnAddLibPathOK").removeClass("btn-disable").addClass("btn-blue");
+		}
+		
+		if (reqFolderCnt != 0) {
+			if (g_lastFolderjqXhr && g_lastFolderjqXhr.readyState != 4) {
+				g_lastFolderjqXhr.abort();
+			}
+		}
+
+		g_lastFolderjqXhr = RequestFolderList(path, drive);
+		reqFolderCnt++;		
+	}		
 
 	function cbHandleFolderlist(data, path, drive) {
 		var parentpath = '';
@@ -194,7 +237,7 @@
 		var html = "";
 		var display = "";
 
-		reqCnt--;
+		reqFolderCnt--;
 		//alert(reqCnt);
 
 		$("#listpath").html("");
@@ -213,10 +256,11 @@
 			parentpath = parentpath.replace(/\'/g, '\\\''); // handle "'" in path, TODO: merge into another func
 		}
 
+		//向上
 		if (parentpath != "") {
 			//alert("parentpath 1=" + parentpath);
 			langua = $.i18n.prop('index_21_3');
-			html = '<div class="back"> <a onClick="ShowPageAddOnePath(\'' + escape(parentpath) + '\',\'' + escape(drive) + '\')">' + langua + '</a> </div>';
+			html = '<div class="back"> <a onClick="ShowFolderList(\'' + escape(parentpath) + '\',\'' + escape(drive) + '\')">' + langua + '</a> </div>';
 			$("#listpath").append(html);
 		}
 
@@ -232,7 +276,7 @@
 			}
 
 			//alert("folderpath 2=" + itempath);              
-			html = '<div class="folder"> <a onClick="ShowPageAddOnePath(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title="' + item.title + '">' + item.title + '</a> </div>';
+			html = '<div class="folder"> <a onClick="ShowFolderList(\'' + escape(itempath) + '\',\'' + escape(drive) + '\')" title="' + item.title + '">' + item.title + '</a> </div>';
 			$("#listpath").append(html);
 		}, this));
 

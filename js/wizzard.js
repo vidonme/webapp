@@ -144,6 +144,7 @@ $(function() {
 			left: -2 * slideWidth
 		}, 500);
 		$(".guideMenu li").eq(4).addClass("selected").siblings().removeClass("selected");
+		$("#selectedPath").focus();
 	})
 
 	$("#btnWzdOK").click(function() {

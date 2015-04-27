@@ -97,6 +97,47 @@
 				}
 			});
 		}
+		
+		function RequestDriveList() {
+
+			var lastjqXhr = vidonme.rpc.request({
+				'context': this,
+				'method': 'VidOnMe.GetDirectory',
+				'params': {
+					"mask": "/",
+					"directory": ""
+				},
+				'success': function(data) {
+					cbHandleDiskList(data);
+				}
+			});
+
+			return lastjqXhr;
+		}	
+		
+		function RequestFolderList(realpath, drivepath) {
+
+			drivepath = unescape(drivepath);
+			realpath = unescape(realpath);
+			realpath = removeslashAtEnd(realpath);
+			//alert("realpath="+realpath+", drivepath="+drivepath);
+
+			var lastjqXhr = vidonme.rpc.request({
+				'context': this,
+				'method': 'VidOnMe.GetDirectory',
+				'params': {
+					"mask": "/",
+					"directory": realpath
+				},
+				'success': function(data) {
+					cbHandleFolderlist(data, realpath, drivepath);
+				}
+			});
+
+			return lastjqXhr;
+
+		}			
+		
 
 		function RequestDriveDirectory(realpath, drivepath) {
 
