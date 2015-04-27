@@ -2,7 +2,7 @@ var g_languageType = null;
 
 $(function() {
 	loadHtml();
-	
+
 	var languageType = getCookie("languageType");
 	if ( languageType != null ) {
 		g_languageType = languageType;
@@ -11,6 +11,7 @@ $(function() {
 	};
 
 	getServerLanguage();
+
 	var settings = new SettingService();
 	//var settings = new SettingService();
 
@@ -140,6 +141,7 @@ function loadHtml() {
 				_this.append(data);
 			});
 	})
+
 	$.ajaxSetup({
 		async: true //取消异步  
 	});
@@ -167,8 +169,6 @@ function translateHtml() {
 		_this.attr("title", originStr);
 	})
 }
-
-
 
 function close_box(elm, index) {
 	if (index == 1) {

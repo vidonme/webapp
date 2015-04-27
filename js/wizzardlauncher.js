@@ -43,6 +43,7 @@ function getBrowserInfo() {
 		"js/jquery-ui.js",
 		"js/vidon.me.core.js",
 		"js/vidon.me.rpc.js",
+		"js/vidon.me.utils.js",
 		"js/global.js",
 		"js/jquery.mCustomScrollbar.concat.min.js",
 		"js/jquery.i18n.properties-1.0.9.js",
