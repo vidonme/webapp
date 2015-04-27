@@ -155,7 +155,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .posterMenu .fresh{ background:url(../images/spriteimg/iconimg.png) no-repeat -92px 2px; margin:31px 25px 0px;  width:32px; height:32px;}
 .posterMenu .fresh:hover{ background-position:-217px 2px;}
 .posterMenu .fresh.loading{ background:url(../images/movie/refresh.gif) no-repeat; position:static }
-.posterMenu .fresh.loading:hover{ background:url(../images/spriteimg/iconimg.png) no-repeat -219px -42px;}
+.posterMenu .fresh.loading:hover{ background:url(../images/spriteimg/iconimg.png) no-repeat -219px -43px;}
 .posterMenu .all a{ margin-top:25px; text-align:right; padding-bottom:10px;}
 .posterMenu .all a b{ font-weight:normal}
 .posterMenu .all a span{  display:inline-block; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -43px; width:28px; height:28px; margin-left:10px; line-height:28px;}
