@@ -57,7 +57,7 @@ function getScraperStatus() {
 					tips = '<p>' + $.i18n.prop('index_43') + '<p>';
 					tips = tips.format(data.result.total.finished, data.result.total.amounts);
 
-					if (g_FreshSeconds > 10 && g_ScrapingNum != data.result.total.finished) {
+					if (g_FreshSeconds > 5 && g_ScrapingNum != data.result.total.finished) {
 						g_ScrapingNum = data.result.total.finished;
 						g_FreshSeconds = 0;
 						FreshMedias();
