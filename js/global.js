@@ -168,6 +168,13 @@ function translateHtml() {
 		originStr = $.i18n.prop(originStr);
 		_this.attr("title", originStr);
 	})
+
+	$("[trans_href]").each(function() {
+		var _this = $(this);
+		var originStr = $(this).attr("trans_href");
+		originStr = $.i18n.prop(originStr);
+		_this.attr("href", originStr);
+	})
 }
 
 function close_box(elm, index) {
