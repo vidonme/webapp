@@ -59,7 +59,14 @@ function ShowUserInfo(data) {
 	$("#login").hide();
 	$("#login_ok").show();
 
-	$("#accout_img").attr("src", data.result.avatar);
+	var img = data.result.avatar;
+
+	if (img == "") {
+		$("#accout_img").attr("src", "../images/DefaultUserImg.png");
+	} else {
+		$("#accout_img").attr("src", img);
+	}
+	
 	$("#email").text(data.result.email);
 
 	if (data.result.subscribed) {
@@ -73,6 +80,8 @@ function ShowUserInfo(data) {
 function ShowLogin() {
 	$("#login").show();
 	$("#login_ok").hide();
+	
+	$("#password").val("");
 }
 
 function CheckAuthUserInfo() {
