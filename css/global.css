@@ -190,8 +190,8 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .movieTips p { line-height:30px; color:#f5fffb; padding:0px;}
 /*电视剧*/
 .teleplayTop { padding:20px 10px; }
-.teleplayTop .left { float:left; width:290px; }
-.teleplayTop .right { margin-left:290px; }
+.teleplayTop .left { float:left; width:240px; }
+.teleplayTop .right { margin-left:240px; }
 .teleplayTop  h3{ font-size:24px; font-weight:normal}
 .teleplayTop .rating{ margin:20px 0px;}
 .teleplaylistblock { margin-top:50px; }
