@@ -298,7 +298,7 @@
  		'success': function(data) {
  			if (data && data.result) {
  				var teleplaylist = SafePreHandleHtml($('#teleplaylist'), 'teleplaylist', 'teleplaylist');
- 				$('#backtotv').text('Tvshow');
+ 				$('#backtotv').text( $.i18n.prop('index_39') );
 
  				for (var i = 0; i < data.result.seasons.length; ++i) {
  					var box = $('<div class="box"></div>');
@@ -448,6 +448,120 @@
  	});
  }
 
+ function GetMovieDetail(idfile) {
+ 	PreDisplay($('#movie'));
+ 	$('.posterMenubtn').hide();
+
+ 	vidonme.rpc.request({
+ 		'context': this,
+ 		'method': "VideoLibrary.GetMovieDetails",
+ 		'params': {
+ 			"idfile": idfile,
+ 		},
+ 		'success': function(data) {
+ 			if (data && data.result) {
+ 				var poster = global_image_url + encodeURI(data.result.moviedetails.thumbnail);
+ 				var plot = data.result.moviedetails.plot;
+ 				var year = data.result.moviedetails.year;
+ 				var title = data.result.moviedetails.title;
+ 				var rating = data.result.moviedetails.rating;
+
+ 				var cast = new Array();
+ 				cast.name = new Array();
+ 				cast.role = new Array();
+ 				cast.thumbnail = new Array();
+
+ 				for (var i = 0; i < data.result.moviedetails.cast.length; ++i) {
+ 					cast.name.push(data.result.moviedetails.cast[i].name);
+ 					cast.role.push(data.result.moviedetails.cast[i].role);
+ 					cast.thumbnail.push(global_image_url + data.result.moviedetails.cast[i].thumbnail);
+ 				}
+
+ 				var genre = new Array();
+ 				for (var i = 0; i < data.result.moviedetails.genre.length; ++i) {
+ 					genre.push(data.result.moviedetails.genre[i]);
+ 				}
+
+ 				$(".movie").removeClass("teleplay");
+ 				$('.posterMenubtn').hide();
+ 				$('#backtotv').attr({
+ 					style: "float:left;display:''"
+ 				});
+ 				$('#backtotv').attr('onclick', "GetMovies()");
+ 				$('#backtotv').text( $.i18n.prop('index_38') );
+
+ 				var topdiv = $('<div class="teleplayTop" id="teleplaytop"></div>');
+ 				var leftdiv = $('<div class="left fillet10"></div>');
+ 				var rightdiv = $('<div class="right"></div>');
+
+ 				if (rating.length == 0) {
+ 					rating = 0;
+ 				}
+
+ 				var ratingvalue = $('<div class="ratingvalue" style="width:' + rating * 10 + '%;"></div>');
+ 				var ratingblock = $('<div class="ratingblock"></div>');
+
+ 				ratingblock.append(ratingvalue);
+
+ 				var ratingnum = $('<div class="ratingnum">' + rating + '</div>');
+
+ 				var rating = $('<div class="rating"></div>');
+ 				var detail = $('<div class="detail"></div>');
+
+ 				162
+ 				var genre_p = '<p>' + $.i18n.prop('index_163') + ': ';
+ 				for (var i = 0; i < genre.length; ++i) {
+ 					if (i != genre.length - 1) {
+ 						genre_p += genre[i] + ', ';
+ 					} else {
+ 						genre_p += genre[i];
+ 					}
+ 				}
+
+ 				genre_p += '</p>';
+ 				
+ 				var cast_p = '<p>' + $.i18n.prop('index_163') + ': ';
+
+ 				for (var i = 0; i < cast.name.length; ++i) {
+ 					if (i != cast.name.length - 1) {
+ 						cast_p += cast.name[i] + ', ';
+ 					} else {
+ 						cast_p += cast.name[i];
+ 					}
+ 				}
+
+ 				cast_p += '</p>';
+				
+ 				var plot_p = '<p>' + $.i18n.prop('index_165') + ': ' + plot + '</p>';
+
+ 				detail.append(genre_p);
+ 				detail.append(cast_p);
+ 				detail.append(plot_p);
+
+ 				rating.append(ratingblock);
+ 				rating.append(ratingnum);
+
+ 				var clrdiv = $('<div class="clr"></div>');
+
+ 				//var leftimge = '<img class="fillet10 mCS_img_loaded" src="' + poster + '"width="209" height="305"/>';
+ 				var leftimge = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10 mCS_img_loaded" src="' + poster + '" width="209" height="305"/><div class="imgbg"></div></div>';
+ 				var righttitle = '<h3>' + title + '</h3>';
+
+ 				leftdiv.append(leftimge);
+ 				rightdiv.append(righttitle);
+ 				rightdiv.append(rating);
+ 				rightdiv.append(detail);
+
+ 				topdiv.append(leftdiv);
+ 				topdiv.append(rightdiv);
+ 				topdiv.append(clrdiv);
+
+ 				$(".posterList .mCSB_container").append(topdiv);
+ 			}
+ 		}
+ 	});
+ }
+
  function __GetMovies(start, end, state) {
  	$(".movie").removeClass("teleplay");
  	var __start = arguments[0] ? start : 0;
@@ -499,6 +613,7 @@
 
  						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';// width="209" height="319" 
  						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
+ 						//var content = '<div class="img fillet10" onclick="GetMovieDetail(' + data.result.movies[i].idfile + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
  						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
  						pic.append(content);
  						box.append(pic);
@@ -818,9 +933,11 @@
  function clickFreshBtn(videoType) {
  	if (!$("#fresh").hasClass("loading")) {
  		$("#fresh").addClass("loading");
+ 		$("#fresh").attr("title", $.i18n.prop('index_158') );
  		RefreshMediaLibrary(videoType);
  	} else {
  		$("#fresh").removeClass("loading");
+ 		$("#fresh").attr("title", $.i18n.prop('index_48') );
  		stopGetScrapingStatus();
  	}
  }
