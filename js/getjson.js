@@ -75,11 +75,7 @@
 					"PathId": pathid
 				},
 				'success': function(data) {
-					if (data && data.result.ret == true) {
-						return;
-					} else {
-						alert(data.result.err);
-					}
+						cbHandleDeleteLibraryPath(data);
 				}
 			});
 		}
