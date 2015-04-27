@@ -60,11 +60,13 @@
 	//打开添加网络路径DIV
 	function ShowPageAddNetShare(host) {
 		var title = "";
-		$("#txtNetShareSrcName").focus();
+
 		$("#txtNetShareDomain").val("WORKGROUP");
 		showdiv(".addNetwork", 3);
 		title = $.i18n.prop('index_28');;
 		$("#popAddNetworkH3").text(title);
+		//document.getElementById("txtNetShareSrcName").focus(); 
+		$("#txtNetShareSrcName")[0].focus();
 	}
 
 	function checkNetShare(protocol, srvaddr, srvdomain, username, userpass) {
