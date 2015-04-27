@@ -307,7 +307,7 @@
  					var season = data.result.seasons[i].iseason;
  					var poster = global_image_url + encodeURI(data.result.seasons[i].episodes[0].thumbnail);
  					//var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')"><div class="imgteleplaylistbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">Season' + ' ' + season + '</p>';//" width="209" height="319" 
- 					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')" style="background-image:url(' + poster + '); "></div><p class="imgname">Season' + ' ' + season + '</p>';
+ 					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">Season' + ' ' + season + '</p>';
  					pic.append(content);
  					box.append(pic);
 
@@ -328,6 +328,7 @@
  	}
 
  	try {
+ 		$(".movie").addClass("teleplay");
  		$('.posterMenubtn').hide();
  		$('#backtotv').attr({
  			style: "float:left;display:''"
@@ -846,6 +847,7 @@
  }
 
  function FreshMediasCount() {
+ 	/*
  	count = $(".posterList .box").length;
  	var str;
  	if (g_selected_type == 'movie') {
@@ -865,6 +867,10 @@
  	}
 
  	$('#mediatype').html(str);
+ 	*/
+
+ 	// don't show media count in main wnd now.
+ 	$('#mediatype').html("");
  }
 
  function FreshSiderbarCount(type, count) {
