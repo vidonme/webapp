@@ -80,6 +80,19 @@ SettingService.prototype = {
         $("#btnPopsetupClose").click(function(){
             saveUpdateInfo();
         });
+
+        $("#btnCancleEssentialInfo").click(function(){
+            settingCancle(eSettingType.essentialInfo);
+        });
+
+        $("#btnCancleMediaLibrary").click(function(){
+            settingCancle(eSettingType.mediaLibrary);
+        });
+
+        $("#btnCancleTranscode").click(function(){
+            settingCancle(eSettingType.transcoding);
+        });
+
     },
     resetPage: function() {
         $('#serverSetting').removeClass('selected');
@@ -259,13 +272,17 @@ function info(infoType) {
       //  $("#localhostInfo").html(.format(address));
 
         if (genericAutoStart == "true") {
+            $("#autostart span:first").removeClass("checkbox");
             $("#autostart span:first").addClass("checkbox selected");
         } else {
+            $("#autostart span:first").removeClass("checkbox selected");
             $("#autostart span:first").addClass("checkbox");
         }
         if (servicesWebonlyLocal == true) {
+            $("#onlyloaclhost span:first").removeClass("checkbox");
             $("#onlyloaclhost span:first").addClass("checkbox selected");
         } else {
+            $("#onlyloaclhost span:first").removeClass("checkbox selected");
             $("#onlyloaclhost span:first").addClass("checkbox");
         }
     } else if (infoType == "trackSubtitle") {
@@ -346,21 +363,14 @@ function info(infoType) {
 //服务器设置保存信息
 function settingSave(actionType) {
     var reloadPage = '';
+    var saveSuccess = false;
     if (actionType == "essentialInfo") {
 
         var autoStart = $("#autostart span:first").hasClass("checkbox selected");
         //var index = languageId.selectedIndex;
 
         var language = $("#selectWebLanguage").attr("cus_value");
-        //      if (genericName == '') {
-        //          if (language == "Chinese (Simple)") {
-        //              genericName = "威动服务器";
-        //          } else if ( language == "Chinese (Traditional)") {
-        //              genericName = "威動伺服器";
-        //          } else {
-        //              genericName = "VidOn Server";
-        //          }
-        //      }
+
 
         var webonlyLocal = $("#onlyloaclhost span:first").hasClass("checkbox selected");
         // var webServicePort = '';
@@ -382,7 +392,7 @@ function settingSave(actionType) {
                 "val": str
             },
             'success': function(data) {
-                var i = '';
+                saveSuccess = true;
             }
         });
         vidonme.rpc.request({
@@ -393,7 +403,7 @@ function settingSave(actionType) {
                 "val": autoStart + ""
             },
             'success': function(data) {
-                var str = '';
+                saveSuccess = true;
             }
         });
         vidonme.rpc.request({
@@ -404,7 +414,7 @@ function settingSave(actionType) {
                 "val": webonlyLocal + ""
             },
             'success': function(data) {
-                var str = '';
+                saveSuccess = true;
             }
         });
         vidonme.rpc.request({
@@ -416,6 +426,7 @@ function settingSave(actionType) {
             },
             'success': function(data) {
                 getServerLanguage();
+                saveSuccess = true;
             }
         });
     } else if (actionType == eSettingType.mediaLibrary) {
@@ -432,7 +443,7 @@ function settingSave(actionType) {
                     "val": false + ""
                 },
                 'success': function(data) {
-
+                    saveSuccess = true;
                 }
             });
         } else {
@@ -444,7 +455,7 @@ function settingSave(actionType) {
                     "val": true + ""
                 },
                 'success': function(data) {
-
+                    saveSuccess = true;
                 }
             });
         }
@@ -457,7 +468,7 @@ function settingSave(actionType) {
                 "val": libUpdateTime
             },
             'success': function(data) {
-
+                saveSuccess = true;
             }
         });
         vidonme.rpc.request({
@@ -478,6 +489,7 @@ function settingSave(actionType) {
                                 'success': function(data) {
                                     if (data && data.result && data.result.settings) {
                                         settingInfo = data.result.settings;
+                                        saveSuccess = true;
                                     }
                                 }
                             });
@@ -504,6 +516,7 @@ function settingSave(actionType) {
                 if (data.result.ret) {
                     //alert("%156".toLocaleString());
                     info(actionType);
+                    saveSuccess = true;
                 }
             }
         });
@@ -527,7 +540,7 @@ function settingSave(actionType) {
                 "val": str
             },
             'success': function(data) {
-                var i = '';
+                saveSuccess = true;
             }
         });
     }
@@ -548,6 +561,7 @@ function settingSave(actionType) {
                     'method': 'VidOnMe.GetServerInfo',
                     'params': [],
                     'success': function(data1) {
+                        saveSuccess = true;
                         if (data1 && data1.result) {
                             serverInfo = data1.result;
                             if (reloadPage != true) {
@@ -562,15 +576,12 @@ function settingSave(actionType) {
             }
         });
     }
+    showSaveMessage(saveSuccess );
 }
 
 //服务器设置取消操作
 function settingCancle(actionType) {
-    if (actionType == "essentialInfo") {
-        alert("%157".toLocaleString());
-    } else if (actionType == "network") {
-        alert("%158".toLocaleString());
-    }
+
     info(actionType);
 }
 
@@ -587,6 +598,15 @@ function getFilePath(p) {
     });
     add.dialog("open");
     scanFilePath("");
+}
+
+function showSaveMessage(isSuccess) {
+    if (isSuccess == true) {
+        //alert($.i18n.prop());
+        alert("Save Success.");
+    } else {
+        alert("Save failed");
+    }
 }
 
 
@@ -1018,6 +1038,7 @@ function saveServerName() {
             "name": name
         },
         'success': function(data) {
+            showSaveMessage(true);
             if (data.result.ret) {
                 //alert("%156".toLocaleString());
             } else {
