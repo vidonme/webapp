@@ -12,6 +12,7 @@ function getLastScraperResult() {
 				tips = tips.format(data.result.total.failed_amounts, data.result.total.success_amounts);
 				$(".movieTips").html(tips);
 				$("#fresh").removeClass("loading");
+				$("#fresh").attr("title", $.i18n.prop('index_48') );
 				//$('#scrapertest').html( tips );
 
 				setTimeout(function() {
@@ -40,6 +41,7 @@ function getScraperStatus() {
 				} else if (status != "finish" && freshScraperStatus <= 0) {
 					freshScraperStatus = setInterval(getScraperStatus, 1000);
 					$("#fresh").addClass("loading");
+					$("#fresh").attr("title", $.i18n.prop('index_158') );
 				}
 
 				g_FreshSeconds++;

@@ -2,8 +2,14 @@ var g_languageType = null;
 
 $(function() {
 	loadHtml();
-	loadProperties("en");
-	translateHtml();
+	
+	var languageType = getCookie("languageType");
+	if ( languageType != null ) {
+		g_languageType = languageType;
+		loadProperties(languageType);
+		translateHtml();
+	};
+
 	getServerLanguage();
 	var settings = new SettingService();
 	//var settings = new SettingService();
@@ -223,9 +229,12 @@ function getServerLanguage() {
 					locale = "en";
 				}
 
-				g_languageType = locale;
-				loadProperties(locale);
-				translateHtml();
+				if ( g_languageType != locale ) {
+					g_languageType = locale;
+					setCookie("languageType", locale, 30);
+					loadProperties(locale);
+					translateHtml();
+				};
 			}
 		}
 	});

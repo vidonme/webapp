@@ -26,3 +26,31 @@ function hidediv() {
 	$(".vidoncover").hide();
 	$(".loadimg").hide();
 }
+
+function getCookie(name) {
+	var i,
+		match,
+		haystack = window.document.cookie.split(';');
+	for (i = 0; i < haystack.length; i += 1) {
+		match = haystack[i].match(/^\s*[\S\s]*=([\s\S]*)\s*$/);
+		if (match && match.length === 2) {
+			return match[1];
+		}
+	}
+	return null;
+}
+
+function setCookie(name, value, days) {
+	var date,
+		expires;
+	if (name) {
+		if (days) {
+			date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			expires = "; expires=" + date.toGMTString();
+		} else {
+			expires = '';
+		}
+		window.document.cookie = name + "=" + value + expires + "; path=/";
+	}
+}
