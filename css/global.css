@@ -63,8 +63,7 @@ p { line-height:1.5; padding:6px 0px; }
 .vertical_wrap {display:table-cell;vertical-align:middle; *position:absolute; top: 50%; left: 0;  }
 .vertical_content { *position: relative; top: -50%; left: 0; display:block;}
 /*rating*/
-.rating
-.ratingblock{ width:225px; height:34px; background:url(../images/spriteimg/iconimg.png) no-repeat 0 -846px; float:left; margin-right:20px;}
+.rating .ratingblock{ width:200px; height:32px; background:url(../images/spriteimg/iconimg.png) no-repeat 0 -846px; float:left; margin-right:20px;}
 .rating .ratingvalue{background:url(../images/spriteimg/iconimg.png) no-repeat 0px -806px; height:34px; width:auto; }
 .rating .ratingnum{ font-size:24px; font-weight:bold; line-height:33px;}
 /*进度条*/
@@ -104,10 +103,10 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 /*向导主体部分*/
 .content { position:relative; width:800px; margin:0px auto; padding:35px 90px; color:#ccc; }
 .guideMenu { margin-bottom:40px; }
-.guideMenu li { float:left; font-size:18px; line-height:30px; width:210px;}
-.guideMenu li.linethrough { text-decoration:line-through; width:62px; height:17px; border-bottom:#d3d3d3 solid 1px; margin:0px 10px; }
-.guideMenu li.selected { color:#f5fffb; }
-.guideMenu li span { display:inline-block; width:30px; height:30px; -moz-border-radius:16px; -webkit-border-radius:16px; border-radius:16px; border:#d3d3d3 solid 1px; font-size:24px; line-height:30px; text-align:center; margin-right:10px; float:left}
+.guideMenu li { float:left; font-size:18px; line-height:30px; width:210px; color:#666666}
+.guideMenu li.linethrough { text-decoration:line-through; width:62px; height:17px; border-bottom:#666666 solid 1px; margin:0px 10px; }
+.guideMenu li.selected { color:#ccc; }
+.guideMenu li span { display:inline-block; width:30px; height:30px; -moz-border-radius:16px; -webkit-border-radius:16px; border-radius:16px; border:#666666 solid 1px; font-size:24px; line-height:30px; text-align:center; margin-right:10px; float:left}
 .guideMenu li.selected span { background:#3278cc; border:#3278cc solid 1px; }
 .guideMenu li b{ font-weight:normal; display:block; float:left; width:165px; text-align:center}
 .slideblock { width:800px; overflow:hidden; position:relative;}
@@ -160,7 +159,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .posterMenu .all a b{ font-weight:normal}
 .posterMenu .all a span{  display:inline-block; background:url(../images/spriteimg/iconimg.png) no-repeat -93px -43px; width:28px; height:28px; margin-left:10px; line-height:28px;}
 .posterMenu .all a:hover span{ background-position:-93px -74px;}
-.posterMenu .all ul{ position:absolute; width:150px; right:0px; top:60px; z-index:2; padding:10PX 0PX; font-size:14px;}
+.posterMenu .all ul{ position:absolute; width:160px; right:0px; top:60px; z-index:2; padding:10PX 0PX; font-size:14px;}
 .posterMenu .all ul li{ padding-left:10px;}
 .posterMenu p { text-align:center; line-height:80px; padding:0px;}
 .posterMenu a.backbtn { float:left; background:url(../images/spriteimg/iconimg.png) no-repeat 0px -648px; display:block; height:90px; line-height:80px; padding-left:40px; margin-left:20px;}
