@@ -65,9 +65,6 @@ SettingService.prototype = {
         $("#btnSaveTranscode").click(function() {
             settingSave(eSettingType.transcoding);
         });
-        $("#btnSaveMediaLibrary").click(function() {
-            settingSave(eSettingType.mediaLibrary);
-        });
 
         $("#btnSaveAutoUpgrade").click(function() {
             saveUpdateInfo();
@@ -264,9 +261,11 @@ function info(infoType) {
                 $("#selectWebLanguage b").html($(this).html());
             }
         });
+
         var address = "http://" + serverIp + ":" + webServicePort;
         address = "<a href='"  + address + "' class='a'>" + address + "</a>"
-        var info = $("#localhostInfo").html();
+        var info = $.i18n.prop('index_90');
+
         info = info.format(address);
         $("#localhostInfo").html(info);
       //  $("#localhostInfo").html(.format(address));
@@ -389,12 +388,20 @@ function settingSave(actionType) {
             'method': 'VidOnMe.SetSystemSetting',
             'params': {
                 "key": "services.webserver",
-                "val": str
+                "val": str,
+                "key": "generic.autostart",
+                "val": autoStart + "",
+                "key": "webonlylocal",
+                "val": webonlyLocal + "",
+                "key": "language.default",
+                "val": language
             },
             'success': function(data) {
-                saveSuccess = true;
+                getServerLanguage();
+                showSaveMessage( true );
             }
         });
+        /*
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetSystemSetting',
@@ -406,6 +413,7 @@ function settingSave(actionType) {
                 saveSuccess = true;
             }
         });
+
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetSystemSetting',
@@ -428,79 +436,68 @@ function settingSave(actionType) {
                 getServerLanguage();
                 saveSuccess = true;
             }
-        });
+        });*/
     } else if (actionType == eSettingType.mediaLibrary) {
         reloadPage = true;
         var libUpdateTime = $("#updateFrequency").attr("cus_value");
         var scraperLanguage = $("#subLanguage").attr("cus_value");
 
+        var isAutoUpdate;
         if (libUpdateTime == "0") {
-            vidonme.rpc.request({
-                'context': this,
-                'method': 'VidOnMe.SetSystemSetting',
-                'params': {
-                    "key": "library.autoupdate",
-                    "val": false + ""
-                },
-                'success': function(data) {
-                    saveSuccess = true;
-                }
-            });
+            isAutoUpdate = false + "";
         } else {
-            vidonme.rpc.request({
-                'context': this,
-                'method': 'VidOnMe.SetSystemSetting',
-                'params': {
-                    "key": "library.autoupdate",
-                    "val": true + ""
-                },
-                'success': function(data) {
-                    saveSuccess = true;
-                }
-            });
+            isAutoUpdate = true + "";
         }
 
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetSystemSetting',
             'params': {
-                "key": "library.autoupdatetimespan",
-                "val": libUpdateTime
+                "key": "library.autoupdate",
+                "val": isAutoUpdate
             },
             'success': function(data) {
-                saveSuccess = true;
-            }
-        });
-        vidonme.rpc.request({
-            'context': this,
-            'method': 'VidOnMe.SetDefaultLanguageForScraper',
-            'params': {
-                "language": scraperLanguage
-            },
-            'success': function(data) {
-                if (data && data.result) {
-                    if (data.result.ret == true) {
-                        window.setTimeout(function() {
-
-                            vidonme.rpc.request({
-                                'context': this,
-                                'method': 'VidOnMe.GetSystemSettingForAll',
-                                'params': [],
-                                'success': function(data) {
-                                    if (data && data.result && data.result.settings) {
-                                        settingInfo = data.result.settings;
-                                        saveSuccess = true;
+                vidonme.rpc.request({
+                    'context': this,
+                    'method': 'VidOnMe.SetSystemSetting',
+                    'params': {
+                        "key": "library.autoupdatetimespan",
+                        "val": libUpdateTime
+                    },
+                    'success': function(data) {
+                        vidonme.rpc.request({
+                            'context': this,
+                            'method': 'VidOnMe.SetDefaultLanguageForScraper',
+                            'params': {
+                                "language": scraperLanguage
+                            },
+                            'success': function(data) {
+                                if (data && data.result) {
+                                    if (data.result.ret == true) {
+                                        showSaveMessage(true);
+                                        window.setTimeout(function() {
+                                            vidonme.rpc.request({
+                                                'context': this,
+                                                'method': 'VidOnMe.GetSystemSettingForAll',
+                                                'params': [],
+                                                'success': function(data) {
+                                                    if (data && data.result && data.result.settings) {
+                                                        settingInfo = data.result.settings;
+                                                    }
+                                                }
+                                            });
+                                        }, 1000);
+                                    } else {
+                                        window.setTimeout(function() {
+                                            //   mediaLibDiv.innerHTML = "%210".toLocaleString();
+                                            alert("time out")
+                                        }, 1000);
                                     }
                                 }
-                            });
-                        }, 1000);
-                    } else {
-                        window.setTimeout(function() {
-                            //   mediaLibDiv.innerHTML = "%210".toLocaleString();
-                            alert("time out")
-                        }, 1000);
+                            }
+                        });
                     }
-                }
+                });
             }
         });
     } else if (actionType == eSettingType.transcoding) {
@@ -514,9 +511,8 @@ function settingSave(actionType) {
             },
             'success': function(data) {
                 if (data.result.ret) {
-                    //alert("%156".toLocaleString());
+                    showSaveMessage( true );
                     info(actionType);
-                    saveSuccess = true;
                 }
             }
         });
@@ -540,7 +536,7 @@ function settingSave(actionType) {
                 "val": str
             },
             'success': function(data) {
-                saveSuccess = true;
+                showSaveMessage( true );
             }
         });
     }
@@ -561,7 +557,6 @@ function settingSave(actionType) {
                     'method': 'VidOnMe.GetServerInfo',
                     'params': [],
                     'success': function(data1) {
-                        saveSuccess = true;
                         if (data1 && data1.result) {
                             serverInfo = data1.result;
                             if (reloadPage != true) {
@@ -576,7 +571,6 @@ function settingSave(actionType) {
             }
         });
     }
-    showSaveMessage(saveSuccess );
 }
 
 //服务器设置取消操作
