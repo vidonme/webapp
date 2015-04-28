@@ -28,16 +28,24 @@ function hidediv() {
 }
 
 function getCookie(name) {
+	var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+	if (arr != null)
+		return unescape(arr[2]);
+
+	return null;
+	/*
 	var i,
 		match,
 		haystack = window.document.cookie.split(';');
 	for (i = 0; i < haystack.length; i += 1) {
+		if (  haystack[i].ind) {};
 		match = haystack[i].match(/^\s*[\S\s]*=([\s\S]*)\s*$/);
 		if (match && match.length === 2) {
 			return match[1];
 		}
 	}
 	return null;
+	*/
 }
 
 function setCookie(name, value, days) {

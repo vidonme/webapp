@@ -306,8 +306,10 @@
 
  					var season = data.result.seasons[i].iseason;
  					var poster = global_image_url + encodeURI(data.result.seasons[i].episodes[0].thumbnail);
+ 					var seasonTitle = $.i18n.prop('index_179');
+ 					seasonTitle = seasonTitle.format( season );
  					//var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')"><div class="imgteleplaylistbg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">Season' + ' ' + season + '</p>';//" width="209" height="319" 
- 					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">Season' + ' ' + season + '</p>';
+ 					var content = '<div class="img fillet10" onclick="GetEpisodeDetails(' + idtvshow + ',\'' + title + '\',' + season + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + seasonTitle + '</p>';
  					pic.append(content);
  					box.append(pic);
 
@@ -563,7 +565,6 @@
  }
 
  function __GetMovies(start, end, state) {
- 	$(".movie").removeClass("teleplay");
  	var __start = arguments[0] ? start : 0;
  	var __end = arguments[1] ? end : 20;
 
@@ -598,6 +599,8 @@
  						FreshSiderbarCount( "movie", data.result.limits.total );
  						return;
  					}
+
+ 					$(".movie").removeClass("teleplay");
 
  					// check is in Movie show page
  					if (g_selected_type != 'movie') {
@@ -634,7 +637,6 @@
  }
 
  function __GetTvshows(start, end, state) {
- 	$(".movie").addClass("teleplay");
  	var __start = arguments[0] ? start : 0;
  	var __end = arguments[1] ? end : 20;
 
@@ -679,6 +681,8 @@
  						return;
  					}
 
+ 					$(".movie").addClass("teleplay");
+
  					if (g_selected_type != 'tvshow') {
  						return;
  					}
@@ -713,7 +717,6 @@
  }
 
  function __GetPrivVideos(start, end, state) {
- 	$(".movie").removeClass("teleplay");
  	var __start = arguments[0] ? start : 0;
  	var __end = arguments[1] ? end : 20;
 
@@ -754,6 +757,8 @@
  						FreshSiderbarCount( "video", data.result.limits.total );
  						return;
  					}
+
+ 					$(".movie").removeClass("teleplay");
 
  					if (g_selected_type != 'video') {
  						return;
@@ -893,6 +898,10 @@
  		alert("Bad parameter");
  		//clearInterval(global_media_timer);
  	}
+
+ 	__GetMovies( 0, 1, "getcount");
+ 	__GetTvshows( 0, 1, "getcount");
+ 	__GetPrivVideos( 0, 1, "getcount");
  }
 
  function GetMovies() {

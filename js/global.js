@@ -1,4 +1,5 @@
 var g_languageType = null;
+var g_i18nType = null;
 
 $(function() {
 	loadHtml();
@@ -193,14 +194,19 @@ function close_box(elm, index) {
 }
 
 function loadProperties(languageType) {
-	jQuery.i18n.properties({ //¼ÓÔØ×Êä¯ÀÀÆ÷ÓïÑÔ¶ÔÓ¦µÄ×ÊÔ´ÎÄ¼þ
-		name: 'strings', //×ÊÔ´ÎÄ¼þÃû³Æ
-		path: 'i18n/', //×ÊÔ´ÎÄ¼þÂ·¾¶
-		mode: 'map', //ÓÃMapµÄ·½Ê½Ê¹ÓÃ×ÊÔ´ÎÄ¼þÖÐµÄÖµ
-		language: languageType,
-		callback: function() { //¼ÓÔØ³É¹¦ºóÉèÖÃÏÔÊ¾ÄÚÈÝ
-		}
-	});
+	if (g_i18nType != languageType) {
+		jQuery.i18n.properties({ //¼ÓÔØ×Êä¯ÀÀÆ÷ÓïÑÔ¶ÔÓ¦µÄ×ÊÔ´ÎÄ¼þ
+			name: 'strings', //×ÊÔ´ÎÄ¼þÃû³Æ
+			path: 'i18n/', //×ÊÔ´ÎÄ¼þÂ·¾¶
+			mode: 'map', //ÓÃMapµÄ·½Ê½Ê¹ÓÃ×ÊÔ´ÎÄ¼þÖÐµÄÖµ
+			language: languageType,
+			callback: function() { //¼ÓÔØ³É¹¦ºóÉèÖÃÏÔÊ¾ÄÚÈÝ
+
+			}
+		});
+	}
+	
+	g_i18nType = languageType;
 }
 
 function getServerLanguage() {
