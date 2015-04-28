@@ -86,23 +86,22 @@
 		$("#selectedPath").html("");
 		
 		g_FolderCnt = data.result.paths.length;
-
 		(g_FolderCnt)? (msg = $.i18n.prop('index_51')) : (msg = $.i18n.prop('index_52'));
 		$("#addPathbtn").text(msg);
 
 		if(!g_FolderCnt){
-			msg = $.i18n.prop('index_16');
-			var itemhtml = '<li index="' + 0 + '"><span class="showpath">' + msg + '</span></li>'
-			$("#selectedPath").append(itemhtml);
-			return;
+				msg = $.i18n.prop('index_16');
+				var itemhtml = '<li index="' + 0 + '"><span class="showpath">' + msg + '</span></li>'
+				$("#selectedPath").append(itemhtml);
+				return;
 		}
 		
 		$.each($(data.result.paths), jQuery.proxy(function(i, item) {
-			var pid = item.PathId;
-			var path = item.path;
-			var itemhtml = '<li index="' + pid + '"><span class="delete"></span><span class="showpath">' + path + '</span></li>'
-			$("#selectedPath").append(itemhtml);
-			$('#selectedPath li:even').addClass("even");
+				var pid = item.PathId;
+				var path = item.path;
+				var itemhtml = '<li index="' + pid + '"><span class="delete"></span><span class="showpath">' + path + '</span></li>'
+				$("#selectedPath").append(itemhtml);
+				$('#selectedPath li:even').addClass("even");
 		}, this));
 	}
 	

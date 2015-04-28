@@ -26,11 +26,8 @@
 
 
 		function RequestLibraryPaths(libid) {
-			//参数判断
-			//RequestGetLibraries("commercial");
-
-
-			//要改为有回调函数的设计。。。。
+			if(!libid) return;
+			
 			vidonme.rpc.request({
 				'context': this,
 				'method': 'VidOnMe.GetLibraryDetail',
@@ -57,7 +54,6 @@
 				},
 				'success': function(data) {
 					cbHandleAddLibraryPath(data);
-					//alert("AddPathToLibrary:" + data.result.ret);
 				}
 			});
 		}
@@ -66,6 +62,7 @@
 			//参数判断
 			//alert("libid=" + libid + ",pid=" + pid);
 			var pathid = Number(pid);
+			if(!pid || !libid) return;
 			//server交互
 			vidonme.rpc.request({
 				'context': this,
@@ -81,7 +78,8 @@
 		}
 
 		function RequestAddNetDrive(path) {
-
+			if(!path) return;
+			
 			vidonme.rpc.request({
 				'context': this,
 				'method': 'VidOnMe.AddNetDirectory',
@@ -111,8 +109,7 @@
 			return lastjqXhr;
 		}	
 		
-		function RequestFolderList(realpath, drivepath) {
-
+		function RequestFolderList(realpath, drivepath) {		
 			drivepath = unescape(drivepath);
 			realpath = unescape(realpath);
 			realpath = removeslashAtEnd(realpath);
