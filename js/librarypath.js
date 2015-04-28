@@ -9,6 +9,7 @@
 	var g_lastDrivejqXhr = {};
 	var reqFolderCnt = 0;
 	var g_lastFolderjqXhr = {};
+	var refreshgif = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';
 
 	$(function() {
 		$("#btnAddLibPathOK").click(function() {
@@ -67,7 +68,7 @@
 	function ShowPageAddOnePath(path, drive) {
 		$("#popDiskblock").html("");
 		$("#listpath").html("");
-		var html = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';
+		var html = refreshgif;
 		$("#popDiskblock").append(html);
 		if (path) {
 			$("#listpath").append(html);
@@ -87,7 +88,7 @@
 	function ShowDriveList(){
 		$("#popDiskblock").html("");
 		
-		var html = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';
+		var html = refreshgif;
 		$("#popDiskblock").append(html);
 		
 		if (reqDriveCnt != 0) {
@@ -139,7 +140,7 @@
 	function ShowFolderList(path,drive){
 		$("#listpath").html("");
 		
-		var html = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';		
+		var html = refreshgif;		
 		if (path) {
 			$("#listpath").append(html);
 			$("#btnAddLibPathOK").removeClass("btn-disable").addClass("btn-blue");
@@ -183,7 +184,7 @@
 		//œÚ…œ
 		if (parentpath != "") {
 			//alert("parentpath 1=" + parentpath);
-			langua = $.i18n.prop('index_21_3');
+			langua = $.i18n.prop('index_181');
 			html = '<div class="back"> <a onClick="ShowFolderList(\'' + escape(parentpath) + '\',\'' + escape(drive) + '\')">' + langua + '</a> </div>';
 			$("#listpath").append(html);
 		}
@@ -226,26 +227,26 @@
 	function checkNetShare(protocol, srvaddr, srvdomain, username, userpass) {
 		var langua = "";
 		if (!srvaddr) {
-			langua = $.i18n.prop('NetShare_IP_Null');
+			langua = $.i18n.prop('index_184');
 			alert(langua);
 			return false;
 		}
 
 		if (checkip(srvaddr) == false) {
-			langua = $.i18n.prop('NetShare_IP_Illegal');
+			langua = $.i18n.prop('index_185');
 			alert(langua);
 			return false;
 		}
 
 		if (!srvdomain) {
-			langua = $.i18n.prop('NetShare_Domin_Null');
+			langua = $.i18n.prop('index_186');
 			alert(langua);
 			return false;
 		}
 
 		if (protocol == "Windows Network (SMB)") {
 			if ((!username && userpass) || (username && !userpass)) {
-				langua = $.i18n.prop('NetShare_UserPwd_Null');
+				langua = $.i18n.prop('index_175');
 				alert(langua);
 				return false;
 			}

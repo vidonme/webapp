@@ -44,12 +44,12 @@
 
 			if (typeof(data) == "undefined") {
 				langua = $.i18n.prop('Server_Response_Err');
-				alert(langua);
+				//alert(langua);
 				return false;
 			}
 
 			if (typeof(data.error) != "undefined") {
-				alert(data.error);
+				//alert(data.error);
 				return false;
 			}
 
@@ -62,13 +62,13 @@
 
 				if (err == "Access is denied") {
 					langua = $.i18n.prop('Server_Response_Err_Access');
-					alert(langua);
+					//alert(langua);
 				} else if (err == "Unknown user name or bad password") {
 					langua = $.i18n.prop('Server_Response_Err_UserPwd');
-					alert(langua);
+					//alert(langua);
 				} else if (err == "Network path not found") {
 					langua = $.i18n.prop('Server_Response_Err_PathErr');
-					alert(langua);
+					//alert(langua);
 				} else {
 					//alert(err);
 				}
@@ -86,10 +86,10 @@
 					drivetypename = $.i18n.prop('index_21');
 					break;
 				case 4:
-					drivetypename = $.i18n.prop('index_21_1');
+					drivetypename = $.i18n.prop('index_182');
 					break;
 				case 6:
-					drivetypename = $.i18n.prop('index_21_2');
+					drivetypename = $.i18n.prop('index_180');
 					break;
 				default:
 					drivetypename = "other";

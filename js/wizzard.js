@@ -76,7 +76,7 @@ function wizardsetting() {
 		},
 		'success': function(data) {
 			if (data.result.ret == false) {
-				var errmsg = $.i18n.prop('index_37_1');
+				var errmsg = $.i18n.prop('index_187');
 				alert(errmsg);
 				return;
 			}
