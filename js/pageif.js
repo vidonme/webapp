@@ -2,10 +2,7 @@
 	var g_CommercialVideoId = 1;
 	var g_PersonalVideoId = 2;
 	var g_CurLibraryType = "commercial";
-	var g_FolderCnt = 0;
-
 	var g_CurDeletePathWaitforConfirm = {}; //存已经选中删除的路径li对象				
-
 
 	$(function() {
 		RequestGetLibraries("all");
@@ -85,11 +82,11 @@
 		if (!checkResponse(data)) return;
 		$("#selectedPath").html("");
 		
-		g_FolderCnt = data.result.paths.length;
-		(g_FolderCnt)? (msg = $.i18n.prop('index_51')) : (msg = $.i18n.prop('index_52'));
+		var FolderCnt = data.result.paths.length;
+		(FolderCnt)? (msg = $.i18n.prop('index_51')) : (msg = $.i18n.prop('index_52'));
 		$("#addPathbtn").text(msg);
 
-		if(!g_FolderCnt){
+		if(!FolderCnt){
 				msg = $.i18n.prop('index_16');
 				var itemhtml = '<li index="' + 0 + '"><span class="showpath">' + msg + '</span></li>'
 				$("#selectedPath").append(itemhtml);
@@ -112,7 +109,10 @@
 			return;
 		}
 		
-		if (!g_FolderCnt) {
+		var len= $("#selectedPath li").length;
+		var index = $("#selectedPath li").attr("index");
+		
+		if (len == 1 && index == 0) {
 				$("#selectedPath").html("");
 		}
 		
