@@ -223,13 +223,13 @@ function getServerLanguage() {
 				} else if (data.result.val == "French") {
 					locale = "fr";
 				} else if (data.result.val == "Japanese") {
-					locale = "ja";
+					locale = "jp";
 				} else if (data.result.val == "Portuguese (Brazil)") {
 					locale = "pt";
 				} else if (data.result.val == "Spanish" || data.result.val == "Spanish (Mexico)") {
 					locale = "es";
 				} else if (data.result.val == "Korean") {
-					locale = "ko";
+					locale = "kr";
 				} else if (data.result.val == "Swedish") {
 					locale = "se";
 				} else if (data.result.val == "English" || data.result.val == "") {

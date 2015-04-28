@@ -262,8 +262,7 @@ function info(infoType) {
             }
         });
 
-        var address = "http://" + serverIp + ":" + webServicePort;
-        address = "<a href='"  + address + "' class='a'>" + address + "</a>"
+        var address = " (http://" + serverIp + ":" + webServicePort + ") ";
         var info = $.i18n.prop('index_90');
 
         info = info.format(address);
@@ -596,8 +595,8 @@ function getFilePath(p) {
 
 function showSaveMessage(isSuccess) {
     if (isSuccess == true) {
-        //alert($.i18n.prop());
-        alert("Save Success.");
+        showdiv(".confirmSave",2);
+        setTimeout(function(){close_box('.confirmSave',2);},2500);
     } else {
         alert("Save failed");
     }
