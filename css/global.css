@@ -240,6 +240,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 /*确认删除*/
 .confirmDelete{ width:600px; min-height:300px; z-index:5}
 .confirmDelete .deletePath{ min-height:150px; padding:0px 50px ;}
+.confirmSave{width:400px; min-height:100px; z-index:5}
 
 /*登陆框*/
 .poplogin{ width:800px; min-height:500px;}

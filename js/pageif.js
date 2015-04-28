@@ -118,8 +118,9 @@
 		}
 		
 		var mediapath = $("#addSrcPath").val();
-		if (!mediapath) return;					
-		var html = '<li index="0"><span class="delete"></span><span class="showpath">' + mediapath + '</span></li>'
+		if (!mediapath) return;	
+		var pathid = data.result.PathId;				
+		var html = '<li index="' + pathid + '"><span class="delete"></span><span class="showpath">' + mediapath + '</span></li>'
 		$("#selectedPath").append(html);
 		$('#selectedPath li:even').addClass("even");		
 		close_box('.addPath', 2);
@@ -134,6 +135,14 @@
 	}
 
 	//==================È·ÈÏÉ¾³ýÂ·¾¶DIV==============================
+	function cbHandleDeleteLibraryPath(data){
+			if (data && data.result.ret == true) {
+				return;
+			} else {
+				alert(data.result.err);
+			}
+	}
+	
 	function confirmDeletePath() {
 		var pid = g_CurDeletePathWaitforConfirm.attr("index");
 		var mediapath = g_CurDeletePathWaitforConfirm.text();
