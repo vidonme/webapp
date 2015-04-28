@@ -140,11 +140,14 @@ $(function() {
 			$("#WzdAddPathTitle").text(title);			
 		}
 		$("#selectedPath").val("");
+		
 		$(".slides").animate({
 			left: -2 * slideWidth
-		}, 500);
+		}, 500,function(){
+			$("#selectedPath").focus();
+		});
+		
 		$(".guideMenu li").eq(4).addClass("selected").siblings().removeClass("selected");
-		$("#selectedPath").focus();
 	})
 
 	$("#btnWzdOK").click(function() {

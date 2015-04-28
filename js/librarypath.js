@@ -1,14 +1,20 @@
+ /*
+  * librarypath.js
+  * 2015-04-15
+  * library path operation,including adding,deleting,listing,and display, etc.
+  * include two div:addonelibpath,add netshare path.
+  */
+  
 	var reqDriveCnt = 0;
 	var g_lastDrivejqXhr = {};
 	var reqFolderCnt = 0;
-	var g_lastFolderjqXhr = {};	
-
+	var g_lastFolderjqXhr = {};
 
 	$(function() {
 		$("#btnAddLibPathOK").click(function() {
 			var path = $("#addSrcPath").val();
 			if (!path) return;
-			commitAddOneLibPath();
+			commitAddOneLibPath();//调用页面填写
 		})
 		
 		$("#addSrcPath").bind("propertychange input",function(){
@@ -21,21 +27,22 @@
 		})
 
 		$("#btnAddNetworkOK").click(function() {
-			commitAddNetShare();
+				commitAddNetShare();
 		})
 
 		$(".addPath .popDisk").mCustomScrollbar({
-			//scrollButtons:{enable:true},
-			autoHideScrollbar: true,
+				autoHideScrollbar: true,
 		});
 
 		$("#listpathblock").mCustomScrollbar({
-			//scrollButtons:{enable:true},
-			autoHideScrollbar: true,
+				autoHideScrollbar: true,
 		});
 	})
 	
-	function ShowPageTitleLibraryPath(type){
+	
+	//==================添加一个LibPath Div======================	
+	//DIV Title设定			
+	function SetPageTitle_LibraryPath(type){
 			
 			if (type == "commercial") {
 				title = $.i18n.prop('index_17');
@@ -52,94 +59,11 @@
 	}
 	
 	function AccessPageLibraryPath(type){
-			ShowPageTitleLibraryPath(type);
+			SetPageTitle_LibraryPath(type);
 			ShowDriveList();
 			//ShowPageAddOnePath('', '');
 	}	
-
-	//打开添加网络路径DIV
-	function ShowPageAddNetShare(host) {
-		var title = "";
-
-		$("#txtNetShareDomain").val("WORKGROUP");
-		showdiv(".addNetwork", 3);
-		title = $.i18n.prop('index_28');;
-		$("#popAddNetworkH3").text(title);
-		//document.getElementById("txtNetShareSrcName").focus(); 
-		$("#txtNetShareSrcName")[0].focus();
-	}
-
-	function checkNetShare(protocol, srvaddr, srvdomain, username, userpass) {
-		var langua = "";
-		if (!srvaddr) {
-			langua = $.i18n.prop('NetShare_IP_Null');
-			alert(langua);
-			return false;
-		}
-
-		if (checkip(srvaddr) == false) {
-			langua = $.i18n.prop('NetShare_IP_Illegal');
-			alert(langua);
-			return false;
-		}
-
-		if (!srvdomain) {
-			langua = $.i18n.prop('NetShare_Domin_Null');
-			alert(langua);
-			return false;
-		}
-
-		if (protocol == "Windows Network (SMB)") {
-			if ((!username && userpass) || (username && !userpass)) {
-				langua = $.i18n.prop('NetShare_UserPwd_Null');
-				alert(langua);
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	function commitAddNetShare() {
-		var protocol = $("#txtNetSharePtl").val();
-		var srvaddr = $("#txtNetShareSrcName").val();
-		var srvdomain = $("#txtNetShareDomain").val();
-		var username = $("#txtNetShareUserName").val();
-		var userpass = $("#txtNetSharePwd").val();
-		var netshare_search = '';
-		var display = '';
-
-		if (!checkNetShare(protocol, srvaddr, srvdomain, username, userpass)) return;
-
-		if (protocol == "Windows Network (SMB)") {
-			if (!username || !userpass) {
-				netshare_search = 'smb://' + srvaddr;
-			} else {
-				netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
-			}
-
-			display = 'smb://' + srvaddr;
-		} else {
-			display = 'nfs://' + srvaddr;
-			netshare_search = display;
-		}
-
-		//alert("netsearch="+netshare_search+",display="+display);
-		RequestAddNetDrive(netshare_search);
-		$("#addSrcPath").val(display);
-		close_box('.addNetwork', 3);
-	}
-
-	function cbAddNetDrive(data, netpath) {
-		//alert(netpath);
-		if (!checkResponse(data)) return;
-		ShowDriveList();
-		ShowFolderList(escape(netpath), escape(netpath));
-	}
-
-
 	
-	//==================添加一个LibPath Div======================			
 	function ShowPageAddOnePath(path, drive) {
 		$("#popDiskblock").html("");
 		$("#listpath").html("");
@@ -159,8 +83,6 @@
 		g_lastjqXhr = RequestDriveDirectory(path, drive);
 		reqCnt++;
 	}
-
-
 
 	function ShowDriveList(){
 		$("#popDiskblock").html("");
@@ -285,4 +207,91 @@
 		display = path.replace(/\\\\/g, '\\');
 		display = handleUrl(display, true, true);
 		$("#addSrcPath").val(display);
+	}	
+
+	//==================网络路径Div======================		
+	//打开DIV页面	
+	function ShowPageAddNetShare(host) {
+			var title = "";
+	
+			$("#txtNetShareDomain").val("WORKGROUP");
+			showdiv(".addNetwork", 3);
+			title = $.i18n.prop('index_28');;
+			$("#popAddNetworkH3").text(title);
+			//document.getElementById("txtNetShareSrcName").focus(); 
+			$("#txtNetShareSrcName")[0].focus();
 	}
+
+	//页面提交前参数检查
+	function checkNetShare(protocol, srvaddr, srvdomain, username, userpass) {
+		var langua = "";
+		if (!srvaddr) {
+			langua = $.i18n.prop('NetShare_IP_Null');
+			alert(langua);
+			return false;
+		}
+
+		if (checkip(srvaddr) == false) {
+			langua = $.i18n.prop('NetShare_IP_Illegal');
+			alert(langua);
+			return false;
+		}
+
+		if (!srvdomain) {
+			langua = $.i18n.prop('NetShare_Domin_Null');
+			alert(langua);
+			return false;
+		}
+
+		if (protocol == "Windows Network (SMB)") {
+			if ((!username && userpass) || (username && !userpass)) {
+				langua = $.i18n.prop('NetShare_UserPwd_Null');
+				alert(langua);
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	//添加网络路径提交。
+	function commitAddNetShare() {
+		var protocol = $("#txtNetSharePtl").val();
+		var srvaddr = $("#txtNetShareSrcName").val();
+		var srvdomain = $("#txtNetShareDomain").val();
+		var username = $("#txtNetShareUserName").val();
+		var userpass = $("#txtNetSharePwd").val();
+		var netshare_search = '';
+		var display = '';
+
+		if (!checkNetShare(protocol, srvaddr, srvdomain, username, userpass)) return;
+
+		if (protocol == "Windows Network (SMB)") {
+			if (!username || !userpass) {
+				netshare_search = 'smb://' + srvaddr;
+			} else {
+				netshare_search = 'smb://' + srvdomain + ';' + username + ':' + userpass + '@' + srvaddr;
+			}
+
+			display = 'smb://' + srvaddr;
+		} else {
+			display = 'nfs://' + srvaddr;
+			netshare_search = display;
+		}
+
+		//alert("netsearch="+netshare_search+",display="+display);
+		RequestAddNetDrive(netshare_search);
+		$("#addSrcPath").val(display);
+		close_box('.addNetwork', 3);
+	}
+
+	//页面提交后显示处理
+	function cbAddNetDrive(data, netpath) {
+		//alert(netpath);
+		if (!checkResponse(data)) return;
+		ShowDriveList();
+		ShowFolderList(escape(netpath), escape(netpath));
+	}
+
+
+	
