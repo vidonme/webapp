@@ -133,6 +133,14 @@ function showdiv(elem, index) {
 	});
 }
 
+
+function PopupAlert (info) {
+    showdiv(".confirmSave",4);
+    $(".confirmSave p").text(info);
+    setTimeout(function(){close_box('.confirmSave',4);},2500);			
+}
+
+
 function loadHtml() {
 	$.ajaxSetup({
 		async: false //取消异步  
@@ -191,6 +199,9 @@ function close_box(elm, index) {
 	if (index == 3) {
 		$(".tckuanglayer3").remove();
 	}
+	if (index == 4) {
+		$(".tckuanglayer4").remove();
+	}	
 	$(elm).fadeOut();
 	$("html").css("overflow", "auto");
 	$("body").css("overflow", "auto");

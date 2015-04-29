@@ -233,13 +233,14 @@
 		var langua = "";
 		if (!srvaddr) {
 			langua = $.i18n.prop('index_184');
-			alert(langua);
+			//alert(langua);
+			PopupAlert(langua);
 			return false;
 		}
 
 		if (checkip(srvaddr) == false) {
 			langua = $.i18n.prop('index_185');
-			alert(langua);
+			PopupAlert(langua);
 			return false;
 		}
 
@@ -288,13 +289,13 @@
 		//alert("netsearch="+netshare_search+",display="+display);
 		RequestAddNetDrive(netshare_search);
 		$("#addSrcPath").val(display);
-		close_box('.addNetwork', 3);
 	}
 
 	//页面提交后显示处理
 	function cbAddNetDrive(data, netpath) {
 		//alert(netpath);
 		if (!checkResponse(data)) return;
+		close_box('.addNetwork', 3);		
 		ShowDriveList();
 		ShowFolderList(escape(netpath), escape(netpath));
 	}
