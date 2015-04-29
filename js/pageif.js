@@ -104,8 +104,8 @@
 	
 	function cbHandleAddLibraryPath(data){
 		if (!checkResponse(data)){
-			var errmsg = $.i18n.prop('index_187');
-			alert(errmsg);
+//			var errmsg = $.i18n.prop('index_187');
+//			alert(errmsg);
 			return;
 		}
 		
