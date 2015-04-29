@@ -259,6 +259,12 @@
  					if (index == -1) {
  						return;
  					} else {
+
+ 						var seasonTitle = $.i18n.prop('index_179');
+ 						seasonTitle = seasonTitle.format( season );
+ 						var strTitle = "<h2>" + name + " " + seasonTitle + "</h2>"
+ 						$(".posterList .mCSB_container").append(strTitle);
+
  						var episodes = data.result.seasons[index].episodes;
  						for (var i = 0; i < episodes.length; ++i) {
  							var episode = episodes[i].episode;
@@ -615,7 +621,7 @@
  						var pic = $('<div class="pic"></div>');
 
  						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';// width="209" height="319" 
- 						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
+ 						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname" title="'+ name + '">' + name + '</p>';
  						//var content = '<div class="img fillet10" onclick="GetMovieDetail(' + data.result.movies[i].idfile + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
  						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><img class="fillet10" src="' + poster + '"/><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
  						pic.append(content);
@@ -697,7 +703,7 @@
  						$('.posterMenubtn').show();
 
  						//var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')"><div class="imgteleplaybg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
- 						var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
+ 						var content = '<div class="img fillet10" onclick="GetTvshowDetails(' + idtvshow + ')" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname" title="' + name + '">' + name + '</p>';
 
  						pic.append(content);
  						box.append(pic);
@@ -771,7 +777,7 @@
  						var poster = global_image_url + encodeURI(data.result.privvideos[i].thumbnail);
  						var name = data.result.privvideos[i].title;
  						//var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)"><div class="imgmoviebg"></div><img class="fillet10" src="' + poster + '"/></div><p class="imgname">' + name + '</p>';//width="209" height="319" 
- 						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname">' + name + '</p>';
+ 						var content = '<div class="img fillet10" onclick="showdiv(\'.addNoPlay\', 1)" style="background-image:url(' + poster + '); "><div class="imgbg"></div></div><p class="imgname" title="' + name + '">' + name + '</p>';
  						pic.append(content);
  						box.append(pic);
  						$(".posterList .mCSB_container").append(box);
