@@ -32,7 +32,7 @@ function HandleVersion(versionIn) {
         version_raw_split = version_raw.split("");
         versionOut = version_raw_split.join(".") + version_tag;
     } else {
-        versionOut = versionIn;
+        versionOut = versionIn; 
     }
 
     return versionOut;
