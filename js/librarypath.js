@@ -10,6 +10,7 @@
 	var reqFolderCnt = 0;
 	var g_lastFolderjqXhr = {};
 	var refreshgif = '<img src="images/movie/refresh.gif" width="32" height="32"  style=" margin:142px 0px 0px 157px;"/>';
+	var g_netPathForCheck;
 
 	$(function() {
 		$("#btnAddLibPathOK").click(function() {
@@ -29,6 +30,10 @@
 
 		$("#btnAddNetworkOK").click(function() {
 				commitAddNetShare();
+		})
+
+		$("#btnAddNetPathOK").click(function() {
+				commitNetPathInfo(g_netPathForCheck);
 		})
 
 		$(".addPath .popDisk").mCustomScrollbar({
@@ -294,11 +299,12 @@
 		ShowFolderList(escape(netpath), escape(netpath));
 	}
 
+
 	// get address path user name and password
 	function commitNetPathInfo(path) {
-		var srvdomain = $("#txtNetShareDomain").val();
-		var username = $("#txtNetShareUserName").val();
-		var userpass = $("#txtNetSharePwd").val();
+		var srvdomain = $("#txtNetPathDomain").val();
+		var username = $("#txtNetPathUserName").val();
+		var userpass = $("#txtNetPathPwd").val();
 
 		//alert("netsearch="+netshare_search+",display="+display);
 		RequestNetPathInfo(path, srvdomain, username, userpass);
@@ -307,14 +313,16 @@
 	}
 
 	function ShowPageAddNetPath(path) {
+		g_netPathForCheck = path;
+
 		var title = "";
 
-		$("#txtNetShareDomain").val("WORKGROUP");
-		showdiv(".addNetwork", 3);
+		$("#txtNetPathDomain").val("WORKGROUP");
+		showdiv(".addNetPath", 3);
 		title = $.i18n.prop('index_28');;
-		$("#popAddNetworkH3").text(title);
+		$("#popAddNetPathH3").text(title);
 		//document.getElementById("txtNetShareSrcName").focus(); 
-		$("#txtNetShareSrcName")[0].focus();
+		$("#txtNetPathUserName")[0].focus();
 	}
 
 

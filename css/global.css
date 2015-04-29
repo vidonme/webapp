@@ -220,6 +220,12 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .addNetwork .dropdown ul{ width:470px; top:28px;}
 .addNetwork .dropdown li{padding-left:10px;}
 .addNetwork  p { margin:20px 0; }
+
+/*弹出层输入网路路径的校验信息*/
+.addNetPath {width:640px; min-height:300px;  z-index:7; }
+.addNetPath label { width:100px; display:inline-block; text-align:right;margin-right:8px }
+.addNetPath input { width:460px;}
+.addNetPath  p { margin:20px 0; }
 /*弹出层添加源*/
 .addVideo { width:800px; min-height:400px; }
 .addVideo .selectedPathblock{ height:360px; overflow:auto}

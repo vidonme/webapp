@@ -123,6 +123,7 @@
 					"directory": realpath
 				},
 				'success': function(data) {
+					//ShowPageAddNetPath(realpath);
 					cbHandleFolderlist(data, realpath, drivepath);
 				}
 			});
