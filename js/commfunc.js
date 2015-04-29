@@ -36,43 +36,49 @@
 			return false;
 		}
 
-
 		function checkResponse(data) {
 
 			var err = "";
 			var langua = "";
 
 			if (typeof(data) == "undefined") {
-				langua = $.i18n.prop('Server_Response_Err');
-				//alert(langua);
+				langua = $.i18n.prop('index_187');
+				PopupAlert(langua);
 				return false;
 			}
 
 			if (typeof(data.error) != "undefined") {
-				//alert(data.error);
+				PopupAlert(langua);
 				return false;
 			}
 
 			if (data && (data.result.ret == false)) {
-				if (typeof(data.result.err_msg) == "undefined") {
+				if (typeof(data.result.err_msg) == "undefined" && typeof(data.result.err) == "undefined") {
+					PopupAlert(langua);
 					return false;
 				}
 				
-				err = data.result.err_msg;
+				if(typeof(data.result.err_msg) != "undefined"){
+					err = data.result.err_msg;
+				}else{
+					err = data.result.err;
+				}
+				
 
 				if (err == "Access is denied") {
-					langua = $.i18n.prop('Server_Response_Err_Access');
-					//alert(langua);
+					langua = $.i18n.prop('index_188');
+					PopupAlert(langua);
 				} else if (err == "Unknown user name or bad password") {
-					langua = $.i18n.prop('Server_Response_Err_UserPwd');
-					//alert(langua);
+					langua = $.i18n.prop('index_35');
+					PopupAlert(langua);
 				} else if (err == "Network path not found") {
-					langua = $.i18n.prop('Server_Response_Err_PathErr');
-					//alert(langua);
+					langua = $.i18n.prop('index_187');
+					PopupAlert(langua);
 				} else {
-					//alert(err);
+					PopupAlert("Network Error!");
 				}
-
+				
+				
 				return false;
 			}
 

@@ -228,13 +228,14 @@
 		var langua = "";
 		if (!srvaddr) {
 			langua = $.i18n.prop('index_184');
-			alert(langua);
+			//alert(langua);
+			PopupAlert(langua);
 			return false;
 		}
 
 		if (checkip(srvaddr) == false) {
 			langua = $.i18n.prop('index_185');
-			alert(langua);
+			PopupAlert(langua);
 			return false;
 		}
 
@@ -283,15 +284,38 @@
 		//alert("netsearch="+netshare_search+",display="+display);
 		RequestAddNetDrive(netshare_search);
 		$("#addSrcPath").val(display);
-		close_box('.addNetwork', 3);
 	}
 
 	//页面提交后显示处理
 	function cbAddNetDrive(data, netpath) {
 		//alert(netpath);
 		if (!checkResponse(data)) return;
+		close_box('.addNetwork', 3);		
 		ShowDriveList();
 		ShowFolderList(escape(netpath), escape(netpath));
+	}
+
+	// get address path user name and password
+	function commitNetPathInfo(path) {
+		var srvdomain = $("#txtNetShareDomain").val();
+		var username = $("#txtNetShareUserName").val();
+		var userpass = $("#txtNetSharePwd").val();
+
+		//alert("netsearch="+netshare_search+",display="+display);
+		RequestNetPathInfo(path, srvdomain, username, userpass);
+		$("#addSrcPath").val(path);
+		close_box('.addNetwork', 3);
+	}
+
+	function ShowPageAddNetPath(path) {
+		var title = "";
+
+		$("#txtNetShareDomain").val("WORKGROUP");
+		showdiv(".addNetwork", 3);
+		title = $.i18n.prop('index_28');;
+		$("#popAddNetworkH3").text(title);
+		//document.getElementById("txtNetShareSrcName").focus(); 
+		$("#txtNetShareSrcName")[0].focus();
 	}
 
 
