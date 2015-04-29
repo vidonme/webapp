@@ -42,6 +42,7 @@ p { line-height:1.5; padding:6px 0px; }
 .tckuanglayer { background:#000; position:fixed; filter:alpha(opacity=30); -moz-opacity:0.3; opacity:0.3; top:0px; left:0px; width:100%; height:100%; z-index:2; }
 .tckuanglayer2 { background:#000; position:fixed; filter:alpha(opacity=30); -moz-opacity:0.3; opacity:0.3; top:0px; left:0px; width:100%; height:100%; z-index:4; }
 .tckuanglayer3 { background:#000; position:fixed; filter:alpha(opacity=30); -moz-opacity:0.3; opacity:0.3; top:0px; left:0px; width:100%; height:100%; z-index:6; }
+.tckuanglayer4 { background:#000; position:fixed; filter:alpha(opacity=30); -moz-opacity:0.3; opacity:0.3; top:0px; left:0px; width:100%; height:100%; z-index:8; }
 .tckuang2 { position:absolute; z-index:5; display:none }
 /*tab*/
 .tab_content .tab_con, .tab_content_w .tab_con_w { display:none; }
@@ -239,7 +240,8 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 /*确认删除*/
 .confirmDelete{ width:600px; min-height:300px; z-index:5}
 .confirmDelete .deletePath{ min-height:150px; padding:0px 50px ;}
-.confirmSave{width:400px; min-height:100px; z-index:5}
+
+.confirmSave{width:400px; min-height:100px; z-index:9}
 
 /*登陆框*/
 .poplogin{ width:800px; min-height:500px;}

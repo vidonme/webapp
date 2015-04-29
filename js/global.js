@@ -111,6 +111,9 @@ function showdiv(elem, index) {
 	if (index == 3) {
 		$(elem).before("<div class='tckuanglayer3'></div>");
 	}
+	if (index == 4) {
+		$(elem).before("<div class='tckuanglayer4'></div>");
+	}
 	$("body", "html").css({
 		height: "100%",
 		width: "100%"
