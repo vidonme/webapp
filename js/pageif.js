@@ -138,7 +138,7 @@
 			if (data && data.result.ret == true) {
 				return;
 			} else {
-				alert(data.result.err);
+				PopupAlert(data.result.err);
 			}
 	}
 	
