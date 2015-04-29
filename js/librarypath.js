@@ -295,5 +295,28 @@
 		ShowFolderList(escape(netpath), escape(netpath));
 	}
 
+	// get address path user name and password
+	function commitNetPathInfo(path) {
+		var srvdomain = $("#txtNetShareDomain").val();
+		var username = $("#txtNetShareUserName").val();
+		var userpass = $("#txtNetSharePwd").val();
+
+		//alert("netsearch="+netshare_search+",display="+display);
+		RequestNetPathInfo(path, srvdomain, username, userpass);
+		$("#addSrcPath").val(path);
+		close_box('.addNetwork', 3);
+	}
+
+	function ShowPageAddNetPath(path) {
+		var title = "";
+
+		$("#txtNetShareDomain").val("WORKGROUP");
+		showdiv(".addNetwork", 3);
+		title = $.i18n.prop('index_28');;
+		$("#popAddNetworkH3").text(title);
+		//document.getElementById("txtNetShareSrcName").focus(); 
+		$("#txtNetShareSrcName")[0].focus();
+	}
+
 
 	
