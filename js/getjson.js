@@ -166,3 +166,21 @@
 			return lastjqXhr;
 
 		}
+
+		function RequestNetPathInfo(path, username, password, domain) {
+			if (!path) return;
+
+			vidonme.rpc.request({
+				'context': this,
+				'method': 'VidOnMe.AddNetDirectoryEx',
+				'params': {
+					"directory": path,
+					"domain" : domain,
+					"username" : username,
+					"password" : password,
+				},
+				'success': function(data) {
+
+				}
+			});
+		}

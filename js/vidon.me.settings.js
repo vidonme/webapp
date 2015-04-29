@@ -595,8 +595,8 @@ function getFilePath(p) {
 
 function showSaveMessage(isSuccess) {
     if (isSuccess == true) {
-        showdiv(".confirmSave",2);
-        setTimeout(function(){close_box('.confirmSave',2);},2500);
+        showdiv(".confirmSave",4);
+        setTimeout(function(){close_box('.confirmSave',4);},2500);
     } else {
         alert("Save failed");
     }
