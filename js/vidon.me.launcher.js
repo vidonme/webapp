@@ -35,7 +35,7 @@ function getBrowserInfo() {
 		script,
 		debug = false,
 		/* Set to true to disable cached javascript */
-		version = (debug ? Math.random() : '2.0.2.8'),
+		version = (debug ? Math.random() : '2.1.0.0'),
 		scripts;
 	if (browserinfo.match("msie"))
 		scripts = [
