@@ -381,25 +381,51 @@ function settingSave(actionType) {
         }
 
         var str = '{\"webonlylocal\":' + webonlyLocal + ',\"webserver\":true,\"webserverpassword\":\"\",\"webserverusername\":\"\"}';
-
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetSystemSetting',
             'params': {
                 "key": "services.webserver",
                 "val": str,
-                "key": "generic.autostart",
-                "val": autoStart + "",
-                "key": "webonlylocal",
-                "val": webonlyLocal + "",
-                "key": "language.default",
-                "val": language
             },
             'success': function(data) {
-                getServerLanguage();
-                showSaveMessage( true );
+                vidonme.rpc.request({
+                    'context': this,
+                    'method': 'VidOnMe.SetSystemSetting',
+                    'params': {
+                        "key": "generic.autostart",
+                        "val": autoStart + ""
+                    },
+                    'success': function(data) {
+                        vidonme.rpc.request({
+                            'context': this,
+                            'method': 'VidOnMe.SetSystemSetting',
+                            'params': {
+                                "key": "webonlylocal",
+                                "val": webonlyLocal + ""
+                            },
+                            'success': function(data) {
+                                vidonme.rpc.request({
+                                    'context': this,
+                                    'method': 'VidOnMe.SetSystemSetting',
+                                    'params': {
+                                        "key": "language.default",
+                                        "val": language
+                                    },
+                                    'success': function(data) {
+                                        showSaveMessage(true);
+                                        getServerLanguage();
+
+                                        freshSettingInfo(reloadPage);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
         });
+        
         /*
         vidonme.rpc.request({
             'context': this,
@@ -409,10 +435,10 @@ function settingSave(actionType) {
                 "val": autoStart + ""
             },
             'success': function(data) {
-                saveSuccess = true;
             }
         });
 
+        
         vidonme.rpc.request({
             'context': this,
             'method': 'VidOnMe.SetSystemSetting',
@@ -539,37 +565,36 @@ function settingSave(actionType) {
             }
         });
     }
+}
 
-    if (actionType != "mediaLibrary" && actionType != "transcoding") {
-        //alert("%156".toLocaleString());
-        vidonme.rpc.request({
-            'context': this,
-            'method': 'VidOnMe.GetSystemSettingForAll',
-            'params': [],
-            'success': function(data) {
-                if (data && data.result && data.result.settings) {
-                    settingInfo = data.result.settings;
-                }
-
-                vidonme.rpc.request({
-                    'context': this,
-                    'method': 'VidOnMe.GetServerInfo',
-                    'params': [],
-                    'success': function(data1) {
-                        if (data1 && data1.result) {
-                            serverInfo = data1.result;
-                            if (reloadPage != true) {
-                                document.location.reload();
-                            } else {
-                                info(actionType);
-                            }
-
-                        }
-                    }
-                });
+function freshSettingInfo(reloadPage){
+    vidonme.rpc.request({
+        'context': this,
+        'method': 'VidOnMe.GetSystemSettingForAll',
+        'params': [],
+        'success': function(data) {
+            if (data && data.result && data.result.settings) {
+                settingInfo = data.result.settings;
             }
-        });
-    }
+
+            vidonme.rpc.request({
+                'context': this,
+                'method': 'VidOnMe.GetServerInfo',
+                'params': [],
+                'success': function(data1) {
+                    if (data1 && data1.result) {
+                        serverInfo = data1.result;
+                        if (reloadPage != true) {
+                            document.location.reload();
+                        } else {
+                            info(actionType);
+                        }
+
+                    }
+                }
+            });
+        }
+    });
 }
 
 //服务器设置取消操作
