@@ -22,9 +22,9 @@
       position: fixed;
       z-index: 10;
       top: 0; left: 0; bottom: 0;
-      width: 200px;
+      width: 240px;
       overflow-y: auto;
-      overflow-x: hidden;
+      overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       padding: 15px 0 30px 30px;
       border-right: 1px solid #bbb;
@@ -64,8 +64,8 @@
             }
     div.container {
       position: relative;
-      width: 550px;
-      margin: 40px 0 50px 260px;
+      width: 630px;
+      margin: 40px 0 50px 290px;
     }
     img#logo {
       width: 450px;
@@ -132,7 +132,7 @@
       text-align: center;
       text-shadow: 0px -1px 1px #1e2d4d;
       text-decoration: none;
-      width: 225px;
+      width: 405px;
       -webkit-background-clip: padding-box; }
       a.punch:hover {
         -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
@@ -196,7 +196,7 @@
         zoom: 1;
       }
       code {
-        margin-left: 20px;
+        margin-left: 80px;
       }
       pre {
         font-size: 12px;
@@ -298,20 +298,114 @@
     </a>
 
     <a class="toc_title" href="#Wizzard">
-      Library
+      Wizzard
     </a>
     <ul class="toc_section">
       <li>– <a href="#Wizzard.IsWizzardEnsabled">Wizzard.IsWizzardEnsabled</a></li>    	
       <li>– <a href="#Wizzard.SetWizzardDisabled">Wizzard.SetWizzardDisabled</a></li>
     </ul>
-    <a class="toc_title" href="#Library">
-      Wizzard
+    <a class="toc_title" href="#Libraries">
+      Libraries
     </a>
     <ul class="toc_section">
       <li>– <a href="#VidOnMe.GetLibraries">VidOnMe.GetLibraries</a></li>
       <li>– <a href="#VidOnMe.GetLibraryDetail">VidOnMe.GetLibraryDetail</a></li>
-    </ul>    
+      <li>– <a href="#VidOnMe.AddPathToLibrary">VidOnMe.AddPathToLibrary</a></li>
+      <li>– <a href="#VidOnMe.DeletePathFromLibrary">VidOnMe.DeletePathFromLibrary</a></li>
+      <li>– <a href="#VidOnMe.StartScan">VidOnMe.StartScan</a></li>       
+    </ul>        
+     <a class="toc_title" href="#Directory">
+      Directory
+    </a>
+    <ul class="toc_section">
+      <li>– <a href="#VidOnMe.AddNetDirectory">VidOnMe.AddNetDirectory</a></li>
+      <li>– <a href="#VidOnMe.GetDirectory">VidOnMe.GetDirectory</a></li>               
+    </ul>     
+     <a class="toc_title" href="#Settings">
+      Settings
+    </a>
+    <ul class="toc_section">
+      <li>– <a href="#VidOnMe.GetServerName">VidOnMe.GetServerName</a></li>
+      <li>– <a href="#VidOnMe.SetServerName">VidOnMe.SetServerName</a></li> 
+      <li>– <a href="#VidOnMe.CheckTranscodeOption">VidOnMe.CheckTranscodeOption</a></li>
+      <li>– <a href="#VidOnMe.SetTranscodeOption">VidOnMe.SetTranscodeOption</a></li>        
+      <li>– <a href="#VidOnMe.GetServerInfo">VidOnMe.GetServerInfo</a></li>        	
+      <li>– <a href="#VidOnMe.GetSystemSetting">VidOnMe.GetSystemSetting</a></li>
+      <li>– <a href="#VidOnMe.GetAllClients">VidOnMe.GetAllClients</a></li>
+      <li>– <a href="#VidOnMe.GetSystemSettingForAll">VidOnMe.GetSystemSettingForAll</a></li>      
+      <li>– <a href="#VidOnMe.SetSystemSetting">VidOnMe.SetSystemSetting</a></li>
+    	<li>– <a href="#VidOnMe.SetDefaultLanguageForScraper">VidOnMe.SetDefaultLanguageForScraper</a></li>   	    
+    </ul>
+ 
+    <a class="toc_title" href="#Upgrade">
+      Upgrade
+    </a>
+    <ul class="toc_section">
+      <li>– <a href="#VidOnMe.Upgrade_GetState">VidOnMe.Upgrade_GetState</a></li>
+      <li>– <a href="#VidOnMe.Upgrade_Install">VidOnMe.Upgrade_Install</a></li> 
+      <li>– <a href="#VidOnMe.Upgrade_Download">VidOnMe.Upgrade_Download</a></li>             
+    </ul>
+          
+    <a class="toc_title" href="#Users">
+      Users
+    </a>
+    <ul class="toc_section">    
+      <li>– <a href="#VidOnMe.GetAuthUserInfo">VidOnMe.GetAuthUserInfo</a></li> 
+      <li>– <a href="#VidOnMe.LoginAuth">VidOnMe.LoginAuth</a></li>          
+    </ul>       
     
+    <a class="toc_title" href="#Scraper">
+      Scraper
+    </a>
+    <ul class="toc_section">    
+      <li>– <a href="#VidOnMe.GetLastScraperStatistics">VidOnMe.GetLastScraperStatistics</a></li>  
+      <li>– <a href="#VidOnMe.GetCurrentScraperState">VidOnMe.GetCurrentScraperState</a></li>   
+    </ul>  
+    
+    <a class="toc_title" href="#Movies">
+      Movies
+    </a>     
+    <ul class="toc_section">    
+      <li>– <a href="#VideoLibrary.GetMovies">VideoLibrary.GetMovies</a></li> 
+    </ul>  
+      
+    <a class="toc_title" href="#TVShows">
+      TV Shows
+    </a>     
+    <ul class="toc_section">    
+      <li>– <a href="#VideoLibrary.GetTVShows">VidOnMe.GetTVShows</a></li> 
+    </ul>
+ 
+    <a class="toc_title" href="#PrivateVideos">
+      Private Videos
+    </a>     
+    <ul class="toc_section">    
+      <li>– <a href="#VideoLibrary.GetPrivateVideos">VideoLibrary.GetPrivateVideos</a></li> 
+    </ul>
+<!--      
+    <a class="toc_title" href="#Picture">
+      Picture
+    </a>
+    <ul class="toc_section">
+      <li>– <a href="#PictureLibrary.GetPictureBackupDevicesV2">PictureLibrary.GetPictureBackupDevicesV2</a></li>
+      <li>– <a href="#PictureLibrary.GetBackupDetailsV2">PictureLibrary.GetBackupDetailsV2</a></li>
+      <li>– <a href="#PictureLibrary.UpdatePhotoLibraryV2">PictureLibrary.UpdatePhotoLibraryV2</a></li>
+    </ul>  
+         
+    <a class="toc_title" href="#Players">
+      Players
+    </a>     
+    <ul class="toc_section">    
+      <li>– <a href="#Player.Open">Player.Open</a></li> 
+    </ul>    
+       
+    <a class="toc_title" href="#Unknown">
+      Unknown
+    </a>     
+    <ul class="toc_section">    
+      <li>– <a href="#VidOnMe.getMethod">VidOnMe.getMethod</a></li> 
+    </ul>  
+-->             
   </div>
 
   <div class="container">
@@ -349,12 +443,11 @@
       is often helpful.
     </p>
 
-    <h2 id="Wizzard">VidOn.me.Wizzard</h2>
+    <h2 id="Wizzard">Wizzard</h2>
 
     <p>
       <b>Wizzards</b> is a module that give the user a wizzard to set the system
       rapidly for using system.
-      For example:
     </p>
 
     <p id="Wizzard.IsWizzardEnsabled">
@@ -401,10 +494,12 @@
 }
 </pre>
 
-		<h2 id="Library">VidOn.me.Library</h2>
+		<h2 id="Libraries">VidOn.me.Library</h2>
 			
     <p>
-      <b>Library</b> is a module that let user operate the library.
+      <b>Libraries</b> is a module that let user operate the library.
+    </br>
+      <tt>Get</tt> <tt>Create</tt> <tt>Update</tt> <tt>Delete</tt> <tt>Options(addpath)</tt> <tt>Options(removepath)</tt>
     </p>		
 		
     <p id="VidOnMe.GetLibraries">
@@ -478,7 +573,831 @@
     }
 }
 </pre>
- 
 
+    <p id="VidOnMe.AddPathToLibrary">
+      <b class="header">VidOnMe.AddPathToLibrary</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+<tt>Request</tt>
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "VidOnMe.AddPathToLibrary",
+  "params": {
+    "LibraryId": 3,
+    "path": "D:\movie"
+  }
+}
+<tt>Response</tt>
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "ret": true,
+        "LibraryId": 3,
+        "PathId": 1
+    }
+}
+</pre> 
+
+    <p id="VidOnMe.DeletePathFromLibrary">
+      <b class="header">VidOnMe.DeletePathFromLibrary</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+<tt>request</tt>
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "VidOnMe.DeletePathFromLibrary",
+  "params": {
+    "LibraryId": 3,
+    "PathId": 1
+  }
+}
+<tt>response</tt>
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "ret": true
+    }
+}
+</pre> 
+
+    <p id="VidOnMe.StartScan ">
+      <b class="header">VidOnMe.StartScan </b>
+      <br />
+    </p>
+<pre>
+request
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "VidOnMe.StartScan",
+  "params": {
+    "LibraryId": 3
+  }
+}
+
+response
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "ret": true
+    }
+}
+</pre>
+
+    <h2 id="Directory">VidOnMe.Directory</h2>
+
+    <p>
+      <b>Directory</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+      </br>
+      <tt>Add</tt> <tt>Update</tt> <tt>Delete</tt> <tt>AddNetDirectoryEx</tt>
+    </p>
+    
+    <p id="VidOnMe.GetDirectory">
+      <b class="header">VidOnMe.GetDirectory</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetDirectory",
+  "id":1,
+  "params":{
+    "mask":"/",
+    "directory":""
+  }
+}
+
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "err":"OK",
+    "filelist":[{
+       "datetime":"1601-01-01 00:00:00",
+       "drivetype":1,
+       "isFolder":true,
+       "path":"C:",
+       "size":0,
+       "title":"C: (System)"
+     }]
+    "ret":true
+  }
+}
+</pre>	    
+    <p id="VidOnMe.AddNetDirectory">
+      <b class="header">VidOnMe.AddNetDirectory</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.AddNetDirectory",
+  "id":1,
+  "params":{
+    "directory":"nfs://10.10.2.100"
+  }
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "err":"OK",
+    "ret":true
+  }
+}
+</pre>	 
+   
+    <h2 id="Settings">VidOnMe.Settings</h2>
+
+    <p>
+      <b>Settings</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>	
+
+    <p id="VidOnMe.SetDefaultLanguageForScraper">
+      <b class="header">VidOnMe.SetDefaultLanguageForScraper</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method":	"VidOnMe.SetDefaultLanguageForScraper"
+    "params": [
+				{
+					"name": "language",
+					"required": true,
+					"type": "string"
+				}
+			]
+}
+
+response
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "ret": {
+			"required": true,
+			"type": "boolean"
+		}
+}
+</pre>
+
+    <p id="VidOnMe.GetServerName">
+      <b class="header">VidOnMe.GetServerName</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+Request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetServerName",
+  "id":1,
+  "params":[]
+}
+Response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "name":"威动服务器",
+    "ret":true
+  }
+}
+</pre>
+
+    <p id="VidOnMe.SetServerName">
+      <b class="header">VidOnMe.SetServerName</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.SetServerName",
+  "id":1,
+  "params":{
+    "name":"xxx"
+  }
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true
+  }
+}    
+</pre>
+
+    <p id="VidOnMe.CheckTranscodeOption">
+      <b class="header">VidOnMe.CheckTranscodeOption</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.CheckTranscodeOption",
+  "id":1,
+  "params":[]
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "hardCodecSetup":true,
+    "hardCodecSupport":true
+  }
+}   
+</pre>
+  
+    <p id="VidOnMe.SetTranscodeOption">
+      <b class="header">VidOnMe.SetTranscodeOption</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.SetTranscodeOption",
+  "id":1,
+  "params":{
+    "config":false
+  }
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true
+  }
+}        
+</pre>       
+
+    <p id="VidOnMe.GetServerInfo">
+      <b class="header">VidOnMe.GetServerInfo</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetServerInfo",
+  "id":1,"params":[]
+}  
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true,
+    "serverip":"10.10.2.196",
+    "srvversion":"2100"
+  }
+}   
+</pre>  
+       
+    <p id="VidOnMe.GetAllClients">
+      <b class="header">VidOnMe.GetAllClients</b>
+      <br />
+    </p>
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetAllClients",
+  "id":1,
+  "params":[]
+} 
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":false
+  }
+}  
+</pre> 
+    <p id="VidOnMe.GetSystemSettingForAll">
+      <b class="header">VidOnMe.GetSystemSettingForAll</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetSystemSettingForAll",
+  "id":1,
+  "params":[]
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true,
+    "settings":[
+      {"key":"account.account","val":""},
+      {"key":"account.password","val":""},
+      {"key":"db.host","val":"127.0.0.1"},
+      {"key":"db.name","val":"VMS2"},
+      {"key":"db.pass","val":"root"},
+      {"key":"db.port","val":"3360"},
+      {"key":"db.type","val":"mysql"},
+      {"key":"db.user","val":"root"},
+      {"key":"discovery.ssdp","val":"true"},
+      {"key":"generic.autostart","val":"true"},
+      {"key":"generic.autoupgrade","val":"true"},
+      {"key":"generic.daytime","val":"3"},
+      {"key":"generic.rebuildbackupdatabase","val":"true"},
+      {"key":"generic.tmpfiledir","val":"C:/Users/GUI~1.YAN/AppData/Local/Temp/"},
+      {"key":"generic.updatetest","val":"false"},
+      {"key":"generic.usrdatadir","val":"C:/Users/Public/Documents/VMS2/userdata/"},
+      {"key":"generic.weekday","val":"0"},
+      {"key":"language.auto","val":"true"},
+      {"key":"language.default","val":"Chinese (Simple)"},
+      {"key":"library.autoupdate","val":"true"},
+      {"key":"library.autoupdatetimespan","val":"24"},
+      {"key":"library.defaultlanguageforscraper","val":"zh"},
+      {"key":"library.updateonstart","val":"true"},
+      {"key":"metaanalysis.mintimeofplaylist","val":"1200000"},
+      {"key":"metaanalysis.port","val":"58000"},
+      {"key":"metaanalysis.screenshotheight","val":"360"},
+      {"key":"metaanalysis.screenshottime","val":"100000"},
+      {"key":"metaanalysis.screenshottimespan","val":"120"},
+      {"key":"metaanalysis.screenshotwidth","val":"640"},
+      {"key":"name.isdefault","val":"true"},
+      {"key":"name.value","val":"VidOn Server"},
+      {"key":"picture.defaultbackuppath","val":""},
+      {"key":"promotion.display","val":"true"},
+      {"key":"webserver.pass","val":""},
+      {"key":"webserver.port","val":"32080"},
+      {"key":"webserver.user","val":""},
+      {"key":"wizzard.allow","val":"false"}
+    ]
+  }
+}
+</pre>        	
+
+    <p id="VidOnMe.SetSystemSetting">
+      <b class="header">VidOnMe.SetSystemSetting</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.SetSystemSetting",
+  "id":1,
+  "params":{
+    "key":"library.autoupdatetimespan",
+    "val":"12"
+  }
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "changes":"",
+    "checkresult":"alreadynewversion",
+    "currversion":"2100",
+    "newversion":"",
+    "progress":"0",
+    "state":"checkversionfin"
+  }
+}  
+</pre>            
+
+
+    <h2 id="Upgrade">Upgrade</h2>
+
+    <p>
+      <b>Upgrade</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>	
+
+    <p id="VidOnMe.Upgrade_GetState">
+      <b class="header">VidOnMe.Upgrade_GetState</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.Upgrade_GetState",
+  "id":1,
+  "params":[]
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "changes":"",
+    "checkresult":"alreadynewversion",
+    "currversion":"2100",
+    "newversion":"",
+    "progress":"0",
+    "state":"checkversionfin"
+  }
+}
+</pre>
+    <p id="VidOnMe.Upgrade_Install">
+      <b class="header">VidOnMe.Upgrade_Install</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"Upgrade_Install",
+  "id":1,
+  "params":[] 
+  "permission": "ReadData"
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true
+  }
+}
+</pre>      
+
+    <p id="VidOnMe.Upgrade_Download">
+      <b class="header">VidOnMe.Upgrade_Download</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"Upgrade_Download",
+  "id":1,
+  "params":[] 
+  "permission": "ReadData"
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "ret":true
+  }
+}
+</pre>        
+
+        
+    <p>
+      <b>Users</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>	
+
+    <p id="VidOnMe.GetAuthUserInfo">
+      <b class="header">VidOnMe.GetAuthUserInfo</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.GetAuthUserInfo",
+  "id":1,
+  "params":{}
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "avatar":"",
+    "email":"xxx.xxx@goland.cn",
+    "expiredate":"",
+    "password":"df891da08741a12ad9870990311e1ffd",
+    "ret":true,
+    "subscribed":false,
+    "username":"xxxx"
+  }
+}
+</pre>
+    <p id="VidOnMe.LoginAuth">
+      <b class="header">VidOnMe.LoginAuth</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VidOnMe.LoginAuth",
+  "id":1,
+  "params":{
+    "username":"xxx",
+    "password":"df891da08741a12ad9870990311e1ffd",
+    "country":"cn"
+  }
+}
+response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "avatar":"",
+    "email":"xxx.xxx@goland.cn",
+    "error":"OK",
+    "expiredate":"",
+    "ret":true,
+    "subscribed":false,
+    "username":"xxxx"
+  }
+}
+</pre>
+
+    <h2 id="Scraper">VidOn.me.Scraper</h2>
+
+    <p>
+      <b>Scripper</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>
+
+
+    <p id="VidOnMe.GetLastScraperStatistics">
+      <b class="header">VidOnMe.GetLastScraperStatistics</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "VidOnMe.GetLastScraperStatistics",
+    "params": {
+    }
+}
+
+response
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "total": {
+            "failed_amounts": 10,
+            "success_amounts": 100
+        }
+    }
+}
+</pre> 
+
+    <p id="VidOnMe.GetLastScraperStatistics">
+      <b class="header">VidOnMe.GetLastScraperStatistics</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "VidOnMe.GetLastScraperStatistics",
+    "params": {
+    }
+}
+
+response
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "total": {
+            "failed_amounts": 10,
+            "success_amounts": 100
+        }
+    }
+}
+</pre>
+
+    <p id="VidOnMe.GetCurrentScraperState">
+      <b class="header">VidOnMe.GetCurrentScraperState</b>
+      <br />
+    </p>
+
+<pre class="runnable">
+request
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "VidOnMe.GetCurrentScraperState",
+    "params": {
+    }
+}
+response    
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "total": {
+            "amounts": 100,
+            "finished": 10,
+            "state": "ready/scanning/scraping/finish"
+        }
+    }
+}
+</pre>
+
+    <h2 id="Movies">Movies</h2>
+
+    <p>
+      <b>Movies</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>
+
+    <p id="VideoLibrary.GetMovies">
+      <b class="header">VideoLibrary.GetMovies</b>
+      <br />
+    </p>
+<pre class="runnable">
+request
+{
+  "jsonrpc":"2.0",
+  "method":"VideoLibrary.GetMovies",
+  "id":1,
+  "params":{
+    "limits":{"start":0,"end":1},
+    "sort":{"ignorearticle":false,"order":"descending","method":"dateadded"},
+    "properties":["file","year","thumbnail","runtime","title"]
+  }
+}
+response    
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "limits":{"end":1,"start":0,"total":13},
+    "movies":[{
+      "file":"E:/MediaLibrary/file.avi",
+      "idfile":97,
+      "meta":"{
+        \"AudioChannel\":\"2.0\",
+        \"AudioCodec\":\"aac\",
+        \"AudioLanguage\":\"\",
+        \"FileFormat\":\"avi\",
+        \"FileType\":\"stVideoFile\",
+        \"MenuMode\":\"\",
+        \"SubLanguage\":\"\",
+        \"SubtitleCodec\":\"\",
+        \"VideoCodec\":\"wmv3\",
+        \"VideoResolution\":\"480p\",
+        \"VideoStandard\":\"\"
+      }",
+      "runtime":"61",
+      "thumbnail":"C:/Users/4b511b5e.jpg",
+      "title":"Temporary File",
+      "year":2014
+    }]
+  }
+}
+</pre>
+
+    <h2 id="TVShows">TVShows</h2>
+
+    <p>
+      <b>TVShows</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>
+
+    <p id="VideoLibrary.GetTVShows">
+      <b class="header">VideoLibrary.GetTVShows</b>
+      <br />
+    </p>
+<pre class="runnable">
+Request
+{
+  "jsonrpc":"2.0",
+  "method":"VideoLibrary.GetTVShows",
+  "id":1,
+  "params":{
+    "sort":{"ignorearticle":false,"order":"descending","method":"dateadded"},
+    "limits":{"start":0,"end":1},
+    "properties":["file","plot","thumbnail","title","year","season","episode"]
+  }
+}
+Response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "limits":{"end":1,"start":0,"total":4},
+    "tvshows":[{
+      "fanart":"http://dafdjpg",
+      "idtvshow":4,
+      "meta":"{
+        \"AudioChannel\":\"2.0\",
+        \"AudioCodec\":\"aac\",
+        \"AudioLanguage\":\"\",
+        \"FileFormat\":\"rmvb\",
+        \"FileType\":\"stVideoFile\",
+        \"MenuMode\":\"\",
+        \"SubLanguage\":\"\",
+        \"SubtitleCodec\":\"\",
+        \"VideoCodec\":\"rv40\",
+        \"VideoResolution\":\"480p\",
+        \"VideoStandard\":\"\"
+      }",
+      "plot":"",
+      "thumbnail":"C:/Users/Thumbnails/6/60dcc6ad.jpg",
+      "title":"The X-Files",
+      "year":1993
+    }]
+  }
+}
+</pre>
+
+    <h2 id="PrivateVideos">PrivateVideos</h2>
+
+    <p>
+      <b>PrivateVideos</b> is a module that give the user a wizzard to set the system
+      rapidly for using system.
+    </p>
+
+    <p id="VideoLibrary.GetPrivateVideos">
+      <b class="header">VideoLibrary.GetPrivateVideos</b>
+      <br />
+    </p>
+<pre class="runnable">
+Request
+{
+  "jsonrpc":"2.0",
+  "method":"VideoLibrary.GetPrivVideos",
+  "id":1,
+  "params":{
+    "limits":{"start":0,"end":1},
+    "sort":{"ignorearticle":false,"order":"descending","method":"dateadded"},
+    "properties":["file","thumbnail","title"]
+  }
+}
+Response
+{
+  "id":1,
+  "jsonrpc":"2.0",
+  "result":{
+    "limits":{"end":1,"start":0,"total":64},
+    "privvideos":[{
+      "file":"E:/MediaLibrary/faad2-fail.mkv",
+      "idfile":96,
+      "meta":"{
+        \"AudioChannel\":\"5.1\",
+        \"AudioCodec\":\"aac\",
+        \"AudioLanguage\":\"\",
+        \"FileFormat\":\"mkv\",
+        \"FileType\":\"stVideoFile\",
+        \"MenuMode\":\"\",
+        \"SubLanguage\":\"\",
+        \"SubtitleCodec\":\"\",
+        \"VideoCodec\":\"dx50\",
+        \"VideoResolution\":\"480p\",
+        \"VideoStandard\":\"\"
+      }",
+      "runtime":"1451",
+      "thumbnail":"C:/Users/Thumbnails/4/4eb472db.jpg",
+      "title":"faad2-fail"
+    }]
+  }
+}
+</pre>
 </body>
 </html>
