@@ -361,7 +361,7 @@
  		var rating = $('<div class="rating"></div>');
  		var detail = $('<div class="detail"></div>');
 
- 		var genre_p = '<p>Genre: ';
+ 		var genre_p = '<p>' + $.i18n.prop('index_163') + ': ';
  		for (var i = 0; i < genre.length; ++i) {
  			if (i != genre.length - 1) {
  				genre_p += genre[i] + ', ';
@@ -369,11 +369,9 @@
  				genre_p += genre[i];
  			}
  		}
-
  		genre_p += '</p>';
 
- 		var cast_p = '<p>Cast: ';
-
+ 		var cast_p = '<p>' + $.i18n.prop('index_163') + ': ';
  		for (var i = 0; i < cast.name.length; ++i) {
  			if (i != cast.name.length - 1) {
  				cast_p += cast.name[i] + ', ';
@@ -384,7 +382,7 @@
 
  		cast_p += '</p>';
 
- 		var plot_p = '<p>Plot: ' + plot + '</p>';
+ 		var plot_p = '<p>' + $.i18n.prop('index_165') + ': ' + plot + '</p>';
 
  		detail.append(genre_p);
  		detail.append(cast_p);
@@ -516,7 +514,6 @@
  				var rating = $('<div class="rating"></div>');
  				var detail = $('<div class="detail"></div>');
 
- 				162
  				var genre_p = '<p>' + $.i18n.prop('index_163') + ': ';
  				for (var i = 0; i < genre.length; ++i) {
  					if (i != genre.length - 1) {
