@@ -246,14 +246,14 @@
 
 		if (!srvdomain) {
 			langua = $.i18n.prop('index_186');
-			alert(langua);
+			PopupAlert(langua);
 			return false;
 		}
 
 		if (protocol == "Windows Network (SMB)") {
 			if ((!username && userpass) || (username && !userpass)) {
 				langua = $.i18n.prop('index_175');
-				alert(langua);
+				PopupAlert(langua);
 				return false;
 			}
 		}
