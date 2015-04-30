@@ -270,18 +270,18 @@ function info(infoType) {
       //  $("#localhostInfo").html(.format(address));
 
         if (genericAutoStart == "true") {
-            $("#autostart span:first").removeClass("checkbox");
-            $("#autostart span:first").addClass("checkbox selected");
+            //$("#autostart span:first").removeClass("checkbox");
+            $("#autostart span:first").addClass("selected");
         } else {
-            $("#autostart span:first").removeClass("checkbox selected");
-            $("#autostart span:first").addClass("checkbox");
+            $("#autostart span:first").removeClass("selected");
+            //$("#autostart span:first").addClass("checkbox");
         }
         if (servicesWebonlyLocal == true) {
-            $("#onlyloaclhost span:first").removeClass("checkbox");
-            $("#onlyloaclhost span:first").addClass("checkbox selected");
+            //$("#onlyloaclhost span:first").removeClass("checkbox");
+            $("#onlyloaclhost span:first").addClass("selected");
         } else {
-            $("#onlyloaclhost span:first").removeClass("checkbox selected");
-            $("#onlyloaclhost span:first").addClass("checkbox");
+            $("#onlyloaclhost span:first").removeClass("selected");
+            //$("#onlyloaclhost span:first").addClass("checkbox");
         }
     } else if (infoType == "trackSubtitle") {
         //音轨字幕语言设置
@@ -323,11 +323,11 @@ function info(infoType) {
                     if (support == true) {
                         $("#hardCodecSupport").removeClass("disable");
                         if (enable) {
-                            $("#opendecoding span:first").remove("checkbox");
-                            $("#opendecoding span:first").addClass("checkbox selected");
+                            //$("#opendecoding span:first").remove("checkbox");
+                            $("#opendecoding span:first").addClass("selected");
                         } else {
-                            $("#opendecoding span:first").removeClass("checkbox selected");
-                            $("#opendecoding span:first").addClass("checkbox");
+                            $("#opendecoding span:first").removeClass("selected");
+                            //$("#opendecoding span:first").addClass("checkbox");
                         }
                     } else {
                         $("#hardCodecSupport").addClass("disable");
@@ -364,13 +364,13 @@ function settingSave(actionType) {
     var saveSuccess = false;
     if (actionType == "essentialInfo") {
 
-        var autoStart = $("#autostart span:first").hasClass("checkbox selected");
+        var autoStart = $("#autostart span:first").hasClass("selected");
         //var index = languageId.selectedIndex;
 
         var language = $("#selectWebLanguage").attr("cus_value");
 
 
-        var webonlyLocal = $("#onlyloaclhost span:first").hasClass("checkbox selected");
+        var webonlyLocal = $("#onlyloaclhost span:first").hasClass("selected");
         // var webServicePort = '';
         for (var i = 0; i < settingInfo.length; i++) {
             if (settingInfo[i].key == "language.default") {
@@ -416,7 +416,7 @@ function settingSave(actionType) {
                                         showSaveMessage(true);
                                         getServerLanguage();
 
-                                        freshSettingInfo(reloadPage);
+                                        freshSettingInfo(reloadPage, actionType);
                                     }
                                 });
                             }
@@ -562,12 +562,13 @@ function settingSave(actionType) {
             },
             'success': function(data) {
                 showSaveMessage( true );
+                freshSettingInfo(reloadPage, actionType);
             }
         });
     }
 }
 
-function freshSettingInfo(reloadPage){
+function freshSettingInfo(reloadPage, actionType){
     vidonme.rpc.request({
         'context': this,
         'method': 'VidOnMe.GetSystemSettingForAll',
