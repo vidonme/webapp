@@ -361,7 +361,7 @@
  		var rating = $('<div class="rating"></div>');
  		var detail = $('<div class="detail"></div>');
 
- 		var genre_p = '<p>' + $.i18n.prop('index_163') + ': ';
+ 		var genre_p = '<p>' + $.i18n.prop('index_162') + ': ';
  		for (var i = 0; i < genre.length; ++i) {
  			if (i != genre.length - 1) {
  				genre_p += genre[i] + ', ';
@@ -514,7 +514,7 @@
  				var rating = $('<div class="rating"></div>');
  				var detail = $('<div class="detail"></div>');
 
- 				var genre_p = '<p>' + $.i18n.prop('index_163') + ': ';
+ 				var genre_p = '<p>' + $.i18n.prop('index_162') + ': ';
  				for (var i = 0; i < genre.length; ++i) {
  					if (i != genre.length - 1) {
  						genre_p += genre[i] + ', ';
