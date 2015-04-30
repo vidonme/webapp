@@ -443,26 +443,25 @@
       is often helpful.
     </p>
 
-    <h2 id="Wizzard">Wizzard</h2>
+    <h2 id="Wizzard">Wizzard</h2><tt>wizzard</tt>
 
     <p>
-      <b>Wizzards</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Wizzards</b> is a module that give the user a wizzard to set the system rapidly for using system. 
     </p>
 
     <p id="Wizzard.IsWizzardEnsabled">
       <b class="header">Wizzard.IsWizzardEnsabled</b>
-      <br />
+      </br><tt>GET&nbsp;/wizzard/status</tt>
     </p>
 
 <pre class="runnable">
-<tt>Request</tt>
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
   "method": "VidOnMe.IsWizzardEnsabled"
 }
-<tt>Response</tt>
+<b>Response</b>
 {
   "id": 1,
   "jsonrpc": "2.0",
@@ -474,17 +473,17 @@
 
     <p id="Wizzard.SetWizzardDisabled">
       <b class="header">Wizzard.SetWizzardDisabled</b>
-      <br />
+      <br /><tt>POST&nbsp;/wizzard/status</tt>
     </p>
 
 <pre class="runnable">
-<tt>Request</tt>
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
   "method": "VidOnMe.SetWizzardDisabled"
 }
-<tt>Response</tt>
+<b>Response</b>
 {
   "id": 1,
   "jsonrpc": "2.0",
@@ -494,27 +493,27 @@
 }
 </pre>
 
-		<h2 id="Libraries">VidOn.me.Library</h2>
-			
+		<h2 id="Libraries">Libraries</h2>
     <p>
-      <b>Libraries</b> is a module that let user operate the library.
+      <b>Libraries</b>.............
     </br>
       <tt>Get</tt> <tt>Create</tt> <tt>Update</tt> <tt>Delete</tt> <tt>Options(addpath)</tt> <tt>Options(removepath)</tt>
     </p>		
 		
     <p id="VidOnMe.GetLibraries">
       <b class="header">VidOnMe.GetLibraries</b>
-      <br />
+      <br /><tt>GET&nbsp;/libraries</tt>	
+
     </p>
 
 <pre class="runnable">
-<tt>Request</tt>
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
   "method": "VidOnMe.GetLibraries"
 }
-<tt>Response</tt>
+<b>Response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -538,11 +537,11 @@
 
     <p id="VidOnMe.GetLibraryDetail">
       <b class="header">VidOnMe.GetLibraryDetail</b>
-      <br />
+      <br /><tt>GET&nbsp;/libraries/{libID}</tt>	
     </p>
 
 <pre class="runnable">
-<tt>Request</tt>
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -551,7 +550,7 @@
     "LibraryId": 2
   }
 }
-<tt>Response</tt>
+<b>Response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -576,11 +575,11 @@
 
     <p id="VidOnMe.AddPathToLibrary">
       <b class="header">VidOnMe.AddPathToLibrary</b>
-      <br />
+      <br /><tt>POST&nbsp;/libraries/{LibID}/path</tt>
     </p>
 
 <pre class="runnable">
-<tt>Request</tt>
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -590,7 +589,7 @@
     "path": "D:\movie"
   }
 }
-<tt>Response</tt>
+<b>Response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -604,11 +603,11 @@
 
     <p id="VidOnMe.DeletePathFromLibrary">
       <b class="header">VidOnMe.DeletePathFromLibrary</b>
-      <br />
+      <br /><tt>DELETE&nbsp;/libraries/{LibID}/path</tt>
     </p>
 
 <pre class="runnable">
-<tt>request</tt>
+<b>request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -618,7 +617,7 @@
     "PathId": 1
   }
 }
-<tt>response</tt>
+<b>response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -628,12 +627,12 @@
 }
 </pre> 
 
-    <p id="VidOnMe.StartScan ">
+    <p id="VidOnMe.StartScan">
       <b class="header">VidOnMe.StartScan </b>
-      <br />
+      <br /><tt>POST&nbsp;/libraries/scan</tt>
     </p>
 <pre>
-request
+<b>Request</b>
 {
   "jsonrpc": "2.0",
   "id": 1,
@@ -643,7 +642,7 @@ request
   }
 }
 
-response
+<b>Response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -653,22 +652,21 @@ response
 }
 </pre>
 
-    <h2 id="Directory">VidOnMe.Directory</h2>
+    <h2 id="Directory">Directory</h2>
 
     <p>
-      <b>Directory</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Directory</b> is a module that ...
       </br>
       <tt>Add</tt> <tt>Update</tt> <tt>Delete</tt> <tt>AddNetDirectoryEx</tt>
     </p>
     
     <p id="VidOnMe.GetDirectory">
       <b class="header">VidOnMe.GetDirectory</b>
-      <br />
+      <br /><tt>GET&nbsp;/directories</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetDirectory",
@@ -678,8 +676,7 @@ request
     "directory":""
   }
 }
-
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -699,11 +696,11 @@ response
 </pre>	    
     <p id="VidOnMe.AddNetDirectory">
       <b class="header">VidOnMe.AddNetDirectory</b>
-      <br />
+      <br /><tt>POST&nbsp;/directories</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.AddNetDirectory",
@@ -723,58 +720,26 @@ response
 }
 </pre>	 
    
-    <h2 id="Settings">VidOnMe.Settings</h2>
+    <h2 id="Settings">Settings</h2>
 
     <p>
-      <b>Settings</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Settings</b> is a module that ...
     </p>	
-
-    <p id="VidOnMe.SetDefaultLanguageForScraper">
-      <b class="header">VidOnMe.SetDefaultLanguageForScraper</b>
-      <br />
-    </p>
-
-<pre class="runnable">
-request
-{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method":	"VidOnMe.SetDefaultLanguageForScraper"
-    "params": [
-				{
-					"name": "language",
-					"required": true,
-					"type": "string"
-				}
-			]
-}
-
-response
-{
-  "id": 1,
-  "jsonrpc": "2.0",
-  "ret": {
-			"required": true,
-			"type": "boolean"
-		}
-}
-</pre>
 
     <p id="VidOnMe.GetServerName">
       <b class="header">VidOnMe.GetServerName</b>
-      <br />
+      <br /><tt>GET&nbsp;/settings/servername</tt>
     </p>
 
 <pre class="runnable">
-Request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetServerName",
   "id":1,
   "params":[]
 }
-Response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -787,11 +752,11 @@ Response
 
     <p id="VidOnMe.SetServerName">
       <b class="header">VidOnMe.SetServerName</b>
-      <br />
+      <br /><tt>POST&nbsp;/settings/servername</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.SetServerName",
@@ -800,7 +765,7 @@ request
     "name":"xxx"
   }
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -812,18 +777,18 @@ response
 
     <p id="VidOnMe.CheckTranscodeOption">
       <b class="header">VidOnMe.CheckTranscodeOption</b>
-      <br />
+      <br /><tt>GET&nbsp;/settings/transcode</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.CheckTranscodeOption",
   "id":1,
   "params":[]
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -836,11 +801,11 @@ response
   
     <p id="VidOnMe.SetTranscodeOption">
       <b class="header">VidOnMe.SetTranscodeOption</b>
-      <br />
+      <br /><tt>POST&nbsp;/settings/transcode</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.SetTranscodeOption",
@@ -849,7 +814,7 @@ request
     "config":false
   }
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -861,17 +826,17 @@ response
 
     <p id="VidOnMe.GetServerInfo">
       <b class="header">VidOnMe.GetServerInfo</b>
-      <br />
+      <br /><tt>GET&nbsp;/settings/server</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetServerInfo",
   "id":1,"params":[]
 }  
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -885,17 +850,17 @@ response
        
     <p id="VidOnMe.GetAllClients">
       <b class="header">VidOnMe.GetAllClients</b>
-      <br />
+      <br /><tt>GET&nbsp;/settings/clients</tt>
     </p>
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetAllClients",
   "id":1,
   "params":[]
 } 
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -906,18 +871,18 @@ response
 </pre> 
     <p id="VidOnMe.GetSystemSettingForAll">
       <b class="header">VidOnMe.GetSystemSettingForAll</b>
-      <br />
+      <br /><tt>GET&nbsp;/settings/all</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetSystemSettingForAll",
   "id":1,
   "params":[]
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -968,11 +933,11 @@ response
 
     <p id="VidOnMe.SetSystemSetting">
       <b class="header">VidOnMe.SetSystemSetting</b>
-      <br />
+      <br /><tt>POST&nbsp;/settings</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.SetSystemSetting",
@@ -982,7 +947,7 @@ request
     "val":"12"
   }
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -996,29 +961,57 @@ response
   }
 }  
 </pre>            
+    <p id="VidOnMe.SetDefaultLanguageForScraper">
+      <b class="header">VidOnMe.SetDefaultLanguageForScraper</b>
+      <br /><tt>POST&nbsp;/settings/scraper/language</tt>
+    </p>
 
+<pre class="runnable">
+<b>Request</b>
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method":	"VidOnMe.SetDefaultLanguageForScraper"
+    "params": [
+				{
+					"name": "language",
+					"required": true,
+					"type": "string"
+				}
+			]
+}
+
+<b>Response</b>
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "ret": {
+			"required": true,
+			"type": "boolean"
+		}
+}
+</pre>
 
     <h2 id="Upgrade">Upgrade</h2>
 
     <p>
-      <b>Upgrade</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Upgrade</b> is a module that ...
     </p>	
 
     <p id="VidOnMe.Upgrade_GetState">
       <b class="header">VidOnMe.Upgrade_GetState</b>
-      <br />
+      <br /><tt>POST&nbsp;/upgrade/status</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.Upgrade_GetState",
   "id":1,
   "params":[]
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1034,11 +1027,11 @@ response
 </pre>
     <p id="VidOnMe.Upgrade_Install">
       <b class="header">VidOnMe.Upgrade_Install</b>
-      <br />
+      <br /><tt>POST&nbsp;/upgrade/install</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"Upgrade_Install",
@@ -1046,7 +1039,7 @@ request
   "params":[] 
   "permission": "ReadData"
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1058,11 +1051,11 @@ response
 
     <p id="VidOnMe.Upgrade_Download">
       <b class="header">VidOnMe.Upgrade_Download</b>
-      <br />
+      <br /><tt>POST&nbsp;/upgrade/download</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"Upgrade_Download",
@@ -1070,7 +1063,7 @@ request
   "params":[] 
   "permission": "ReadData"
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1080,26 +1073,25 @@ response
 }
 </pre>        
 
-        
+    <h2 id="Users">Users</h2>    
     <p>
-      <b>Users</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Users</b> is a module that ...
     </p>	
 
     <p id="VidOnMe.GetAuthUserInfo">
       <b class="header">VidOnMe.GetAuthUserInfo</b>
-      <br />
+      <br /><tt>GET&nbsp;/users</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.GetAuthUserInfo",
   "id":1,
   "params":{}
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1116,11 +1108,11 @@ response
 </pre>
     <p id="VidOnMe.LoginAuth">
       <b class="header">VidOnMe.LoginAuth</b>
-      <br />
+      <br /><tt>POST&nbsp;/login</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VidOnMe.LoginAuth",
@@ -1131,7 +1123,7 @@ request
     "country":"cn"
   }
 }
-response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1147,21 +1139,20 @@ response
 }
 </pre>
 
-    <h2 id="Scraper">VidOn.me.Scraper</h2>
+    <h2 id="Scraper">Scraper</h2>
 
     <p>
-      <b>Scripper</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Scripper</b> is a module that ...
     </p>
 
 
     <p id="VidOnMe.GetLastScraperStatistics">
       <b class="header">VidOnMe.GetLastScraperStatistics</b>
-      <br />
+      <br /><tt>GET&nbsp;/scraper/laststatistics</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -1170,7 +1161,7 @@ request
     }
 }
 
-response
+<b>Response</b>
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -1183,41 +1174,13 @@ response
 }
 </pre> 
 
-    <p id="VidOnMe.GetLastScraperStatistics">
-      <b class="header">VidOnMe.GetLastScraperStatistics</b>
-      <br />
-    </p>
-
-<pre class="runnable">
-request
-{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "VidOnMe.GetLastScraperStatistics",
-    "params": {
-    }
-}
-
-response
-{
-    "id": 1,
-    "jsonrpc": "2.0",
-    "result": {
-        "total": {
-            "failed_amounts": 10,
-            "success_amounts": 100
-        }
-    }
-}
-</pre>
-
-    <p id="VidOnMe.GetCurrentScraperState">
+     <p id="VidOnMe.GetCurrentScraperState">
       <b class="header">VidOnMe.GetCurrentScraperState</b>
-      <br />
+      <br /><tt>GET&nbsp;/scraper/status</tt>
     </p>
 
 <pre class="runnable">
-request
+<b>Request</b>
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -1225,7 +1188,7 @@ request
     "params": {
     }
 }
-response    
+<b>Response</b>    
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -1242,16 +1205,15 @@ response
     <h2 id="Movies">Movies</h2>
 
     <p>
-      <b>Movies</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>Movies</b> is a module that ...
     </p>
 
     <p id="VideoLibrary.GetMovies">
       <b class="header">VideoLibrary.GetMovies</b>
-      <br />
+      <br /><tt>GET&nbsp;/movies</tt>
     </p>
 <pre class="runnable">
-request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VideoLibrary.GetMovies",
@@ -1262,7 +1224,7 @@ request
     "properties":["file","year","thumbnail","runtime","title"]
   }
 }
-response    
+<b>Response</b>    
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1296,16 +1258,15 @@ response
     <h2 id="TVShows">TVShows</h2>
 
     <p>
-      <b>TVShows</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>TVShows</b> is a module that ...
     </p>
 
     <p id="VideoLibrary.GetTVShows">
       <b class="header">VideoLibrary.GetTVShows</b>
-      <br />
+      <br /><tt>GET&nbsp;/tvshows</tt>
     </p>
 <pre class="runnable">
-Request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VideoLibrary.GetTVShows",
@@ -1316,7 +1277,7 @@ Request
     "properties":["file","plot","thumbnail","title","year","season","episode"]
   }
 }
-Response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
@@ -1350,16 +1311,15 @@ Response
     <h2 id="PrivateVideos">PrivateVideos</h2>
 
     <p>
-      <b>PrivateVideos</b> is a module that give the user a wizzard to set the system
-      rapidly for using system.
+      <b>PrivateVideos</b> is a module that ...
     </p>
 
     <p id="VideoLibrary.GetPrivateVideos">
       <b class="header">VideoLibrary.GetPrivateVideos</b>
-      <br />
+      <br /><tt>GET&nbsp;/privatevideos</tt>
     </p>
 <pre class="runnable">
-Request
+<b>Request</b>
 {
   "jsonrpc":"2.0",
   "method":"VideoLibrary.GetPrivVideos",
@@ -1370,7 +1330,7 @@ Request
     "properties":["file","thumbnail","title"]
   }
 }
-Response
+<b>Response</b>
 {
   "id":1,
   "jsonrpc":"2.0",
