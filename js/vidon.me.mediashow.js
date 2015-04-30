@@ -371,7 +371,7 @@
  		}
  		genre_p += '</p>';
 
- 		var cast_p = '<p>' + $.i18n.prop('index_163') + ': ';
+ 		var cast_p = '<p>' + $.i18n.prop('index_164') + ': ';
  		for (var i = 0; i < cast.name.length; ++i) {
  			if (i != cast.name.length - 1) {
  				cast_p += cast.name[i] + ', ';
@@ -525,7 +525,7 @@
 
  				genre_p += '</p>';
  				
- 				var cast_p = '<p>' + $.i18n.prop('index_163') + ': ';
+ 				var cast_p = '<p>' + $.i18n.prop('index_164') + ': ';
 
  				for (var i = 0; i < cast.name.length; ++i) {
  					if (i != cast.name.length - 1) {
@@ -562,6 +562,9 @@
  				topdiv.append(clrdiv);
 
  				$(".posterList .mCSB_container").append(topdiv);
+
+ 				for(var i = 0; i < cast.name.length; ++i) {
+ 				}
  			}
  		}
  	});
