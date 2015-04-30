@@ -134,6 +134,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .setUp .tips{ float:left; width:360px; padding:20px; margin-top:20px;}
 .setUp .tips a{ color:#3278cc; text-decoration:underline}
 .setUp .tips a:hover{ background:transparent; color:#f5fffb;} 
+.selectedMedia .tips a.selected{ background:none;}
 
 /*图片展示*/
 .siderbar { width: 200px; border-right:#000 solid 1px; position:absolute; top:60px; left:0px; bottom:0px;padding-top:20px;-moz-box-shadow:5px 5px 5px #000; -webkit-box-shadow:5px 5px 5px #000; box-shadow:5px 5px 5px #000; z-index:2}
@@ -343,7 +344,7 @@ input { background:transparent;  height:18px; line-height:14px; border:#d3d3d3 s
 .cloud .no1{ width:250px;}
 .cloud .no2{ width:250px;}
 .cloud .no3{ width:220px; padding-top:40px; text-align:center}
-.cloud .btn-small{ height:44px;  font-size:14px; line-height:18px; padding-top:8px; text-decoration:none; color:#f5fffb}
+.cloud .btn-small{ height:44px;  font-size:14px; line-height:18px; padding-top:8px; text-decoration:none; color:#f5fffb; min-width:126px;}
 .cloud .btn-small b{ font-weight:bold}
 .cloud .btn-small:hover{color:#f5fffb;}
 .cloud .mac{ margin:30px 0; background-image:url(../images/spriteimg/iconimg.png); background-repeat: no-repeat; background-position: -200px -237px; padding-left:70px;}
